@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { toolsData, categories } from '@/data/tools/toolsData'
-import AdPlaceholder from '@/components/AdPlaceholder'
+import AdSense from '@/components/AdSense'
 import SearchBar from '@/components/SearchBar'
 
 export default function ToolsPage() {
@@ -31,7 +31,7 @@ export default function ToolsPage() {
           </div>
         </div>
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
 
         {/* Categories */}
         <div className="mb-8">
@@ -98,7 +98,7 @@ export default function ToolsPage() {
           )}
         </div>
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
       </div>
     </div>
   )

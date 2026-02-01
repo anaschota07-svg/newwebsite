@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { blogPosts } from '@/data/blog/blogData'
-import AdPlaceholder from '@/components/AdPlaceholder'
+import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
 import { BookOpen, TrendingUp, Clock, Calendar, User } from 'lucide-react'
 
@@ -89,7 +89,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
       </div>
     </div>
   )

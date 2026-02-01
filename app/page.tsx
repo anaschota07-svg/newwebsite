@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, Zap, Shield, Sparkles, TrendingUp, Users, Clock, CheckCircle2, Calculator, FileText } from 'lucide-react'
 import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
-import AdPlaceholder from '@/components/AdPlaceholder'
+import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
 import { motion } from 'framer-motion'
 
@@ -338,7 +338,7 @@ export default function Home() {
 
       {/* Ad Placeholder */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
       </div>
 
       {/* Featured Tools Section */}

@@ -22,7 +22,7 @@ import PercentageCalculator from '@/components/tools/PercentageCalculator'
 import RandomNumberGenerator from '@/components/tools/RandomNumberGenerator'
 import TextToBinary from '@/components/tools/TextToBinary'
 import HTMLEncoderDecoder from '@/components/tools/HTMLEncoderDecoder'
-import AdPlaceholder from '@/components/AdPlaceholder'
+import AdSense from '@/components/AdSense'
 
 export async function generateStaticParams() {
   return toolsData.map((tool) => ({
@@ -443,14 +443,14 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
           </span>
         </div>
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
 
         {/* Tool Component */}
         <div className="my-8">
           {ToolComponent ? <ToolComponent /> : <div className="text-center text-red-600 dark:text-red-400">Tool component not found</div>}
         </div>
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
 
         {/* SEO Content */}
         {content && (

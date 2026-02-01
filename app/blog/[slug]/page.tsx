@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Clock, Calendar, User } from 'lucide-react'
 import { getBlogPostBySlug, blogPosts } from '@/data/blog/blogData'
-import AdPlaceholder from '@/components/AdPlaceholder'
+import AdSense from '@/components/AdSense'
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -346,7 +346,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </header>
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
 
         {/* Post Content */}
         {content && (
@@ -377,7 +377,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
 
-        <AdPlaceholder format="horizontal" />
+        <AdSense format="horizontal" />
 
         {/* Conclusion */}
         <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800 my-12 transition-colors duration-300">
