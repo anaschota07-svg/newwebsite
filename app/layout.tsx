@@ -69,13 +69,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/logo.png', sizes: 'any' },
       { url: '/logo.png', sizes: '32x32', type: 'image/png' },
       { url: '/logo.png', sizes: '16x16', type: 'image/png' },
     ],
     apple: [
       { url: '/logo.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/logo.png',
+    shortcut: [
+      { url: '/logo.png', type: 'image/png' },
+    ],
   },
 };
 
@@ -88,11 +91,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://simplewebtoolsbox.com" />
-        {/* Favicon */}
+        {/* Favicon - Priority order matters */}
+        <link rel="shortcut icon" href="/logo.png" type="image/png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
-        <link rel="shortcut icon" href="/logo.png" />
+        <link rel="manifest" href="/manifest.json" />
         {/* Google AdSense */}
         <script
           async
