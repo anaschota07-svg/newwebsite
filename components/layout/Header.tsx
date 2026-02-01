@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Moon, Sun, Menu, X, Sparkles } from 'lucide-react'
+import { Moon, Sun, Menu, X } from 'lucide-react'
 import { useTheme } from '@/components/providers/ThemeProvider'
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
@@ -107,48 +108,22 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, type: "spring" }}
             >
-              <Link href="/" className="flex items-center space-x-3 group">
+              <Link href="/" className="flex items-center space-x-3 group" aria-label="SimpleWebToolsBox Home">
                 <motion.div 
                   className="relative"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  {/* 3D Shadow Layers */}
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 opacity-10 blur-md" />
-                  
-                  <motion.div 
-                    className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 text-white font-bold text-xl shadow-2xl overflow-hidden"
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      transform: 'perspective(1000px)',
-                    }}
-                    whileHover={{ 
-                      rotateY: 360,
-                      rotateX: 10,
-                    }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    {/* Glossy Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-tl from-black/20 to-transparent" />
-                    
-                    <Sparkles className="w-5 h-5 relative z-10" />
-                    
-                    {/* Animated Ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-xl border-2 border-white/50"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.5, 0, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
+                  <div className="relative h-10 w-10 sm:h-12 sm:w-12">
+                    <Image
+                      src="/logo.png"
+                      alt="SimpleWebToolsBox Logo"
+                      fill
+                      className="object-contain"
+                      priority
+                      sizes="(max-width: 640px) 40px, 48px"
                     />
-                  </motion.div>
+                  </div>
                 </motion.div>
 
                 <div className="flex flex-col leading-tight">

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const footerLinks = {
   company: [
@@ -24,14 +25,20 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white font-bold text-lg shadow-lg">
-                S
+            <Link href="/" className="flex items-center space-x-2 mb-4 group" aria-label="SimpleWebToolsBox Home">
+              <div className="relative h-9 w-9 sm:h-10 sm:w-10">
+                <Image
+                  src="/logo.png"
+                  alt="SimpleWebToolsBox Logo"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 36px, 40px"
+                />
               </div>
-              <span className="text-lg font-bold text-gray-900 dark:text-white transition-colors duration-300">
+              <span className="text-lg font-bold text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                 SimpleWebToolsBox
               </span>
-            </div>
+            </Link>
             <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
               Free online tools and how-to guides to make your life easier. Simple, fast, and reliable.
             </p>
