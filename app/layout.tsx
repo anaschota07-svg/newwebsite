@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import StructuredData from "@/components/StructuredData";
 
 // Force dynamic rendering for theme support
 export const dynamic = 'force-dynamic';
@@ -93,6 +94,38 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100`}>
+        <StructuredData
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'SimpleWebToolsBox',
+            url: 'https://simplewebtoolsbox.com',
+            description: 'Free online tools and how-to guides to help you get things done.',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: {
+                '@type': 'EntryPoint',
+                urlTemplate: 'https://simplewebtoolsbox.com/search?q={search_term_string}',
+              },
+              'query-input': 'required name=search_term_string',
+            },
+          }}
+        />
+        <StructuredData
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'SimpleWebToolsBox',
+            url: 'https://simplewebtoolsbox.com',
+            logo: 'https://simplewebtoolsbox.com/logo.png',
+            sameAs: [],
+            contactPoint: {
+              '@type': 'ContactPoint',
+              contactType: 'Customer Service',
+              url: 'https://simplewebtoolsbox.com/contact',
+            },
+          }}
+        />
         <ThemeProvider>
           <Header />
           <main className="flex-1">

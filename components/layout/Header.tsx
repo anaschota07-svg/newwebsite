@@ -151,12 +151,20 @@ export default function Header() {
                   </motion.div>
                 </motion.div>
 
-                <motion.span 
-                  className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  SimpleWebToolsBox
-                </motion.span>
+                <div className="flex flex-col leading-tight">
+                  <motion.span 
+                    className="text-base sm:text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    SimpleWebTools
+                  </motion.span>
+                  <motion.span 
+                    className="text-xs sm:text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-300 dark:to-gray-400 -mt-1"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    Box
+                  </motion.span>
+                </div>
               </Link>
             </motion.div>
 
@@ -279,29 +287,11 @@ export default function Header() {
                 }}
               >
                 {/* 3D Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all rounded-xl" />
                 
-                <motion.div
-                  key={theme}
-                  initial={{ rotateY: -180, opacity: 0 }}
-                  animate={{ rotateY: 0, opacity: 1 }}
-                  exit={{ rotateY: 180, opacity: 0 }}
-                  transition={{ duration: 0.5, type: "spring" }}
-                  className="relative z-10"
-                >
-                  {theme === 'light' ? (
-                    <Moon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
-                  ) : (
-                    <Sun className="h-5 w-5 text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
-                  )}
-                </motion.div>
+                
 
                 {/* Orbiting Ring */}
-                <motion.div
-                  className="absolute inset-0 rounded-xl border border-blue-400/30"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                />
+              
               </motion.button>
 
               {/* Mobile menu button with 3D effect */}
@@ -327,6 +317,7 @@ export default function Header() {
                 </motion.div>
               </motion.button>
             </div>
+            
           </div>
 
           {/* Mobile menu with Glass Morphism */}

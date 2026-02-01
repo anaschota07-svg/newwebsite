@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-28',
     readTime: '5 min read',
-    image: 'https://images.pexels.com/photos/590570/pexels-photo-590570.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/590570/pexels-photo-590570.jpeg',
   },
   {
     id: '2',
@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-25',
     readTime: '7 min read',
-    image: 'https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg',
   },
   {
     id: '3',
@@ -42,7 +42,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-20',
     readTime: '6 min read',
-    image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg',
   },
   {
     id: '4',
@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-15',
     readTime: '8 min read',
-    image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg',
   },
   {
     id: '5',
@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-10',
     readTime: '6 min read',
-    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg',
   },
   {
     id: '6',
@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-08',
     readTime: '5 min read',
-    image: 'https://images.pexels.com/photos-196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg',
   },
   {
     id: '7',
@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-05',
     readTime: '7 min read',
-    image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg',
   },
   {
     id: '8',
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-03',
     readTime: '6 min read',
-    image: 'https://images.pexels.com/photos/163117/calender-date-time-month-163117.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/163117/calender-date-time-month-163117.jpeg',
   },
   {
     id: '9',
@@ -108,7 +108,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2026-01-01',
     readTime: '5 min read',
-    image: 'https://images.pexels.com/photos-1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg',
   },
   {
     id: '10',
@@ -119,7 +119,7 @@ export const blogPosts: BlogPost[] = [
     author: 'SimpleWebToolsBox Team',
     date: '2025-12-28',
     readTime: '4 min read',
-    image: 'https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop',
+    image: 'https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg',
   },
 ]
 
