@@ -393,10 +393,10 @@ export const checkGoogleSession = async () => {
     const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 
       (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://zap2link.com')
     
+    // IMPORTANT: Don't set Referer header manually - browser does it automatically
+    // Setting it manually causes "Refused to set unsafe header" error
     const response = await api.get('/api/middleware/check-session', {
-      headers: {
-        'Referer': typeof window !== 'undefined' ? window.location.href : '',
-      },
+      // No Referer header - browser sends it automatically
     })
     
     return {

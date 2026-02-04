@@ -87,16 +87,23 @@ export const useMiddlewareSession = () => {
       const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 
         (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://zap2link.com')
 
+      // IMPORTANT: Don't set Referer header manually - browser does it automatically
+      // Setting it manually causes "Refused to set unsafe header" error
+      // Browser automatically sends Referer header with fetch requests
       const response = await fetch(`${API_BASE_URL}/api/middleware/check-session`, {
         method: 'GET',
         headers: {
-          'Referer': window.location.href,
           'Content-Type': 'application/json',
         },
         credentials: 'include', // Include cookies if needed
+        // Referer header is automatically sent by browser
       })
 
       if (!response.ok) {
+        // Handle CORS and other HTTP errors
+        if (response.status === 0 || response.type === 'opaque') {
+          throw new Error('CORS error: Backend needs to allow requests from this domain')
+        }
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
@@ -123,9 +130,18 @@ export const useMiddlewareSession = () => {
           console.log('❌ No Google session found - showing normal website')
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       // On error, show normal website (fail gracefully)
-      console.error('❌ Google session check failed:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ Google session check failed:', error)
+        if (error.message?.includes('CORS')) {
+          console.error('⚠️ CORS Error: Backend at zap2link.com needs to allow requests from simplewebtoolsbox.com')
+          console.error('⚠️ Backend should add: Access-Control-Allow-Origin: https://simplewebtoolsbox.com')
+        }
+        if (error.message?.includes('Failed to fetch')) {
+          console.error('⚠️ Network Error: Could not reach API. Check if backend is running and CORS is configured.')
+        }
+      }
       setSessionToken(null)
       setShortCode(null)
       setHasSession(false)
