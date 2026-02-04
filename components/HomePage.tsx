@@ -22,8 +22,8 @@ const HomeMiddlewareAd1 = () => {
         <div className="w-full mb-4">
             <div className="w-full max-w-4xl mx-auto">
                 <AdComponent
-                    adSlotId="5673683751"
-                    size="responsive"
+                    adSlotId="4686013446"
+                    size="300x250"
                     className="w-full"
                 />
             </div>
@@ -36,8 +36,8 @@ const HomeMiddlewareAd2 = () => {
         <div className="w-full mt-4">
             <div className="w-full max-w-4xl mx-auto">
                 <AdComponent
-                    adSlotId="5673683751"
-                    size="responsive"
+                    adSlotId="4686013446"
+                    size="300x250"
                     className="w-full"
                 />
             </div>
@@ -51,8 +51,8 @@ const HomeAd3 = () => {
         <div className="w-full mb-6">
             <div className="w-full max-w-6xl mx-auto" style={{ minHeight: '90px' }}>
                 <AdComponent
-                    adSlotId="1053047933"
-                    size="responsive"
+                    adSlotId="4686013446"
+                    size="300x250"
                     className="w-full"
                 />
             </div>
@@ -65,8 +65,8 @@ const HomeAd4 = () => {
         <div className="w-full mt-6">
             <div className="w-full max-w-6xl mx-auto" style={{ minHeight: '90px' }}>
                 <AdComponent
-                    adSlotId="1053047933"
-                    size="responsive"
+                    adSlotId="4686013446"
+                    size="300x250"
                     className="w-full"
                 />
             </div>

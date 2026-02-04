@@ -24,6 +24,10 @@ export const StepTimer = ({
   useEffect(() => {
     if (timeLeft <= 0) {
       setIsComplete(true)
+      // Auto-call onComplete when timer finishes (even if showContinueButton is false)
+      if (!showContinueButton) {
+        onComplete()
+      }
       return
     }
 
@@ -31,6 +35,10 @@ export const StepTimer = ({
       setTimeLeft((prev) => {
         if (prev <= 1) {
           setIsComplete(true)
+          // Auto-call onComplete when timer finishes
+          if (!showContinueButton) {
+            onComplete()
+          }
           return 0
         }
         return prev - 1
@@ -38,7 +46,7 @@ export const StepTimer = ({
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [timeLeft])
+  }, [timeLeft, showContinueButton, onComplete])
 
   const handleContinue = async () => {
     if (isComplete && !isLoading) {

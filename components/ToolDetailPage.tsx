@@ -69,6 +69,22 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
     }
   }, [currentStep])
 
+  // Scroll to Get Link button when step changes to get-link
+  useEffect(() => {
+    if (currentStep === 'get-link') {
+      // Small delay to ensure button is rendered
+      setTimeout(() => {
+        const getLinkSection = document.getElementById('get-link-section')
+        if (getLinkSection) {
+          getLinkSection.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          if (process.env.NODE_ENV === 'development') {
+            console.log('📜 Scrolled to Get Link button')
+          }
+        }
+      }, 500)
+    }
+  }, [currentStep])
+
   return (
     <div className="min-h-screen py-8 relative">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -79,8 +95,8 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
               {/* Ad 1 */}
               <div className="w-full">
                 <AdComponent
-                  adSlotId="7569504767"
-                  size="responsive"
+                  adSlotId="4686013446" 
+                  size="300x250"
                   className="w-full"
                 />
               </div>
@@ -145,8 +161,8 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
               {/* Ad 2 */}
               <div className="w-full">
                 <AdComponent
-                  adSlotId="7569504767"
-                  size="responsive"
+                  adSlotId="4686013446"
+                  size="300x250"
                   className="w-full"
                 />
               </div>
@@ -252,16 +268,16 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
           </div>
         </div>
 
-        {/* Get Link Button Section - At Bottom (Step 8) */}
-        {sessionToken && shortCode && (currentStep === 'get-link' || currentStep === 'tool-detail-timer') && (
+        {/* Get Link Button Section - At Bottom (Step 8) - ONLY show when step is 'get-link' */}
+        {sessionToken && shortCode && currentStep === 'get-link' && (
           <div id="get-link-section" className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
             <GetLinkButton />
 
             {/* Ad below Get Link Button */}
             <div className="w-full mt-4">
               <AdComponent
-                adSlotId="7569504767"
-                size="responsive"
+                adSlotId="4686013446"
+                size="300x250"
                 className="w-full"
               />
             </div>

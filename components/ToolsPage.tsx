@@ -178,8 +178,8 @@ export function ToolsPageContent() {
               {/* Ad 1 */}
               <div className="w-full mb-4">
                 <AdComponent
-                  adSlotId="4590814170"
-                  size="responsive"
+                  adSlotId="4686013446"
+                  size="300x250"
                   className="w-full"
                 />
               </div>
@@ -296,8 +296,8 @@ export function ToolsPageContent() {
               {/* Ad 2 - Remains visible after timer */}
               <div className="w-full">
                 <AdComponent
-                  adSlotId="4590814170"
-                  size="responsive"
+                  adSlotId="4686013446"
+                  size="300x250"
                   className="w-full"
                 />
               </div>
