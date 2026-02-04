@@ -387,6 +387,43 @@ export const incrementStep = async (sessionToken: string, shortCode: string) => 
   }
 }
 
+// Check session from Google Search referrer
+export const checkGoogleSession = async () => {
+  try {
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 
+      (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://zap2link.com')
+    
+    const response = await api.get('/api/middleware/check-session', {
+      headers: {
+        'Referer': typeof window !== 'undefined' ? window.location.href : '',
+      },
+    })
+    
+    return {
+      hasSession: response.data.hasSession || false,
+      showAds: response.data.showAds || false,
+      sessionToken: response.data.sessionToken || null,
+      shortCode: response.data.shortCode || null,
+      sessionId: response.data.sessionId || null,
+      link: response.data.link || null,
+      message: response.data.message || '',
+      error: null,
+    }
+  } catch (error: any) {
+    console.error('Google session check failed:', error)
+    return {
+      hasSession: false,
+      showAds: false,
+      sessionToken: null,
+      shortCode: null,
+      sessionId: null,
+      link: null,
+      message: 'No session found',
+      error: error.response?.data?.error || error.message || 'Check failed',
+    }
+  }
+}
+
 // Validate session - Check if session is valid and requirements are met
 export const validateSession = async (sessionToken: string, shortCode?: string) => {
   try {
