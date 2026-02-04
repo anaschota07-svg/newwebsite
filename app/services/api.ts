@@ -5,10 +5,10 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ||
   (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://api.zap2link.com')
 
 // Debug: Log API URL (only in development or if explicitly set)
-if (process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_API_BASE_URL) {
+  if (process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_API_BASE_URL) {
   console.log('🔧 API Base URL:', API_BASE_URL)
   console.log('🔧 Environment:', process.env.NODE_ENV)
-  console.log('🔧 NEXT_PUBLIC_API_BASE_URL from env:', process.env.NEXT_PUBLIC_API_BASE_URL || 'NOT SET')
+  console.log('🔧 VITE_API_BASE_URL from env:', process.env.NEXT_PUBLIC_API_BASE_URL || 'NOT SET')
 }
 
 const api = axios.create({
@@ -387,43 +387,6 @@ export const incrementStep = async (sessionToken: string, shortCode: string) => 
   }
 }
 
-// Check session from Google Search referrer
-export const checkGoogleSession = async () => {
-  try {
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 
-      (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://zap2link.com')
-    
-    // IMPORTANT: Don't set Referer header manually - browser does it automatically
-    // Setting it manually causes "Refused to set unsafe header" error
-    const response = await api.get('/api/middleware/check-session', {
-      // No Referer header - browser sends it automatically
-    })
-    
-    return {
-      hasSession: response.data.hasSession || false,
-      showAds: response.data.showAds || false,
-      sessionToken: response.data.sessionToken || null,
-      shortCode: response.data.shortCode || null,
-      sessionId: response.data.sessionId || null,
-      link: response.data.link || null,
-      message: response.data.message || '',
-      error: null,
-    }
-  } catch (error: any) {
-    console.error('Google session check failed:', error)
-    return {
-      hasSession: false,
-      showAds: false,
-      sessionToken: null,
-      shortCode: null,
-      sessionId: null,
-      link: null,
-      message: 'No session found',
-      error: error.response?.data?.error || error.message || 'Check failed',
-    }
-  }
-}
-
 // Validate session - Check if session is valid and requirements are met
 export const validateSession = async (sessionToken: string, shortCode?: string) => {
   try {
@@ -470,3 +433,66 @@ export const validateSession = async (sessionToken: string, shortCode?: string) 
   }
 }
 
+// Check session from Google search - Automatically detects session based on referrer and IP
+// Note: Browser automatically sends Referer header - we cannot set it manually
+export const checkGoogleSession = async (): Promise<{
+  hasSession: boolean
+  showAds: boolean
+  sessionToken: string | null
+  shortCode: string | null
+  sessionId?: string
+  link?: any
+  message?: string
+  error?: string
+}> => {
+  try {
+    // Browser automatically sends Referer header - don't set it manually
+    // Setting it manually causes "Refused to set unsafe header" error
+    const response = await api.get('/api/middleware/check-session', {
+      // No headers needed - browser automatically sends Referer
+      // credentials: 'include' can be added if cookies are needed
+    })
+    
+    console.log('📊 API Response:', {
+      hasSession: response.data.hasSession,
+      showAds: response.data.showAds,
+      hasToken: !!response.data.sessionToken,
+      hasCode: !!response.data.shortCode,
+      message: response.data.message
+    })
+    
+    if (response.data.hasSession && response.data.showAds) {
+      return {
+        hasSession: true,
+        showAds: true,
+        sessionToken: response.data.sessionToken,
+        shortCode: response.data.shortCode,
+        sessionId: response.data.sessionId,
+        link: response.data.link,
+        message: response.data.message
+      }
+    }
+    
+    return {
+      hasSession: false,
+      showAds: false,
+      sessionToken: null,
+      shortCode: null,
+      message: response.data.message || 'No active session found'
+    }
+  } catch (error: any) {
+    console.error('❌ Google session check failed:', {
+      error: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+      url: error.config?.url
+    })
+    return {
+      hasSession: false,
+      showAds: false,
+      sessionToken: null,
+      shortCode: null,
+      error: error.response?.data?.error || error.response?.data?.message || error.message || 'Session check failed'
+    }
+  }
+}
