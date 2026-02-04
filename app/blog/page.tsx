@@ -1,93 +1,129 @@
+'use client'
+
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { blogPosts } from '@/data/blog/blogData'
 import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
-import { BookOpen, TrendingUp, Clock, Calendar, User } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'How-To Guides & Tutorials',
-  description: 'Learn from our expert how-to guides and tutorials covering various topics including technology, health, productivity, and more.',
-}
+import { BookOpen, Clock, Calendar, User, Sparkles, ArrowRight } from 'lucide-react'
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Hero Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6 transition-colors duration-300">
-            <BookOpen className="h-10 w-10 text-blue-600 dark:text-blue-400" />
-          </div>
-          <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
-            How-To Guides & Tutorials
-          </h3>
-        
-          <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
-              <span>{blogPosts.length} Tutorials</span>
-            </div>
-            
-          </div>
-        </div>
+    <div className="min-h-screen py-12 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pattern-grid opacity-20" />
+      <motion.div
+        className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+        }}
+      />
 
-        {/* <AdPlaceholder format="horizontal" /> */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+          >
+            <BookOpen className="h-8 w-8 text-white" />
+          </motion.div>
+          
+          <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-4">
+            How-To <span className="gradient-text">Guides</span>
+          </h1>
+          <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
+            {blogPosts.length} expert tutorials to level up your skills
+          </p>
+        </motion.div>
 
         {/* All Articles Grid */}
-        <section className="mb-12" aria-labelledby="all-tutorials-heading">
-          <h2 id="all-tutorials-heading" className="text-3xl font-bold text-gray-900 dark:text-white mb-8 transition-colors duration-300">
-            All Tutorials
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
-            {blogPosts.map((post) => (
-              <article key={post.id} role="listitem">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1 block"
-                  aria-label={`Read article: ${post.title}`}
-                >
-                <div className="relative h-56 w-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600">
-                  <BlogImage
-                    src={post.image}
-                    alt={`${post.title} - ${post.description}`}
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-3 transition-colors duration-300">
-                    <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded text-xs font-medium transition-colors duration-300">
-                      {post.category}
-                    </span>
-                    <span>•</span>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{post.readTime}</span>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.05 }
+            }
+          }}
+        >
+          {blogPosts.map((post) => (
+            <motion.article
+              key={post.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              whileHover={{ y: -6 }}
+            >
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group block relative h-full"
+                aria-label={`Read: ${post.title}`}
+              >
+                <div className="glass rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all h-full flex flex-col">
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <BlogImage
+                      src={post.image}
+                      alt={post.title}
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                      <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm">
+                        {post.category}
+                      </span>
+                      <div className="flex items-center gap-1 text-white/90 text-xs font-semibold">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </div>
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 transition-colors duration-300">
-                    {post.description}
-                  </p>
-                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
-                    <div className="flex items-center gap-1">
-                      <User className="h-3 w-3" />
-                      <span>{post.author}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                  
+                  {/* Content */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 transition-all line-clamp-2 leading-tight">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-slate-900 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1">
+                      {post.description}
+                    </p>
+                    
+                    {/* Meta */}
+                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 font-medium pt-4 border-t border-slate-200 dark:border-slate-800">
+                      <div className="flex items-center gap-1">
+                        <User className="w-3 h-3" />
+                        {post.author}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </div>
                     </div>
                   </div>
                 </div>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
+                {/* Hover Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 rounded-3xl blur-xl transition-all -z-10" />
+              </Link>
+            </motion.article>
+          ))}
+        </motion.div>
 
         <AdSense format="horizontal" />
       </div>

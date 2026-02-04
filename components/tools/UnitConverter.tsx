@@ -82,39 +82,39 @@ export default function UnitConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="space-y-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Unit Type
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              📏 Unit Type
             </label>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button
                 onClick={() => setUnitType('length')}
-                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${
                   unitType === 'length'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                    : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50'
                 }`}
               >
                 Length
               </button>
               <button
                 onClick={() => setUnitType('weight')}
-                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${
                   unitType === 'weight'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
+                    : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
                 }`}
               >
                 Weight
               </button>
               <button
                 onClick={() => setUnitType('temperature')}
-                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${
                   unitType === 'temperature'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                    ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg shadow-orange-500/50'
+                    : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-orange-500/50'
                 }`}
               >
                 Temperature
@@ -124,13 +124,13 @@ export default function UnitConverter() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                From
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+                📤 From
               </label>
               <select
                 value={fromUnit}
                 onChange={(e) => setFromUnit(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-bold"
               >
                 {getUnits().map((unit) => (
                   <option key={unit} value={unit}>
@@ -140,13 +140,13 @@ export default function UnitConverter() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                To
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+                📥 To
               </label>
               <select
                 value={toUnit}
                 onChange={(e) => setToUnit(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-bold"
               >
                 {getUnits().map((unit) => (
                   <option key={unit} value={unit}>
@@ -158,8 +158,8 @@ export default function UnitConverter() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Value
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              🔢 Value
             </label>
             <input
               type="number"
@@ -167,20 +167,20 @@ export default function UnitConverter() {
               onChange={(e) => setValue(e.target.value)}
               onKeyUp={handleConvert}
               placeholder="Enter value to convert..."
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-semibold text-lg"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={handleConvert}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all"
             >
-              Convert
+              ⚡ Convert
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-3 bg-gray-200 dark:bg-slate-900 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
+              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -189,17 +189,24 @@ export default function UnitConverter() {
       </div>
 
       {result && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm animate-slide-up transition-colors duration-300">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Result</h3>
-          <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 transition-colors duration-300">
-            {result} {toUnit.charAt(0).toUpperCase() + toUnit.slice(1)}
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up text-center bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+            ✨ Result
+          </h3>
+          <div className="text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 mb-2">
+            {result}
+          </div>
+          <div className="text-xl font-bold text-slate-700 dark:text-slate-300">
+            {toUnit.charAt(0).toUpperCase() + toUnit.slice(1)}
           </div>
         </div>
       )}
 
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-300">Unit Conversion</h3>
-        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
+      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+          💡 Unit Conversion
+        </h3>
+        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-semibold">
           Convert between different units of measurement including length, weight, and temperature. All conversions are accurate and use standard conversion factors.
         </p>
       </div>

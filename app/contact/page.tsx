@@ -1,154 +1,183 @@
-import { Metadata } from 'next'
-import { Mail, MessageSquare, MapPin } from 'lucide-react'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Get in touch with SimpleWebToolsBox team. We\'d love to hear from you!',
-}
+import { Metadata } from 'next'
+import { motion } from 'framer-motion'
+import { Mail, MessageSquare, MapPin, Send, Sparkles } from 'lucide-react'
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 pattern-dots opacity-20" />
+      <motion.div
+        className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+        }}
+      />
+
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            Contact Us
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyan-500/30 mb-6">
+            <Sparkles className="w-4 h-4 text-cyan-500" />
+            <span className="text-sm font-bold gradient-text">Get in Touch</span>
+          </div>
+          
+          <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6">
+            Let's <span className="gradient-text">Connect</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors duration-300">
-            Have questions or suggestions? We'd love to hear from you!
+          <p className="text-xl text-slate-600 dark:text-slate-400">
+            Questions? Ideas? We're here to help
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Info Cards */}
+        {/* Contact Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center transition-colors duration-300">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4 transition-colors duration-300">
-              <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400 transition-colors duration-300" />
-            </div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">Email Us</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-              contact@simplewebtoolsbox.com
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center transition-colors duration-300">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full mb-4 transition-colors duration-300">
-              <MessageSquare className="h-6 w-6 text-green-600 dark:text-green-400 transition-colors duration-300" />
-            </div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">Support</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-              support@simplewebtoolsbox.com
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center transition-colors duration-300">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4 transition-colors duration-300">
-              <MapPin className="h-6 w-6 text-purple-600 dark:text-purple-400 transition-colors duration-300" />
-            </div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">Location</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-              Online Worldwide
-            </p>
-          </div>
+          {[
+            { icon: Mail, title: 'Email', value: 'contact@simplewebtoolsbox.com', gradient: 'from-cyan-500 to-blue-500' },
+            { icon: MessageSquare, title: 'Support', value: 'support@simplewebtoolsbox.com', gradient: 'from-blue-500 to-purple-500' },
+            { icon: MapPin, title: 'Location', value: 'Online Worldwide', gradient: 'from-purple-500 to-pink-500' },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -4 }}
+              className="relative group"
+            >
+              <div className="glass rounded-3xl p-6 border border-white/10 hover:border-white/30 transition-all text-center">
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform`}>
+                  <item.icon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-black text-slate-900 dark:text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{item.value}</p>
+              </div>
+              <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-10 blur-xl rounded-3xl transition-opacity -z-10`} />
+            </motion.div>
+          ))}
         </div>
 
         {/* Contact Form */}
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Send us a Message</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="glass rounded-3xl p-8 border border-white/10 mb-12"
+        >
+          <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-8">Send a Message</h2>
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                   Your Name
                 </label>
                 <input
                   type="text"
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                  className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                   Your Email
                 </label>
                 <input
                   type="email"
                   placeholder="john@example.com"
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                  className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                 Subject
               </label>
               <input
                 type="text"
-                placeholder="How can we help you?"
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                placeholder="How can we help?"
+                className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                 Message
               </label>
               <textarea
                 rows={6}
-                placeholder="Tell us more about your inquiry..."
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white resize-none transition-colors duration-300"
+                placeholder="Tell us more..."
+                className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none transition-all"
               ></textarea>
             </div>
 
-            <button
+            <motion.button
               type="submit"
-              className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative w-full px-8 py-4 rounded-2xl font-bold text-white overflow-hidden"
             >
-              Send Message
-            </button>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 animate-gradient-shift" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <Send className="w-5 h-5" />
+                Send Message
+              </span>
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
 
-        {/* FAQ Section */}
-        <div className="mt-12 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
-                Are all tools really free?
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                Yes! All our tools are completely free to use with no hidden costs, subscriptions, or premium tiers.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
-                Do I need to create an account?
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                No registration required. All tools work instantly without any sign-up process.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
-                Is my data safe?
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                Absolutely! All our tools work entirely in your browser. Your data never leaves your device.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
-                Can I suggest new tools?
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                We'd love to hear your suggestions! Please send us an email with your ideas.
-              </p>
-            </div>
+        {/* FAQ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="glass rounded-3xl p-8 border border-white/10"
+        >
+          <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-8">Quick Answers</h2>
+          <div className="space-y-6">
+            {[
+              {
+                q: 'Are all tools really free?',
+                a: 'Yes! Every single tool is 100% free. No hidden costs, no subscriptions, no premium tiers.'
+              },
+              {
+                q: 'Do I need to create an account?',
+                a: 'Nope! All tools work instantly. No sign-up, no login, no hassle.'
+              },
+              {
+                q: 'Is my data safe?',
+                a: 'Absolutely! Everything processes locally in your browser. Your data never leaves your device.'
+              },
+              {
+                q: 'Can I suggest new tools?',
+                a: "We love feedback! Send us an email with your ideas and we'll consider them."
+              },
+            ].map((faq, i) => (
+              <motion.div
+                key={i}
+                className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+                whileHover={{ x: 4 }}
+              >
+                <h3 className="font-black text-slate-900 dark:text-white mb-2">{faq.q}</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{faq.a}</p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

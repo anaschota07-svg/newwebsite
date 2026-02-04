@@ -61,11 +61,11 @@ export default function JSONFormatter() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="space-y-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Input JSON
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              📋 Input JSON
             </label>
             <textarea
               value={input}
@@ -76,7 +76,7 @@ export default function JSONFormatter() {
               }}
               placeholder='{"name": "John", "age": 30}'
               rows={10}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white font-mono text-sm resize-none transition-colors duration-300"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono text-sm resize-none transition-all"
             />
           </div>
 
@@ -84,63 +84,65 @@ export default function JSONFormatter() {
             <button
               onClick={formatJSON}
               disabled={!input}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
-              Format
+              ✨ Format
             </button>
             <button
               onClick={minifyJSON}
               disabled={!input}
-              className="px-6 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
-              Minify
+              📦 Minify
             </button>
             <button
               onClick={validateJSON}
               disabled={!input}
-              className="px-6 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-emerald-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
-              Validate
+              ✓ Validate
             </button>
             <button
               onClick={clearAll}
               disabled={!input && !output}
-              className="px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="px-6 py-3 glass border border-white/10 hover:border-red-500/50 disabled:opacity-50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all disabled:cursor-not-allowed"
             >
-              Clear
+              🗑️ Clear
             </button>
           </div>
 
           {isValid !== null && (
-            <div className={`flex items-center gap-2 p-3 rounded-lg ${isValid ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'}`}>
-              {isValid ? <Check className="h-5 w-5" /> : <X className="h-5 w-5" />}
-              <span className="font-medium">{isValid ? 'Valid JSON' : 'Invalid JSON'}</span>
+            <div className={`flex items-center gap-3 p-4 rounded-xl glass border ${isValid ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-red-500/50 bg-red-500/10'} transition-all`}>
+              {isValid ? <Check className="h-6 w-6 text-emerald-500" /> : <X className="h-6 w-6 text-red-500" />}
+              <span className={`font-black text-lg ${isValid ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
+                {isValid ? '✓ Valid JSON' : '✗ Invalid JSON'}
+              </span>
             </div>
           )}
 
           {error && (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
-              <p className="text-sm text-red-700 dark:text-red-400 font-mono">{error}</p>
+            <div className="glass border border-red-500/50 bg-red-500/10 rounded-xl p-4">
+              <p className="text-sm text-red-600 dark:text-red-400 font-mono font-bold">{error}</p>
             </div>
           )}
         </div>
       </div>
 
       {output && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm animate-slide-up transition-colors duration-300">
-          <div className="flex items-center justify-between mb-3">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
-              Output
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+          <div className="flex items-center justify-between mb-4">
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">
+              ✨ Output
             </label>
             <button
               onClick={copyToClipboard}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800-secondary rounded-lg transition-colors"
+              className="p-3 glass border border-white/10 hover:border-cyan-500 rounded-xl transition-all"
               title="Copy to clipboard"
             >
-              <Copy className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <Copy className="h-5 w-5 text-cyan-500" />
             </button>
           </div>
-          <pre className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white font-mono text-sm overflow-x-auto transition-colors duration-300">
+          <pre className="w-full px-5 py-4 glass border border-white/10 rounded-xl text-slate-900 dark:text-white font-mono text-sm overflow-x-auto">
             {output}
           </pre>
         </div>

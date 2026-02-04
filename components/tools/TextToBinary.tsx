@@ -48,55 +48,55 @@ export default function TextToBinary() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="flex gap-2 mb-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="flex gap-3 mb-6">
           <button
             onClick={() => setMode('toBinary')}
-            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
               mode === 'toBinary'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50'
             }`}
           >
-            Text → Binary
+            📝 Text → Binary
           </button>
           <button
             onClick={() => setMode('fromBinary')}
-            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
               mode === 'fromBinary'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
+                : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
             }`}
           >
-            Binary → Text
+            💾 Binary → Text
           </button>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              {mode === 'toBinary' ? 'Text Input' : 'Binary Input (space-separated bytes)'}
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              {mode === 'toBinary' ? '📝 Text Input' : '💾 Binary Input (space-separated bytes)'}
             </label>
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={mode === 'toBinary' ? 'Enter text to convert...' : 'Enter binary (e.g., 01001000 01100101 01101100 01101100 01101111)...'}
               rows={6}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white resize-none transition-colors duration-300 font-mono text-sm"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none font-mono text-sm transition-all"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={handleConvert}
               disabled={!input}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
-              Convert
+              ⚡ Convert
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-3 bg-gray-200 dark:bg-slate-900 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
+              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -105,24 +105,24 @@ export default function TextToBinary() {
       </div>
 
       {output && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm animate-slide-up transition-colors duration-300">
-          <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
-              {mode === 'toBinary' ? 'Binary Output' : 'Text Output'}
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+          <div className="flex items-center justify-between mb-4">
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">
+              {mode === 'toBinary' ? '✨ Binary Output' : '📄 Text Output'}
             </label>
             <button
               onClick={handleCopy}
-              className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors gap-2"
+              className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
             >
               <Copy className="h-4 w-4" />
-              {copied ? 'Copied!' : 'Copy'}
+              {copied ? '✓ Copied!' : 'Copy'}
             </button>
           </div>
           <textarea
             value={output}
             readOnly
             rows={6}
-            className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white resize-none transition-colors duration-300 font-mono text-sm"
+            className="w-full px-5 py-4 glass border border-white/10 rounded-xl text-slate-900 dark:text-white resize-none font-mono text-sm"
           />
         </div>
       )}

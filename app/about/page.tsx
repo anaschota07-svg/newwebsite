@@ -1,116 +1,173 @@
-import { Metadata } from 'next'
-import { Users, Target, Heart, Zap } from 'lucide-react'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn more about SimpleWebToolsBox and our mission to provide free, easy-to-use online tools for everyone.',
-}
+import { Metadata } from 'next'
+import { motion } from 'framer-motion'
+import { Users, Target, Heart, Zap, Shield, Rocket, Sparkles, Lock, Smartphone, Link } from 'lucide-react'
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            About SimpleWebToolsBox
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors duration-300">
-            Making online tools accessible to everyone
-          </p>
-        </div>
+    <div className="min-h-screen py-12 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pattern-grid opacity-20" />
+      <motion.div
+        className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
+      />
 
-        {/* Mission Section */}
-        <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700 mb-8 transition-colors duration-300">
-          <div className="flex items-center mb-4">
-            <Target className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3 transition-colors duration-300" />
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Our Mission</h2>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/30 mb-6">
+            <Sparkles className="w-4 h-4 text-blue-500" />
+            <span className="text-sm font-bold gradient-text">About Us</span>
           </div>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-            At SimpleWebToolsBox, our mission is to provide free, fast, and easy-to-use online tools that help people 
-            accomplish everyday tasks more efficiently. We believe that powerful tools shouldn't be complicated or 
-            expensive, which is why all our tools are completely free and require no registration.
+          
+          <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6">
+            Building the <span className="gradient-text">Future</span>
+          </h1>
+          <p className="text-xl text-slate-900 dark:text-slate-400 leading-relaxed">
+            Empowering developers with next-generation tools
           </p>
-        </section>
+        </motion.div>
+
+        {/* Mission */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass rounded-3xl p-8 border border-white/10 mb-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+              <Target className="h-6 w-6 text-white" />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Our Mission</h2>
+          </div>
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
+            We're on a mission to democratize powerful development tools. Every feature is designed with simplicity, 
+            speed, and privacy in mind. No complexity, no compromises.
+          </p>
+        </motion.section>
 
         {/* What We Do */}
-        <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700 mb-8 transition-colors duration-300">
-          <div className="flex items-center mb-4">
-            <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3 transition-colors duration-300" />
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">What We Do</h2>
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="glass rounded-3xl p-8 border border-white/10 mb-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+              <Zap className="h-6 w-6 text-white" />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white">What We Build</h2>
           </div>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 transition-colors duration-300">
-            We create and maintain a growing collection of online tools that cover various categories including:
-          </p>
-          <ul className="space-y-2 text-gray-700 dark:text-gray-300 transition-colors duration-300">
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2 transition-colors duration-300">✓</span>
-              <span><strong>Calculators:</strong> Age, BMI, and more specialized calculators</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2 transition-colors duration-300">✓</span>
-              <span><strong>Text Tools:</strong> Case converters, word counters, and text analyzers</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2 transition-colors duration-300">✓</span>
-              <span><strong>Generators:</strong> Password generators, QR codes, and more</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2 transition-colors duration-300">✓</span>
-              <span><strong>Developer Tools:</strong> JSON formatters, color pickers, and coding utilities</span>
-            </li>
-          </ul>
-        </section>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            {[
+              { icon: '🧮', title: 'Calculators', desc: 'Powerful calculation tools for every need' },
+              { icon: '✍️', title: 'Text Tools', desc: 'Transform and analyze text effortlessly' },
+              { icon: '🔐', title: 'Generators', desc: 'Create secure passwords, UUIDs, and more' },
+              { icon: '💻', title: 'Dev Tools', desc: 'Essential utilities for developers' },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="text-3xl mb-2">{item.icon}</div>
+                <h3 className="font-black text-slate-900 dark:text-white mb-1">{item.title}</h3>
+                <p className="text-sm text-slate-900 dark:text-slate-400">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
 
-        {/* Our Values */}
-        <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700 mb-8 transition-colors duration-300">
-          <div className="flex items-center mb-6">
-            <Heart className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3 transition-colors duration-300" />
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Our Values</h2>
+        {/* Values */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="glass rounded-3xl p-8 border border-white/10 mb-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+              <Heart className="h-6 w-6 text-white" />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Core Values</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">🆓 Always Free</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                All our tools are completely free to use with no hidden costs or premium tiers.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">🔒 Privacy First</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                Your data never leaves your browser. We don't store or track your information.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">⚡ Lightning Fast</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                All tools work instantly in your browser without any uploads or processing delays.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">📱 Mobile Friendly</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
-                All our tools are fully responsive and work perfectly on any device.
-              </p>
-            </div>
+            {[
+              { icon: Heart, title: 'Always Free', desc: 'No hidden costs, subscriptions, or premium tiers. Forever.' },
+              { icon: Lock, title: 'Privacy First', desc: 'Your data never leaves your browser. Complete privacy guaranteed.' },
+              { icon: Zap, title: 'Lightning Fast', desc: 'Instant results with zero uploads or processing delays.' },
+              { icon: Smartphone, title: 'Mobile Ready', desc: 'Fully responsive design that works perfectly on any device.' },
+            ].map((value, i) => (
+              <motion.div
+                key={i}
+                className="flex gap-4"
+                whileHover={{ x: 4 }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
+                  <value.icon className="w-5 h-5 text-cyan-500" />
+                </div>
+                <div>
+                  <h3 className="font-black text-slate-900 dark:text-white mb-1">{value.title}</h3>
+                  <p className="text-sm text-slate-900 dark:text-slate-400 leading-relaxed">{value.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* Community */}
-        <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-          <div className="flex items-center mb-4">
-            <Users className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3 transition-colors duration-300" />
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Join Our Community</h2>
+        {/* Community CTA */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="relative rounded-3xl p-10 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 animate-gradient-shift" />
+          <div className="absolute inset-0 pattern-dots opacity-10" />
+          
+          <div className="relative z-10 text-center">
+            <motion.div
+              className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-white/20 backdrop-blur-sm"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              <Users className="h-8 w-8 text-white" />
+            </motion.div>
+            <h2 className="text-3xl font-black text-white mb-4">Join Thousands of Users</h2>
+            <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
+              Developers, creators, and professionals worldwide trust our tools daily. 
+              Got ideas? We'd love to hear from you!
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              type="button"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-xl"
+              onClick={() => window.location.href = "/contact"}
+            >
+              <Rocket className="w-5 h-5" />
+              Get in Touch
+            </motion.button>
           </div>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 transition-colors duration-300">
-            SimpleWebToolsBox serves thousands of users every month who trust our tools for their daily tasks. 
-            Whether you're a student, professional, developer, or just someone who needs a quick tool, we're here to help.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-            Have suggestions for new tools or features? We'd love to hear from you! Feel free to reach out through 
-            our contact page.
-          </p>
-        </section>
+        </motion.section>
       </div>
     </div>
   )

@@ -40,24 +40,24 @@ export default function QRCodeGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="space-y-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Enter Text or URL
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              📝 Enter Text or URL
             </label>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Enter text, URL, or contact information..."
               rows={4}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white resize-none transition-colors duration-300"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none transition-all font-semibold"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              QR Code Size: {size}px
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              📐 QR Code Size: {size}px
             </label>
             <input
               type="range"
@@ -66,16 +66,22 @@ export default function QRCodeGenerator() {
               step="32"
               value={size}
               onChange={(e) => setSize(Number(e.target.value))}
-              className="w-full"
+              className="w-full h-3 glass rounded-full appearance-none cursor-pointer accent-cyan-500"
             />
+            <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mt-2 font-bold">
+              <span>128px</span>
+              <span>512px</span>
+            </div>
           </div>
         </div>
       </div>
 
       {text && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm text-center animate-slide-up transition-colors duration-300">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Your QR Code</h3>
-          <div className="flex justify-center mb-4 p-4 bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 transition-colors duration-300">
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg text-center animate-slide-up">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+            ✨ Your QR Code
+          </h3>
+          <div className="flex justify-center mb-6 p-6 glass rounded-2xl border border-white/10 bg-white dark:bg-slate-900">
             <QRCodeSVG
               id="qrcode-svg"
               value={text}
@@ -86,7 +92,7 @@ export default function QRCodeGenerator() {
           </div>
           <button
             onClick={downloadQRCode}
-            className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors gap-2"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-emerald-500/20 transition-all gap-3"
           >
             <Download className="h-5 w-5" />
             Download QR Code
@@ -94,23 +100,25 @@ export default function QRCodeGenerator() {
         </div>
       )}
 
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-300">QR Code Uses</h3>
-        <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
+      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+          🎯 QR Code Uses
+        </h3>
+        <ul className="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-cyan-500 font-bold">✦</span>
             <span>Share website URLs quickly</span>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-blue-500 font-bold">✦</span>
             <span>Add contact information to business cards</span>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-purple-500 font-bold">✦</span>
             <span>Create WiFi connection codes</span>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-pink-500 font-bold">✦</span>
             <span>Generate payment links</span>
           </li>
         </ul>

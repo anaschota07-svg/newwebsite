@@ -82,32 +82,32 @@ export default function HashGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="space-y-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Enter Text to Hash
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              🔐 Enter Text to Hash
             </label>
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter text to generate hash values..."
               rows={6}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white resize-none transition-colors duration-300 font-mono text-sm"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none font-mono text-sm transition-all"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={handleGenerate}
               disabled={!input}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
-              Generate Hashes
+              ⚡ Generate Hashes
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-3 bg-gray-200 dark:bg-slate-900 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
+              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -116,49 +116,65 @@ export default function HashGenerator() {
       </div>
 
       {Object.keys(hashes).length > 0 && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm animate-slide-up transition-colors duration-300">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Generated Hashes</h3>
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+            ✨ Generated Hashes
+          </h3>
           <div className="space-y-4">
-            {Object.entries(hashes).map(([type, hash]) => (
-              <div key={type} className="bg-gray-50 dark:bg-slate-900 rounded-lg p-4 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">{type}</span>
-                  <button
-                    onClick={() => handleCopy(hash, type)}
-                    className="inline-flex items-center px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded transition-colors gap-1"
-                  >
-                    <Copy className="h-3 w-3" />
-                    {copied === type ? 'Copied!' : 'Copy'}
-                  </button>
+            {Object.entries(hashes).map(([type, hash], i) => {
+              const gradients = [
+                'from-cyan-500/10 to-blue-500/10 border-cyan-500/20',
+                'from-blue-500/10 to-purple-500/10 border-blue-500/20',
+                'from-purple-500/10 to-pink-500/10 border-purple-500/20',
+                'from-pink-500/10 to-red-500/10 border-pink-500/20',
+              ]
+              const gradient = gradients[i % gradients.length]
+              
+              return (
+                <div key={type} className={`glass border rounded-xl p-5 bg-gradient-to-br ${gradient} transition-all hover:scale-102`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-black text-slate-700 dark:text-slate-300 px-3 py-1 glass rounded-lg border border-white/10">
+                      {type}
+                    </span>
+                    <button
+                      onClick={() => handleCopy(hash, type)}
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
+                    >
+                      <Copy className="h-3 w-3" />
+                      {copied === type ? '✓ Copied!' : 'Copy'}
+                    </button>
+                  </div>
+                  <p className="font-mono text-sm text-slate-900 dark:text-white break-all leading-relaxed">{hash}</p>
                 </div>
-                <p className="font-mono text-sm text-gray-900 dark:text-white break-all transition-colors duration-300">{hash}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       )}
 
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-300">About Hash Functions</h3>
-        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
+      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+          🛡️ About Hash Functions
+        </h3>
+        <p className="text-sm text-slate-700 dark:text-slate-300 mb-5 leading-relaxed font-semibold">
           Hash functions convert input data into fixed-size strings. They're commonly used for data integrity verification, password storage, and digital signatures.
         </p>
-        <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span><strong>MD5:</strong> 128-bit hash (not recommended for security)</span>
+        <ul className="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+          <li className="flex items-start gap-3 p-4 glass rounded-xl border border-red-500/20">
+            <span className="text-red-500 font-bold text-lg">🔴</span>
+            <div><strong className="text-red-600 dark:text-red-400">MD5:</strong> 128-bit hash (not recommended for security)</div>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span><strong>SHA-1:</strong> 160-bit hash (deprecated for security)</span>
+          <li className="flex items-start gap-3 p-4 glass rounded-xl border border-yellow-500/20">
+            <span className="text-yellow-500 font-bold text-lg">🟡</span>
+            <div><strong className="text-yellow-600 dark:text-yellow-400">SHA-1:</strong> 160-bit hash (deprecated for security)</div>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span><strong>SHA-256:</strong> 256-bit hash (recommended for most uses)</span>
+          <li className="flex items-start gap-3 p-4 glass rounded-xl border border-green-500/20">
+            <span className="text-green-500 font-bold text-lg">🟢</span>
+            <div><strong className="text-green-600 dark:text-green-400">SHA-256:</strong> 256-bit hash (recommended for most uses)</div>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span><strong>SHA-512:</strong> 512-bit hash (highest security)</span>
+          <li className="flex items-start gap-3 p-4 glass rounded-xl border border-cyan-500/20">
+            <span className="text-cyan-500 font-bold text-lg">🔵</span>
+            <div><strong className="text-cyan-600 dark:text-cyan-400">SHA-512:</strong> 512-bit hash (highest security)</div>
           </li>
         </ul>
       </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { MiddlewareFlowProvider } from "@/app/contexts/MiddlewareFlowContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StructuredData from "@/components/StructuredData";
@@ -103,6 +104,20 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
           crossOrigin="anonymous"
         />
+        {/* Google reCAPTCHA v2 */}
+        <script
+          async
+          src="https://www.google.com/recaptcha/api.js?render=explicit"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.handleRecaptchaCallback = function(token) {
+                window.dispatchEvent(new CustomEvent('recaptcha-verified', { detail: { token } }));
+              };
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -118,7 +133,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100`}>
+      <body className={`${inter.variable} antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 noise-texture`}>
         <StructuredData
           data={{
             '@context': 'https://schema.org',
@@ -152,11 +167,13 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
+          <MiddlewareFlowProvider>
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </MiddlewareFlowProvider>
         </ThemeProvider>
       </body>
     </html>

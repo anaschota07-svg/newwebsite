@@ -34,34 +34,34 @@ export default function RandomNumberGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="space-y-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-5">
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                Min
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+                📉 Min
               </label>
               <input
                 type="number"
                 value={min}
                 onChange={(e) => setMin(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-4 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                Max
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+                📈 Max
               </label>
               <input
                 type="number"
                 value={max}
                 onChange={(e) => setMax(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-4 py-4 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                Count
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+                🔢 Count
               </label>
               <input
                 type="number"
@@ -69,21 +69,21 @@ export default function RandomNumberGenerator() {
                 max="100"
                 value={count}
                 onChange={(e) => setCount(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-4 py-4 glass border border-white/10 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
               />
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={generate}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all"
             >
-              Generate Random Numbers
+              🎲 Generate Random Numbers
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-3 bg-gray-200 dark:bg-slate-900 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
+              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -92,24 +92,24 @@ export default function RandomNumberGenerator() {
       </div>
 
       {results.length > 0 && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm animate-slide-up transition-colors duration-300">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">
-              Generated Numbers ({results.length})
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-black text-slate-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+              ✨ Generated Numbers ({results.length})
             </h3>
             <button
               onClick={handleCopy}
-              className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors gap-2"
+              className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
             >
               <Copy className="h-4 w-4" />
-              {copied ? 'Copied!' : 'Copy'}
+              {copied ? '✓ Copied!' : 'Copy'}
             </button>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {results.map((num, index) => (
               <div
                 key={index}
-                className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-lg font-mono font-semibold transition-colors duration-300"
+                className="px-5 py-3 glass border border-cyan-500/30 rounded-xl font-mono font-black text-xl bg-gradient-to-br from-cyan-500/10 to-purple-500/10 text-slate-900 dark:text-white hover:scale-110 transition-all cursor-default"
               >
                 {num}
               </div>

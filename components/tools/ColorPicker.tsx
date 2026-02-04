@@ -85,64 +85,70 @@ export default function ColorPicker() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-        <div className="space-y-6">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-8">
           <div className="flex flex-col items-center">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors duration-300">
-              Pick a Color
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-5">
+              🎨 Pick a Color
             </label>
-            <input
-              type="color"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-              className="w-full h-48 rounded-lg cursor-pointer border-4 border-gray-200 dark:border-slate-700 transition-colors duration-300"
-            />
+            <div className="relative w-full">
+              <input
+                type="color"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                className="w-full h-64 rounded-2xl cursor-pointer border-4 border-white/20 shadow-2xl hover:scale-102 transition-transform"
+              />
+              <div 
+                className="absolute -top-2 -right-2 w-16 h-16 rounded-full border-4 border-white dark:border-slate-800 shadow-xl"
+                style={{ backgroundColor: color }}
+              />
+            </div>
           </div>
 
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-900 rounded-lg transition-colors duration-300">
+            <div className="flex items-center justify-between p-4 glass border border-white/10 rounded-xl group hover:border-cyan-500/50 transition-all">
               <div>
-                <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">HEX</span>
-                <div className="font-mono text-lg text-gray-900 dark:text-white transition-colors duration-300">{color.toUpperCase()}</div>
+                <span className="text-xs font-bold text-slate-500 dark:text-slate-400">HEX</span>
+                <div className="font-mono text-xl font-bold text-slate-900 dark:text-white">{color.toUpperCase()}</div>
               </div>
               <button
                 onClick={() => copyToClipboard(color)}
-                className="p-2 hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                className="p-3 glass border border-white/10 hover:border-cyan-500 rounded-xl transition-all group-hover:scale-110"
               >
-                <Copy className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                <Copy className="h-5 w-5 text-cyan-500" />
               </button>
             </div>
 
             {rgb && (
-              <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-900 rounded-lg transition-colors duration-300">
+              <div className="flex items-center justify-between p-4 glass border border-white/10 rounded-xl group hover:border-blue-500/50 transition-all">
                 <div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">RGB</span>
-                  <div className="font-mono text-lg text-gray-900 dark:text-white transition-colors duration-300">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400">RGB</span>
+                  <div className="font-mono text-xl font-bold text-slate-900 dark:text-white">
                     rgb({rgb.r}, {rgb.g}, {rgb.b})
                   </div>
                 </div>
                 <button
                   onClick={() => copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`)}
-                  className="p-2 hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                  className="p-3 glass border border-white/10 hover:border-blue-500 rounded-xl transition-all group-hover:scale-110"
                 >
-                  <Copy className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                  <Copy className="h-5 w-5 text-blue-500" />
                 </button>
               </div>
             )}
 
             {hsl && (
-              <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-900 rounded-lg transition-colors duration-300">
+              <div className="flex items-center justify-between p-4 glass border border-white/10 rounded-xl group hover:border-purple-500/50 transition-all">
                 <div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">HSL</span>
-                  <div className="font-mono text-lg text-gray-900 dark:text-white transition-colors duration-300">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400">HSL</span>
+                  <div className="font-mono text-xl font-bold text-slate-900 dark:text-white">
                     hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
                   </div>
                 </div>
                 <button
                   onClick={() => copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`)}
-                  className="p-2 hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                  className="p-3 glass border border-white/10 hover:border-purple-500 rounded-xl transition-all group-hover:scale-110"
                 >
-                  <Copy className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                  <Copy className="h-5 w-5 text-purple-500" />
                 </button>
               </div>
             )}
@@ -150,20 +156,22 @@ export default function ColorPicker() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Color Palette</h3>
-        <div className="grid grid-cols-5 gap-2">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+          🌈 Color Palette
+        </h3>
+        <div className="grid grid-cols-5 gap-3">
           {colorShades.map((shade) => {
             const shadeColor = adjustColor(color, shade.factor)
             return (
               <button
                 key={shade.name}
                 onClick={() => setColor(shadeColor)}
-                className="group relative aspect-square rounded-lg overflow-hidden border-2 border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
+                className="group relative aspect-square rounded-xl overflow-hidden border-3 border-white/20 hover:border-white/60 hover:scale-110 transition-all shadow-lg hover:shadow-2xl"
                 style={{ backgroundColor: shadeColor }}
               >
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity flex items-end justify-center pb-2">
-                  <span className="text-xs font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-black/20 group-hover:from-white/10 group-hover:to-black/30 transition-all flex items-center justify-center">
+                  <span className="text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg">
                     {shade.name}
                   </span>
                 </div>

@@ -42,55 +42,55 @@ export default function HTMLEncoderDecoder() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="flex gap-2 mb-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="flex gap-3 mb-6">
           <button
             onClick={() => setMode('encode')}
-            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
               mode === 'encode'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50'
             }`}
           >
-            Encode
+            🔒 Encode
           </button>
           <button
             onClick={() => setMode('decode')}
-            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
               mode === 'decode'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
+                : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
             }`}
           >
-            Decode
+            🔓 Decode
           </button>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              {mode === 'encode' ? 'HTML to Encode' : 'HTML Entities to Decode'}
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              {mode === 'encode' ? '📝 HTML to Encode' : '🔐 HTML Entities to Decode'}
             </label>
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={mode === 'encode' ? 'Enter HTML to encode...' : 'Enter HTML entities to decode...'}
               rows={6}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white resize-none transition-colors duration-300 font-mono text-sm"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none font-mono text-sm transition-all"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={handleConvert}
               disabled={!input}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
-              {mode === 'encode' ? 'Encode HTML' : 'Decode HTML'}
+              {mode === 'encode' ? '⚡ Encode HTML' : '🔓 Decode HTML'}
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-3 bg-gray-200 dark:bg-slate-900 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
+              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -99,45 +99,47 @@ export default function HTMLEncoderDecoder() {
       </div>
 
       {output && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm animate-slide-up transition-colors duration-300">
-          <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
-              {mode === 'encode' ? 'Encoded HTML' : 'Decoded HTML'}
+        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+          <div className="flex items-center justify-between mb-4">
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">
+              {mode === 'encode' ? '✨ Encoded HTML' : '📄 Decoded HTML'}
             </label>
             <button
               onClick={handleCopy}
-              className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors gap-2"
+              className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
             >
               <Copy className="h-4 w-4" />
-              {copied ? 'Copied!' : 'Copy'}
+              {copied ? '✓ Copied!' : 'Copy'}
             </button>
           </div>
           <textarea
             value={output}
             readOnly
             rows={6}
-            className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white resize-none transition-colors duration-300 font-mono text-sm"
+            className="w-full px-5 py-4 glass border border-white/10 rounded-xl text-slate-900 dark:text-white resize-none font-mono text-sm"
           />
         </div>
       )}
 
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-300">About HTML Encoding</h3>
-        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
+      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+          💡 About HTML Encoding
+        </h3>
+        <p className="text-sm text-slate-700 dark:text-slate-300 mb-5 leading-relaxed font-semibold">
           HTML encoding converts special characters into HTML entities, making them safe to display in HTML documents. This prevents XSS attacks and ensures proper rendering.
         </p>
-        <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span>&lt; becomes &amp;lt;</span>
+        <ul className="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-cyan-500 font-bold">✦</span>
+            <span className="font-mono">&lt; becomes &amp;lt;</span>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span>&gt; becomes &amp;gt;</span>
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-purple-500 font-bold">✦</span>
+            <span className="font-mono">&gt; becomes &amp;gt;</span>
           </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-            <span>&amp; becomes &amp;amp;</span>
+          <li className="flex items-start gap-3 p-3 glass rounded-xl">
+            <span className="text-pink-500 font-bold">✦</span>
+            <span className="font-mono">&amp; becomes &amp;amp;</span>
           </li>
         </ul>
       </div>

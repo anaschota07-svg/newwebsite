@@ -58,35 +58,35 @@ export default function BMICalculator() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
-        <div className="flex gap-2 mb-6">
+    <div className="space-y-4">
+      <div className="glass rounded-2xl p-6 border border-white/10 shadow-lg">
+        <div className="flex gap-3 mb-5">
           <button
             onClick={() => setUnit('metric')}
-            className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+            className={`flex-1 py-2.5 px-5 rounded-xl font-bold transition-all ${
               unit === 'metric'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                : 'glass border border-white/10 text-slate-900 dark:text-slate-300 hover:border-cyan-500/50'
             }`}
           >
-            Metric (kg, cm)
+            📏 Metric (kg, cm)
           </button>
           <button
             onClick={() => setUnit('imperial')}
-            className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+            className={`flex-1 py-2.5 px-5 rounded-xl font-bold transition-all ${
               unit === 'imperial'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-slate-900 text-gray-700 dark:text-gray-300'
+                ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
+                : 'glass border border-white/10 text-slate-900 dark:text-slate-300 hover:border-purple-500/50'
             }`}
           >
-            Imperial (lbs, in)
+            📐 Imperial (lbs, in)
           </button>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Weight {unit === 'metric' ? '(kg)' : '(lbs)'}
+            <label className="block text-sm font-bold text-slate-900 dark:text-slate-300 mb-2">
+              ⚖️ Weight {unit === 'metric' ? '(kg)' : '(lbs)'}
             </label>
             <div className="relative">
               <input
@@ -94,15 +94,15 @@ export default function BMICalculator() {
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 placeholder={unit === 'metric' ? 'e.g., 70' : 'e.g., 154'}
-                className="w-full px-4 py-3 pl-10 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-5 py-3 pl-12 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-semibold"
               />
-              <Weight className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+              <Weight className="absolute left-4 top-3 h-5 w-5 text-cyan-500" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-              Height {unit === 'metric' ? '(cm)' : '(inches)'}
+            <label className="block text-sm font-bold text-slate-900 dark:text-slate-300 mb-2">
+              📏 Height {unit === 'metric' ? '(cm)' : '(inches)'}
             </label>
             <div className="relative">
               <input
@@ -110,51 +110,57 @@ export default function BMICalculator() {
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
                 placeholder={unit === 'metric' ? 'e.g., 175' : 'e.g., 69'}
-                className="w-full px-4 py-3 pl-10 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white transition-colors duration-300"
+                className="w-full px-5 py-3 pl-12 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-semibold"
               />
-              <Ruler className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+              <Ruler className="absolute left-4 top-3 h-5 w-5 text-purple-500" />
             </div>
           </div>
 
           <button
             onClick={calculateBMI}
             disabled={!weight || !height}
-            className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed"
+            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-600 hover:via-blue-700 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
           >
-            Calculate BMI
+            🎯 Calculate BMI
           </button>
         </div>
       </div>
 
       {bmi && (
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 animate-slide-up transition-colors duration-300">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Your BMI Result</h3>
-          <div className="text-center mb-6">
-            <div className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">{bmi.value}</div>
-            <div className={`text-2xl font-semibold ${bmi.color}`}>{bmi.category}</div>
+        <div className="glass rounded-2xl p-6 border border-white/10 shadow-lg animate-slide-up bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 text-center">
+            📊 Your BMI Result
+          </h3>
+          <div className="text-center mb-5">
+            <div className="text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600 mb-2">
+              {bmi.value}
+            </div>
+            <div className={`text-2xl font-bold ${bmi.color}`}>{bmi.category}</div>
           </div>
 
           <div className="space-y-3">
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 transition-colors duration-300">
-              <p className="text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">{bmi.advice}</p>
+            <div className="glass rounded-xl p-4 border border-white/10">
+              <p className="text-sm text-slate-900 dark:text-slate-300 leading-relaxed font-semibold">
+                💡 {bmi.advice}
+              </p>
             </div>
 
-            <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1 transition-colors duration-300">
-              <div className="flex justify-between">
-                <span>Underweight:</span>
-                <span>&lt; 18.5</span>
+            <div className="grid grid-cols-2 gap-2 text-xs font-bold">
+              <div className="glass rounded-xl p-3 border border-blue-500/20">
+                <div className="text-slate-900 dark:text-slate-400 mb-1">Underweight</div>
+                <div className="text-blue-500">&lt; 18.5</div>
               </div>
-              <div className="flex justify-between">
-                <span>Normal weight:</span>
-                <span>18.5 - 24.9</span>
+              <div className="glass rounded-xl p-3 border border-green-500/20">
+                <div className="text-slate-900 dark:text-slate-400 mb-1">Normal</div>
+                <div className="text-green-500">18.5 - 24.9</div>
               </div>
-              <div className="flex justify-between">
-                <span>Overweight:</span>
-                <span>25 - 29.9</span>
+              <div className="glass rounded-xl p-3 border border-yellow-500/20">
+                <div className="text-slate-900 dark:text-slate-400 mb-1">Overweight</div>
+                <div className="text-yellow-500">25 - 29.9</div>
               </div>
-              <div className="flex justify-between">
-                <span>Obese:</span>
-                <span>≥ 30</span>
+              <div className="glass rounded-xl p-3 border border-red-500/20">
+                <div className="text-slate-900 dark:text-slate-400 mb-1">Obese</div>
+                <div className="text-red-500">≥ 30</div>
               </div>
             </div>
           </div>

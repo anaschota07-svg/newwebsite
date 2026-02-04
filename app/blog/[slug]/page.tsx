@@ -276,6 +276,141 @@ const blogContent: { [key: string]: { sections: { heading: string; content: stri
       },
     ],
   },
+  'css-optimization-guide': {
+    sections: [
+      {
+        heading: 'Why CSS Optimization Matters',
+        content: 'In 2026, website performance is more critical than ever. CSS optimization can significantly reduce page load times, improve user experience, and boost SEO rankings. Large, unoptimized CSS files can slow down your website, increase bandwidth costs, and frustrate users on slower connections.',
+        image: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Minification and Compression',
+        content: 'CSS minification removes unnecessary whitespace, comments, and formatting from your stylesheets. This can reduce file size by 20-40% without affecting functionality. Combine minification with gzip compression for even better results. Our CSS Minifier tool makes this process instant and effortless.',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Remove Unused CSS',
+        content: 'Modern frameworks and libraries often include CSS for features you don\'t use. Tools like PurgeCSS can identify and remove unused styles, sometimes reducing CSS file size by 90% or more. Always test thoroughly after removing unused CSS to ensure nothing breaks.',
+      },
+      {
+        heading: 'CSS Organization Best Practices',
+        content: 'Organize your CSS logically with consistent naming conventions. Use methodologies like BEM (Block Element Modifier) or utility-first approaches like Tailwind CSS. Split large CSS files into smaller modules for better maintainability and faster initial loads with code splitting.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Critical CSS and Loading Strategies',
+        content: 'Identify and inline critical CSS needed for above-the-fold content. Load non-critical CSS asynchronously to prevent render-blocking. Use media queries to load print or device-specific styles only when needed. These strategies can dramatically improve perceived performance.',
+      },
+    ],
+  },
+  'image-compression-guide': {
+    sections: [
+      {
+        heading: 'Understanding Image Compression',
+        content: 'Image compression reduces file size while maintaining visual quality. There are two types: lossless (preserves all data) and lossy (removes some data). Choosing the right compression method and settings is crucial for balancing quality and performance on your website.',
+        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Lossy vs Lossless Compression',
+        content: 'Lossless compression (PNG, WebP lossless) preserves every pixel perfectly but achieves lower compression ratios. Lossy compression (JPEG, WebP lossy) removes imperceptible details to achieve much smaller files. For photos, lossy compression at 80-85% quality offers the best balance.',
+        image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Modern Image Formats',
+        content: 'WebP provides superior compression compared to JPEG and PNG, often 25-35% smaller. AVIF offers even better compression but has limited browser support. Always provide fallbacks for older browsers. Use responsive images with srcset to serve appropriate sizes for different devices.',
+      },
+      {
+        heading: 'Optimization Workflow',
+        content: 'Start with the highest quality source images. Resize images to their display dimensions before compressing. Use tools to find the optimal quality setting for each image. Automate optimization in your build process for consistency. Our Image Compressor tool makes this process quick and easy.',
+        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Performance Impact',
+        content: 'Optimized images can reduce page weight by 50-80%, leading to faster load times, improved Core Web Vitals, better SEO rankings, and reduced bandwidth costs. For e-commerce sites, every second of improvement can increase conversion rates significantly.',
+      },
+    ],
+  },
+  'pomodoro-technique-guide': {
+    sections: [
+      {
+        heading: 'What is the Pomodoro Technique?',
+        content: 'The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It uses a timer to break work into focused intervals, traditionally 25 minutes, separated by short breaks. This simple yet powerful technique helps combat procrastination and maintain focus.',
+        image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'How the Technique Works',
+        content: 'Work for 25 minutes (one pomodoro) on a single task without interruptions. Take a 5-minute break to rest and recharge. After completing four pomodoros, take a longer 15-30 minute break. This rhythm helps maintain high productivity while preventing burnout.',
+        image: 'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Benefits of Pomodoro',
+        content: 'The technique improves focus by creating urgency and limiting work sessions. Frequent breaks prevent mental fatigue and maintain productivity. The structured approach helps estimate task duration, track progress, and build momentum. Many users report completing more work in less time.',
+      },
+      {
+        heading: 'Customizing for Your Needs',
+        content: 'While 25 minutes is traditional, you can adjust intervals to suit your work style. Some prefer 50-minute work sessions with 10-minute breaks (52/17 method). Others use 90-minute deep work sessions. Experiment to find what works best for your concentration span and task complexity.',
+        image: 'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Using Our Pomodoro Timer',
+        content: 'Our Pomodoro Timer tool offers customizable work and break intervals, visual and audio notifications, and session tracking. It\'s perfect for remote workers, students, and anyone looking to improve their productivity. Try it today and experience the benefits of focused work sessions.',
+      },
+    ],
+  },
+  'regex-beginners-guide': {
+    sections: [
+      {
+        heading: 'Introduction to Regular Expressions',
+        content: 'Regular expressions (regex) are powerful patterns used to match, search, and manipulate text. They might look cryptic at first, but mastering regex can save countless hours of manual text processing. Regex is supported in virtually every programming language and text editor.',
+        image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Basic Regex Patterns',
+        content: 'Start with simple patterns: literal characters match themselves, the dot (.) matches any character, asterisk (*) means zero or more, plus (+) means one or more, and question mark (?) means zero or one. Square brackets [] define character sets, and parentheses () create groups.',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Common Regex Use Cases',
+        content: 'Regex is invaluable for validating email addresses, phone numbers, and URLs. Use it to extract specific data from logs, clean up messy text, find and replace complex patterns, and parse structured data. Regex powers search functionality in most IDEs and text editors.',
+      },
+      {
+        heading: 'Regex Flags and Modifiers',
+        content: 'Flags modify how regex patterns work: "g" for global matching (find all matches), "i" for case-insensitive matching, "m" for multiline mode, and "s" for dotall mode. Understanding flags helps you write more flexible and powerful patterns.',
+        image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Testing and Debugging Regex',
+        content: 'Always test your regex patterns with various inputs, including edge cases. Online regex testers provide instant feedback and explanations. Our Regex Tester tool offers live matching, syntax highlighting, and detailed explanations to help you learn and debug patterns effectively.',
+      },
+    ],
+  },
+  'loan-calculation-guide': {
+    sections: [
+      {
+        heading: 'Understanding Loan Calculations',
+        content: 'Whether you\'re buying a home, car, or taking a personal loan, understanding how loan payments are calculated is crucial for making informed financial decisions. Loan calculations involve principal amount, interest rate, loan term, and payment frequency. Mastering these concepts helps you compare offers and plan your budget.',
+        image: 'https://images.unsplash.com/photo-1554224311-beee4c27c98d?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'The Loan Payment Formula',
+        content: 'Monthly loan payments are calculated using the amortization formula: M = P[r(1+r)^n]/[(1+r)^n-1], where M is monthly payment, P is principal, r is monthly interest rate, and n is number of payments. This formula ensures you pay off the loan completely with equal monthly payments.',
+        image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Interest Rate Impact',
+        content: 'Even small differences in interest rates can significantly impact total costs. A 1% difference on a $300,000 mortgage can cost tens of thousands over 30 years. Always shop around for the best rates, improve your credit score before applying, and consider making extra payments to reduce total interest.',
+      },
+      {
+        heading: 'Loan Term Considerations',
+        content: 'Shorter loan terms mean higher monthly payments but less total interest paid. Longer terms offer lower monthly payments but cost more overall. Consider your budget, financial goals, and life plans when choosing a loan term. Our Loan Calculator helps you compare different scenarios.',
+        image: 'https://images.unsplash.com/photo-1554224311-beee4c27c98d?w=1200&h=600&fit=crop',
+      },
+      {
+        heading: 'Making Extra Payments',
+        content: 'Extra principal payments can dramatically reduce total interest and loan term. Even small additional payments each month compound over time. Check if your loan has prepayment penalties. Use our Loan Calculator to see how extra payments affect your loan payoff timeline and total cost.',
+      },
+    ],
+  },
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -289,19 +424,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const content = blogContent[slug]
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
-      <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 pattern-grid opacity-20" />
+      
+      <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Back Button */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-6 transition-colors duration-300 group"
-        >
-          <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" />
-          Back to Blog
-        </Link>
+        <div className="mb-5">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 hover:border-cyan-500/50 text-slate-700 dark:text-slate-300 font-semibold group transition-all"
+          >
+            <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
+            Back to Blog
+          </Link>
+        </div>
 
         {/* Featured Image */}
-        <div className="relative aspect-video rounded-2xl mb-8 overflow-hidden shadow-2xl">
+        <div className="relative aspect-video rounded-3xl mb-8 overflow-hidden">
           {post.image.startsWith('http') ? (
             <Image
               src={post.image}
@@ -312,35 +452,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               priority
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
+            <div className="w-full h-full bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 animate-gradient-shift"></div>
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
 
         {/* Post Header */}
-        <header className="mb-8">
-          <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4 transition-colors duration-300">
-            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full font-medium transition-colors duration-300">
+        <header className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="px-4 py-1.5 rounded-full glass border border-cyan-500/30 text-sm font-bold gradient-text">
               {post.category}
             </span>
-            <span>•</span>
-            <div className="flex items-center">
-              <Clock className="h-4 w-4 mr-1" />
-              <span>{post.readTime}</span>
+            <div className="flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400">
+              <Clock className="h-4 w-4" />
+              <span className="font-semibold">{post.readTime}</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300 leading-tight">
+          
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
             {post.title}
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 mb-6 transition-colors duration-300">
+          
+          <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
             {post.description}
           </p>
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-            <div className="flex items-center">
-              <User className="h-4 w-4 mr-1" />
-              <span>{post.author}</span>
+          
+          <div className="flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex items-center gap-2">
+              <User className="h-4 w-4" />
+              <span className="font-semibold">{post.author}</span>
             </div>
-            <div className="flex items-center">
-              <Calendar className="h-4 w-4 mr-1" />
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
               <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
             </div>
           </div>
@@ -350,25 +493,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Post Content */}
         {content && (
-          <div className="prose prose-lg dark:prose-invert max-w-none my-12">
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700 space-y-12 transition-colors duration-300">
+          <div className="my-12">
+            <div className="glass rounded-3xl p-8 sm:p-12 border border-white/10 space-y-12">
               {content.sections.map((section, index) => (
-                <section key={index} className="space-y-4">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
+                <section key={index} className="space-y-6">
+                  <h2 className="text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                    <div className="w-2 h-8 bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full" />
                     {section.heading}
                   </h2>
                   {section.image && (
-                    <div className="relative w-full h-80 rounded-xl overflow-hidden my-6 shadow-lg">
+                    <div className="relative w-full h-80 rounded-2xl overflow-hidden shadow-xl">
                       <Image
                         src={section.image}
                         alt={section.heading}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 1200px"
+                        sizes="100vw"
                       />
                     </div>
                   )}
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg transition-colors duration-300">
+                  <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
                     {section.content}
                   </p>
                 </section>
@@ -380,50 +524,58 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <AdSense format="horizontal" />
 
         {/* Conclusion */}
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800 my-12 transition-colors duration-300">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Conclusion</h2>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-            We hope this guide has been helpful! For more tutorials and tips, explore our other blog posts. 
-            Don't forget to check out our free online tools to put this knowledge into practice.
-          </p>
+        <div className="relative rounded-3xl p-10 my-12 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 animate-gradient-shift" />
+          <div className="absolute inset-0 pattern-dots opacity-10" />
+          <div className="relative z-10">
+            <h2 className="text-3xl font-black text-white mb-4">Wrapping Up</h2>
+            <p className="text-white/90 leading-relaxed text-lg">
+              Hope this guide helped you! Explore more tutorials and try our free tools to level up your skills.
+            </p>
+          </div>
         </div>
 
         {/* Related Posts */}
         <section className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Related Articles</h2>
+          <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-8">More to Explore</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {blogPosts
               .filter((p) => p.id !== post.id)
               .slice(0, 2)
-              .map((relatedPost) => (
-                <Link
-                  key={relatedPost.id}
-                  href={`/blog/${relatedPost.slug}`}
-                  className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 card-hover transition-all duration-300"
-                >
-                  <div className="relative aspect-video overflow-hidden">
-                    {relatedPost.image.startsWith('http') ? (
-                      <Image
-                        src={relatedPost.image}
-                        alt={relatedPost.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded text-xs font-medium mb-2 transition-colors duration-300">
-                      {relatedPost.category}
-                    </span>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                      {relatedPost.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">{relatedPost.readTime}</p>
-                  </div>
-                </Link>
+              .map((relatedPost, i) => (
+                <div key={relatedPost.id} className="hover:-translate-y-1 transition-transform duration-200">
+                  <Link
+                    href={`/blog/${relatedPost.slug}`}
+                    className="group block relative h-full"
+                  >
+                    <div className="glass rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all h-full">
+                      <div className="relative h-48 overflow-hidden">
+                        {relatedPost.image.startsWith('http') ? (
+                          <Image
+                            src={relatedPost.image}
+                            alt={relatedPost.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                            sizes="50vw"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-cyan-500 to-purple-600"></div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      </div>
+                      <div className="p-6">
+                        <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 mb-3 inline-block">
+                          {relatedPost.category}
+                        </span>
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-purple-500 transition-all line-clamp-2">
+                          {relatedPost.title}
+                        </h3>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">{relatedPost.readTime}</p>
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/5 group-hover:to-purple-500/5 rounded-3xl blur-xl transition-all -z-10" />
+                  </Link>
+                </div>
               ))}
           </div>
         </section>

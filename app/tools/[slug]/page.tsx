@@ -23,6 +23,7 @@ import RandomNumberGenerator from '@/components/tools/RandomNumberGenerator'
 import TextToBinary from '@/components/tools/TextToBinary'
 import HTMLEncoderDecoder from '@/components/tools/HTMLEncoderDecoder'
 import AdSense from '@/components/AdSense'
+import { ToolDetailPage } from '@/components/ToolDetailPage'
 
 export async function generateStaticParams() {
   return toolsData.map((tool) => ({
@@ -412,147 +413,18 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
 
   const ToolComponent = toolComponents[slug]
   const content = toolContent[slug]
+  
+  // Get related tools (same category, exclude current tool)
+  const relatedTools = toolsData
+    .filter((t) => t.id !== tool.id && t.category === tool.category)
+    .slice(0, 4)
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Back Button */}
-        <Link
-          href="/tools"
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-6 transition-colors duration-300"
-        >
-          <ArrowLeft className="h-5 w-5 mr-2" />
-          Back to All Tools
-        </Link>
-
-        {/* Tool Header */}
-        <div className="mb-8">
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="text-5xl">{tool.icon}</div>
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
-                {tool.name}
-              </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mt-2 transition-colors duration-300">
-                {tool.description}
-              </p>
-            </div>
-          </div>
-          <span className="inline-block text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full transition-colors duration-300">
-            {tool.category}
-          </span>
-        </div>
-
-        <AdSense format="horizontal" />
-
-        {/* Tool Component */}
-        <div className="my-8">
-          {ToolComponent ? <ToolComponent /> : <div className="text-center text-red-600 dark:text-red-400">Tool component not found</div>}
-        </div>
-
-        <AdSense format="horizontal" />
-
-        {/* SEO Content */}
-        {content && (
-          <div className="mt-12 space-y-8">
-            {/* About Section */}
-            <section className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-                About {tool.name}
-              </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-                {content.about}
-              </p>
-            </section>
-
-            {/* How to Use Section */}
-            <section className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-                How to Use {tool.name}
-              </h2>
-              <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                {content.howTo.map((step, index) => (
-                  <li key={index} className="leading-relaxed">
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            {/* Features Section */}
-            <section className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-                Key Features
-              </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {content.features.map((feature, index) => (
-                  <li key={index} className="flex items-start text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    <span className="text-blue-600 dark:text-blue-400 mr-2 transition-colors duration-300">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* FAQ/Additional Info */}
-            <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-                Why Use {tool.name}?
-              </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 transition-colors duration-300">
-                Our {tool.name} is completely free to use, requires no registration, and works entirely in your browser. 
-                Your data never leaves your device, ensuring complete privacy and security. The tool is designed to be 
-                fast, accurate, and easy to use, making it perfect for both beginners and professionals.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="inline-block bg-white dark:bg-slate-800 px-3 py-1 rounded-full text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                  🚀 Fast & Efficient
-                </span>
-                <span className="inline-block bg-white dark:bg-slate-800 px-3 py-1 rounded-full text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                  🔒 100% Private
-                </span>
-                <span className="inline-block bg-white dark:bg-slate-800 px-3 py-1 rounded-full text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                  💯 Always Free
-                </span>
-                <span className="inline-block bg-white dark:bg-slate-800 px-3 py-1 rounded-full text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                  📱 Mobile Friendly
-                </span>
-              </div>
-            </section>
-          </div>
-        )}
-
-        {/* Related Tools */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
-            Related Tools
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {toolsData
-              .filter((t) => t.id !== tool.id)
-              .slice(0, 4)
-              .map((relatedTool) => (
-                <Link
-                  key={relatedTool.id}
-                  href={`/tools/${relatedTool.slug}`}
-                  className="group bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 card-hover transition-all duration-300"
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className="text-3xl">{relatedTool.icon}</div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                        {relatedTool.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                        {relatedTool.category}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-          </div>
-        </section>
-      </div>
-    </div>
+    <ToolDetailPage
+      tool={tool}
+      ToolComponent={ToolComponent}
+      content={content}
+      relatedTools={relatedTools}
+    />
   )
 }

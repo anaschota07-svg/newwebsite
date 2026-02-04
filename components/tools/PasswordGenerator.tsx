@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Copy, RefreshCw } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Copy, RefreshCw, Shield, Check, Sparkles } from 'lucide-react'
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState('')
   const [length, setLength] = useState(16)
+  const [copied, setCopied] = useState(false)
   const [options, setOptions] = useState({
     uppercase: true,
     lowercase: true,
@@ -35,14 +37,17 @@ export default function PasswordGenerator() {
       newPassword += chars.charAt(Math.floor(Math.random() * chars.length))
     }
     setPassword(newPassword)
+    setCopied(false)
   }
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   const getStrength = () => {
-    if (!password) return { text: '', color: '', width: '0%' }
+    if (!password) return { text: '', gradient: '', width: '0%' }
     
     let strength = 0
     if (password.length >= 12) strength++
@@ -52,46 +57,64 @@ export default function PasswordGenerator() {
     if (/[0-9]/.test(password)) strength++
     if (/[^a-zA-Z0-9]/.test(password)) strength++
 
-    if (strength <= 2) return { text: 'Weak', color: 'bg-red-500', width: '33%' }
-    if (strength <= 4) return { text: 'Medium', color: 'bg-yellow-500', width: '66%' }
-    return { text: 'Strong', color: 'bg-green-500', width: '100%' }
+    if (strength <= 2) return { text: 'Weak', gradient: 'from-red-500 to-orange-500', width: '33%' }
+    if (strength <= 4) return { text: 'Medium', gradient: 'from-yellow-500 to-orange-500', width: '66%' }
+    return { text: 'Strong', gradient: 'from-green-500 to-emerald-500', width: '100%' }
   }
 
   const strength = getStrength()
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-        <div className="space-y-6">
+      <div className="glass rounded-3xl p-8 border border-white/10">
+        <div className="space-y-8">
+          {/* Password Display */}
           {password && (
-            <div className="bg-gray-50 dark:bg-slate-900 rounded-lg p-4 border border-gray-300 dark:border-slate-700">
-              <div className="flex items-center justify-between mb-3">
-                <code className="text-xl font-mono text-gray-900 dark:text-white break-all">{password}</code>
-                <button
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative p-6 rounded-2xl glass border border-white/10"
+            >
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <code className="text-xl font-mono text-slate-900 dark:text-white break-all font-bold tracking-wide">{password}</code>
+                <motion.button
                   onClick={copyToClipboard}
-                  className="ml-4 p-2 hover:bg-gray-200 dark:hover:bg-slate-800 rounded-lg transition-colors flex-shrink-0"
-                  title="Copy to clipboard"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-3 rounded-xl glass border border-white/10 hover:border-cyan-500/50 transition-all flex-shrink-0"
+                  title="Copy"
                 >
-                  <Copy className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-                </button>
+                  {copied ? (
+                    <Check className="h-5 w-5 text-green-500" />
+                  ) : (
+                    <Copy className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                  )}
+                </motion.button>
               </div>
+              
+              {/* Strength Indicator */}
               <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600 dark:text-gray-400">Password Strength:</span>
-                  <span className={`font-semibold ${strength.text === 'Strong' ? 'text-green-600' : strength.text === 'Medium' ? 'text-yellow-600' : 'text-red-600'}`}>
-                    {strength.text}
-                  </span>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-slate-600 dark:text-slate-400 font-semibold">Strength:</span>
+                  <span className="font-black gradient-text">{strength.text}</span>
                 </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                  <div className={`${strength.color} h-2 rounded-full transition-all duration-300`} style={{ width: strength.width }}></div>
+                <div className="h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <motion.div
+                    className={`h-full bg-gradient-to-r ${strength.gradient} rounded-full`}
+                    initial={{ width: '0%' }}
+                    animate={{ width: strength.width }}
+                    transition={{ duration: 0.5 }}
+                  />
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
+          {/* Length Slider */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Password Length: {length}
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-4 flex items-center justify-between">
+              <span>Password Length</span>
+              <span className="px-3 py-1 rounded-full glass border border-cyan-500/30 text-cyan-500 font-black">{length}</span>
             </label>
             <input
               type="range"
@@ -99,84 +122,93 @@ export default function PasswordGenerator() {
               max="32"
               value={length}
               onChange={(e) => setLength(parseInt(e.target.value))}
-              className="w-full h-2 bg-gray-200 dark:bg-slate-900 rounded-lg appearance-none cursor-pointer"
+              className="w-full h-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full appearance-none cursor-pointer slider-futuristic"
+              style={{
+                background: `linear-gradient(to right, #06b6d4 0%, #a855f7 ${((length - 8) / 24) * 100}%, #e2e8f0 ${((length - 8) / 24) * 100}%, #e2e8f0 100%)`
+              }}
             />
-            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <div className="flex justify-between text-xs text-slate-500 dark:text-slate-500 mt-2 font-semibold">
               <span>8</span>
               <span>32</span>
             </div>
           </div>
 
+          {/* Options */}
           <div className="space-y-3">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={options.uppercase}
-                onChange={(e) => setOptions({ ...options, uppercase: e.target.checked })}
-                className="w-5 h-5 text-blue-600 bg-gray-100 dark:bg-slate-900 border-gray-300 dark:border-slate-700 rounded focus:ring-blue-500"
-              />
-              <span className="ml-3 text-gray-700 dark:text-gray-300">Uppercase Letters (A-Z)</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={options.lowercase}
-                onChange={(e) => setOptions({ ...options, lowercase: e.target.checked })}
-                className="w-5 h-5 text-blue-600 bg-gray-100 dark:bg-slate-900 border-gray-300 dark:border-slate-700 rounded focus:ring-blue-500"
-              />
-              <span className="ml-3 text-gray-700 dark:text-gray-300">Lowercase Letters (a-z)</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={options.numbers}
-                onChange={(e) => setOptions({ ...options, numbers: e.target.checked })}
-                className="w-5 h-5 text-blue-600 bg-gray-100 dark:bg-slate-900 border-gray-300 dark:border-slate-700 rounded focus:ring-blue-500"
-              />
-              <span className="ml-3 text-gray-700 dark:text-gray-300">Numbers (0-9)</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={options.symbols}
-                onChange={(e) => setOptions({ ...options, symbols: e.target.checked })}
-                className="w-5 h-5 text-blue-600 bg-gray-100 dark:bg-slate-900 border-gray-300 dark:border-slate-700 rounded focus:ring-blue-500"
-              />
-              <span className="ml-3 text-gray-700 dark:text-gray-300">Symbols (!@#$%^&*)</span>
-            </label>
+            {[
+              { key: 'uppercase' as const, label: 'Uppercase', desc: 'A-Z' },
+              { key: 'lowercase' as const, label: 'Lowercase', desc: 'a-z' },
+              { key: 'numbers' as const, label: 'Numbers', desc: '0-9' },
+              { key: 'symbols' as const, label: 'Symbols', desc: '!@#$%^&*' },
+            ].map((option, i) => (
+              <motion.label
+                key={option.key}
+                className="flex items-center justify-between p-4 rounded-2xl glass border border-white/10 hover:border-cyan-500/30 cursor-pointer transition-all group"
+                whileHover={{ x: 4 }}
+              >
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    checked={options[option.key]}
+                    onChange={(e) => setOptions({ ...options, [option.key]: e.target.checked })}
+                    className="w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 text-cyan-500 focus:ring-2 focus:ring-cyan-500/20 cursor-pointer"
+                  />
+                  <div>
+                    <div className="font-bold text-slate-900 dark:text-white">{option.label}</div>
+                    <div className="text-xs text-slate-500 font-mono">{option.desc}</div>
+                  </div>
+                </div>
+                {options[option.key] && (
+                  <Check className="w-5 h-5 text-cyan-500" />
+                )}
+              </motion.label>
+            ))}
           </div>
 
-          <button
+          {/* Generate Button */}
+          <motion.button
             onClick={generatePassword}
-            className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative w-full px-8 py-4 rounded-2xl font-bold text-white overflow-hidden"
           >
-            <RefreshCw className="h-5 w-5" />
-            Generate Password
-          </button>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 animate-gradient-shift" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              <RefreshCw className="w-5 h-5" />
+              Generate Password
+            </span>
+          </motion.button>
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Password Tips</h3>
-        <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">✓</span>
-            <span>Use at least 12 characters for better security</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">✓</span>
-            <span>Mix uppercase, lowercase, numbers, and symbols</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">✓</span>
-            <span>Avoid using personal information</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-blue-600 dark:text-blue-400 mr-2">✓</span>
-            <span>Use a unique password for each account</span>
-          </li>
-        </ul>
-      </div>
+      {/* Security Tips */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="glass rounded-3xl p-6 border border-white/10"
+      >
+        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-cyan-500" />
+          Security Tips
+        </h3>
+        <div className="space-y-3">
+          {[
+            'Use at least 12 characters for better security',
+            'Mix uppercase, lowercase, numbers, and symbols',
+            'Avoid using personal information',
+            'Use a unique password for each account',
+          ].map((tip, i) => (
+            <div key={i} className="flex items-start gap-3">
+              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-white text-xs">✓</span>
+              </div>
+              <span className="text-sm text-slate-700 dark:text-slate-300">{tip}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Moon, Sun, Menu, X } from 'lucide-react'
+import { Moon, Sun, Menu, X, Sparkles } from 'lucide-react'
 import { useTheme } from '@/components/providers/ThemeProvider'
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
@@ -21,363 +21,212 @@ export default function Header() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   
   const { scrollY } = useScroll()
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 1])
-  const headerBlur = useTransform(scrollY, [0, 100], [8, 20])
+  const headerY = useTransform(scrollY, [0, 100], [0, -2])
+  const headerBlur = useTransform(scrollY, [0, 50], [0, 16])
 
   useEffect(() => {
     setMounted(true)
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   if (!mounted) return null
 
   return (
-    <>
-      {/* Ambient Background Glow */}
-      <div className="fixed top-0 left-0 w-full h-32 pointer-events-none z-40 overflow-hidden">
+    <motion.header 
+      style={{ 
+        y: headerY,
+        backdropFilter: `blur(${headerBlur}px)`,
+      }}
+      className="sticky top-0 z-50 w-full glass border-b border-white/10"
+    >
+      {/* Animated Gradient Border */}
+      <div className="absolute inset-x-0 bottom-0 h-[2px] overflow-hidden">
         <motion.div
-          className="absolute w-96 h-96 rounded-full blur-3xl opacity-20"
+          className="h-full w-full"
           style={{
-            background: theme === 'dark' 
-              ? 'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, transparent 70%)',
-            left: mousePosition.x - 192,
-            top: -150,
+            background: 'linear-gradient(90deg, transparent, #06b6d4, #3b82f6, #a855f7, #ec4899, transparent)',
           }}
           animate={{
-            scale: [1, 1.2, 1],
+            x: ['-100%', '100%'],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "linear"
           }}
         />
       </div>
-
-      <motion.header 
-        style={{ 
-          opacity: headerOpacity,
-          backdropFilter: `blur(${headerBlur}px)`,
-        }}
-        className="sticky top-0 z-50 w-full border-b border-gray-200/50 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 shadow-lg dark:shadow-blue-500/5"
-      >
-        {/* Gradient Border Animation */}
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50" />
-        
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative" aria-label="Top">
-          {/* Floating Particles */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-blue-400 rounded-full"
-                initial={{ 
-                  x: Math.random() * 100 + '%', 
-                  y: '100%',
-                  opacity: 0 
-                }}
-                animate={{
-                  y: '-100%',
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 3 + i,
-                  repeat: Infinity,
-                  delay: i * 1.5,
-                  ease: "linear"
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="flex h-16 items-center justify-between">
-            {/* Logo with 3D Effect */}
+      
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo - Futuristic */}
+          <Link href="/" className="flex items-center gap-3 group" aria-label="SimpleWebToolsBox Home">
             <motion.div 
-              className="flex items-center relative"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, type: "spring" }}
+              className="relative"
+              whileHover={{ scale: 1.05, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <Link href="/" className="flex items-center space-x-3 group" aria-label="SimpleWebToolsBox Home">
-                <motion.div 
-                  className="relative"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <div className="relative h-10 w-10 sm:h-12 sm:w-12">
-                    <Image
-                      src="/logo.png"
-                      alt="SimpleWebToolsBox Logo"
-                      fill
-                      className="object-contain"
-                      priority
-                      sizes="(max-width: 640px) 40px, 48px"
-                    />
-                  </div>
-                </motion.div>
-
-                <div className="flex flex-col leading-tight">
-                  <motion.span 
-                    className="text-base sm:text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    SimpleWebTools
-                  </motion.span>
-                  <motion.span 
-                    className="text-xs sm:text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-300 dark:to-gray-400 -mt-1"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    Box
-                  </motion.span>
-                </div>
-              </Link>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+              <div className="relative h-10 w-10 sm:h-11 sm:w-11 rounded-xl overflow-hidden border border-white/20">
+                <Image
+                  src="/logo.png"
+                  alt="SimpleWebToolsBox"
+                  fill
+                  className="object-contain"
+                  priority
+                  sizes="44px"
+                />
+              </div>
             </motion.div>
 
-            {/* Desktop Navigation with 3D Tabs */}
-            <div className="hidden md:flex md:items-center md:space-x-1">
+            <div className="hidden sm:block">
+              <span className="text-xl font-black gradient-text tracking-tight">
+                SimpleWebToolsBox
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation - Minimalistic Pills */}
+          <div className="hidden md:flex md:items-center md:gap-2">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href
+              
+              return (
+                <Link key={item.name} href={item.href}>
+                  <motion.div
+                    className="relative px-4 py-2 rounded-full text-sm font-semibold cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {isActive ? (
+                      <>
+                        <motion.div
+                          layoutId="navPill"
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            background: 'linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7)',
+                          }}
+                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        />
+                        <motion.div
+                          className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent"
+                        />
+                        <span className="relative z-10 text-white flex items-center gap-1.5">
+                          {item.name}
+                          <Sparkles className="w-3 h-3" />
+                        </span>
+                      </>
+                    ) : (
+                      <span className="relative z-10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors">
+                        {item.name}
+                      </span>
+                    )}
+                  </motion.div>
+                </Link>
+              )
+            })}
+          </div>
+
+          {/* Right Section */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle - Futuristic */}
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="relative p-2.5 rounded-full glass hover:border-cyan-400 dark:hover:border-purple-400 border border-transparent transition-all group"
+              aria-label="Toggle theme"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/20 group-hover:to-purple-500/20 rounded-full transition-all" />
+              <motion.div
+                animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+                transition={{ duration: 0.5, type: "spring" }}
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-5 w-5 text-amber-400" />
+                ) : (
+                  <Moon className="h-5 w-5 text-slate-700" />
+                )}
+              </motion.div>
+            </motion.button>
+
+            {/* Mobile Menu */}
+            <motion.button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="md:hidden p-2.5 rounded-full glass border border-transparent hover:border-cyan-400 transition-all"
+              aria-label="Toggle menu"
+            >
+              <motion.div
+                animate={{ rotate: mobileMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+                ) : (
+                  <Menu className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+                )}
+              </motion.div>
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Mobile Menu - Glass Effect */}
+        {mobileMenuOpen && (
+          <motion.div 
+            className="md:hidden pb-4"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="space-y-2 pt-2">
               {navigation.map((item, index) => {
                 const isActive = pathname === item.href
                 
                 return (
                   <motion.div
                     key={item.name}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="relative"
                   >
-                    <Link
-                      href={item.href}
-                      className="relative block"
-                    >
+                    <Link href={item.href} onClick={() => setMobileMenuOpen(false)}>
                       <motion.div
-                        className={`
-                          relative px-4 py-2 rounded-lg text-sm font-medium
-                          transition-all duration-300
-                          ${isActive 
-                            ? 'text-white dark:text-white' 
-                            : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-                          }
-                        `}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        style={{
-                          transformStyle: 'preserve-3d',
-                        }}
+                        className="relative rounded-2xl px-4 py-3 text-base font-semibold overflow-hidden"
+                        whileTap={{ scale: 0.97 }}
                       >
-                        {/* Active Background with 3D Effect */}
                         {isActive && (
                           <>
-                            {/* Glow Effect */}
                             <motion.div
-                              className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 opacity-70 blur-lg"
-                              layoutId="activeGlow"
-                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                              layoutId="mobilePill"
+                              className="absolute inset-0"
+                              style={{
+                                background: 'linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7)',
+                              }}
+                              transition={{ type: "spring", stiffness: 400, damping: 30 }}
                             />
-                            
-                            {/* Main Background */}
-                            <motion.div
-                              className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg"
-                              layoutId="activeBackground"
-                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                            >
-                              {/* Glossy Overlay */}
-                              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/20 to-transparent" />
-                            </motion.div>
-
-                            {/* Animated Particles */}
-                            {[...Array(3)].map((_, i) => (
-                              <motion.div
-                                key={i}
-                                className="absolute w-1 h-1 bg-white rounded-full"
-                                initial={{ 
-                                  x: Math.random() * 100 - 50,
-                                  y: Math.random() * 20,
-                                  opacity: 0 
-                                }}
-                                animate={{
-                                  y: -30,
-                                  opacity: [0, 1, 0],
-                                }}
-                                transition={{
-                                  duration: 1.5,
-                                  repeat: Infinity,
-                                  delay: i * 0.3,
-                                }}
-                              />
-                            ))}
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent" />
                           </>
                         )}
-
-                        {/* Hover Effect for Non-Active Items */}
-                        {!isActive && (
-                          <motion.div
-                            className="absolute inset-0 rounded-lg bg-gray-100 dark:bg-white/5"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileHover={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.2 }}
-                          />
-                        )}
-
-                        <span className="relative z-10">{item.name}</span>
+                        
+                        <span className={`relative z-10 flex items-center justify-between ${
+                          isActive ? 'text-white' : 'text-slate-700 dark:text-slate-300'
+                        }`}>
+                          {item.name}
+                          {isActive && <Sparkles className="w-4 h-4" />}
+                        </span>
                       </motion.div>
-
-                      {/* Bottom Indicator Line */}
-                      {isActive && (
-                        <motion.div
-                          className="absolute -bottom-2 left-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent"
-                          layoutId="activeIndicator"
-                          initial={{ x: '-50%' }}
-                          animate={{ x: '-50%' }}
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        />
-                      )}
                     </Link>
                   </motion.div>
                 )
               })}
             </div>
-
-            {/* Theme Toggle & Mobile Menu Button */}
-            <div className="flex items-center space-x-3">
-              {/* Theme Toggle with 3D Animation */}
-              <motion.button
-                onClick={toggleTheme}
-                whileHover={{ scale: 1.1, rotate: 180 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative rounded-xl p-2.5 hover:bg-gray-100/80 dark:hover:bg-white/10 transition-colors group overflow-hidden"
-                aria-label="Toggle theme"
-                style={{
-                  transformStyle: 'preserve-3d',
-                }}
-              >
-                {/* 3D Background */}
-                
-                
-
-                {/* Orbiting Ring */}
-              
-              </motion.button>
-
-              {/* Mobile menu button with 3D effect */}
-              <motion.button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="md:hidden relative rounded-xl p-2.5 hover:bg-gray-100/80 dark:hover:bg-white/10 transition-colors overflow-hidden"
-                aria-label="Toggle menu"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 hover:from-blue-500/10 hover:to-purple-500/10 transition-all rounded-xl" />
-                
-                <motion.div
-                  animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative z-10"
-                >
-                  {mobileMenuOpen ? (
-                    <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-                  ) : (
-                    <Menu className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-                  )}
-                </motion.div>
-              </motion.button>
-            </div>
-            
-          </div>
-
-          {/* Mobile menu with Glass Morphism */}
-          {mobileMenuOpen && (
-            <motion.div 
-              className="md:hidden overflow-hidden"
-              initial={{ opacity: 0, height: 0, y: -20 }}
-              animate={{ opacity: 1, height: 'auto', y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <div className="space-y-2 pb-4 pt-2">
-                {navigation.map((item, index) => {
-                  const isActive = pathname === item.href
-                  
-                  return (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <motion.div
-                          className={`
-                            relative rounded-xl px-4 py-3 text-base font-medium
-                            transition-all duration-300 overflow-hidden
-                            ${isActive
-                              ? 'text-white'
-                              : 'text-gray-700 dark:text-gray-300'
-                            }
-                          `}
-                          whileTap={{ scale: 0.97 }}
-                        >
-                          {isActive && (
-                            <>
-                              <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600"
-                                layoutId="activeMobile"
-                                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-                            </>
-                          )}
-                          
-                          {!isActive && (
-                            <div className="absolute inset-0 bg-gray-100/50 dark:bg-white/5 opacity-0 hover:opacity-100 transition-opacity" />
-                          )}
-                          
-                          <span className="relative z-10 flex items-center justify-between">
-                            {item.name}
-                            {isActive && (
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="w-2 h-2 rounded-full bg-white"
-                              />
-                            )}
-                          </span>
-                        </motion.div>
-                      </Link>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </motion.div>
-          )}
-        </nav>
-
-        {/* Bottom Shimmer Effect */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-          animate={{
-            x: ['-100%', '100%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </motion.header>
-    </>
+          </motion.div>
+        )}
+      </nav>
+    </motion.header>
   )
 }

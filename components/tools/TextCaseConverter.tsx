@@ -42,55 +42,55 @@ export default function TextCaseConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-        <div className="space-y-4">
+      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Enter Your Text
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              ✍️ Enter Your Text
             </label>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Type or paste your text here..."
               rows={8}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white resize-none"
+              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none transition-all font-semibold"
             />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <button
               onClick={() => convertCase('upper')}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+              className="px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold rounded-xl shadow-md hover:shadow-cyan-500/20 transition-all"
             >
               UPPERCASE
             </button>
             <button
               onClick={() => convertCase('lower')}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+              className="px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold rounded-xl shadow-md hover:shadow-purple-500/20 transition-all"
             >
               lowercase
             </button>
             <button
               onClick={() => convertCase('title')}
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
+              className="px-4 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold rounded-xl shadow-md hover:shadow-emerald-500/20 transition-all"
             >
               Title Case
             </button>
             <button
               onClick={() => convertCase('sentence')}
-              className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors"
+              className="px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-md hover:shadow-amber-500/20 transition-all"
             >
               Sentence case
             </button>
             <button
               onClick={() => convertCase('camel')}
-              className="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-medium rounded-lg transition-colors"
+              className="px-4 py-3 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold rounded-xl shadow-md hover:shadow-pink-500/20 transition-all"
             >
               camelCase
             </button>
             <button
               onClick={() => convertCase('snake')}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+              className="px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-md hover:shadow-indigo-500/20 transition-all"
             >
               snake_case
             </button>
@@ -100,40 +100,42 @@ export default function TextCaseConverter() {
             <button
               onClick={copyToClipboard}
               disabled={!text}
-              className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-3 glass border border-white/10 hover:border-emerald-500 disabled:opacity-50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all disabled:cursor-not-allowed"
             >
-              Copy to Clipboard
+              📋 Copy to Clipboard
             </button>
             <button
               onClick={() => setText('')}
               disabled={!text}
-              className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-3 glass border border-white/10 hover:border-red-500 disabled:opacity-50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all disabled:cursor-not-allowed"
             >
-              Clear
+              🗑️ Clear
             </button>
           </div>
         </div>
       </div>
 
       {text && (
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 animate-slide-up">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Text Statistics</h3>
+        <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg animate-slide-up bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+            📊 Text Statistics
+          </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{text.length}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Characters</div>
+            <div className="text-center glass rounded-xl p-5 border border-cyan-500/30">
+              <div className="text-4xl font-black text-cyan-500 mb-2">{text.length}</div>
+              <div className="text-sm font-bold text-slate-600 dark:text-slate-400">Characters</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{text.trim().split(/\s+/).filter(Boolean).length}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Words</div>
+            <div className="text-center glass rounded-xl p-5 border border-purple-500/30">
+              <div className="text-4xl font-black text-purple-500 mb-2">{text.trim().split(/\s+/).filter(Boolean).length}</div>
+              <div className="text-sm font-bold text-slate-600 dark:text-slate-400">Words</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">{text.split(/[.!?]+/).filter(Boolean).length}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Sentences</div>
+            <div className="text-center glass rounded-xl p-5 border border-emerald-500/30">
+              <div className="text-4xl font-black text-emerald-500 mb-2">{text.split(/[.!?]+/).filter(Boolean).length}</div>
+              <div className="text-sm font-bold text-slate-600 dark:text-slate-400">Sentences</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">{text.split(/\n\n+/).filter(Boolean).length}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Paragraphs</div>
+            <div className="text-center glass rounded-xl p-5 border border-pink-500/30">
+              <div className="text-4xl font-black text-pink-500 mb-2">{text.split(/\n\n+/).filter(Boolean).length}</div>
+              <div className="text-sm font-bold text-slate-600 dark:text-slate-400">Paragraphs</div>
             </div>
           </div>
         </div>
