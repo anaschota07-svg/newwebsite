@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Loader2, Sparkles } from 'lucide-react'
 
@@ -20,24 +20,35 @@ export const StepTimer = ({
   const [timeLeft, setTimeLeft] = useState(duration)
   const [isComplete, setIsComplete] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const onCompleteRef = useRef(onComplete)
+  const showContinueButtonRef = useRef(showContinueButton)
 
+  // Update refs when props change
   useEffect(() => {
-    if (timeLeft <= 0) {
-      setIsComplete(true)
-      // Auto-call onComplete when timer finishes (even if showContinueButton is false)
-      if (!showContinueButton) {
-        onComplete()
-      }
-      return
+    onCompleteRef.current = onComplete
+    showContinueButtonRef.current = showContinueButton
+  }, [onComplete, showContinueButton])
+
+  // Set up timer only once on mount
+  useEffect(() => {
+    // Reset state when duration changes
+    setTimeLeft(duration)
+    setIsComplete(false)
+
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
     }
 
-    const timer = setInterval(() => {
+    // Set up new interval
+    intervalRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           setIsComplete(true)
           // Auto-call onComplete when timer finishes
-          if (!showContinueButton) {
-            onComplete()
+          if (!showContinueButtonRef.current) {
+            onCompleteRef.current()
           }
           return 0
         }
@@ -45,8 +56,13 @@ export const StepTimer = ({
       })
     }, 1000)
 
-    return () => clearInterval(timer)
-  }, [timeLeft, showContinueButton, onComplete])
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [duration]) // Only depend on duration, not timeLeft or other props
 
   const handleContinue = async () => {
     if (isComplete && !isLoading) {
@@ -73,34 +89,22 @@ export const StepTimer = ({
         <div className="space-y-3">
           {/* Timer Display */}
           <div className="text-center">
-            <motion.div
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl glass border border-cyan-500/30"
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl glass border border-cyan-500/30">
               <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse-gentle" />
               <span className="text-2xl font-black gradient-text tabular-nums">
                 {timeLeft}s
               </span>
-            </motion.div>
+            </div>
           </div>
 
           {/* Progress Bar */}
           <div className="relative h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-            <motion.div
-              className="absolute inset-y-0 left-0 rounded-full"
+            <div
+              className="absolute inset-y-0 left-0 rounded-full transition-all duration-300 ease-linear"
               style={{
                 background: 'linear-gradient(90deg, #06b6d4, #3b82f6, #a855f7)',
+                width: `${progress}%`,
               }}
-              initial={{ width: '0%' }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
-            />
-            {/* Shimmer Effect */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-              animate={{ x: ['-100%', '200%'] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             />
           </div>
         </div>

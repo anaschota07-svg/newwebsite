@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { AdPopup } from './AdPopup'
 import { useMiddlewareSession } from '@/app/hooks/useMiddlewareSession'
 import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
@@ -16,10 +16,17 @@ export const MiddlewareWrapper = ({ children }: { children: React.ReactNode }) =
   const { sessionToken, shortCode, hasSession } = useMiddlewareSession()
   const { setSessionToken, setShortCode, setCurrentStep, currentStep, popupClosed, setPopupClosed, setSessionStartTime, sessionStartTime } = useMiddlewareFlow()
   const [showPopup, setShowPopup] = useState(false)
+  const hasValidatedRef = useRef(false)
+  const lastSessionTokenRef = useRef<string | null>(null)
+  const popupHandledRef = useRef(false)
 
+  // Initialize flow when session detected (only once per session)
   useEffect(() => {
     // Initialize flow when session detected
     if (hasSession && sessionToken && shortCode) {
+      // Only validate if this is a new session token
+      const isNewSession = lastSessionTokenRef.current !== sessionToken
+      
       setSessionToken(sessionToken)
       setShortCode(shortCode)
       
@@ -45,35 +52,52 @@ export const MiddlewareWrapper = ({ children }: { children: React.ReactNode }) =
         }
       }
       
-      // Validate session on page load
-      const validate = async () => {
-        const result = await validateSession(sessionToken, shortCode)
-        if (!result.valid) {
-          toast.error('Session expired. Please click the link again.')
-          return
-        }
-        if (!result.requirements_met && result.steps_remaining > 0) {
-          if (process.env.NODE_ENV === 'development') {
-            console.log(`Need ${result.steps_remaining} more steps`)
+      // Validate session only once per session token (not on every render)
+      if (isNewSession && !hasValidatedRef.current) {
+        hasValidatedRef.current = true
+        lastSessionTokenRef.current = sessionToken
+        
+        const validate = async () => {
+          try {
+            const result = await validateSession(sessionToken, shortCode)
+            // Don't show error for rate limiting
+            if (!result.valid && result.error !== 'rate_limited') {
+              toast.error('Session expired. Please click the link again.')
+              return
+            }
+            if (!result.requirements_met && result.steps_remaining > 0) {
+              if (process.env.NODE_ENV === 'development') {
+                console.log(`Need ${result.steps_remaining} more steps`)
+              }
+            }
+          } catch (error) {
+            // Silently handle validation errors to prevent spam
+            if (process.env.NODE_ENV === 'development') {
+              console.warn('Session validation error (non-blocking):', error)
+            }
           }
         }
+        validate()
       }
-      validate()
       
-      // Show popup if not already closed
-      if (!popupClosed && currentStep === 'popup') {
+      // Show popup if not already closed (only handle once per session)
+      if (!popupClosed && currentStep === 'popup' && !popupHandledRef.current) {
         setShowPopup(true)
         setCurrentStep('popup')
+        popupHandledRef.current = true
       }
     } else {
       // Reset flow when no session
+      hasValidatedRef.current = false
+      lastSessionTokenRef.current = null
+      popupHandledRef.current = false
       setSessionToken(null)
       setShortCode(null)
       setCurrentStep('popup')
       setPopupClosed(false)
       setShowPopup(false)
     }
-  }, [hasSession, sessionToken, shortCode, popupClosed, currentStep, setSessionToken, setShortCode, setCurrentStep, setSessionStartTime, sessionStartTime])
+  }, [hasSession, sessionToken, shortCode, popupClosed, currentStep, sessionStartTime, setSessionToken, setShortCode, setCurrentStep, setSessionStartTime])
 
   const handlePopupClose = async () => {
     setShowPopup(false)

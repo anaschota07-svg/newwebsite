@@ -406,8 +406,31 @@ export const validateSession = async (sessionToken: string, shortCode?: string) 
       message: response.data.message
     }
   } catch (error: any) {
-    console.error('Session validation failed:', error)
     const status = error.response?.status
+    
+    // Handle rate limiting (429) - don't log as error, just return gracefully
+    if (status === 429) {
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ Rate limited - validation skipped')
+      }
+      // Return valid: true to prevent UI disruption, but mark as rate limited
+      return {
+        valid: true,
+        data: null,
+        error: 'rate_limited',
+        requirements_met: false,
+        session: null,
+        minimum_steps_required: 3,
+        steps_remaining: 0,
+        message: 'Rate limited - will retry later'
+      }
+    }
+    
+    // Only log non-rate-limit errors
+    if (status !== 429) {
+      console.error('Session validation failed:', error)
+    }
+    
     if (status === 401 || status === 404) {
       return {
         valid: false,

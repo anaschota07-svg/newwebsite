@@ -11,7 +11,7 @@ const CONFIG = {
   SESSION_DURATION: 10 * 60 * 1000, // 10 minutes
   MINIMUM_TIME: 60 * 1000, // 1 minute (60 seconds)
   TRACKING_INTERVAL: 5000, // 5 seconds
-  VALIDATION_INTERVAL: 60000, // 1 minute
+  VALIDATION_INTERVAL: 300000, // 5 minutes (reduced frequency to prevent rate limiting)
 }
 
 interface MiddlewareSession {
@@ -56,49 +56,86 @@ export const MiddlewareOverlay = ({ sessionToken, shortCode, onClose }: Middlewa
   const validationIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const trackingIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const lastValidationRef = useRef<number>(0)
+  const isMountedRef = useRef(true)
 
-  // Initialize session validation
+  // Initialize session validation (only once on mount)
   useEffect(() => {
-    validateSession()
-
-    // Periodic validation
-    validationIntervalRef.current = setInterval(() => {
+    isMountedRef.current = true
+    
+    // Validate immediately on mount
+    if (sessionToken && shortCode) {
       validateSession()
+      lastValidationRef.current = Date.now()
+    }
+
+    // Periodic validation with rate limiting
+    validationIntervalRef.current = setInterval(() => {
+      // Only validate if enough time has passed since last validation
+      const timeSinceLastValidation = Date.now() - lastValidationRef.current
+      if (timeSinceLastValidation >= CONFIG.VALIDATION_INTERVAL && isMountedRef.current) {
+        validateSession()
+        lastValidationRef.current = Date.now()
+      }
     }, CONFIG.VALIDATION_INTERVAL)
 
     return () => {
+      isMountedRef.current = false
       if (validationIntervalRef.current) {
         clearInterval(validationIntervalRef.current)
+        validationIntervalRef.current = null
       }
       if (trackingIntervalRef.current) {
         clearInterval(trackingIntervalRef.current)
+        trackingIntervalRef.current = null
       }
       if (timerIntervalRef.current) {
         clearInterval(timerIntervalRef.current)
+        timerIntervalRef.current = null
       }
     }
-  }, [sessionToken, shortCode])
+  }, []) // Only run once on mount, not on every sessionToken/shortCode change
 
-  // Validate session
+  // Validate session with error handling and rate limiting
   const validateSession = async () => {
-    console.log('MiddlewareOverlay - Validating session:', { sessionToken, shortCode })
+    if (!sessionToken || !shortCode || !isMountedRef.current) return
+    
+    // Rate limiting: Don't validate if called too recently
+    const timeSinceLastValidation = Date.now() - lastValidationRef.current
+    if (timeSinceLastValidation < 10000) { // Minimum 10 seconds between validations
+      if (process.env.NODE_ENV === 'development') {
+        console.log('⏸️ Validation skipped - rate limiting')
+      }
+      return
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('MiddlewareOverlay - Validating session:', { sessionToken: sessionToken.substring(0, 10) + '...', shortCode })
+    }
+    
     try {
       const { data, error } = await validateMiddlewareSession(sessionToken, shortCode)
 
-      console.log('MiddlewareOverlay - Validation response:', { data, error })
+      if (process.env.NODE_ENV === 'development') {
+        console.log('MiddlewareOverlay - Validation response:', { valid: data?.valid, error })
+      }
 
       if (error || !data?.valid) {
-        console.error('❌ Session validation failed:', error || 'Invalid session')
-        toast.error('Session expired or invalid')
-        // Don't close immediately - let user see the error
-        // onClose()
+        // Don't show error toast on 429 (rate limit) - it's expected
+        if (error && !error.includes('429') && !error.includes('Too Many Requests')) {
+          console.error('❌ Session validation failed:', error || 'Invalid session')
+          toast.error('Session expired or invalid')
+        }
         setIsValidating(false)
         return
       }
 
+      if (!isMountedRef.current) return
+
       setSession(data.session)
       setLink(data.link)
       setIsValidating(false)
+      lastValidationRef.current = Date.now()
 
       // Start timers and tracking if not already started
       if (!sessionStartTime) {
@@ -107,10 +144,19 @@ export const MiddlewareOverlay = ({ sessionToken, shortCode, onClose }: Middlewa
         loadAds()
         startTracking()
       }
-    } catch (error) {
+    } catch (error: any) {
+      // Silently handle rate limit errors
+      if (error?.response?.status === 429 || error?.message?.includes('429')) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('⚠️ Rate limited - will retry later')
+        }
+        return
+      }
       console.error('Session validation error:', error)
-      toast.error('Failed to validate session')
-      onClose()
+      if (isMountedRef.current) {
+        toast.error('Failed to validate session')
+        onClose()
+      }
     }
   }
 
