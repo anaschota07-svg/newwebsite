@@ -22,6 +22,32 @@ import PercentageCalculator from '@/components/tools/PercentageCalculator'
 import RandomNumberGenerator from '@/components/tools/RandomNumberGenerator'
 import TextToBinary from '@/components/tools/TextToBinary'
 import HTMLEncoderDecoder from '@/components/tools/HTMLEncoderDecoder'
+import ImageCompressor from '@/components/tools/ImageCompressor'
+import PDFMerger from '@/components/tools/PDFMerger'
+import InvoiceGenerator from '@/components/tools/InvoiceGenerator'
+import MarkdownEditor from '@/components/tools/MarkdownEditor'
+import CSSMinifier from '@/components/tools/CSSMinifier'
+import JavaScriptMinifier from '@/components/tools/JavaScriptMinifier'
+import GradientGenerator from '@/components/tools/GradientGenerator'
+import BoxShadowGenerator from '@/components/tools/BoxShadowGenerator'
+import ImageResizer from '@/components/tools/ImageResizer'
+import CreditCardValidator from '@/components/tools/CreditCardValidator'
+import LoanCalculator from '@/components/tools/LoanCalculator'
+import CalorieCalculator from '@/components/tools/CalorieCalculator'
+import DateCalculator from '@/components/tools/DateCalculator'
+import TimezoneConverter from '@/components/tools/TimezoneConverter'
+import PomodoroTimer from '@/components/tools/PomodoroTimer'
+import RegexTester from '@/components/tools/RegexTester'
+import IPLookup from '@/components/tools/IPLookup'
+import BarcodeGenerator from '@/components/tools/BarcodeGenerator'
+import CurrencyConverter from '@/components/tools/CurrencyConverter'
+import CSVToJSON from '@/components/tools/CSVToJSON'
+import RandomPasswordGenerator from '@/components/tools/RandomPasswordGenerator'
+import TextDiffChecker from '@/components/tools/TextDiffChecker'
+import EmailValidator from '@/components/tools/EmailValidator'
+import Stopwatch from '@/components/tools/Stopwatch'
+import FontPreview from '@/components/tools/FontPreview'
+import SpeedTest from '@/components/tools/SpeedTest'
 import AdSense from '@/components/AdSense'
 import { ToolDetailPage } from '@/components/ToolDetailPage'
 
@@ -67,6 +93,32 @@ const toolComponents: { [key: string]: React.ComponentType } = {
   'random-number-generator': RandomNumberGenerator,
   'text-to-binary': TextToBinary,
   'html-encoder-decoder': HTMLEncoderDecoder,
+  'image-compressor': ImageCompressor,
+  'pdf-merger': PDFMerger,
+  'invoice-generator': InvoiceGenerator,
+  'markdown-editor': MarkdownEditor,
+  'css-minifier': CSSMinifier,
+  'js-minifier': JavaScriptMinifier,
+  'gradient-generator': GradientGenerator,
+  'box-shadow-generator': BoxShadowGenerator,
+  'image-resizer': ImageResizer,
+  'credit-card-validator': CreditCardValidator,
+  'loan-calculator': LoanCalculator,
+  'calorie-calculator': CalorieCalculator,
+  'date-calculator': DateCalculator,
+  'timezone-converter': TimezoneConverter,
+  'pomodoro-timer': PomodoroTimer,
+  'regex-tester': RegexTester,
+  'ip-lookup': IPLookup,
+  'barcode-generator': BarcodeGenerator,
+  'currency-converter': CurrencyConverter,
+  'csv-to-json': CSVToJSON,
+  'random-password-generator': RandomPasswordGenerator,
+  'text-diff-checker': TextDiffChecker,
+  'email-validator': EmailValidator,
+  'stopwatch': Stopwatch,
+  'font-preview': FontPreview,
+  'speed-test': SpeedTest,
 }
 
 const toolContent: { [key: string]: { about: string; howTo: string[]; features: string[] } } = {
@@ -401,6 +453,448 @@ const toolContent: { [key: string]: { about: string; howTo: string[]; features: 
       'Instant conversion',
     ],
   },
+  'image-compressor': {
+    about: 'Image Compressor reduces image file sizes without significant quality loss. This tool is perfect for optimizing images for web use, email attachments, or storage. It supports JPEG, PNG, and WebP formats, allowing you to compress images while maintaining visual quality. The tool processes images entirely in your browser, ensuring your privacy and security.',
+    howTo: [
+      'Upload your image by clicking or dragging and dropping',
+      'Adjust the compression quality slider',
+      'Preview the compressed image',
+      'Download the optimized image',
+    ],
+    features: [
+      'Support for JPEG, PNG, and WebP formats',
+      'Adjustable compression quality',
+      'Real-time file size preview',
+      'No quality loss option',
+      'Client-side processing for privacy',
+      'Instant compression',
+    ],
+  },
+  'pdf-merger': {
+    about: 'PDF Merger combines multiple PDF files into a single document. This tool is essential for organizing documents, combining reports, or merging multiple files for easier sharing. The merger maintains the quality and formatting of all original PDFs while creating one unified document.',
+    howTo: [
+      'Upload multiple PDF files',
+      'Arrange files in the desired order',
+      'Click "Merge PDFs"',
+      'Download the merged PDF file',
+    ],
+    features: [
+      'Merge unlimited PDF files',
+      'Drag and drop file ordering',
+      'Maintains original quality',
+      'Fast processing',
+      'Secure client-side merging',
+      'No file size limits',
+    ],
+  },
+  'invoice-generator': {
+    about: 'Invoice Generator creates professional invoices quickly and easily. This tool helps freelancers, small businesses, and service providers generate customized invoices with all necessary details. Create professional-looking invoices with company information, itemized lists, taxes, and totals.',
+    howTo: [
+      'Enter your company and client details',
+      'Add line items with descriptions and prices',
+      'Set tax rates and discounts if needed',
+      'Preview and download your invoice',
+    ],
+    features: [
+      'Professional invoice templates',
+      'Customizable company and client info',
+      'Itemized billing support',
+      'Tax and discount calculations',
+      'PDF export functionality',
+      'Multiple currency support',
+    ],
+  },
+  'markdown-editor': {
+    about: 'Markdown Editor provides a live preview of your Markdown content as you type. This tool is perfect for writers, developers, and content creators who work with Markdown syntax. Write in Markdown on the left and see the rendered output on the right in real-time.',
+    howTo: [
+      'Type or paste your Markdown content',
+      'View the live preview on the right',
+      'Use Markdown syntax for formatting',
+      'Copy or export the rendered HTML',
+    ],
+    features: [
+      'Live preview as you type',
+      'Full Markdown syntax support',
+      'Syntax highlighting',
+      'Export to HTML',
+      'Copy rendered content',
+      'Split-screen editor',
+    ],
+  },
+  'css-minifier': {
+    about: 'CSS Minifier compresses your CSS code by removing whitespace, comments, and unnecessary characters. This reduces file size significantly, improving page load times and performance. The minified CSS maintains all functionality while being optimized for production use.',
+    howTo: [
+      'Paste your CSS code into the input area',
+      'Click "Minify" to compress the code',
+      'Review the minified output',
+      'Copy the optimized CSS',
+    ],
+    features: [
+      'Remove whitespace and comments',
+      'Optimize CSS selectors',
+      'Preserve functionality',
+      'Significant file size reduction',
+      'One-click minification',
+      'Format and beautify options',
+    ],
+  },
+  'js-minifier': {
+    about: 'JavaScript Minifier compresses JavaScript code while preserving functionality. This tool removes whitespace, comments, and optimizes code structure to reduce file size. Minified JavaScript loads faster, improving website performance and user experience.',
+    howTo: [
+      'Paste your JavaScript code',
+      'Click "Minify" to compress',
+      'Review the minified output',
+      'Copy the optimized code',
+    ],
+    features: [
+      'Remove whitespace and comments',
+      'Optimize variable names',
+      'Preserve code functionality',
+      'Significant size reduction',
+      'Fast processing',
+      'Format and beautify options',
+    ],
+  },
+  'gradient-generator': {
+    about: 'Gradient Generator creates beautiful CSS gradients with a visual editor. Choose colors, adjust angles, and preview your gradient in real-time. Generate CSS code for linear and radial gradients that you can use in your web projects.',
+    howTo: [
+      'Select gradient type (linear or radial)',
+      'Choose colors for your gradient',
+      'Adjust angle and position',
+      'Copy the generated CSS code',
+    ],
+    features: [
+      'Visual gradient editor',
+      'Multiple color stops',
+      'Linear and radial gradients',
+      'Real-time preview',
+      'CSS code generation',
+      'Export gradient as image',
+    ],
+  },
+  'box-shadow-generator': {
+    about: 'Box Shadow Generator helps you create CSS box shadows visually. Adjust shadow properties like blur, spread, offset, and color to create the perfect shadow effect. Get the CSS code instantly to use in your projects.',
+    howTo: [
+      'Adjust shadow properties using sliders',
+      'Choose shadow color',
+      'Preview the shadow in real-time',
+      'Copy the generated CSS code',
+    ],
+    features: [
+      'Visual shadow editor',
+      'Adjustable blur, spread, and offset',
+      'Color picker for shadows',
+      'Real-time preview',
+      'CSS code generation',
+      'Multiple shadow support',
+    ],
+  },
+  'image-resizer': {
+    about: 'Image Resizer changes image dimensions to specific sizes or percentages. This tool is perfect for resizing images for social media, websites, or thumbnails. Maintain aspect ratio or set custom dimensions for your needs.',
+    howTo: [
+      'Upload your image',
+      'Set target dimensions or percentage',
+      'Choose to maintain aspect ratio',
+      'Download the resized image',
+    ],
+    features: [
+      'Resize by pixels or percentage',
+      'Maintain aspect ratio option',
+      'Support for multiple formats',
+      'High-quality resizing',
+      'Batch resize multiple images',
+      'Instant processing',
+    ],
+  },
+  'credit-card-validator': {
+    about: 'Credit Card Validator checks if credit card numbers are valid using the Luhn algorithm. This tool helps developers validate card numbers in forms and applications. It identifies card types and verifies number format without processing any transactions.',
+    howTo: [
+      'Enter a credit card number',
+      'Click "Validate" to check',
+      'View validation results',
+      'See card type and format info',
+    ],
+    features: [
+      'Luhn algorithm validation',
+      'Card type detection',
+      'Format verification',
+      'Instant validation',
+      'No data transmission',
+      'Developer-friendly tool',
+    ],
+  },
+  'loan-calculator': {
+    about: 'Loan Calculator computes loan payments, interest rates, and amortization schedules. This tool helps you understand loan terms, calculate monthly payments, and see how much interest you\'ll pay over the life of the loan. Perfect for mortgages, car loans, and personal loans.',
+    howTo: [
+      'Enter loan amount',
+      'Set interest rate and loan term',
+      'Choose payment frequency',
+      'View payment schedule and amortization',
+    ],
+    features: [
+      'Calculate monthly payments',
+      'Amortization schedule',
+      'Interest calculations',
+      'Multiple payment frequencies',
+      'Total interest display',
+      'Payment breakdown',
+    ],
+  },
+  'calorie-calculator': {
+    about: 'Calorie Calculator determines your daily caloric needs based on age, weight, height, gender, and activity level. This tool uses established formulas to calculate Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) to help you maintain, lose, or gain weight.',
+    howTo: [
+      'Enter your age, weight, and height',
+      'Select gender and activity level',
+      'Choose your goal (maintain/lose/gain)',
+      'View your daily calorie needs',
+    ],
+    features: [
+      'BMR and TDEE calculations',
+      'Multiple activity levels',
+      'Weight goal options',
+      'Macronutrient breakdown',
+      'Accurate formulas',
+      'Personalized recommendations',
+    ],
+  },
+  'date-calculator': {
+    about: 'Date Calculator performs date arithmetic by adding or subtracting days, weeks, months, or years from any date. It also calculates the difference between two dates. Perfect for project planning, deadline tracking, and date-based calculations.',
+    howTo: [
+      'Select a start date',
+      'Choose to add or subtract time',
+      'Enter the amount (days, weeks, months, years)',
+      'View the calculated result date',
+    ],
+    features: [
+      'Add or subtract from dates',
+      'Calculate date differences',
+      'Support for days, weeks, months, years',
+      'Account for leap years',
+      'Multiple date formats',
+      'Easy-to-use interface',
+    ],
+  },
+  'timezone-converter': {
+    about: 'Timezone Converter converts times between different time zones worldwide. This tool is essential for scheduling meetings, coordinating with international teams, or understanding time differences. Select any timezone and convert times instantly.',
+    howTo: [
+      'Select source timezone',
+      'Enter the time to convert',
+      'Choose destination timezone',
+      'View the converted time',
+    ],
+    features: [
+      'Worldwide timezone support',
+      'Daylight saving time handling',
+      'Multiple timezone selection',
+      'Current time display',
+      'Time difference calculation',
+      'Easy timezone search',
+    ],
+  },
+  'pomodoro-timer': {
+    about: 'Pomodoro Timer helps you boost productivity using the Pomodoro Technique. Work in focused 25-minute intervals followed by short breaks. This time management method improves focus and prevents burnout by breaking work into manageable chunks.',
+    howTo: [
+      'Set your work duration (default 25 minutes)',
+      'Set break duration (default 5 minutes)',
+      'Click start to begin a work session',
+      'Take breaks when the timer completes',
+    ],
+    features: [
+      'Customizable work and break times',
+      'Visual countdown timer',
+      'Sound notifications',
+      'Session tracking',
+      'Productivity statistics',
+      'Full-screen focus mode',
+    ],
+  },
+  'regex-tester': {
+    about: 'Regex Tester helps you test and debug regular expressions. Enter a regex pattern and test it against sample text to see matches in real-time. This tool is essential for developers working with pattern matching and text processing.',
+    howTo: [
+      'Enter your regular expression pattern',
+      'Input test text',
+      'View matches highlighted in real-time',
+      'See match groups and details',
+    ],
+    features: [
+      'Real-time pattern matching',
+      'Match highlighting',
+      'Capture group display',
+      'Common regex patterns library',
+      'Error detection',
+      'Match explanation',
+    ],
+  },
+  'ip-lookup': {
+    about: 'IP Address Lookup provides detailed information about any IP address. Get location data, ISP information, and network details for any IPv4 or IPv6 address. This tool is useful for network troubleshooting, security analysis, and geolocation.',
+    howTo: [
+      'Enter an IP address',
+      'Click "Lookup" to get information',
+      'View location, ISP, and network details',
+      'Check your own IP address',
+    ],
+    features: [
+      'IP geolocation',
+      'ISP and organization info',
+      'Network type detection',
+      'IPv4 and IPv6 support',
+      'Location mapping',
+      'Detailed network information',
+    ],
+  },
+  'barcode-generator': {
+    about: 'Barcode Generator creates various types of barcodes including Code 128, EAN-13, QR codes, and more. Generate barcodes for products, inventory management, or any application requiring barcode encoding. Download barcodes as images for use in your projects.',
+    howTo: [
+      'Select barcode type',
+      'Enter the data to encode',
+      'Customize size and format',
+      'Download the generated barcode',
+    ],
+    features: [
+      'Multiple barcode formats',
+      'Customizable size and resolution',
+      'High-quality output',
+      'Download as PNG or SVG',
+      'Instant generation',
+      'Compatible with scanners',
+    ],
+  },
+  'currency-converter': {
+    about: 'Currency Converter converts between 150+ world currencies with real-time or historical exchange rates. This tool is perfect for travelers, international businesses, or anyone needing currency conversion. Get accurate conversion rates instantly.',
+    howTo: [
+      'Select source currency',
+      'Enter the amount to convert',
+      'Choose destination currency',
+      'View the converted amount',
+    ],
+    features: [
+      '150+ world currencies',
+      'Real-time exchange rates',
+      'Historical rate lookup',
+      'Reverse conversion',
+      'Currency rate charts',
+      'Offline mode support',
+    ],
+  },
+  'csv-to-json': {
+    about: 'CSV to JSON Converter transforms CSV (Comma-Separated Values) files into JSON format. This tool is essential for data processing, API integration, and converting tabular data to structured JSON. Supports custom delimiters and handles complex CSV structures.',
+    howTo: [
+      'Upload a CSV file or paste CSV data',
+      'Configure delimiter and options',
+      'Click "Convert to JSON"',
+      'Copy or download the JSON output',
+    ],
+    features: [
+      'CSV to JSON conversion',
+      'Custom delimiter support',
+      'Header row detection',
+      'Nested JSON support',
+      'Large file handling',
+      'Preview before conversion',
+    ],
+  },
+  'random-password-generator': {
+    about: 'Random Password Generator creates multiple strong passwords at once with advanced security options. Generate secure passwords with customizable length, character types, and exclusion rules. Perfect for creating multiple account passwords quickly.',
+    howTo: [
+      'Set password length and count',
+      'Choose character types to include',
+      'Set exclusion rules if needed',
+      'Generate and copy passwords',
+    ],
+    features: [
+      'Generate multiple passwords',
+      'Customizable length and complexity',
+      'Character type selection',
+      'Exclude similar characters',
+      'Password strength indicator',
+      'Bulk password generation',
+    ],
+  },
+  'text-diff-checker': {
+    about: 'Text Difference Checker compares two texts side-by-side and highlights differences. This tool is perfect for reviewing changes, comparing versions, or finding discrepancies between documents. See additions, deletions, and modifications clearly marked.',
+    howTo: [
+      'Paste or enter the first text',
+      'Enter the second text to compare',
+      'Click "Compare" to find differences',
+      'Review highlighted changes',
+    ],
+    features: [
+      'Side-by-side comparison',
+      'Highlight additions and deletions',
+      'Word-level diff detection',
+      'Character-level precision',
+      'Easy-to-read formatting',
+      'Copy differences',
+    ],
+  },
+  'email-validator': {
+    about: 'Email Validator checks if email addresses are properly formatted and valid. This tool verifies email syntax, domain existence, and format correctness. Essential for form validation, data cleaning, and ensuring email addresses are valid before use.',
+    howTo: [
+      'Enter an email address',
+      'Click "Validate" to check',
+      'View validation results',
+      'See detailed validation information',
+    ],
+    features: [
+      'Syntax validation',
+      'Domain verification',
+      'Format checking',
+      'MX record lookup',
+      'Disposable email detection',
+      'Bulk email validation',
+    ],
+  },
+  'stopwatch': {
+    about: 'Stopwatch Timer provides precise time tracking with lap and split time functionality. Use this tool for timing events, workouts, presentations, or any activity requiring accurate time measurement. Track multiple intervals and review your timing history.',
+    howTo: [
+      'Click "Start" to begin timing',
+      'Use "Lap" to record split times',
+      'Click "Stop" to pause',
+      'Reset to start over',
+    ],
+    features: [
+      'Precise millisecond accuracy',
+      'Lap and split time tracking',
+      'Multiple timer modes',
+      'History of recorded times',
+      'Sound notifications',
+      'Full-screen mode',
+    ],
+  },
+  'font-preview': {
+    about: 'Font Preview Tool lets you preview and compare different fonts with custom text and sizes. This tool is perfect for designers and developers choosing fonts for projects. See how fonts look at different sizes and with your specific text.',
+    howTo: [
+      'Enter text to preview',
+      'Select font family',
+      'Adjust font size and weight',
+      'Compare multiple fonts side-by-side',
+    ],
+    features: [
+      'Preview custom text',
+      'Multiple font families',
+      'Adjustable size and weight',
+      'Side-by-side comparison',
+      'Google Fonts integration',
+      'Export font choices',
+    ],
+  },
+  'speed-test': {
+    about: 'Speed Test Calculator measures your internet connection speed for download and upload rates. Test your broadband, WiFi, or mobile data connection to see actual speeds. Get detailed metrics including ping, download speed, and upload speed.',
+    howTo: [
+      'Click "Start Speed Test"',
+      'Wait for download test to complete',
+      'Upload test will run automatically',
+      'View detailed speed results',
+    ],
+    features: [
+      'Download speed measurement',
+      'Upload speed testing',
+      'Ping/latency measurement',
+      'Multiple server locations',
+      'Historical speed tracking',
+      'Detailed connection statistics',
+    ],
+  },
 }
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -413,6 +907,11 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
 
   const ToolComponent = toolComponents[slug]
   const content = toolContent[slug]
+  
+  // Safety check: if component or content is missing, show 404
+  if (!ToolComponent || !content) {
+    notFound()
+  }
   
   // Get related tools (same category, exclude current tool)
   const relatedTools = toolsData
