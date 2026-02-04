@@ -69,7 +69,7 @@ export const AdPopup = ({ onClose }: AdPopupProps) => {
                     {!canClose && (
                         <button
                             onClick={handleFakeCloseClick}
-                            className="absolute left-2 top-2 w-5 h-5 flex items-center justify-center bg-black/30 hover:bg-black/50 rounded transition-colors cursor-pointer z-50"
+                            className="absolute left-7 top-7 w-5 h-5 flex items-center justify-center bg-black/30 hover:bg-black/50 rounded transition-colors cursor-pointer z-50"
                             aria-label="View Ad"
                         >
                             <X className="w-3 h-3 text-white" />
@@ -80,7 +80,7 @@ export const AdPopup = ({ onClose }: AdPopupProps) => {
                     {canClose && (
                         <button
                             onClick={onClose}
-                            className="absolute right-2 top-2 w-6 h-6 flex items-center justify-center bg-black/30 hover:bg-black/50 rounded-full transition-colors z-50"
+                            className="absolute right-7 top-7 w-6 h-6 flex items-center justify-center bg-black/30 hover:bg-black/50 rounded-full transition-colors z-50"
                             aria-label="Close"
                         >
                             <X className="w-4 h-4 text-white" />

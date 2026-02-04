@@ -93,9 +93,9 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
           <div className="w-full mb-8">
             <div className="max-w-4xl mx-auto space-y-4">
               {/* Ad 1 */}
-              <div className="w-full">
+              <div className="flex justify-center">
                 <AdComponent
-                  adSlotId="4686013446" 
+                  adSlotId="4686013446"
                   size="300x250"
                   className="w-full"
                 />
@@ -159,7 +159,7 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
               )}
 
               {/* Ad 2 */}
-              <div className="w-full">
+              <div className="flex justify-center">
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"
@@ -261,8 +261,8 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
               Why Choose This Tool?
             </h3>
             <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-              Our {tool.name} is designed with simplicity and efficiency in mind. 
-              It works entirely in your browser, ensuring your data privacy while delivering instant results. 
+              Our {tool.name} is designed with simplicity and efficiency in mind.
+              It works entirely in your browser, ensuring your data privacy while delivering instant results.
               No installation, no registration, just pure functionality at your fingertips.
             </p>
           </div>
@@ -271,10 +271,17 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
         {/* Get Link Button Section - At Bottom (Step 8) - ONLY show when step is 'get-link' */}
         {sessionToken && shortCode && currentStep === 'get-link' && (
           <div id="get-link-section" className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
+            <div className="flex justify-center mb-4">
+              <AdComponent
+                adSlotId="4686013446"
+                size="300x250"
+                className="w-full"
+              />
+            </div>
             <GetLinkButton />
 
             {/* Ad below Get Link Button */}
-            <div className="w-full mt-4">
+            <div className="flex justify-center mt-4">
               <AdComponent
                 adSlotId="4686013446"
                 size="300x250"

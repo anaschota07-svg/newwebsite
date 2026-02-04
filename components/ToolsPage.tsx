@@ -176,7 +176,7 @@ export function ToolsPageContent() {
           <div className="w-full mb-8">
             <div className="max-w-4xl mx-auto">
               {/* Ad 1 */}
-              <div className="w-full mb-4">
+              <div className="flex justify-center">
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"
@@ -294,7 +294,7 @@ export function ToolsPageContent() {
               )}
 
               {/* Ad 2 - Remains visible after timer */}
-              <div className="w-full">
+              <div className="flex justify-center">
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"

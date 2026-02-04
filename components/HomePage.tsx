@@ -80,7 +80,9 @@ const AdsSectionWithNext = ({ onNext, isLoading = false }: { onNext: () => void,
         <section className="w-full px-4 py-8">
             <div className="max-w-4xl mx-auto space-y-6">
                 {/* Home Ad 3 */}
-                <HomeAd3 />
+                <div className="flex justify-center">
+                    <HomeAd3 />
+                </div>
 
                 {/* Next Button */}
                 <div className="flex justify-center">
@@ -107,7 +109,7 @@ const AdsSectionWithNext = ({ onNext, isLoading = false }: { onNext: () => void,
                 </div>
 
                 {/* Home Ad 4 */}
-                <HomeAd4 />
+                <div className="flex justify-center">   <HomeAd4 /></div>
             </div>
         </section>
     )
@@ -148,7 +150,9 @@ export function HomePageContent() {
                     <section className="w-full px-4 py-6">
                         <div className="max-w-4xl mx-auto">
                             {/* Ad 1 */}
-                            <HomeMiddlewareAd1 />
+                            <div className="flex justify-center">
+                                <HomeMiddlewareAd1 />
+                            </div>
 
                             {/* Middleware Flow Content */}
                             <div className="text-center py-4">
@@ -225,7 +229,9 @@ export function HomePageContent() {
                             </div>
 
                             {/* Ad 2 */}
-                            <HomeMiddlewareAd2 />
+                            <div className="flex justify-center">
+                                <HomeMiddlewareAd2 />
+                            </div>
                         </div>
                     </section>
                 )}
