@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^5.0.1",
+    "@supabase/supabase-js": "^2.94.0",
     "axios": "^1.13.4",
     "fingerprintjs": "^0.5.3",
     "framer-motion": "^12.29.2",
