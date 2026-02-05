@@ -96,7 +96,7 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"
-                  className="w-full"
+                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
                 />
               </div>
 
@@ -138,7 +138,7 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"
-                  className="w-full"
+                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
                 />
               </div>
             </div>
@@ -243,28 +243,7 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
           </div>
         </div>
 
-        {/* Get Link Button Section - At Bottom (Step 8) - ONLY show when step is 'get-link' */}
-        {sessionToken && shortCode && currentStep === 'get-link' && (
-          <div id="get-link-section" className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
-            <div className="flex justify-center mb-4">
-              <AdComponent
-                adSlotId="4686013446"
-                size="300x250"
-                className="w-full"
-              />
-            </div>
-            <GetLinkButton />
 
-            {/* Ad below Get Link Button */}
-            <div className="flex justify-center mt-4">
-              <AdComponent
-                adSlotId="4686013446"
-                size="300x250"
-                className="w-full"
-              />
-            </div>
-          </div>
-        )}
 
         {/* Related Tools */}
         {relatedTools.length > 0 && (
@@ -297,7 +276,30 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
             </div>
           </div>
         )}
+        {/* Get Link Button Section - At Bottom (Step 8) - ONLY show when step is 'get-link' */}
+        {sessionToken && shortCode  && (
+          <div id="get-link-section" className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
+            <div className="flex justify-center mb-0">
+              <AdComponent
+                adSlotId="4686013446"
+                size="300x250"
+                style={{ display: 'inline-block', width: '300px', height: '250px' }}
+              />
+            </div>
+            {currentStep === 'get-link' && (
+              <GetLinkButton />
+            )}
 
+            {/* Ad below Get Link Button */}
+            <div className="flex justify-center mt-0">
+              <AdComponent
+                adSlotId="4686013446"
+                size="300x250"
+                style={{ display: 'inline-block', width: '300px', height: '250px' }}
+              />
+            </div>
+          </div>
+        )}1
         {!sessionToken && <AdSense format="horizontal" />}
       </div>
     </div>

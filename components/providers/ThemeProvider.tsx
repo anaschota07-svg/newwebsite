@@ -16,22 +16,16 @@ const ThemeContext = createContext<ThemeContextType>({
 })
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme] = useState<Theme>('dark')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    // Always set to dark theme - static, no switching
-    const initialTheme = 'dark'
-    setTheme(initialTheme)
-    document.documentElement.classList.add('dark')
+    // Theme is statically set to dark in HTML tag, no need to manipulate DOM
   }, [])
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-    document.documentElement.classList.toggle('dark', newTheme === 'dark')
+    // Theme is static dark, no switching allowed
   }
 
   return (

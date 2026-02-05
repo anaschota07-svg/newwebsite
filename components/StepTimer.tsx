@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
-import { Loader2, Sparkles } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Check } from 'lucide-react'
 
 interface StepTimerProps {
   duration: number
@@ -19,35 +18,27 @@ export const StepTimer = ({
 }: StepTimerProps) => {
   const [timeLeft, setTimeLeft] = useState(duration)
   const [isComplete, setIsComplete] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const onCompleteRef = useRef(onComplete)
-  const showContinueButtonRef = useRef(showContinueButton)
+  const showContinueRef = useRef(showContinueButton)
 
   // Update refs when props change
   useEffect(() => {
     onCompleteRef.current = onComplete
-    showContinueButtonRef.current = showContinueButton
+    showContinueRef.current = showContinueButton
   }, [onComplete, showContinueButton])
 
-  // Set up timer only once on mount
   useEffect(() => {
-    // Reset state when duration changes
     setTimeLeft(duration)
     setIsComplete(false)
 
-    // Clear any existing interval
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
+    if (intervalRef.current) clearInterval(intervalRef.current)
 
-    // Set up new interval
     intervalRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           setIsComplete(true)
-          // Auto-call onComplete when timer finishes
-          if (!showContinueButtonRef.current) {
+          if (!showContinueRef.current) {
             onCompleteRef.current()
           }
           return 0
@@ -57,93 +48,44 @@ export const StepTimer = ({
     }, 1000)
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [duration]) // Only depend on duration, not timeLeft or other props
-
-  const handleContinue = async () => {
-    if (isComplete && !isLoading) {
-      setIsLoading(true)
-      try {
-        await new Promise(resolve => setTimeout(resolve, 300))
-        onComplete()
-      } catch (error) {
-        setIsLoading(false)
-      }
-    }
-  }
+  }, [duration])
 
   const progress = ((duration - timeLeft) / duration) * 100
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      className="w-full"
-    >
+    <div className="w-full max-w-xs mx-auto">
       {!isComplete ? (
-        <div className="space-y-3">
-          {/* Timer Display */}
+        <div className="space-y-2">
+          {/* Minimal Timer Display */}
           <div className="text-center">
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl glass border border-cyan-500/30">
-              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse-gentle" />
-              <span className="text-2xl font-black gradient-text tabular-nums">
-                {timeLeft}s
-              </span>
-            </div>
+            <span className="text-lg font-medium text-gray-700 dark:text-gray-300 tabular-nums">
+              {timeLeft}s
+            </span>
           </div>
 
-          {/* Progress Bar */}
-          <div className="relative h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+          {/* Thin Progress Bar */}
+          <div className="relative h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
             <div
-              className="absolute inset-y-0 left-0 rounded-full transition-all duration-300 ease-linear"
-              style={{
-                background: 'linear-gradient(90deg, #06b6d4, #3b82f6, #a855f7)',
-                width: `${progress}%`,
-              }}
+              className="absolute inset-y-0 left-0 bg-blue-500 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
             />
           </div>
         </div>
       ) : (
         <>
           {showContinueButton && (
-            <motion.button
-              onClick={handleContinue}
-              disabled={isLoading}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              whileHover={!isLoading ? { scale: 1.05, y: -2 } : {}}
-              whileTap={!isLoading ? { scale: 0.95 } : {}}
-              className="group relative w-full sm:w-auto mx-auto flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
+            <button
+              onClick={onComplete}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 animate-gradient-shift" />
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin relative z-10" />  
-                  <span className="relative z-10">Processing...</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-5 h-5 relative z-10" />
-                  <span className="relative z-10">{continueButtonText}</span>
-                </>
-              )}
-              {/* Shimmer on Hover */}
-              <motion.div
-                className="absolute inset-0 bg-white/20"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.6 }}
-              />
-            </motion.button>
+              <Check className="w-4 h-4" />
+              {continueButtonText}
+            </button>
           )}
         </>
       )}
-    </motion.div>
+    </div>
   )
 }

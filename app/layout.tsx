@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { MiddlewareFlowProvider } from "@/app/contexts/MiddlewareFlowContext";
@@ -89,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://simplewebtoolsbox.com" />
         {/* Favicon - Priority order matters */}
@@ -98,18 +99,23 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
         <link rel="manifest" href="/manifest.json" />
+      </head>
+      <body className={`${inter.variable} antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 noise-texture`}>
         {/* Google AdSense */}
-        <script
-          async
+        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
+          strategy="afterInteractive"
           crossOrigin="anonymous"
         />
         {/* Google reCAPTCHA v2 */}
-        <script
-          async
+        <Script
           src="https://www.google.com/recaptcha/api.js?render=explicit"
+          strategy="afterInteractive"
         />
-        <script
+        {/* reCAPTCHA Callback Handler */}
+        <Script
+          id="recaptcha-callback"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.handleRecaptchaCallback = function(token) {
@@ -118,22 +124,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const savedTheme = localStorage.getItem('theme');
-                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                const theme = savedTheme || systemTheme;
-                if (theme === 'dark') {
-                  document.documentElement.classList.add('dark');
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
-      </head>
-      <body className={`${inter.variable} antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 noise-texture`}>
         <StructuredData
           data={{
             '@context': 'https://schema.org',

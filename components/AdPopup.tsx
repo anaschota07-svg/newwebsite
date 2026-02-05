@@ -56,43 +56,45 @@ export const AdPopup = ({ onClose }: AdPopupProps) => {
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.9, opacity: 0 }}
-                    className="relative w-full"
+                    className="w-full flex items-center justify-center"
                     style={{
                         maxWidth: '800px',
                         minHeight: '250px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
                     }}
                 >
-                    {/* Fake Close Button - Left Side Overlay */}
-                    {!canClose && (
-                        <button
-                            onClick={handleFakeCloseClick}
-                            className="absolute left-7 top-7 w-5 h-5 flex items-center justify-center bg-black/30 hover:bg-black/50 rounded transition-colors cursor-pointer z-50"
-                            aria-label="View Ad"
-                        >
-                            <X className="w-3 h-3 text-white" />
-                        </button>
-                    )}
+                    {/* Wrapper that is exactly the ad size so buttons sit near the ad */}
+                    <div
+                        ref={adRef}
+                        className="relative flex items-center justify-center"
+                        style={{ width: '300px', height: '250px' }}
+                    >
+                        {/* Fake Close Button - Top-left over ad */}
+                        {!canClose && (
+                            <button
+                                onClick={handleFakeCloseClick}
+                                className="absolute left-1 top-1 w-5 h-5 flex items-center justify-center bg-black/40 hover:bg-black/60 rounded transition-colors cursor-pointer z-50"
+                                aria-label="View Ad"
+                            >
+                                <X className="w-3 h-3 text-white" />
+                            </button>
+                        )}
 
-                    {/* Real Close Button - Right Side Overlay */}
-                    {canClose && (
-                        <button
-                            onClick={onClose}
-                            className="absolute right-7 top-7 w-6 h-6 flex items-center justify-center bg-black/30 hover:bg-black/50 rounded-full transition-colors z-50"
-                            aria-label="Close"
-                        >
-                            <X className="w-4 h-4 text-white" />
-                        </button>
-                    )}
+                        {/* Real Close Button - Top-right over ad */}
+                        {canClose && (
+                            <button
+                                onClick={onClose}
+                                className="absolute right-1 top-1 w-6 h-6 flex items-center justify-center bg-black/40 hover:bg-black/60 rounded-full transition-colors z-50"
+                                aria-label="Close"
+                            >
+                                <X className="w-4 h-4 text-white" />
+                            </button>
+                        )}
 
-                    {/* Ad Only - No Padding, No Box */}
-                    <div ref={adRef} className="w-full flex items-center justify-center">
+                        {/* Ad Only - No Padding, No Box */}
                         <AdComponent
                             adSlotId="4686013446"
                             size="300x250"
-                            className="w-full"
+                            className="w-full h-full"
                             style={{ display: 'inline-block', width: '300px', height: '250px' }}
                         />
                     </div>

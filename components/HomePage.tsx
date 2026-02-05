@@ -19,12 +19,12 @@ import LazyLoad from '@/components/LazyLoad'
 // Home Middleware Ads
 const HomeMiddlewareAd1 = () => {
     return (
-        <div className="w-full mb-4">
-            <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full mb-4 flex justify-center">
+            <div>
                 <AdComponent
                     adSlotId="4686013446"
                     size="300x250"
-                    className="w-full"
+                    className=""
                 />
             </div>
         </div>
@@ -33,12 +33,12 @@ const HomeMiddlewareAd1 = () => {
 
 const HomeMiddlewareAd2 = () => {
     return (
-        <div className="w-full mt-4">
-            <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full mt-4 flex justify-center">
+            <div>
                 <AdComponent
                     adSlotId="4686013446"
                     size="300x250"
-                    className="w-full"
+                    className=""
                 />
             </div>
         </div>
@@ -48,12 +48,12 @@ const HomeMiddlewareAd2 = () => {
 // Home Ad 3 & 4 for Next Button Section
 const HomeAd3 = () => {
     return (
-        <div className="w-full mb-6">
-            <div className="w-full max-w-6xl mx-auto" style={{ minHeight: '90px' }}>
+        <div className="w-full mb-6 flex justify-center">
+            <div style={{ minHeight: '90px' }}>
                 <AdComponent
                     adSlotId="4686013446"
                     size="300x250"
-                    className="w-full"
+                    className=""
                 />
             </div>
         </div>
@@ -62,20 +62,21 @@ const HomeAd3 = () => {
 
 const HomeAd4 = () => {
     return (
-        <div className="w-full mt-6">
-            <div className="w-full max-w-6xl mx-auto" style={{ minHeight: '90px' }}>
+        <div className="w-full mt-6 flex justify-center">
+            <div style={{ minHeight: '90px' }}>
                 <AdComponent
                     adSlotId="4686013446"
                     size="300x250"
-                    className="w-full"
+                    className=""
                 />
             </div>
         </div>
     )
 }
 
-// Ads Section with Next Button
 const AdsSectionWithNext = ({ onNext, isLoading = false }: { onNext: () => void, isLoading?: boolean }) => {
+    const { currentStep } = useMiddlewareFlow();
+
     return (
         <section className="w-full px-4 py-8">
             <div className="max-w-4xl mx-auto space-y-6">
@@ -84,23 +85,27 @@ const AdsSectionWithNext = ({ onNext, isLoading = false }: { onNext: () => void,
                     <HomeAd3 />
                 </div>
 
-                {/* Next Button */}
-                <div className="flex justify-center">
-                    <button
-                        onClick={onNext}
-                        disabled={isLoading}
-                        className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition-all"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-                        <Sparkles className="w-5 h-5 relative z-10" />
-                        <span className="relative z-10">{isLoading ? 'Loading...' : 'Next'}</span>
-                        <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                </div>
+                {/* Next Button - show only when currentStep === 'home-next' */}
+                {currentStep === 'home-next' && (
+                    <div className="flex justify-center">
+                        <button
+                            onClick={onNext}
+                            disabled={isLoading}
+                            className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                            <Sparkles className="w-5 h-5 relative z-10" />
+                            <span className="relative z-10">{isLoading ? 'Loading...' : 'Next'}</span>
+                            <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                    </div>
+                )}
 
                 {/* Home Ad 4 */}
-                <div className="flex justify-center">   <HomeAd4 /></div>
+                <div className="flex justify-center">
+                    <HomeAd4 />
+                </div>
             </div>
         </section>
     )
@@ -138,15 +143,15 @@ export function HomePageContent() {
 
                 {/* Middleware Flow Section - Above Hero (WITH session only) */}
                 {sessionToken && shortCode && (currentStep === 'popup' || currentStep === 'captcha' || currentStep === 'home-timer' || currentStep === 'home-next') && (
-                    <section className="w-full px-4 py-6">
-                        <div className="max-w-4xl mx-auto">
+                    <section className="w-full px-0 py-0">
+                        <div className="max-w-4xl mx-auto space-y-[1px]">
                             {/* Ad 1 */}
                             <div className="flex justify-center">
                                 <HomeMiddlewareAd1 />
                             </div>
 
                             {/* Middleware Flow Content */}
-                            <div className="text-center py-4">
+                            <div className="text-center py-0">
                                 {/* Step 2: Captcha - Show during popup or captcha step */}
                                 {(currentStep === 'popup' || currentStep === 'captcha') && (
                                     <ReCaptchaBox
@@ -584,7 +589,7 @@ export function HomePageContent() {
                 )}
 
                 {/* Ads Section with Next Button - Step 5 - At Bottom */}
-                {sessionToken && shortCode && currentStep === 'home-next' && (
+                {sessionToken && shortCode && (
                     <div id="home-ads-section" className="scroll-mt-20">
                         <AdsSectionWithNext
                             onNext={async () => {

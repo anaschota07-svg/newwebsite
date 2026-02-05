@@ -108,7 +108,7 @@ export const GetLinkButton = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex justify-center my-12"
+      className="flex justify-center my-2"
     >
       {/* Completely different theme - Bright Orange/Red gradient with neon effect */}
       <motion.button

@@ -152,7 +152,7 @@ export function ToolsPageContent() {
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"
-                  className="w-full"
+                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
                 />
               </div>
 
@@ -187,7 +187,7 @@ export function ToolsPageContent() {
                 <AdComponent
                   adSlotId="4686013446"
                   size="300x250"
-                  className="w-full"
+                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
                 />
               </div>
             </div>
