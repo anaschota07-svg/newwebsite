@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Check } from 'lucide-react'
-import { motion } from 'framer-motion'
 import { Tool } from '@/data/tools/toolsData'
 import AdSense from '@/components/AdSense'
 import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
@@ -119,43 +118,19 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
 
               {/* Step 8: Scroll Instruction (after timer completes) */}
               {currentStep === 'get-link' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full mb-2"
-                >
+                <div className="w-full mb-2">
                   <div className="w-full mx-auto">
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.02, 1],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-3 rounded-lg shadow-lg text-center"
-                    >
+                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-3 rounded-lg shadow-lg text-center">
                       <p className="text-sm font-bold">
                         ↓ Scroll down to{' '}
-                        <motion.span
-                          animate={{
-                            opacity: [1, 0.7, 1],
-                          }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                          }}
-                          className="text-yellow-300"
-                        >
+                        <span className="text-yellow-300">
                           Get Link
-                        </motion.span>{' '}
+                        </span>{' '}
                         button ↓
                       </p>
-                    </motion.div>
+                    </div>
                   </div>
-                </motion.div>
+                </div>
               )}
 
               {/* Ad 2 */}
