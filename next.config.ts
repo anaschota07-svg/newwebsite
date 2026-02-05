@@ -27,10 +27,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Compression
   compress: true,
-  // Ensure consistent rendering
-  swcMinify: true,
-  // Optimize fonts
-  optimizeFonts: true,
 };
 
 export default nextConfig;
