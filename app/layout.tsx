@@ -27,6 +27,12 @@ export const metadata: Metadata = {
   authors: [{ name: "SimpleWebToolsBox" }],
   creator: "SimpleWebToolsBox",
   publisher: "SimpleWebToolsBox",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -121,14 +127,8 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              try {
-                const savedTheme = localStorage.getItem('theme');
-                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                const theme = savedTheme || systemTheme;
-                if (theme === 'dark') {
-                  document.documentElement.classList.add('dark');
-                }
-              } catch (e) {}
+              // Force dark theme immediately - no checking localStorage or system preference
+              document.documentElement.classList.add('dark');
             `,
           }}
         />
