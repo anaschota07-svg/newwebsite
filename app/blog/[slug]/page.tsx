@@ -303,33 +303,7 @@ const blogContent: { [key: string]: { sections: { heading: string; content: stri
       },
     ],
   },
-  'image-compression-guide': {
-    sections: [
-      {
-        heading: 'Understanding Image Compression',
-        content: 'Image compression reduces file size while maintaining visual quality. There are two types: lossless (preserves all data) and lossy (removes some data). Choosing the right compression method and settings is crucial for balancing quality and performance on your website.',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=600&fit=crop',
-      },
-      {
-        heading: 'Lossy vs Lossless Compression',
-        content: 'Lossless compression (PNG, WebP lossless) preserves every pixel perfectly but achieves lower compression ratios. Lossy compression (JPEG, WebP lossy) removes imperceptible details to achieve much smaller files. For photos, lossy compression at 80-85% quality offers the best balance.',
-        image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=600&fit=crop',
-      },
-      {
-        heading: 'Modern Image Formats',
-        content: 'WebP provides superior compression compared to JPEG and PNG, often 25-35% smaller. AVIF offers even better compression but has limited browser support. Always provide fallbacks for older browsers. Use responsive images with srcset to serve appropriate sizes for different devices.',
-      },
-      {
-        heading: 'Optimization Workflow',
-        content: 'Start with the highest quality source images. Resize images to their display dimensions before compressing. Use tools to find the optimal quality setting for each image. Automate optimization in your build process for consistency. Our Image Compressor tool makes this process quick and easy.',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=600&fit=crop',
-      },
-      {
-        heading: 'Performance Impact',
-        content: 'Optimized images can reduce page weight by 50-80%, leading to faster load times, improved Core Web Vitals, better SEO rankings, and reduced bandwidth costs. For e-commerce sites, every second of improvement can increase conversion rates significantly.',
-      },
-    ],
-  },
+  
   'pomodoro-technique-guide': {
     sections: [
       {

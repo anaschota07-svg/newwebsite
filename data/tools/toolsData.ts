@@ -160,22 +160,7 @@ export const toolsData: Tool[] = [
     icon: '🌐',
     slug: 'html-encoder-decoder',
   },
-  {
-    id: '20',
-    name: 'Image Compressor',
-    description: 'Compress images without losing quality. Support for JPEG, PNG, and WebP formats.',
-    category: 'Design',
-    icon: '🖼️',
-    slug: 'image-compressor',
-  },
-  {
-    id: '21',
-    name: 'PDF Merger',
-    description: 'Merge multiple PDF files into a single document quickly and securely.',
-    category: 'Productivity',
-    icon: '📚',
-    slug: 'pdf-merger',
-  },
+
   {
     id: '22',
     name: 'Invoice Generator',
@@ -224,22 +209,7 @@ export const toolsData: Tool[] = [
     icon: '📦',
     slug: 'box-shadow-generator',
   },
-  {
-    id: '28',
-    name: 'Image Resizer',
-    description: 'Resize images to specific dimensions or percentages instantly.',
-    category: 'Design',
-    icon: '📐',
-    slug: 'image-resizer',
-  },
-  {
-    id: '29',
-    name: 'Credit Card Validator',
-    description: 'Validate credit card numbers using the Luhn algorithm instantly.',
-    category: 'Finance',
-    icon: '💳',
-    slug: 'credit-card-validator',
-  },
+
   {
     id: '30',
     name: 'Loan Calculator',
@@ -304,14 +274,7 @@ export const toolsData: Tool[] = [
     icon: '📊',
     slug: 'barcode-generator',
   },
-  {
-    id: '38',
-    name: 'Currency Converter',
-    description: 'Convert between 150+ currencies with real-time exchange rates.',
-    category: 'Finance',
-    icon: '💱',
-    slug: 'currency-converter',
-  },
+
   {
     id: '39',
     name: 'CSV to JSON Converter',

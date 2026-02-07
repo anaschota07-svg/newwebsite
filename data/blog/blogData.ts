@@ -132,17 +132,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min read',
     image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg',
   },
-  {
-    id: '12',
-    title: 'Image Compression: Quality vs File Size',
-    description: 'Master the art of image compression to balance quality and performance for web and mobile.',
-    slug: 'image-compression-guide',
-    category: 'Design',
-    author: 'SimpleWebToolsBox Team',
-    date: '2025-12-22',
-    readTime: '6 min read',
-    image: 'https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg',
-  },
+ 
   {
     id: '13',
     title: 'Productivity Hacks: Pomodoro Technique Explained',

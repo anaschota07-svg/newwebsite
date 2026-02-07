@@ -453,40 +453,7 @@ const toolContent: { [key: string]: { about: string; howTo: string[]; features: 
       'Instant conversion',
     ],
   },
-  'image-compressor': {
-    about: 'Image Compressor reduces image file sizes without significant quality loss. This tool is perfect for optimizing images for web use, email attachments, or storage. It supports JPEG, PNG, and WebP formats, allowing you to compress images while maintaining visual quality. The tool processes images entirely in your browser, ensuring your privacy and security.',
-    howTo: [
-      'Upload your image by clicking or dragging and dropping',
-      'Adjust the compression quality slider',
-      'Preview the compressed image',
-      'Download the optimized image',
-    ],
-    features: [
-      'Support for JPEG, PNG, and WebP formats',
-      'Adjustable compression quality',
-      'Real-time file size preview',
-      'No quality loss option',
-      'Client-side processing for privacy',
-      'Instant compression',
-    ],
-  },
-  'pdf-merger': {
-    about: 'PDF Merger combines multiple PDF files into a single document. This tool is essential for organizing documents, combining reports, or merging multiple files for easier sharing. The merger maintains the quality and formatting of all original PDFs while creating one unified document.',
-    howTo: [
-      'Upload multiple PDF files',
-      'Arrange files in the desired order',
-      'Click "Merge PDFs"',
-      'Download the merged PDF file',
-    ],
-    features: [
-      'Merge unlimited PDF files',
-      'Drag and drop file ordering',
-      'Maintains original quality',
-      'Fast processing',
-      'Secure client-side merging',
-      'No file size limits',
-    ],
-  },
+ 
   'invoice-generator': {
     about: 'Invoice Generator creates professional invoices quickly and easily. This tool helps freelancers, small businesses, and service providers generate customized invoices with all necessary details. Create professional-looking invoices with company information, itemized lists, taxes, and totals.',
     howTo: [
@@ -587,40 +554,6 @@ const toolContent: { [key: string]: { about: string; howTo: string[]; features: 
       'Real-time preview',
       'CSS code generation',
       'Multiple shadow support',
-    ],
-  },
-  'image-resizer': {
-    about: 'Image Resizer changes image dimensions to specific sizes or percentages. This tool is perfect for resizing images for social media, websites, or thumbnails. Maintain aspect ratio or set custom dimensions for your needs.',
-    howTo: [
-      'Upload your image',
-      'Set target dimensions or percentage',
-      'Choose to maintain aspect ratio',
-      'Download the resized image',
-    ],
-    features: [
-      'Resize by pixels or percentage',
-      'Maintain aspect ratio option',
-      'Support for multiple formats',
-      'High-quality resizing',
-      'Batch resize multiple images',
-      'Instant processing',
-    ],
-  },
-  'credit-card-validator': {
-    about: 'Credit Card Validator checks if credit card numbers are valid using the Luhn algorithm. This tool helps developers validate card numbers in forms and applications. It identifies card types and verifies number format without processing any transactions.',
-    howTo: [
-      'Enter a credit card number',
-      'Click "Validate" to check',
-      'View validation results',
-      'See card type and format info',
-    ],
-    features: [
-      'Luhn algorithm validation',
-      'Card type detection',
-      'Format verification',
-      'Instant validation',
-      'No data transmission',
-      'Developer-friendly tool',
     ],
   },
   'loan-calculator': {
@@ -757,23 +690,6 @@ const toolContent: { [key: string]: { about: string; howTo: string[]; features: 
       'Download as PNG or SVG',
       'Instant generation',
       'Compatible with scanners',
-    ],
-  },
-  'currency-converter': {
-    about: 'Currency Converter converts between 150+ world currencies with real-time or historical exchange rates. This tool is perfect for travelers, international businesses, or anyone needing currency conversion. Get accurate conversion rates instantly.',
-    howTo: [
-      'Select source currency',
-      'Enter the amount to convert',
-      'Choose destination currency',
-      'View the converted amount',
-    ],
-    features: [
-      '150+ world currencies',
-      'Real-time exchange rates',
-      'Historical rate lookup',
-      'Reverse conversion',
-      'Currency rate charts',
-      'Offline mode support',
     ],
   },
   'csv-to-json': {
