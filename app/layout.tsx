@@ -24,14 +24,38 @@ export const metadata: Metadata = {
     template: "%s | SimpleWebToolsBox",
   },
   description:
-    "Access free online tools including Age Calculator, BMI Calculator, Text Converter, and more. Expert how-to guides and tutorials to help you get things done.",
+    "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, Base64 Encoder, Hash Generator, and 35+ more tools. Expert how-to guides, tutorials, and step-by-step instructions. No registration required. 100% free forever.",
   keywords: [
-    "online tools",
-    "free tools",
-    "calculator",
-    "converter",
+    "free online tools",
+    "online calculator",
+    "age calculator",
+    "bmi calculator",
+    "password generator",
+    "qr code generator",
+    "json formatter",
+    "base64 encoder",
+    "hash generator",
+    "text converter",
+    "word counter",
+    "uuid generator",
+    "unit converter",
+    "percentage calculator",
+    "random number generator",
+    "html encoder",
+    "url encoder",
+    "timestamp converter",
+    "css minifier",
+    "javascript minifier",
+    "gradient generator",
+    "box shadow generator",
     "how-to guides",
     "tutorials",
+    "web tools",
+    "developer tools",
+    "productivity tools",
+    "text tools",
+    "security tools",
+    "design tools",
   ],
   authors: [{ name: "SimpleWebToolsBox" }],
   creator: "SimpleWebToolsBox",
@@ -54,7 +78,7 @@ export const metadata: Metadata = {
     siteName: "SimpleWebToolsBox",
     title: "SimpleWebToolsBox - Free Online Tools & How-To Guides",
     description:
-      "Access free online tools including Age Calculator, BMI Calculator, Text Converter, and more.",
+      "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert how-to guides and tutorials. No registration required.",
     images: [
       {
         url: "/og-image.png",
@@ -68,7 +92,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SimpleWebToolsBox",
     description:
-      "Access free online tools and how-to guides to make your life easier.",
+      "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert how-to guides and tutorials.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -149,6 +173,48 @@ export default function RootLayout({
             name: "SimpleWebToolsBox",
             url: "https://simplewebtoolsbox.com",
             logo: "https://simplewebtoolsbox.com/logo.png",
+          }}
+        />
+
+        {/* FAQ Structured Data */}
+        <StructuredData
+          data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Are these tools really free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes! All tools are 100% free forever. No registration, no hidden costs, no premium tiers. We believe powerful tools should be accessible to everyone.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is my data safe and private?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Absolutely. All tools run entirely in your browser. Your data never leaves your device and is never sent to our servers. Complete privacy guaranteed.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Do I need to create an account?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No account required! Just visit the tool you need and start using it immediately. No signup, no email, no hassle.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I use these tools on mobile?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes! All tools are fully responsive and work perfectly on mobile phones, tablets, and desktops. Use them anywhere, anytime.",
+                },
+              },
+            ],
           }}
         />
 

@@ -573,6 +573,71 @@ export function HomePageContent() {
                     </section>
                 </LazyLoad>
 
+                {/* FAQ Section - Hide with session */}
+                {!sessionToken && (
+                    <LazyLoad>
+                        <section className="py-20 relative" aria-labelledby="faq-heading">
+                            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+                                <div className="text-center mb-16">
+                                    <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-emerald-500/30 shadow-lg mb-6">
+                                        <Sparkles className="w-4 h-4 text-emerald-500" />
+                                        <span className="text-sm font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                                            Frequently Asked Questions
+                                        </span>
+                                    </div>
+                                    <h2 id="faq-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                                        Got <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Questions?</span>
+                                    </h2>
+                                    <p className="text-lg text-slate-700 dark:text-slate-400 font-medium">
+                                        Find answers to common questions about our tools
+                                    </p>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {[
+                                        {
+                                            question: 'Are these tools really free?',
+                                            answer: 'Yes! All {realStats.tools} tools are 100% free forever. No registration, no hidden costs, no premium tiers. We believe powerful tools should be accessible to everyone.',
+                                        },
+                                        {
+                                            question: 'Is my data safe and private?',
+                                            answer: 'Absolutely. All tools run entirely in your browser. Your data never leaves your device and is never sent to our servers. Complete privacy guaranteed.',
+                                        },
+                                        {
+                                            question: 'Do I need to create an account?',
+                                            answer: 'No account required! Just visit the tool you need and start using it immediately. No signup, no email, no hassle.',
+                                        },
+                                        {
+                                            question: 'Can I use these tools on mobile?',
+                                            answer: 'Yes! All tools are fully responsive and work perfectly on mobile phones, tablets, and desktops. Use them anywhere, anytime.',
+                                        },
+                                        {
+                                            question: 'How many tools do you have?',
+                                            answer: 'We currently offer {realStats.tools} free online tools across {realStats.categories} categories including calculators, text tools, generators, developer tools, and more.',
+                                        },
+                                        {
+                                            question: 'Do you add new tools regularly?',
+                                            answer: 'Yes! We continuously add new tools based on user feedback and needs. Check back regularly for new additions.',
+                                        },
+                                    ].map((faq, index) => (
+                                        <div
+                                            key={index}
+                                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border-2 border-slate-200 dark:border-slate-700 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 transition-all shadow-lg"
+                                        >
+                                            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+                                                {faq.question}
+                                            </h3>
+                                            <p className="text-slate-700 dark:text-slate-400 leading-relaxed font-medium">
+                                                {faq.answer.replace('{realStats.tools}', String(realStats.tools)).replace('{realStats.categories}', String(realStats.categories))}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </LazyLoad>
+                )}
+
                 {/* CTA Section - Hide with session */}
                 {!sessionToken && (
                     <LazyLoad>

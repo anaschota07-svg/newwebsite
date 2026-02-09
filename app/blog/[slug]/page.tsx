@@ -23,8 +23,39 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: post.title,
-    description: post.description,
+    title: `${post.title} | SimpleWebToolsBox`,
+    description: `${post.description} Read our comprehensive guide with step-by-step instructions. Expert tutorials and how-to guides.`,
+    keywords: [
+      post.title.toLowerCase(),
+      post.category.toLowerCase(),
+      'how-to guide',
+      'tutorial',
+      'step-by-step',
+      'online tools',
+      'free tools',
+    ],
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      url: `https://simplewebtoolsbox.com/blog/${post.slug}`,
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [post.image],
+    },
   }
 }
 

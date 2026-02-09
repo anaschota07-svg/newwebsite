@@ -68,8 +68,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${tool.name} - Free Online Tool`,
-    description: tool.description,
+    title: `${tool.name} - Free Online Tool | SimpleWebToolsBox`,
+    description: `${tool.description} Use our free ${tool.name.toLowerCase()} tool instantly. No registration required. Fast, secure, and 100% free.`,
+    keywords: [
+      tool.name.toLowerCase(),
+      `free ${tool.name.toLowerCase()}`,
+      `online ${tool.name.toLowerCase()}`,
+      tool.category.toLowerCase(),
+      'free online tools',
+      'web tools',
+      'online calculator',
+    ],
+    openGraph: {
+      title: `${tool.name} - Free Online Tool`,
+      description: `${tool.description} Use our free ${tool.name.toLowerCase()} tool instantly.`,
+      type: 'website',
+      url: `https://simplewebtoolsbox.com/tools/${tool.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${tool.name} - Free Online Tool`,
+      description: `${tool.description} Use our free ${tool.name.toLowerCase()} tool instantly.`,
+    },
   }
 }
 
