@@ -112,6 +112,12 @@ export default function RootLayout({
         {/* Canonical */}
         <link rel="canonical" href="https://simplewebtoolsbox.com" />
 
+        {/* AdSense site verification meta tag */}
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-2268511139409784"
+        />
+
         {/* Google AdSense – MUST be plain script */}
         <script
           async
