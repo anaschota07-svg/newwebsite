@@ -220,8 +220,6 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
           </div>
         )}
 
-        <AdSense format="horizontal" />
-
         {/* Conclusion */}
         <div className="relative rounded-3xl p-10 my-12 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 animate-gradient-shift" />
