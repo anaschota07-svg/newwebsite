@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -19,6 +19,16 @@ export default function BlogPage() {
   const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
+
+  // Shuffle blog posts so order is random each time
+  const shuffledPosts = useMemo(() => {
+    const arr = [...blogPosts]
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+    }
+    return arr
+  }, [])
 
   // Debug: Log when blog page loads with session
   useEffect(() => {
@@ -216,7 +226,7 @@ export default function BlogPage() {
             }
           }}
         >
-          {blogPosts.map((post) => (
+          {shuffledPosts.map((post) => (
             <motion.article
               key={post.id}
               variants={{
