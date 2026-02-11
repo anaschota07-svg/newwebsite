@@ -25,7 +25,7 @@ export default function BlogPage() {
     const arr = [...blogPosts]
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
-      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+        ;[arr[i], arr[j]] = [arr[j], arr[i]]
     }
     return arr
   }, [])
@@ -79,13 +79,13 @@ export default function BlogPage() {
       if (process.env.NODE_ENV === 'development') {
         console.log('⏱️ Blog timer FINISHED (20s) - Moving to blog-next...')
       }
-      
+
       // IMPORTANT: Change step FIRST (don't wait for backend)
       setCurrentStep('blog-next')
       if (process.env.NODE_ENV === 'development') {
         console.log('💾 Step changed to: blog-next')
       }
-      
+
       // Then try to update backend (non-blocking)
       try {
         const result = await incrementStep(sessionToken, shortCode)
@@ -192,29 +192,31 @@ export default function BlogPage() {
         )}
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        if (!sessionToken) {
           <motion.div
-            className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500"
-            whileHover={{ scale: 1.1, rotate: 5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
           >
-            <BookOpen className="h-8 w-8 text-white" />
+            <motion.div
+              className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              <BookOpen className="h-8 w-8 text-white" />
+            </motion.div>
+
+            <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-4">
+              How-To <span className="gradient-text">Guides</span>
+            </h1>
+            <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
+              {blogPosts.length} expert tutorials to level up your skills
+            </p>
           </motion.div>
-          
-          <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-4">
-            How-To <span className="gradient-text">Guides</span>
-          </h1>
-          <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
-            {blogPosts.length} expert tutorials to level up your skills
-          </p>
-        </motion.div>
+        }
 
         {/* All Articles Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
           initial="hidden"
           animate="visible"
@@ -239,7 +241,7 @@ export default function BlogPage() {
                 className={`${sessionToken && shortCode && currentStep === 'blog-next'
                   ? 'ring-4 ring-green-500 dark:ring-green-400 shadow-xl animate-pulse'
                   : ''
-                }`}
+                  }`}
               >
                 <Link
                   href={`/blog/${post.slug}`}
@@ -255,7 +257,7 @@ export default function BlogPage() {
 
                       // Set step FIRST (don't wait for backend)
                       setCurrentStep('blog-detail-timer')
-                      
+
                       // Update backend in background (non-blocking)
                       incrementStep(sessionToken, shortCode).then(result => {
                         if (process.env.NODE_ENV === 'development') {
@@ -270,10 +272,10 @@ export default function BlogPage() {
                           console.warn('⚠️ Backend error (non-blocking):', error)
                         }
                       })
-                      
+
                       // Small delay to ensure state is saved to localStorage
                       await new Promise(resolve => setTimeout(resolve, 100))
-                      
+
                       // Navigate to blog post page
                       router.push(`/blog/${post.slug}`)
                     }
@@ -281,52 +283,52 @@ export default function BlogPage() {
                   className={`group block relative h-full ${sessionToken && shortCode && currentStep === 'blog-next'
                     ? 'hover:scale-105 transition-transform cursor-pointer'
                     : ''
-                  }`}
+                    }`}
                   aria-label={`Read: ${post.title}`}
                 >
-                <div className="glass rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all h-full flex flex-col">
-                  {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <BlogImage
-                      src={post.image}
-                      alt={post.title}
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm">
-                        {post.category}
-                      </span>
-                      <div className="flex items-center gap-1 text-white/90 text-xs font-semibold">
-                        <Clock className="w-3 h-3" />
-                        {post.readTime}
+                  <div className="glass rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all h-full flex flex-col">
+                    {/* Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <BlogImage
+                        src={post.image}
+                        alt={post.title}
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                        <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm">
+                          {post.category}
+                        </span>
+                        <div className="flex items-center gap-1 text-white/90 text-xs font-semibold">
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 transition-all line-clamp-2 leading-tight">
+                        {post.title}
+                      </h3>
+                      <p className="text-sm text-slate-900 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1">
+                        {post.description}
+                      </p>
+
+                      {/* Meta */}
+                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 font-medium pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <div className="flex items-center gap-1">
+                          <User className="w-3 h-3" />
+                          {post.author}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </div>
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 transition-all line-clamp-2 leading-tight">
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-slate-900 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1">
-                      {post.description}
-                    </p>
-                    
-                    {/* Meta */}
-                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 font-medium pt-4 border-t border-slate-200 dark:border-slate-800">
-                      <div className="flex items-center gap-1">
-                        <User className="w-3 h-3" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
                   {/* Hover Glow */}
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 rounded-3xl blur-xl transition-all -z-10" />
                 </Link>

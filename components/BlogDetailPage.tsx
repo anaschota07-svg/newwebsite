@@ -67,18 +67,6 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
     }
   }, [currentStep])
 
-  // Scroll to Get Link button when step changes to get-link
-  useEffect(() => {
-    if (currentStep === 'get-link') {
-      setTimeout(() => {
-        const getLinkSection = document.getElementById('get-link-section')
-        if (getLinkSection) {
-          getLinkSection.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-      }, 500)
-    }
-  }, [currentStep])
-
   return (
     <div className="min-h-screen py-12 relative overflow-hidden">
       {/* Background */}
@@ -117,7 +105,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                   <div className="w-full mx-auto">
                     <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-3 rounded-lg shadow-lg text-center">
                       <p className="text-sm font-bold">
-                        ↓ Scroll down to <span className="text-yellow-300">Get Link</span> button ↓
+                        ↓ Scroll down to <span className="text-yellow-300">Get Link</span> button to continue ↓
                       </p>
                     </div>
                   </div>
