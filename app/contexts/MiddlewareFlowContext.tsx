@@ -12,6 +12,10 @@ export type FlowStep =
   | 'tools-next' // Step 6: Tools page - click tool instruction
   | 'tool-detail-timer' // Step 7: Tool detail page hidden timer (20s)
   | 'tool-detail-continue' // Step 8: Tool continue (unused)
+  | 'blog-timer' // Step 5: Blog page timer (20s, hidden with rainbow message)
+  | 'blog-next' // Step 6: Blog page - click article instruction
+  | 'blog-detail-timer' // Step 7: Blog detail page hidden timer (20s)
+  | 'blog-detail-continue' // Step 8: Blog continue (unused)
   | 'articles-timer' // Alternative: Articles page timer (for article flow)
   | 'articles-continue' // Alternative: Articles continue
   | 'articles-next' // Alternative: Next button on articles

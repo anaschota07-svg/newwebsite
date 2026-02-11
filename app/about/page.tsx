@@ -35,10 +35,10 @@ export default function AboutPage() {
           </div>
           
           <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6">
-            Building the <span className="gradient-text">Future</span>
+            About <span className="gradient-text">SimpleWebToolsBox</span>
           </h1>
           <p className="text-xl text-slate-900 dark:text-slate-400 leading-relaxed">
-            Empowering developers with next-generation tools
+            Your trusted source for free, powerful online tools and expert guides
           </p>
         </motion.div>
 
@@ -55,9 +55,15 @@ export default function AboutPage() {
             </div>
             <h2 className="text-3xl font-black text-slate-900 dark:text-white">Our Mission</h2>
           </div>
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg mb-4">
+            SimpleWebToolsBox is a comprehensive platform offering over 45 free online tools and 15+ expert guides 
+            to help you work smarter, faster, and more efficiently. Whether you're a developer, designer, student, 
+            or professional, our tools are designed to simplify your daily tasks.
+          </p>
           <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
-            We're on a mission to democratize powerful development tools. Every feature is designed with simplicity, 
-            speed, and privacy in mind. No complexity, no compromises.
+            Every tool is built with simplicity, speed, and privacy in mind. All processing happens locally in your 
+            browser, ensuring your data never leaves your device. No registration required, no hidden costs, 
+            no compromises—just powerful tools that work instantly.
           </p>
         </motion.section>
 
@@ -73,14 +79,21 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
               <Zap className="h-6 w-6 text-white" />
             </div>
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white">What We Build</h2>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white">What We Offer</h2>
           </div>
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg mb-6">
+            SimpleWebToolsBox provides a wide range of free online tools organized into multiple categories:
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
             {[
-              { icon: '🧮', title: 'Calculators', desc: 'Powerful calculation tools for every need' },
-              { icon: '✍️', title: 'Text Tools', desc: 'Transform and analyze text effortlessly' },
-              { icon: '🔐', title: 'Generators', desc: 'Create secure passwords, UUIDs, and more' },
-              { icon: '💻', title: 'Dev Tools', desc: 'Essential utilities for developers' },
+              { icon: '🧮', title: 'Calculators', desc: 'Age, BMI, Loan, Date, Percentage, and Unit conversion calculators for personal and professional use' },
+              { icon: '✍️', title: 'Text Tools', desc: 'Text case converter, word counter, text diff checker, and Lorem Ipsum generator for content creators' },
+              { icon: '🔐', title: 'Security Tools', desc: 'Password generators, hash generators, and encryption tools to keep your data secure' },
+              { icon: '💻', title: 'Developer Tools', desc: 'JSON formatter, Base64 encoder, URL encoder, HTML encoder, regex tester, and code minifiers' },
+              { icon: '🎨', title: 'Design Tools', desc: 'Color picker, gradient generator, box shadow generator, and font preview tools for designers' },
+              { icon: '📱', title: 'Generators', desc: 'QR code generator, UUID generator, barcode generator, and random number generator' },
+              { icon: '⏱️', title: 'Productivity Tools', desc: 'Pomodoro timer, stopwatch, time zone converter, and invoice generator' },
+              { icon: '📚', title: 'How-To Guides', desc: '15+ comprehensive tutorials covering everything from password security to loan calculations' },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -153,8 +166,13 @@ export default function AboutPage() {
             </motion.div>
             <h2 className="text-3xl font-black text-white mb-4">Join Thousands of Users</h2>
             <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
-              Developers, creators, and professionals worldwide trust our tools daily. 
-              Got ideas? We'd love to hear from you!
+              Developers, designers, students, and professionals worldwide trust SimpleWebToolsBox for their daily 
+              tasks. Our tools are used by thousands of users every day to calculate, convert, generate, and optimize 
+              their work. Whether you're building a website, managing finances, or creating content, we're here to help.
+            </p>
+            <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
+              Have a tool idea or feedback? We'd love to hear from you! Your suggestions help us improve and expand 
+              our collection of free tools.
             </p>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}

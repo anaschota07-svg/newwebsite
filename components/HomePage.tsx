@@ -687,8 +687,8 @@ export function HomePageContent() {
                                 try {
                                     // Small delay to show loading animation
                                     await new Promise(resolve => setTimeout(resolve, 500))
-                                    setCurrentStep('tools-timer')
-                                    router.push('/tools')
+                                    setCurrentStep('blog-timer')
+                                    router.push('/blog')
                                 } catch (error) {
                                     setIsLoading(false)
                                 }
