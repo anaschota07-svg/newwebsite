@@ -190,8 +190,6 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
           </div>
         </header>
 
-        <AdSense format="horizontal" />
-
         {/* Post Content */}
         {content && (
           <div className="my-12">
@@ -279,8 +277,30 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
 
         {/* Get Link Button Section - Bottom */}
         {sessionToken && shortCode && (
-          <div id="get-link-section" className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
+          <div
+            id="get-link-section"
+            className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center space-y-6"
+          >
+            {/* Ad Above Get Link */}
+            <div className="flex justify-center">
+              <AdComponent
+                adSlotId="4686013446"
+                size="300x250"
+                style={{ display: 'inline-block', width: '300px', height: '250px' }}
+              />
+            </div>
+
+            {/* Get Link Button */}
             {currentStep === 'get-link' && <GetLinkButton />}
+
+            {/* Ad Below Get Link */}
+            <div className="flex justify-center">
+              <AdComponent
+                adSlotId="4686013446"
+                size="300x250"
+                style={{ display: 'inline-block', width: '300px', height: '250px' }}
+              />
+            </div>
           </div>
         )}
       </article>

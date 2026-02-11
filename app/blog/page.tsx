@@ -192,7 +192,7 @@ export default function BlogPage() {
         )}
 
         {/* Header */}
-        if (!sessionToken) {
+        {!sessionToken && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -213,7 +213,7 @@ export default function BlogPage() {
               {blogPosts.length} expert tutorials to level up your skills
             </p>
           </motion.div>
-        }
+        )}
 
         {/* All Articles Grid */}
         <motion.div
