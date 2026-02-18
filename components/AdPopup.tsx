@@ -12,14 +12,14 @@ interface AdPopupProps {
 }
 
 export const AdPopup = ({ onClose }: AdPopupProps) => {
+    const [countdown, setCountdown] = useState(5)
     const [canClose, setCanClose] = useState(false)
-    const adRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        // Timer countdown
-        let timeLeft = 20
+        let timeLeft = 5
         const interval = setInterval(() => {
             timeLeft -= 1
+            setCountdown(timeLeft)
             if (timeLeft <= 0) {
                 setCanClose(true)
                 clearInterval(interval)
@@ -29,20 +29,6 @@ export const AdPopup = ({ onClose }: AdPopupProps) => {
         return () => clearInterval(interval)
     }, [])
 
-    // Handle fake close button click - scroll to ad area
-    const handleFakeCloseClick = (e: React.MouseEvent) => {
-        e.preventDefault()
-        e.stopPropagation()
-
-        // Scroll to the ad area to help users interact with ads
-        if (adRef.current) {
-            const adElement = adRef.current.querySelector('ins.adsbygoogle')
-            if (adElement) {
-                adElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            }
-        }
-    }
-
     return (
         <AnimatePresence>
             <motion.div
@@ -51,53 +37,38 @@ export const AdPopup = ({ onClose }: AdPopupProps) => {
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-black/80 z-[10000] flex items-center justify-center p-4"
             >
-                {/* Just Ad - No Box */}
                 <motion.div
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.9, opacity: 0 }}
-                    className="w-full flex items-center justify-center"
-                    style={{
-                        maxWidth: '800px',
-                        minHeight: '250px',
-                    }}
+                    className="relative bg-slate-900 rounded-2xl p-4 shadow-2xl"
+                    style={{ maxWidth: '360px', width: '100%' }}
                 >
-                    {/* Wrapper that is exactly the ad size so buttons sit near the ad */}
-                    <div
-                        ref={adRef}
-                        className="relative flex items-center justify-center"
-                        style={{ width: '300px', height: '250px' }}
-                    >
-                        {/* Fake Close Button - Top-left over ad */}
-                        {!canClose && (
-                            <button
-                                onClick={handleFakeCloseClick}
-                                className="absolute left-1 top-1 w-5 h-5 flex items-center justify-center bg-black/40 hover:bg-black/60 rounded transition-colors cursor-pointer z-50"
-                                aria-label="View Ad"
-                            >
-                                <X className="w-3 h-3 text-white" />
-                            </button>
-                        )}
-
-                        {/* Real Close Button - Top-right over ad */}
-                        {canClose && (
+                    {/* Close button — clearly ABOVE the ad, never overlapping it */}
+                    <div className="flex items-center justify-between mb-3 px-1">
+                        <span className="text-xs text-slate-400 font-medium">Advertisement</span>
+                        {canClose ? (
                             <button
                                 onClick={onClose}
-                                className="absolute right-1 top-1 w-6 h-6 flex items-center justify-center bg-black/40 hover:bg-black/60 rounded-full transition-colors z-50"
-                                aria-label="Close"
+                                className="flex items-center gap-1 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors text-white text-xs font-semibold"
+                                aria-label="Close advertisement"
                             >
-                                <X className="w-4 h-4 text-white" />
+                                <X className="w-3 h-3" />
+                                Close
                             </button>
+                        ) : (
+                            <span className="text-xs text-slate-400 bg-slate-700 px-3 py-1.5 rounded-lg font-semibold">
+                                Close in {countdown}s
+                            </span>
                         )}
-
-                        {/* Ad Only - No Padding, No Box */}
-                        <AdComponent
-                            adSlotId="4686013446"
-                            size="300x250"
-                            className="w-full h-full"
-                            style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                        />
                     </div>
+
+                    {/* Ad unit — no buttons overlapping it */}
+                    <AdComponent
+                        adSlotId="4686013446"
+                        size="300x250"
+                        style={{ display: 'block', width: '300px', height: '250px' }}
+                    />
                 </motion.div>
             </motion.div>
         </AnimatePresence>

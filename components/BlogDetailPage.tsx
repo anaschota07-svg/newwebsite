@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Clock, Calendar, User } from 'lucide-react'
+import { ArrowLeft, Clock, Calendar, User, Github, Linkedin, Code2 } from 'lucide-react'
 import { BlogPost } from '@/data/blog/blogData'
 import AdSense from '@/components/AdSense'
 import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
@@ -229,6 +229,60 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
             <p className="text-white/90 leading-relaxed text-lg">
               Hope this guide helped you! Explore more tutorials and try our free tools to level up your skills.
             </p>
+          </div>
+        </div>
+
+        {/* Author Bio Card */}
+        <div className="my-12 glass rounded-3xl p-8 border border-white/10">
+          <h2 className="text-lg font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">About the Author</h2>
+          <div className="flex flex-col sm:flex-row gap-6 items-start">
+            {/* Avatar */}
+            <div className="flex-shrink-0">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-xl">
+                <span className="text-3xl font-black text-white">MW</span>
+              </div>
+            </div>
+            {/* Info */}
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-3 mb-2">
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">Mohd Washid</h3>
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
+                  Author & Creator
+                </span>
+              </div>
+              <p className="text-sm font-semibold text-cyan-600 dark:text-cyan-400 mb-3 flex items-center gap-2">
+                <Code2 className="w-4 h-4" />
+                Flutter Developer &amp; Web Tools Creator
+              </p>
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                Mohd Washid is the founder of SimpleWebToolsBox and a passionate software developer 
+                specializing in Flutter, web development, and productivity tools. With hands-on 
+                experience building real-world applications, he writes in-depth guides to help developers, 
+                students, and professionals get the most out of technology.
+              </p>
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 dark:hover:bg-slate-600 transition-all"
+                  aria-label="Mohd Washid on GitHub"
+                >
+                  <Github className="w-4 h-4" />
+                  GitHub
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all"
+                  aria-label="Mohd Washid on LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4" />
+                  LinkedIn
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 

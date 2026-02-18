@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Zap, Shield, Sparkles, Calculator, FileText, Rocket, Star, Code2, Layers, TrendingUp, Users, Award } from 'lucide-react'
+import { ArrowRight, Zap, Shield, Sparkles, Calculator, FileText, Rocket, Star, Code2, Layers, TrendingUp, Users, Award, Github, Linkedin, Globe, BookOpen, Lock, Smartphone } from 'lucide-react'
 import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
 import AdSense from '@/components/AdSense'
@@ -632,6 +632,120 @@ export function HomePageContent() {
                                             </p>
                                         </div>
                                     ))}
+                                </div>
+                            </div>
+                        </section>
+                    </LazyLoad>
+                )}
+
+                {/* Tools Categories Section - Hide with session */}
+                {!sessionToken && (
+                    <LazyLoad>
+                        <section className="py-20 relative" aria-labelledby="categories-heading">
+                            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                                <div className="text-center mb-16">
+                                    <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-blue-500/30 shadow-lg mb-6">
+                                        <Layers className="w-4 h-4 text-blue-500" />
+                                        <span className="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                                            Complete Tool Library
+                                        </span>
+                                    </div>
+                                    <h2 id="categories-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                                        Everything You Need,{' '}
+                                        <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                                            Organized
+                                        </span>
+                                    </h2>
+                                    <p className="text-lg text-slate-700 dark:text-slate-400 font-medium max-w-2xl mx-auto">
+                                        {realStats.tools} free tools across {realStats.categories} categories — calculators, converters, generators, developer utilities, and more. No signup, no cost, forever free.
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                                    {[
+                                        { icon: Calculator, title: 'Calculators', desc: 'Age, BMI, loan, percentage, date difference, unit conversion and more — instant, precise calculations for everyday needs.', gradient: 'from-cyan-500 to-blue-500', count: '8+', link: '/tools' },
+                                        { icon: Code2, title: 'Developer Tools', desc: 'JSON formatter, Base64 encoder/decoder, URL encoder, HTML encoder, regex tester, code minifiers, timestamp converter.', gradient: 'from-blue-500 to-indigo-500', count: '10+', link: '/tools' },
+                                        { icon: Lock, title: 'Security Tools', desc: 'Strong password generator, MD5/SHA hash generator, UUID generator — keep your data and accounts secure.', gradient: 'from-indigo-500 to-purple-500', count: '5+', link: '/tools' },
+                                        { icon: BookOpen, title: 'Text Tools', desc: 'Text case converter, word counter, Lorem Ipsum generator, text diff checker — essential for writers and content creators.', gradient: 'from-purple-500 to-pink-500', count: '6+', link: '/tools' },
+                                        { icon: Globe, title: 'Generators', desc: 'QR code generator, barcode generator, random number generator, invoice generator — create what you need instantly.', gradient: 'from-pink-500 to-rose-500', count: '6+', link: '/tools' },
+                                        { icon: Smartphone, title: 'Design Tools', desc: 'Color picker, gradient generator, CSS box shadow generator, font preview — design utilities for every project.', gradient: 'from-rose-500 to-orange-500', count: '5+', link: '/tools' },
+                                        { icon: TrendingUp, title: 'Productivity', desc: 'Pomodoro timer, stopwatch, time zone converter — tools that help you stay focused and manage your time better.', gradient: 'from-orange-500 to-amber-500', count: '4+', link: '/tools' },
+                                        { icon: FileText, title: 'How-To Guides', desc: '{count} comprehensive tutorials on passwords, health, finance, and more — step-by-step guides written by experts.', gradient: 'from-amber-500 to-yellow-500', count: `${realStats.guides}`, link: '/blog' },
+                                    ].map((cat, i) => (
+                                        <Link key={i} href={cat.link} className="group block hover:scale-105 transition-transform">
+                                            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border-2 border-slate-200 dark:border-slate-700 hover:border-cyan-500/50 transition-all h-full shadow-lg hover:shadow-xl">
+                                                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform`}>
+                                                    <cat.icon className="w-6 h-6 text-white" />
+                                                </div>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <h3 className="text-lg font-black text-slate-900 dark:text-white">{cat.title}</h3>
+                                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full bg-gradient-to-r ${cat.gradient} text-white`}>{cat.count}</span>
+                                                </div>
+                                                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                                    {cat.desc.replace('{count}', cat.count)}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+
+                                <div className="text-center">
+                                    <Link href="/tools" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-base hover:from-blue-600 hover:to-cyan-600 transition-all shadow-lg hover:shadow-xl hover:scale-105 group">
+                                        Browse All {realStats.tools} Tools
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </section>
+                    </LazyLoad>
+                )}
+
+                {/* About the Founder Section - Hide with session */}
+                {!sessionToken && (
+                    <LazyLoad>
+                        <section className="py-20 relative" aria-labelledby="founder-heading">
+                            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+                                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden shadow-xl">
+                                    <div className="p-8 sm:p-12">
+                                        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 mb-8">
+                                            <Users className="w-4 h-4 text-cyan-500" />
+                                            <span className="text-sm font-black bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">About the Creator</span>
+                                        </div>
+
+                                        <div className="flex flex-col sm:flex-row gap-8 items-start">
+                                            {/* Avatar */}
+                                            <div className="flex-shrink-0">
+                                                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl">
+                                                    <span className="text-4xl font-black text-white">MW</span>
+                                                </div>
+                                            </div>
+                                            {/* Content */}
+                                            <div className="flex-1">
+                                                <h2 id="founder-heading" className="text-3xl font-black text-slate-900 dark:text-white mb-1">Mohd Washid</h2>
+                                                <p className="text-cyan-600 dark:text-cyan-400 font-bold mb-4">Flutter Developer &amp; Founder of SimpleWebToolsBox</p>
+                                                <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                                                    SimpleWebToolsBox was created by Mohd Washid, a software developer passionate about building tools that make everyday tasks simpler. With a background in Flutter development and web engineering, Mohd built this platform to provide free, fast, and privacy-first tools for developers, students, and professionals worldwide.
+                                                </p>
+                                                <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
+                                                    Every tool on this site is built, tested, and maintained by the same team that uses them daily. The goal is simple: powerful utilities that run entirely in your browser — no signups, no data collection, no cost.
+                                                </p>
+                                                <div className="flex flex-wrap gap-3">
+                                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 dark:hover:bg-slate-600 transition-all">
+                                                        <Github className="w-4 h-4" />
+                                                        GitHub
+                                                    </a>
+                                                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all">
+                                                        <Linkedin className="w-4 h-4" />
+                                                        LinkedIn
+                                                    </a>
+                                                    <Link href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
+                                                        <Globe className="w-4 h-4" />
+                                                        Contact
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </section>

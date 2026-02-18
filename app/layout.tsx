@@ -99,6 +99,9 @@ export const metadata: Metadata = {
     icon: "/logo.png",
     apple: "/logo.png",
   },
+  alternates: {
+    canonical: "https://simplewebtoolsbox.com",
+  },
 };
 
 export default function RootLayout({
@@ -109,21 +112,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* Canonical */}
-        <link rel="canonical" href="https://simplewebtoolsbox.com" />
-
         {/* AdSense site verification meta tag */}
         <meta
           name="google-adsense-account"
           content="ca-pub-2268511139409784"
         />
-
-        {/* Google AdSense – MUST be plain script */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
-          crossOrigin="anonymous"
-        ></script>
 
         {/* Favicons */}
         <link rel="shortcut icon" href="/logo.png" type="image/png" />
@@ -135,6 +128,15 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50`}
       >
+        {/* Google AdSense */}
+        <Script
+          id="google-adsense"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Google reCAPTCHA */}
         <Script
           src="https://www.google.com/recaptcha/api.js?render=explicit"

@@ -15,10 +15,13 @@ const footerLinks = {
     { name: 'Privacy Policy', href: '/privacy-policy' },
     { name: 'Terms & Conditions', href: '/terms-conditions' },
     { name: 'Disclaimer', href: '/disclaimer' },
+    { name: 'Editorial Policy', href: '/editorial-policy' },
+    { name: 'DMCA Policy', href: '/dmca' },
   ],
   resources: [
     { name: 'All Tools', href: '/tools' },
     { name: 'How-To Guides', href: '/blog' },
+    { name: 'Sitemap', href: '/sitemap-page' },
   ],
 }
 

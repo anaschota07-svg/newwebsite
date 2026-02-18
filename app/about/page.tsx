@@ -2,7 +2,8 @@
 
 import { Metadata } from 'next'
 import { motion } from 'framer-motion'
-import { Users, Target, Heart, Zap, Shield, Rocket, Sparkles, Lock, Smartphone, Link } from 'lucide-react'
+import { Users, Target, Heart, Zap, Shield, Rocket, Sparkles, Lock, Smartphone, Link, Code2, Github, Globe } from 'lucide-react'
+import NextLink from 'next/link'
 
 export default function AboutPage() {
   return (
@@ -143,6 +144,56 @@ export default function AboutPage() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </motion.section>
+
+        {/* Founder Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25 }}
+          className="glass rounded-3xl p-8 border border-white/10 mb-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+              <Users className="h-6 w-6 text-white" />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Meet the Creator</h2>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-6 items-start">
+            <div className="flex-shrink-0">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-xl">
+                <span className="text-3xl font-black text-white">MW</span>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-1">Mohd Washid</h3>
+              <p className="text-cyan-600 dark:text-cyan-400 font-bold mb-4 flex items-center gap-2">
+                <Code2 className="w-4 h-4" />
+                Flutter Developer &amp; Founder
+              </p>
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4 text-lg">
+                SimpleWebToolsBox was built by Mohd Washid, a software developer with expertise in Flutter, 
+                web development, and productivity applications. Frustrated with bloated, paid-only tools, 
+                he set out to create a single platform offering all essential web utilities — completely free, 
+                fast, and private.
+              </p>
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
+                Every tool on this platform is personally built, tested, and used by Mohd. Have a suggestion 
+                or want to collaborate? Reach out directly — your feedback shapes what gets built next.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 transition-all">
+                  <Github className="w-4 h-4" />
+                  GitHub
+                </a>
+                <NextLink href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
+                  <Globe className="w-4 h-4" />
+                  Contact
+                </NextLink>
+              </div>
+            </div>
           </div>
         </motion.section>
 
