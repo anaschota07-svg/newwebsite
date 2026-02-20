@@ -700,57 +700,6 @@ export function HomePageContent() {
                     </LazyLoad>
                 )}
 
-                {/* About the Founder Section - Hide with session */}
-                {!sessionToken && (
-                    <LazyLoad>
-                        <section className="py-20 relative" aria-labelledby="founder-heading">
-                            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden shadow-xl">
-                                    <div className="p-8 sm:p-12">
-                                        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 mb-8">
-                                            <Users className="w-4 h-4 text-cyan-500" />
-                                            <span className="text-sm font-black bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">About the Creator</span>
-                                        </div>
-
-                                        <div className="flex flex-col sm:flex-row gap-8 items-start">
-                                            {/* Avatar */}
-                                            <div className="flex-shrink-0">
-                                                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl">
-                                                    <span className="text-4xl font-black text-white">MW</span>
-                                                </div>
-                                            </div>
-                                            {/* Content */}
-                                            <div className="flex-1">
-                                                <h2 id="founder-heading" className="text-3xl font-black text-slate-900 dark:text-white mb-1">Mohd Washid</h2>
-                                                <p className="text-cyan-600 dark:text-cyan-400 font-bold mb-4">Flutter Developer &amp; Founder of SimpleWebToolsBox</p>
-                                                <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                                                    SimpleWebToolsBox was created by Mohd Washid, a software developer passionate about building tools that make everyday tasks simpler. With a background in Flutter development and web engineering, Mohd built this platform to provide free, fast, and privacy-first tools for developers, students, and professionals worldwide.
-                                                </p>
-                                                <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-                                                    Every tool on this site is built, tested, and maintained by the same team that uses them daily. The goal is simple: powerful utilities that run entirely in your browser — no signups, no data collection, no cost.
-                                                </p>
-                                                <div className="flex flex-wrap gap-3">
-                                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 dark:hover:bg-slate-600 transition-all">
-                                                        <Github className="w-4 h-4" />
-                                                        GitHub
-                                                    </a>
-                                                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all">
-                                                        <Linkedin className="w-4 h-4" />
-                                                        LinkedIn
-                                                    </a>
-                                                    <Link href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
-                                                        <Globe className="w-4 h-4" />
-                                                        Contact
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </LazyLoad>
-                )}
 
                 {/* CTA Section - Hide with session */}
                 {!sessionToken && (
@@ -759,7 +708,7 @@ export function HomePageContent() {
                             {/* Animated Gradient Background */}
                             <div className="absolute inset-0 bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700" />
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
-                            
+
                             {/* Decorative elements */}
                             <div className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
                             <div className="absolute bottom-10 right-10 w-80 h-80 bg-cyan-400/20 rounded-full blur-3xl" />
