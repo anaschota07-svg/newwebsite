@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toolsData, categories } from '@/data/tools/toolsData'
-import AdSense from '@/components/AdSense'
 import SearchBar from '@/components/SearchBar'
 import { ArrowRight, Sparkles, Filter } from 'lucide-react'
 // [MIDDLEWARE] import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
@@ -105,8 +104,6 @@ export function ToolsPageContent() {
           )}
         </div>
 
-        {!sessionToken && <AdSense format="horizontal" />}
-
         {/* Categories - Pill Design */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
@@ -187,8 +184,6 @@ export function ToolsPageContent() {
           )}
         </div>
         </LazyLoad>
-
-        {!sessionToken && <AdSense format="horizontal" />}
       </div>
     </div>
   )

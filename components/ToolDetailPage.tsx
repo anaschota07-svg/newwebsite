@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Check } from 'lucide-react'
 import { Tool } from '@/data/tools/toolsData'
-import AdSense from '@/components/AdSense'
+// import AdSense from '@/components/AdSense'
 // [MIDDLEWARE] import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
 // [MIDDLEWARE] import { GetLinkButton } from '@/components/GetLinkButton'
 // [MIDDLEWARE] import { AdComponent } from '@/components/AdComponent'
@@ -99,8 +99,6 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
         <div className="mb-8">
           <ToolComponent />
         </div>
-
-        {!sessionToken && <AdSense format="horizontal" />}
 
         {/* About Section */}
         <div className="mt-8 space-y-4 glass rounded-3xl p-6 border border-white/10">
@@ -198,7 +196,6 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
           <div id="get-link-section"> ... AdComponent + GetLinkButton + AdComponent ... </div>
         )}
         [MIDDLEWARE END] */}
-        {!sessionToken && <AdSense format="horizontal" />}
       </div>
     </div>
   )

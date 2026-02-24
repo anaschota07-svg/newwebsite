@@ -311,13 +311,6 @@ export function HomePageContent() {
                     </LazyLoad>
                 )}
 
-                {/* Ad Placeholder - Hide with session */}
-                {!sessionToken && (
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <AdSense format="horizontal" />
-                    </div>
-                )}
-
                 {/* Featured Tools Section - Hide with session */}
                 {!sessionToken && (
                     <LazyLoad>
