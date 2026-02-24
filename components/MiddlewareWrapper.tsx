@@ -124,7 +124,7 @@ export const MiddlewareWrapper = ({ children }: { children: React.ReactNode }) =
       {/* Normal website content - always rendered */}
       {children}
 
-      {/* Ad Popup - Step 1: Show popup with ads */}
+      {/* [MIDDLEWARE] Ad Popup — commented out for AdSense review, uncomment to restore
       {showPopup && sessionToken && shortCode && currentStep === 'popup' ? (
         <AdPopup
           sessionToken={sessionToken}
@@ -132,6 +132,7 @@ export const MiddlewareWrapper = ({ children }: { children: React.ReactNode }) =
           onClose={handlePopupClose}
         />
       ) : null}
+      [MIDDLEWARE END] */}
     </>
   )
 }

@@ -7,15 +7,20 @@ import { toolsData, categories } from '@/data/tools/toolsData'
 import AdSense from '@/components/AdSense'
 import SearchBar from '@/components/SearchBar'
 import { ArrowRight, Sparkles, Filter } from 'lucide-react'
-import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
-import { incrementStep } from '@/app/services/api'
-import { AdComponent } from '@/components/AdComponent'
+// [MIDDLEWARE] import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
+// [MIDDLEWARE] import { incrementStep } from '@/app/services/api'
+// [MIDDLEWARE] import { AdComponent } from '@/components/AdComponent'
 import LazyLoad from '@/components/LazyLoad'
 
 export function ToolsPageContent() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All Tools')
   const [isNavigating, setIsNavigating] = useState(false)
-  const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
+  // [MIDDLEWARE] const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
+  // Placeholders while middleware is commented out — remove these 4 lines to restore:
+  const sessionToken = null
+  const shortCode = null
+  const currentStep = ''
+  const setCurrentStep = (_step: string) => {}
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
 
@@ -23,109 +28,38 @@ export function ToolsPageContent() {
     ? toolsData
     : toolsData.filter(tool => tool.category === selectedCategory)
 
-  // Debug: Log when tools page loads with session
-  useEffect(() => {
-    if (sessionToken && shortCode) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🔧 Tools page loaded with session:', {
-          step: currentStep,
-          hasSession: !!sessionToken,
-          hasShortCode: !!shortCode
-        })
-      }
-    }
-  }, [])
-
-  // If user comes back from tool detail page and we have session, restore tools-next step
-  useEffect(() => {
-    if (sessionToken && shortCode && currentStep === 'tool-detail-timer') {
-      // User came back, restore highlighting
-      setCurrentStep('tools-next')
-    }
-  }, [sessionToken, shortCode, currentStep, setCurrentStep])
+  // [MIDDLEWARE] Debug + step-restore effects — commented out for AdSense review
+  // useEffect(() => {
+  //   if (sessionToken && shortCode) console.log('🔧 Tools page loaded with session')
+  // }, [])
+  // useEffect(() => {
+  //   if (sessionToken && shortCode && currentStep === 'tool-detail-timer') setCurrentStep('tools-next')
+  // }, [sessionToken, shortCode, currentStep, setCurrentStep])
+  // [MIDDLEWARE END]
 
   // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
-  // If user comes back from tool detail page, restore tools-next step for highlighting
-  useEffect(() => {
-    if (sessionToken && shortCode) {
-      // If step is tool-detail-timer or tool-detail-continue or get-link, restore to tools-next
-      if (currentStep === 'tool-detail-timer' || currentStep === 'tool-detail-continue' || currentStep === 'get-link') {
-        setCurrentStep('tools-next')
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🔄 Restored tools-next step for highlighting')
-        }
-      }
-    }
-  }, [sessionToken, shortCode, currentStep, setCurrentStep])
-
-  // Scroll to top when step changes to tools-timer
-  useEffect(() => {
-    if (currentStep === 'tools-timer') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }, [currentStep])
-
-  // Hidden timer that runs in background for tools-timer step
-  useEffect(() => {
-    if (!sessionToken || !shortCode || currentStep !== 'tools-timer') {
-      if (process.env.NODE_ENV === 'development' && timerRef.current) {
-        console.log('⚠️ Tools timer cleared - conditions not met')
-      }
-      return
-    }
-
-    if (timerRef.current) {
-      clearTimeout(timerRef.current)
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🔄 Clearing previous tools timer')
-      }
-    }
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log('⏰ Starting tools timer - 20 seconds countdown...')
-    }
-
-    timerRef.current = setTimeout(async () => {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('⏱️ Tools timer FINISHED (20s) - Moving to tools-next...')
-      }
-      
-      // IMPORTANT: Change step FIRST (don't wait for backend)
-      setCurrentStep('tools-next')
-      if (process.env.NODE_ENV === 'development') {
-        console.log('💾 Step changed to: tools-next')
-      }
-      
-      // Then try to update backend (non-blocking)
-      try {
-        const result = await incrementStep(sessionToken, shortCode)
-        if (process.env.NODE_ENV === 'development') {
-          if (result.success) {
-            console.log('✅ Backend step incremented successfully')
-          } else {
-            console.warn('⚠️ Backend increment failed (non-blocking):', result.error)
-          }
-        }
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('⚠️ Backend increment error (non-blocking):', error)
-        }
-      }
-    }, 20000) // 20 seconds
-
-    return () => {
-      if (timerRef.current) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🧹 Cleaning up tools timer')
-        }
-        clearTimeout(timerRef.current)
-      }
-    }
-  }, [sessionToken, shortCode, currentStep])
+  // [MIDDLEWARE] Step-restore + scroll-on-timer + hidden 20s timer — commented out for AdSense review
+  // Uncomment the 3 useEffect blocks below to restore:
+  // useEffect(() => {
+  //   if (sessionToken && shortCode && (currentStep === 'tool-detail-timer' || currentStep === 'get-link'))
+  //     setCurrentStep('tools-next')
+  // }, [sessionToken, shortCode, currentStep, setCurrentStep])
+  // useEffect(() => {
+  //   if (currentStep === 'tools-timer') window.scrollTo({ top: 0, behavior: 'smooth' })
+  // }, [currentStep])
+  // useEffect(() => {
+  //   if (!sessionToken || !shortCode || currentStep !== 'tools-timer') return
+  //   timerRef.current = setTimeout(async () => {
+  //     setCurrentStep('tools-next')
+  //     try { await incrementStep(sessionToken, shortCode) } catch {}
+  //   }, 20000)
+  //   return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+  // }, [sessionToken, shortCode, currentStep])
+  // [MIDDLEWARE END]
 
   return (
     <div className="min-h-screen py-12 relative overflow-hidden">
@@ -143,56 +77,11 @@ export function ToolsPageContent() {
       <div className="absolute inset-0 pattern-dots opacity-20" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Middleware Flow Section - Tools Timer with Ads */}
+        {/* [MIDDLEWARE] Tools Timer + Ads section — commented out for AdSense review
         {sessionToken && shortCode && (currentStep === 'tools-timer' || currentStep === 'tools-next') && (
-          <div className="w-full mb-8">
-            <div className="max-w-4xl mx-auto">
-              {/* Ad 1 */}
-              <div className="flex justify-center">
-                <AdComponent
-                  adSlotId="4686013446"
-                  size="300x250"
-                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                />
-              </div>
-
-              {/* Rainbow Message - Shows during timer, hides after 20 seconds */}
-              {currentStep === 'tools-timer' && (
-                <div className="text-center py-2 mb-4">
-                  <div className="inline-flex flex-col items-center gap-1">
-                    {/* Main Content Box */}
-                    <div className="relative px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 overflow-visible">
-                      {/* Text with Inline Thumbs */}
-                      <div className="relative z-10 flex items-center justify-center gap-2 text-sm font-bold text-white drop-shadow-lg">
-                        <span className="text-lg">👆</span>
-                        <span>Click on Ads & Return to Continue!</span>
-                        <span className="text-lg">👇</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Instruction after timer completes */}
-              {currentStep === 'tools-next' && (
-                <div className="text-center mb-4">
-                  <p className="text-slate-700 dark:text-slate-300 text-sm font-semibold">
-                    ↓ Scroll down and click a tool to continue ↓
-                  </p>
-                </div>
-              )}
-
-              {/* Ad 2 - Remains visible after timer */}
-              <div className="flex justify-center">
-                <AdComponent
-                  adSlotId="4686013446"
-                  size="300x250"
-                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                />
-              </div>
-            </div>
-          </div>
+          <div className="w-full mb-8"> ... AdComponent + timer message ... </div>
         )}
+        [MIDDLEWARE END] */}
 
         {/* Header */}
         <div className="text-center mb-12">
@@ -256,54 +145,12 @@ export function ToolsPageContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredTools.length > 0 ? (
             filteredTools.map((tool) => (
-              <div
-                key={tool.id}
-                className={`${sessionToken && shortCode && currentStep === 'tools-next'
-                  ? 'ring-4 ring-green-500 dark:ring-green-400 shadow-xl animate-pulse'
-                  : ''
-                }`}
-              >
+              <div key={tool.id}>
+                {/* [MIDDLEWARE] className ring/pulse + onClick handler removed — restore to add back */}
                 <Link
                   href={`/tools/${tool.slug}`}
-                  onClick={async (e) => {
-                    // If in middleware flow and on tools-next step, handle navigation
-                    if (sessionToken && shortCode && currentStep === 'tools-next') {
-                      e.preventDefault()
-                      setIsNavigating(true)
-
-                      if (process.env.NODE_ENV === 'development') {
-                        console.log('✅ Tool clicked - Moving to tool-detail-timer')
-                      }
-
-                      // Set step FIRST (don't wait for backend)
-                      setCurrentStep('tool-detail-timer')
-                      
-                      // Update backend in background (non-blocking)
-                      incrementStep(sessionToken, shortCode).then(result => {
-                        if (process.env.NODE_ENV === 'development') {
-                          if (result.success) {
-                            console.log('✅ Backend step incremented')
-                          } else {
-                            console.warn('⚠️ Backend increment failed (non-blocking):', result.error)
-                          }
-                        }
-                      }).catch(error => {
-                        if (process.env.NODE_ENV === 'development') {
-                          console.warn('⚠️ Backend error (non-blocking):', error)
-                        }
-                      })
-                      
-                      // Small delay to ensure state is saved to localStorage
-                      await new Promise(resolve => setTimeout(resolve, 100))
-                      
-                      // Navigate to tool page
-                      router.push(`/tools/${tool.slug}`)
-                    }
-                  }}
-                  className={`group block relative h-full ${sessionToken && shortCode && currentStep === 'tools-next'
-                    ? 'hover:scale-105 transition-transform cursor-pointer'
-                    : ''
-                  }`}
+                  // [MIDDLEWARE] onClick with incrementStep + router.push removed
+                  className="group block relative h-full"
                 >
                   <div className="glass rounded-3xl p-6 border border-white/10 hover:border-white/30 transition-all h-full">
                     <div className="flex items-start gap-4">

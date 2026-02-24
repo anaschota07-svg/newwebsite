@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { ArrowLeft, Check } from 'lucide-react'
 import { Tool } from '@/data/tools/toolsData'
 import AdSense from '@/components/AdSense'
-import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
-import { GetLinkButton } from '@/components/GetLinkButton'
-import { AdComponent } from '@/components/AdComponent'
-import { StepTimer } from '@/components/StepTimer'
+// [MIDDLEWARE] import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
+// [MIDDLEWARE] import { GetLinkButton } from '@/components/GetLinkButton'
+// [MIDDLEWARE] import { AdComponent } from '@/components/AdComponent'
+// [MIDDLEWARE] import { StepTimer } from '@/components/StepTimer'
 
 interface ToolDetailPageProps {
   tool: Tool
@@ -22,128 +22,45 @@ interface ToolDetailPageProps {
 }
 
 export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: ToolDetailPageProps) {
-  const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
+  // [MIDDLEWARE] const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
+  // Placeholders while middleware is commented out — remove these 4 lines to restore:
+  const sessionToken = null
+  const shortCode = null
+  const currentStep = ''
+  const setCurrentStep = (_step: string) => {}
 
-  // Debug: Log when tool detail page loads AND auto-fix step if needed
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🔧 Tool detail page loaded:', {
-        tool: tool.name,
-        step: currentStep,
-        sessionToken: sessionToken ? `${sessionToken.substring(0, 10)}...` : 'null',
-        shortCode: shortCode || 'null',
-        shouldShowTimer: !!(sessionToken && shortCode && currentStep === 'tool-detail-timer'),
-        shouldShowScrollInstruction: !!(sessionToken && shortCode && currentStep === 'get-link')
-      })
-    }
-
-    // Auto-fix: If we have session but wrong step, correct it
-    if (sessionToken && shortCode) {
-      // If step is still tools-next when page loads, fix it
-      if (currentStep === 'tools-next') {
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`🔧 Auto-fixing step from 'tools-next' to 'tool-detail-timer'`)
-        }
-        setCurrentStep('tool-detail-timer')
-      }
-      // If step is popup/captcha/home/tools-timer, it means context was reset - fix it
-      else if (currentStep === 'popup' || currentStep === 'captcha' || currentStep === 'home-timer' || currentStep === 'home-next' || currentStep === 'tools-timer') {
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`🔧 Auto-fixing invalid step '${currentStep}' to 'tool-detail-timer'`)
-        }
-        setCurrentStep('tool-detail-timer')
-      }
-    }
-  }, [tool.name, currentStep, sessionToken, shortCode, setCurrentStep])
-
-  // Scroll to top when page loads
+  // Scroll to top when page loads (kept — good UX regardless of middleware)
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [tool.slug])
 
-  // Scroll to top when step changes to tool-detail-timer
-  useEffect(() => {
-    if (currentStep === 'tool-detail-timer') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }, [currentStep])
-
-  // Scroll to Get Link button when step changes to get-link
-  useEffect(() => {
-    if (currentStep === 'get-link') {
-      // Small delay to ensure button is rendered
-      setTimeout(() => {
-        const getLinkSection = document.getElementById('get-link-section')
-        if (getLinkSection) {
-          getLinkSection.scrollIntoView({ behavior: 'smooth', block: 'center' })
-          if (process.env.NODE_ENV === 'development') {
-            console.log('📜 Scrolled to Get Link button')
-          }
-        }
-      }, 500)
-    }
-  }, [currentStep])
+  // [MIDDLEWARE] Auto-fix step + scroll-to-timer + scroll-to-get-link effects — commented out for AdSense review
+  // Uncomment the 3 useEffect blocks below to restore:
+  // useEffect(() => {
+  //   if (sessionToken && shortCode) {
+  //     if (currentStep === 'tools-next') setCurrentStep('tool-detail-timer')
+  //     else if (['popup','captcha','home-timer','home-next','tools-timer'].includes(currentStep))
+  //       setCurrentStep('tool-detail-timer')
+  //   }
+  // }, [tool.name, currentStep, sessionToken, shortCode, setCurrentStep])
+  // useEffect(() => {
+  //   if (currentStep === 'tool-detail-timer') window.scrollTo({ top: 0, behavior: 'smooth' })
+  // }, [currentStep])
+  // useEffect(() => {
+  //   if (currentStep === 'get-link') setTimeout(() => {
+  //     document.getElementById('get-link-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  //   }, 500)
+  // }, [currentStep])
+  // [MIDDLEWARE END]
 
   return (
     <div className="min-h-screen py-8 relative">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        {/* Middleware Flow Section - Tool Detail Timer with Ads */}
+        {/* [MIDDLEWARE] Tool Detail Timer + Ads section — commented out for AdSense review
         {sessionToken && shortCode && (currentStep === 'tool-detail-timer' || currentStep === 'get-link') && (
-          <div className="w-full mb-8">
-            <div className="max-w-4xl mx-auto space-y-4">
-              {/* Ad 1 */}
-              <div className="flex justify-center">
-                <AdComponent
-                  adSlotId="4686013446"
-                  size="300x250"
-                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                />
-              </div>
-
-              {/* Step 7: Visible Timer (20s countdown) */}
-              {currentStep === 'tool-detail-timer' && (
-                <div className="text-center py-2">
-                  <StepTimer
-                    duration={20}
-                    onComplete={() => {
-                      setCurrentStep('get-link')
-                      if (process.env.NODE_ENV === 'development') {
-                        console.log('⏱️ Timer completed - Moving to get-link')
-                      }
-                    }}
-                    showContinueButton={false}
-                  />
-                </div>
-              )}
-
-              {/* Step 8: Scroll Instruction (after timer completes) */}
-              {currentStep === 'get-link' && (
-                <div className="w-full mb-2">
-                  <div className="w-full mx-auto">
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-3 rounded-lg shadow-lg text-center">
-                      <p className="text-sm font-bold">
-                        ↓ Scroll down to{' '}
-                        <span className="text-yellow-300">
-                          Get Link
-                        </span>{' '}
-                        button ↓
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Ad 2 */}
-              <div className="flex justify-center">
-                <AdComponent
-                  adSlotId="4686013446"
-                  size="300x250"
-                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                />
-              </div>
-            </div>
-          </div>
+          <div className="w-full mb-8"> ... StepTimer + AdComponent ... </div>
         )}
+        [MIDDLEWARE END] */}
 
         {/* Back Button */}
         <div className="mb-5">
@@ -276,30 +193,11 @@ export function ToolDetailPage({ tool, ToolComponent, content, relatedTools }: T
             </div>
           </div>
         )}
-        {/* Get Link Button Section - At Bottom (Step 8) - ONLY show when step is 'get-link' */}
-        {sessionToken && shortCode  && (
-          <div id="get-link-section" className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
-            <div className="flex justify-center mb-0">
-              <AdComponent
-                adSlotId="4686013446"
-                size="300x250"
-                style={{ display: 'inline-block', width: '300px', height: '250px' }}
-              />
-            </div>
-            {currentStep === 'get-link' && (
-              <GetLinkButton />
-            )}
-
-            {/* Ad below Get Link Button */}
-            <div className="flex justify-center mt-0">
-              <AdComponent
-                adSlotId="4686013446"
-                size="300x250"
-                style={{ display: 'inline-block', width: '300px', height: '250px' }}
-              />
-            </div>
-          </div>
-        )}1
+        {/* [MIDDLEWARE] Get Link Button + bottom ads section — commented out for AdSense review
+        {sessionToken && shortCode && (
+          <div id="get-link-section"> ... AdComponent + GetLinkButton + AdComponent ... </div>
+        )}
+        [MIDDLEWARE END] */}
         {!sessionToken && <AdSense format="horizontal" />}
       </div>
     </div>

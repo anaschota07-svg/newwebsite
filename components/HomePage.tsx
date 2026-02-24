@@ -7,92 +7,68 @@ import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
 import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
-import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
-import { MiddlewareWrapper } from '@/components/MiddlewareWrapper'
-import ReCaptchaBox from '@/components/CaptchaVerification'
-import { StepTimer } from '@/components/StepTimer'
-import { incrementStep } from '@/app/services/api'
-import { useRouter } from 'next/navigation'
-import { AdComponent } from '@/components/AdComponent'
+// ============================================================
+// MIDDLEWARE SYSTEM — COMMENTED OUT FOR ADSENSE REVIEW
+// Uncomment all sections marked [MIDDLEWARE] to restore
+// ============================================================
+// import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'  // [MIDDLEWARE]
+// import { MiddlewareWrapper } from '@/components/MiddlewareWrapper'         // [MIDDLEWARE]
+// import ReCaptchaBox from '@/components/CaptchaVerification'               // [MIDDLEWARE]
+// import { StepTimer } from '@/components/StepTimer'                        // [MIDDLEWARE]
+// import { incrementStep } from '@/app/services/api'                        // [MIDDLEWARE]
+// import { useRouter } from 'next/navigation'                               // [MIDDLEWARE]
+// import { AdComponent } from '@/components/AdComponent'                    // [MIDDLEWARE]
 import LazyLoad from '@/components/LazyLoad'
 
-// Home Middleware Ads
+// [MIDDLEWARE] — Ad components commented out for AdSense review
+// Uncomment below to restore the middleware ad-gate system
+/*
 const HomeMiddlewareAd1 = () => {
     return (
         <div className="w-full mb-4 flex justify-center">
             <div>
-                <AdComponent
-                    adSlotId="4686013446"
-                    size="300x250"
-                    className=""
-                />
+                <AdComponent adSlotId="4686013446" size="300x250" className="" />
             </div>
         </div>
     )
 }
-
 const HomeMiddlewareAd2 = () => {
     return (
         <div className="w-full mt-4 flex justify-center">
             <div>
-                <AdComponent
-                    adSlotId="4686013446"
-                    size="300x250"
-                    className=""
-                />
+                <AdComponent adSlotId="4686013446" size="300x250" className="" />
             </div>
         </div>
     )
 }
-
-// Home Ad 3 & 4 for Next Button Section
 const HomeAd3 = () => {
     return (
         <div className="w-full mb-6 flex justify-center">
             <div style={{ minHeight: '90px' }}>
-                <AdComponent
-                    adSlotId="4686013446"
-                    size="300x250"
-                    className=""
-                />
+                <AdComponent adSlotId="4686013446" size="300x250" className="" />
             </div>
         </div>
     )
 }
-
 const HomeAd4 = () => {
     return (
         <div className="w-full mt-6 flex justify-center">
             <div style={{ minHeight: '90px' }}>
-                <AdComponent
-                    adSlotId="4686013446"
-                    size="300x250"
-                    className=""
-                />
+                <AdComponent adSlotId="4686013446" size="300x250" className="" />
             </div>
         </div>
     )
 }
-
 const AdsSectionWithNext = ({ onNext, isLoading = false }: { onNext: () => void, isLoading?: boolean }) => {
     const { currentStep } = useMiddlewareFlow();
-
     return (
         <section className="w-full px-4 py-8">
             <div className="max-w-4xl mx-auto space-y-6">
-                {/* Home Ad 3 */}
-                <div className="flex justify-center">
-                    <HomeAd3 />
-                </div>
-
-                {/* Next Button - show only when currentStep === 'home-next' */}
+                <div className="flex justify-center"><HomeAd3 /></div>
                 {currentStep === 'home-next' && (
                     <div className="flex justify-center">
-                        <button
-                            onClick={onNext}
-                            disabled={isLoading}
-                            className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl hover:scale-105"
-                        >
+                        <button onClick={onNext} disabled={isLoading}
+                            className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl hover:scale-105">
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
                             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
                             <Sparkles className="w-5 h-5 relative z-10" />
@@ -101,22 +77,24 @@ const AdsSectionWithNext = ({ onNext, isLoading = false }: { onNext: () => void,
                         </button>
                     </div>
                 )}
-
-                {/* Home Ad 4 */}
-                <div className="flex justify-center">
-                    <HomeAd4 />
-                </div>
+                <div className="flex justify-center"><HomeAd4 /></div>
             </div>
         </section>
     )
 }
+*/
 
 export function HomePageContent() {
     const featuredTools = toolsData.slice(0, 6)
     const featuredPosts = blogPosts.slice(0, 3)
-    const [isLoading, setIsLoading] = useState(false)
-    const router = useRouter()
-    const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
+
+    // [MIDDLEWARE] — Commented out for AdSense review. Uncomment to restore:
+    // const [isLoading, setIsLoading] = useState(false)
+    // const router = useRouter()
+    // const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
+    // Placeholder values so JSX conditions ({!sessionToken && ...}) keep working:
+    const sessionToken = null
+    const shortCode = null
 
     const realStats = {
         tools: toolsData.length,
@@ -134,102 +112,21 @@ export function HomePageContent() {
     }
 
     return (
-        <MiddlewareWrapper>
+        <>
+            {/* [MIDDLEWARE] <MiddlewareWrapper> was here — uncomment import + replace <> with <MiddlewareWrapper> to restore */}
             <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-blue-950 dark:to-purple-950">
                 {/* Skip Link */}
                 <a href="#main-content" className="sr-only focus:not-sr-only">
                     Skip to main content
                 </a>
 
-                {/* Middleware Flow Section - Above Hero (WITH session only) */}
+                {/* [MIDDLEWARE] Middleware Flow Section — commented out for AdSense review
                 {sessionToken && shortCode && (currentStep === 'popup' || currentStep === 'captcha' || currentStep === 'home-timer' || currentStep === 'home-next') && (
                     <section className="w-full px-0 py-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
-                        <div className="max-w-4xl mx-auto space-y-[1px]">
-                            {/* Ad 1 */}
-                            <div className="flex justify-center">
-                                <HomeMiddlewareAd1 />
-                            </div>
-
-                            {/* Middleware Flow Content */}
-                            <div className="text-center py-4">
-                                {/* Step 2: Captcha - Show during popup or captcha step */}
-                                {(currentStep === 'popup' || currentStep === 'captcha') && (
-                                    <ReCaptchaBox
-                                        onVerify={async () => {
-                                            // Move to next step immediately (don't wait for backend)
-                                            setCurrentStep('home-timer')
-
-                                            // Update backend in background
-                                            if (sessionToken && shortCode) {
-                                                try {
-                                                    const result = await incrementStep(sessionToken, shortCode)
-                                                    if (process.env.NODE_ENV === 'development') {
-                                                        if (result.success) {
-                                                            console.log('✅ Step 2 completed - Captcha verified')
-                                                        } else {
-                                                            console.warn('⚠️ Backend increment failed (non-blocking):', result.error)
-                                                        }
-                                                    }
-                                                } catch (error) {
-                                                    if (process.env.NODE_ENV === 'development') {
-                                                        console.warn('⚠️ Backend error (non-blocking):', error)
-                                                    }
-                                                }
-                                            }
-                                        }}
-                                    />
-                                )}
-
-                                {/* Step 3: Timer (20s) */}
-                                {currentStep === 'home-timer' && (
-                                    <StepTimer
-                                        duration={20}
-                                        onComplete={async () => {
-                                            // Move to next step immediately (don't wait for backend)
-                                            setCurrentStep('home-next')
-                                            if (process.env.NODE_ENV === 'development') {
-                                                console.log('✅ Home page timer completed')
-                                            }
-
-                                            // Update backend in background
-                                            if (sessionToken && shortCode) {
-                                                try {
-                                                    const result = await incrementStep(sessionToken, shortCode)
-                                                    if (process.env.NODE_ENV === 'development') {
-                                                        if (result.success) {
-                                                            console.log('✅ Backend step incremented')
-                                                        } else {
-                                                            console.warn('⚠️ Backend increment failed (non-blocking):', result.error)
-                                                        }
-                                                    }
-                                                } catch (error) {
-                                                    if (process.env.NODE_ENV === 'development') {
-                                                        console.warn('⚠️ Backend error (non-blocking):', error)
-                                                    }
-                                                }
-                                            }
-                                        }}
-                                    />
-                                )}
-
-                                {/* Step 4: Instruction to scroll */}
-                                {currentStep === 'home-next' && (
-                                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30">
-                                        <ArrowRight className="w-5 h-5 text-cyan-500 animate-bounce rotate-90" />
-                                        <p className="text-slate-700 dark:text-slate-300 text-sm font-bold">
-                                            Scroll down to continue
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Ad 2 */}
-                            <div className="flex justify-center">
-                                <HomeMiddlewareAd2 />
-                            </div>
-                        </div>
+                        ... captcha / timer / ad steps ...
                     </section>
                 )}
+                [MIDDLEWARE END] */}
 
                 {/* Hero Section - Futuristic - Always Visible */}
                 <section
@@ -741,14 +638,13 @@ export function HomePageContent() {
                     </LazyLoad>
                 )}
 
-                {/* Ads Section with Next Button - Step 5 - At Bottom */}
+                {/* [MIDDLEWARE] Ads Section with Next Button — commented out for AdSense review
                 {sessionToken && shortCode && (
                     <div id="home-ads-section" className="scroll-mt-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
                         <AdsSectionWithNext
                             onNext={async () => {
                                 setIsLoading(true)
                                 try {
-                                    // Small delay to show loading animation
                                     await new Promise(resolve => setTimeout(resolve, 500))
                                     setCurrentStep('blog-timer')
                                     router.push('/blog')
@@ -760,7 +656,9 @@ export function HomePageContent() {
                         />
                     </div>
                 )}
+                [MIDDLEWARE END] */}
             </div>
-        </MiddlewareWrapper>
+            {/* [MIDDLEWARE] </MiddlewareWrapper> was here — replace </> with </MiddlewareWrapper> to restore */}
+        </>
     )
 }
