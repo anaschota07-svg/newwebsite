@@ -1,14 +1,16 @@
 'use client'
 
+import React from 'react'
+
 interface MarkdownContentProps {
   content: string
 }
 
 export function MarkdownContent({ content }: MarkdownContentProps) {
   // Parse markdown and convert to JSX
-  const parseMarkdown = (text: string) => {
+  const parseMarkdown = (text: string): React.ReactNode[] => {
     const lines = text.split('\n')
-    const elements: JSX.Element[] = []
+    const elements: React.ReactNode[] = []
     let i = 0
 
     while (i < lines.length) {
