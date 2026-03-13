@@ -1,7 +1,7 @@
 {
   "name": "SimpleWebToolsBox",
   "short_name": "SWToolsBox",
-  "description": "Free online tools and how-to guides",
+  "description": "Free online tools and Blogs & guides",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

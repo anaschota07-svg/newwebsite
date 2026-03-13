@@ -3,7 +3,7 @@ import { HomePageContent } from '@/components/HomePage'
 
 export const metadata: Metadata = {
   title: 'SimpleWebToolsBox - 35+ Free Online Tools & Calculators',
-  description: 'Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, Base64 Encoder, Hash Generator, and 35+ more tools. Expert how-to guides and tutorials. No registration required. 100% free forever.',
+  description: 'Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, Base64 Encoder, Hash Generator, and 35+ more tools. Expert Blogs & guides and tutorials. No registration required. 100% free forever.',
   keywords: [
     'free online tools',
     'online calculator',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     'javascript minifier',
     'gradient generator',
     'box shadow generator',
-    'how-to guides',
+    'Blogs & guides',
     'tutorials',
     'web tools',
     'developer tools',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'SimpleWebToolsBox - 35+ Free Online Tools & Calculators',
-    description: 'Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert how-to guides and tutorials. No registration required.',
+    description: 'Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert Blogs & guides and tutorials. No registration required.',
     type: 'website',
     url: 'https://simplewebtoolsbox.com',
     siteName: 'SimpleWebToolsBox',
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'SimpleWebToolsBox - 35+ Free Online Tools & Calculators',
-    description: 'Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert how-to guides and tutorials.',
+    description: 'Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert Blogs & guides and tutorials.',
     images: ['/og-image.png'],
   },
   alternates: {

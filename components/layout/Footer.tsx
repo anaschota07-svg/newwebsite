@@ -20,7 +20,7 @@ const footerLinks = {
   ],
   resources: [
     { name: 'All Tools', href: '/tools' },
-    { name: 'How-To Guides', href: '/blog' },
+    { name: 'Blogs & Guides', href: '/blog' },
     { name: 'Sitemap', href: '/sitemap-page' },
   ],
 }

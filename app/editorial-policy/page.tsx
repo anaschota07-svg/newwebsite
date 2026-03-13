@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Editorial Policy',
-  description: 'SimpleWebToolsBox editorial policy — how we research, write, and maintain our how-to guides and tutorials.',
+  description: 'SimpleWebToolsBox editorial policy — how we research, write, and maintain our Blogs & guides and tutorials.',
   alternates: {
     canonical: 'https://simplewebtoolsbox.com/editorial-policy',
   },
@@ -20,7 +20,7 @@ export default function EditorialPolicyPage() {
           <section>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Our Commitment to Quality</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              At SimpleWebToolsBox, every guide and how-to article is created with the goal of being genuinely useful, 
+              At SimpleWebToolsBox, every guide and article is created with the goal of being genuinely useful, 
               accurate, and actionable. We follow a strict editorial process to ensure that all published content 
               meets a high standard of quality, accuracy, and usefulness.
             </p>

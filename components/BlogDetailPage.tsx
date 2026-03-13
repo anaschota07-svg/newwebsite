@@ -3,13 +3,9 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Clock, Calendar, User, Github, Linkedin, Code2 } from 'lucide-react'
+import { ArrowLeft, Clock, Calendar, User, Code2 } from 'lucide-react'
 import { BlogPost } from '@/data/blog/blogData'
-import AdSense from '@/components/AdSense'
-import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
-import { GetLinkButton } from '@/components/GetLinkButton'
-import { AdComponent } from '@/components/AdComponent'
-import { StepTimer } from '@/components/StepTimer'
+import { MarkdownContent } from './MarkdownContent'
 
 interface BlogSection {
   heading: string
@@ -24,48 +20,10 @@ interface BlogDetailPageProps {
 }
 
 export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPageProps) {
-  const { currentStep, setCurrentStep, sessionToken, shortCode } = useMiddlewareFlow()
-
-  // Debug + auto-fix step when coming from blog page
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('📖 Blog detail page loaded:', {
-        title: post.title,
-        step: currentStep,
-        sessionToken: sessionToken ? `${sessionToken.substring(0, 10)}...` : 'null',
-        shortCode: shortCode || 'null',
-      })
-    }
-
-    if (sessionToken && shortCode) {
-      // If user just came from blog listing step, move into blog-detail-timer
-      if (currentStep === 'blog-next') {
-        setCurrentStep('blog-detail-timer')
-      }
-      // If context was reset, still ensure we move into blog-detail-timer
-      else if (
-        currentStep === 'popup' ||
-        currentStep === 'captcha' ||
-        currentStep === 'home-timer' ||
-        currentStep === 'home-next' ||
-        currentStep === 'blog-timer'
-      ) {
-        setCurrentStep('blog-detail-timer')
-      }
-    }
-  }, [post.title, currentStep, sessionToken, shortCode, setCurrentStep])
-
   // Scroll to top on load
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [post.slug])
-
-  // Scroll to top when timer starts
-  useEffect(() => {
-    if (currentStep === 'blog-detail-timer') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }, [currentStep])
 
   return (
     <div className="min-h-screen py-12 relative overflow-hidden">
@@ -73,57 +31,6 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
       <div className="absolute inset-0 pattern-grid opacity-20" />
 
       <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Middleware Flow Section - Blog Detail Timer with Ads */}
-        {sessionToken && shortCode && (currentStep === 'blog-detail-timer' || currentStep === 'get-link') && (
-          <div className="w-full mb-8">
-            <div className="max-w-3xl mx-auto space-y-4">
-              {/* Ad 1 */}
-              <div className="flex justify-center">
-                <AdComponent
-                  adSlotId="4686013446"
-                  size="300x250"
-                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                />
-              </div>
-
-              {/* Visible Timer */}
-              {currentStep === 'blog-detail-timer' && (
-                <div className="text-center py-2">
-                  <StepTimer
-                    duration={20}
-                    onComplete={() => {
-                      setCurrentStep('get-link')
-                    }}
-                    showContinueButton={false}
-                  />
-                </div>
-              )}
-
-              {/* Scroll instruction after timer */}
-              {currentStep === 'get-link' && (
-                <div className="w-full mb-2">
-                  <div className="w-full mx-auto">
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-3 rounded-lg shadow-lg text-center">
-                      <p className="text-sm font-bold">
-                        ↓ Scroll down to <span className="text-yellow-300">Get Link</span> button to continue ↓
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Ad 2 */}
-              <div className="flex justify-center">
-                <AdComponent
-                  adSlotId="4686013446"
-                  size="300x250"
-                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Back Button */}
         <div className="mb-5">
           <Link
@@ -211,9 +118,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                       />
                     </div>
                   )}
-                  <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-                    {section.content}
-                  </p>
+                  <MarkdownContent content={section.content} />
                 </section>
               ))}
             </div>
@@ -239,26 +144,23 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
             {/* Avatar */}
             <div className="flex-shrink-0">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-xl">
-                <span className="text-3xl font-black text-white">MW</span>
+                <span className="text-2xl font-black text-white">ST</span>
               </div>
             </div>
             {/* Info */}
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-3 mb-2">
-                <h3 className="text-2xl font-black text-slate-900 dark:text-white">Mohd Washid</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">SimpleWebToolsBox Team</h3>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
-                  Author & Creator
+                  Expert Contributors
                 </span>
               </div>
               <p className="text-sm font-semibold text-cyan-600 dark:text-cyan-400 mb-3 flex items-center gap-2">
                 <Code2 className="w-4 h-4" />
-                Flutter Developer &amp; Web Tools Creator
+                Professional Content Creators
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                Mohd Washid is the founder of SimpleWebToolsBox and a passionate software developer 
-                specializing in Flutter, web development, and productivity tools. With hands-on 
-                experience building real-world applications, he writes in-depth guides to help developers, 
-                students, and professionals get the most out of technology.
+                SimpleWebToolsBox Team is dedicated to creating high-quality, comprehensive guides and resources on technology, finance, education, and professional development. Our expert contributors bring years of experience to help you master complex topics with practical, actionable insights.
               </p>
               <div className="flex items-center gap-4">
                 <a
@@ -266,9 +168,9 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 dark:hover:bg-slate-600 transition-all"
-                  aria-label="Mohd Washid on GitHub"
+                  aria-label="SimpleWebToolsBox on GitHub"
                 >
-                  <Github className="w-4 h-4" />
+                  <span className="text-lg">🔗</span>
                   GitHub
                 </a>
                 <a
@@ -276,9 +178,9 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all"
-                  aria-label="Mohd Washid on LinkedIn"
+                  aria-label="SimpleWebToolsBox on LinkedIn"
                 >
-                  <Linkedin className="w-4 h-4" />
+                  <span className="text-lg">💼</span>
                   LinkedIn
                 </a>
               </div>
@@ -327,34 +229,6 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
           </section>
         )}
 
-        {/* Get Link Button Section - Bottom */}
-        {sessionToken && shortCode && (
-          <div
-            id="get-link-section"
-            className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 text-center space-y-6"
-          >
-            {/* Ad Above Get Link */}
-            <div className="flex justify-center">
-              <AdComponent
-                adSlotId="4686013446"
-                size="300x250"
-                style={{ display: 'inline-block', width: '300px', height: '250px' }}
-              />
-            </div>
-
-            {/* Get Link Button */}
-            {currentStep === 'get-link' && <GetLinkButton />}
-
-            {/* Ad Below Get Link */}
-            <div className="flex justify-center">
-              <AdComponent
-                adSlotId="4686013446"
-                size="300x250"
-                style={{ display: 'inline-block', width: '300px', height: '250px' }}
-              />
-            </div>
-          </div>
-        )}
       </article>
     </div>
   )

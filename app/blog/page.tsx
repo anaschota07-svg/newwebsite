@@ -25,14 +25,9 @@ export default function BlogPage() {
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
 
-  // Shuffle blog posts so order is random each time
+  // Use blog posts in order (no shuffling to avoid hydration mismatch)
   const shuffledPosts = useMemo(() => {
-    const arr = [...blogPosts]
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-        ;[arr[i], arr[j]] = [arr[j], arr[i]]
-    }
-    return arr
+    return blogPosts
   }, [])
 
   // [MIDDLEWARE] Debug effect — commented out for AdSense review
@@ -109,7 +104,7 @@ export default function BlogPage() {
             </motion.div>
 
             <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-4">
-              How-To <span className="gradient-text">Guides</span>
+              Blogs <span className="gradient-text">Guides</span>
             </h1>
             <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
               {blogPosts.length} expert tutorials to level up your skills

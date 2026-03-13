@@ -45,7 +45,7 @@ export default function SitemapPage() {
               {[
                 { name: 'Home', href: '/' },
                 { name: 'All Tools', href: '/tools' },
-                { name: 'How-To Guides', href: '/blog' },
+                { name: 'Blogs & Guides', href: '/blog' },
                 { name: 'About Us', href: '/about' },
                 { name: 'Contact Us', href: '/contact' },
                 { name: 'Privacy Policy', href: '/privacy-policy' },
@@ -100,7 +100,7 @@ export default function SitemapPage() {
           {/* Blog Posts by Category */}
           <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-slate-700">
-              📚 How-To Guides ({blogPosts.length} total)
+              📚 Blogs & Guides ({blogPosts.length} total)
             </h2>
             <div className="space-y-8">
               {Object.entries(postsByCategory).map(([category, posts]) => (

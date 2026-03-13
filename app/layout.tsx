@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { MiddlewareFlowProvider } from "@/app/contexts/MiddlewareFlowContext";
+
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StructuredData from "@/components/StructuredData";
@@ -20,11 +20,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://simplewebtoolsbox.com"),
   title: {
-    default: "SimpleWebToolsBox - Free Online Tools & How-To Guides",
+    default: "SimpleWebToolsBox - Free Online Tools & Blogs & Guides",
     template: "%s | SimpleWebToolsBox",
   },
   description:
-    "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, Base64 Encoder, Hash Generator, and 35+ more tools. Expert how-to guides, tutorials, and step-by-step instructions. No registration required. 100% free forever.",
+    "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, Base64 Encoder, Hash Generator, and 35+ more tools. Expert Blogs & guides, tutorials, and step-by-step instructions. No registration required. 100% free forever.",
   keywords: [
     "free online tools",
     "online calculator",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     "javascript minifier",
     "gradient generator",
     "box shadow generator",
-    "how-to guides",
+    "Blogs & guides",
     "tutorials",
     "web tools",
     "developer tools",
@@ -76,9 +76,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://simplewebtoolsbox.com",
     siteName: "SimpleWebToolsBox",
-    title: "SimpleWebToolsBox - Free Online Tools & How-To Guides",
+    title: "SimpleWebToolsBox - Free Online Tools & Blogs & Guides",
     description:
-      "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert how-to guides and tutorials. No registration required.",
+      "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert Blogs & guides and tutorials. No registration required.",
     images: [
       {
         url: "/og-image.png",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SimpleWebToolsBox",
     description:
-      "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert how-to guides and tutorials.",
+      "Free online tools and calculators: Age Calculator, BMI Calculator, Password Generator, QR Code Generator, JSON Formatter, and 35+ more tools. Expert Blogs & guides and tutorials.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -227,11 +227,9 @@ export default function RootLayout({
         />
 
         <ThemeProvider>
-          <MiddlewareFlowProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </MiddlewareFlowProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

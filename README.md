@@ -1,6 +1,6 @@
 # SimpleWebToolsBox 🚀
 
-A modern, fast, and AdSense-friendly website providing free online tools and comprehensive how-to guides. Built with Next.js 14, TypeScript, and Tailwind CSS.
+A modern, fast, and AdSense-friendly website providing free online tools and comprehensive Blogs & guides. Built with Next.js 14, TypeScript, and Tailwind CSS.
 
 ## 🌐 Live Demo
 
@@ -27,7 +27,7 @@ Visit: [simplewebtoolsbox.com](https://simplewebtoolsbox.com)
 8. **JSON Formatter** - Format, minify, and validate JSON
 
 ### 📚 Content Features
-- Blog/How-to guides section
+- Blog/Blogs & guides section
 - SEO optimized pages
 - About, Contact, Privacy Policy, Terms & Conditions, Disclaimer pages
 - Related tools suggestions

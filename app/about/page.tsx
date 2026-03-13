@@ -94,7 +94,7 @@ export default function AboutPage() {
               { icon: '🎨', title: 'Design Tools', desc: 'Color picker, gradient generator, box shadow generator, and font preview tools for designers' },
               { icon: '📱', title: 'Generators', desc: 'QR code generator, UUID generator, barcode generator, and random number generator' },
               { icon: '⏱️', title: 'Productivity Tools', desc: 'Pomodoro timer, stopwatch, time zone converter, and invoice generator' },
-              { icon: '📚', title: 'How-To Guides', desc: '15+ comprehensive tutorials covering everything from password security to loan calculations' },
+              { icon: '📚', title: 'Blogs & Guides', desc: '15+ comprehensive tutorials covering everything from password security to loan calculations' },
             ].map((item, i) => (
               <motion.div
                 key={i}
