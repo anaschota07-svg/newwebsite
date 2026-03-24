@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-import { getBlogPostBySlug, blogPosts } from '@/data/blog/blogData'
+import { getBlogPostBySlug, blogPosts, normalizeBlogAuthor } from '@/data/blog/blogData'
 import { BlogDetailPage } from '@/components/BlogDetailPage'
 
 // Import content from separate files
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: 'article',
       url: `https://simplewebtoolsbox.com/blog/${post.slug}`,
       publishedTime: post.date,
-      authors: [post.author],
+      authors: [normalizeBlogAuthor(post.author)],
       images: [
         {
           url: post.image,

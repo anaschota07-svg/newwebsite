@@ -1,8 +1,7 @@
 'use client'
 
-import { Metadata } from 'next'
 import { motion } from 'framer-motion'
-import { Users, Target, Heart, Zap, Shield, Rocket, Sparkles, Lock, Smartphone, Link, Code2, Github, Globe } from 'lucide-react'
+import { Users, Target, Heart, Zap, Shield, Rocket, Sparkles, Lock, Smartphone, Code2, Github, Globe } from 'lucide-react'
 import NextLink from 'next/link'
 
 export default function AboutPage() {
@@ -147,6 +146,44 @@ export default function AboutPage() {
           </div>
         </motion.section>
 
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.22 }}
+          className="glass rounded-3xl p-8 border border-white/10 mb-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+              <Shield className="h-6 w-6 text-white" />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Editorial Standards</h2>
+          </div>
+          <div className="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
+            <p>
+              SimpleWebToolsBox is designed to be both a utility site and a publisher-quality resource. We aim to
+              publish content that helps people use a tool correctly, understand its limits, and make better
+              decisions from the output.
+            </p>
+            <p>
+              Articles are reviewed before publication, updated when they become stale, and written to support
+              genuine user tasks. We avoid scraped content, spun summaries, and misleading claims about expertise
+              or outcomes.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            {[
+              'Named publisher and contact details',
+              'Original tool descriptions and usage guidance',
+              'Policy, privacy, disclaimer, and DMCA pages available sitewide',
+            ].map((item) => (
+              <div key={item} className="rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                {item}
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
         {/* Founder Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
@@ -184,10 +221,10 @@ export default function AboutPage() {
                 or want to collaborate? Reach out directly — your feedback shapes what gets built next.
               </p>
               <div className="flex flex-wrap gap-3">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 transition-all">
+                <NextLink href="/blog" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 transition-all">
                   <Github className="w-4 h-4" />
-                  GitHub
-                </a>
+                  Read Articles
+                </NextLink>
                 <NextLink href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
                   <Globe className="w-4 h-4" />
                   Contact

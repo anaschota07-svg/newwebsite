@@ -110,6 +110,13 @@ export default function ContactPage() {
     },
   ]
 
+  const publisherDetails = [
+    'Publisher: Mohd Washid',
+    'Website: SimpleWebToolsBox',
+    'Primary contact: contact@simplewebtoolsbox.com',
+    'Editorial and policy pages are linked in the site footer for transparency',
+  ]
+
   return (
     <div className="min-h-screen py-12 px-4 relative overflow-hidden">
       {/* Background */}
@@ -319,6 +326,17 @@ export default function ContactPage() {
                 <p className="text-sm text-slate-500 dark:text-slate-500 mt-4">
                   We typically respond within 24-48 hours during business days.
                 </p>
+              </div>
+            </div>
+
+            <div className="glass rounded-3xl p-8 border border-white/10">
+              <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Publisher Information</h3>
+              <div className="space-y-3">
+                {publisherDetails.map((detail) => (
+                  <p key={detail} className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {detail}
+                  </p>
+                ))}
               </div>
             </div>
           </motion.div>

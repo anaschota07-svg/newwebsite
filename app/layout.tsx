@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -7,15 +6,6 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StructuredData from "@/components/StructuredData";
-
-// Force dynamic rendering for theme support
-export const dynamic = "force-dynamic";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://simplewebtoolsbox.com"),
@@ -126,7 +116,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${inter.variable} antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50`}
+        className="antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50"
       >
         {/* Google AdSense */}
         <Script
@@ -135,27 +125,6 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
           crossOrigin="anonymous"
           strategy="afterInteractive"
-        />
-
-        {/* Google reCAPTCHA */}
-        <Script
-          src="https://www.google.com/recaptcha/api.js?render=explicit"
-          strategy="afterInteractive"
-        />
-
-        {/* reCAPTCHA callback */}
-        <Script
-          id="recaptcha-callback"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.handleRecaptchaCallback = function(token) {
-                window.dispatchEvent(
-                  new CustomEvent('recaptcha-verified', { detail: { token } })
-                );
-              };
-            `,
-          }}
         />
 
         {/* Structured Data */}

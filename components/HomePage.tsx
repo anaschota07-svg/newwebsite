@@ -363,6 +363,65 @@ export function HomePageContent() {
                 </section>
             </LazyLoad>
 
+            <LazyLoad>
+                <section className="py-20 relative" aria-labelledby="trust-heading">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-14">
+                            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-cyan-500/30 shadow-lg mb-6">
+                                <Shield className="w-4 h-4 text-cyan-500" />
+                                <span className="text-sm font-black bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Trust & Quality</span>
+                            </div>
+                            <h2 id="trust-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                                Built Like a <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">Real Resource</span>
+                            </h2>
+                            <p className="text-lg text-slate-700 dark:text-slate-400 max-w-3xl mx-auto font-medium">
+                                SimpleWebToolsBox combines browser-based tools with original support content so users can understand what a tool does, when to use it, and where its limits are.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                            {[
+                                {
+                                    icon: Shield,
+                                    title: 'Named ownership',
+                                    body: 'The site is published and maintained by Mohd Washid. About, contact, editorial, privacy, disclaimer, and DMCA pages are all available to help users understand who runs the site.',
+                                },
+                                {
+                                    icon: Award,
+                                    title: 'Original guidance',
+                                    body: 'Articles and tool pages are written to explain the practical use of each resource instead of acting as thin filler around a widget.',
+                                },
+                                {
+                                    icon: Globe,
+                                    title: 'Clear user intent',
+                                    body: 'Visitors can discover tools, browse by category, read guides, and contact the publisher without needing an account or navigating misleading flows.',
+                                },
+                            ].map((item) => (
+                                <div key={item.title} className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-6 border-2 border-slate-200 dark:border-slate-700 shadow-xl">
+                                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mb-4 shadow-lg">
+                                        <item.icon className="w-6 h-6 text-white" />
+                                    </div>
+                                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3">{item.title}</h3>
+                                    <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed font-medium">{item.body}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="bg-white/75 dark:bg-slate-900/75 backdrop-blur-xl rounded-3xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-xl">
+                            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4">How We Maintain Quality</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 dark:text-slate-400 leading-relaxed font-medium">
+                                <p>
+                                    Tool pages are structured to stand on their own, with an explanation, usage steps, features, and related recommendations. That helps users even if they land directly on one page from search.
+                                </p>
+                                <p>
+                                    Blog content is reviewed and tied back to real tools or real user workflows. The goal is to publish fewer, more useful pages rather than inflate the site with shallow content.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </LazyLoad>
+
             {/* CTA Section */}
             <LazyLoad>
                 <section className="py-24 relative overflow-hidden">

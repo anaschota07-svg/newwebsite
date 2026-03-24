@@ -10,6 +10,12 @@ export interface BlogPost {
   image: string
 }
 
+export const BLOG_AUTHOR = 'Mohd Washid'
+
+export function normalizeBlogAuthor(author: string): string {
+  return author === 'SimpleWebToolsBox Team' ? BLOG_AUTHOR : author
+}
+
 export const blogPosts: BlogPost[] = [
   // ===== TECH & AI ARTICLES =====
   {

@@ -1,11 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { blogPosts } from '@/data/blog/blogData'
+import { blogPosts, normalizeBlogAuthor } from '@/data/blog/blogData'
 import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
 import { BookOpen, Clock, Calendar, User, Sparkles, ArrowRight } from 'lucide-react'
@@ -109,7 +108,37 @@ export default function BlogPage() {
             <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
               {blogPosts.length} expert tutorials to level up your skills
             </p>
+            <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-4 leading-relaxed">
+              Every article is published under the SimpleWebToolsBox editorial process, reviewed for clarity,
+              and updated when the underlying tools, formulas, or recommendations change.
+            </p>
           </motion.div>
+        )}
+
+        {!sessionToken && (
+          <section className="glass rounded-3xl p-8 border border-white/10 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: 'Written for usefulness',
+                  body: 'Our guides are designed to solve specific user problems, not just target keywords. We focus on practical steps, examples, and context that support the tools on this site.',
+                },
+                {
+                  title: 'Reviewed by a named publisher',
+                  body: 'Articles attributed to the SimpleWebToolsBox team are reviewed and published by Mohd Washid, the founder of the site and the person responsible for its tools and editorial direction.',
+                },
+                {
+                  title: 'Updated when content changes',
+                  body: 'We revise pages when formulas, workflows, or product details become outdated so readers do not rely on stale advice or misleading examples.',
+                },
+              ].map((item) => (
+                <div key={item.title} className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5">
+                  <h2 className="text-lg font-black text-slate-900 dark:text-white mb-2">{item.title}</h2>
+                  <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* All Articles Grid */}
@@ -175,10 +204,10 @@ export default function BlogPage() {
                       </p>
 
                       {/* Meta */}
-                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 font-medium pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 font-medium pt-4 border-t border-slate-200 dark:border-slate-800">
                         <div className="flex items-center gap-1">
                           <User className="w-3 h-3" />
-                          {post.author}
+                          {normalizeBlogAuthor(post.author)}
                         </div>
                         <div className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
@@ -194,6 +223,21 @@ export default function BlogPage() {
             </motion.article>
           ))}
         </motion.div>
+
+        {!sessionToken && (
+          <section className="glass rounded-3xl p-8 border border-white/10 mb-12">
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">How We Keep These Guides Useful</h2>
+            <p className="text-slate-700 dark:text-slate-400 leading-relaxed mb-4">
+              The blog section exists to support the tools, not pad out the site with filler content. That means
+              we prioritize walkthroughs, comparisons, and explainers that help readers make better use of the
+              calculators, generators, and reference pages published on SimpleWebToolsBox.
+            </p>
+            <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
+              Before resubmitting to AdSense, this is one of the strongest quality signals we can send: clear
+              ownership, clear editorial standards, and content that has a real purpose for users.
+            </p>
+          </section>
+        )}
 
         {!sessionToken && <AdSense format="horizontal" />}
       </div>

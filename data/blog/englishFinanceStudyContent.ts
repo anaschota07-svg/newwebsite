@@ -5,32 +5,18 @@ export const digitalMarketingContent = {
     sections: [
       {
         heading: 'What is Digital Marketing and Why It Matters',
-        content: `Digital marketing is the most powerful business tool for reaching target customers. It's not just advertising—it's a comprehensive marketing approach that combines multiple channels to achieve business goals.
+        content: `Digital marketing is not one channel. It is the operating system a business uses to attract attention, turn that attention into trust, and convert trust into leads or sales. For a small publisher or product site, digital marketing may begin with search traffic and email. For a local service business, it may begin with local SEO, reviews, short-form social content, and paid campaigns.
 
-**Key Components of Digital Marketing:**
-• Social Media Marketing - Brand presence on Facebook, Instagram, LinkedIn, Twitter, TikTok
-• Search Engine Optimization (SEO) - Ranking high on Google organically
-• Content Marketing - Building trust through valuable information
-• Email Marketing - Direct communication with customers
-• Pay-Per-Click (PPC) - Google and Facebook advertising
-• Affiliate Marketing - Commission-based sales
-• Video Marketing - YouTube and short-form videos
-• Influencer Marketing - Partnering with content creators
+What matters most is not using every channel. It is matching the channel to the buying behavior of the audience. A product people search for on Google needs a different strategy than a product people discover on Instagram or YouTube.
 
-**Why Digital Marketing Matters:**
-Digital marketing is far more cost-effective than traditional methods. You control your budget precisely, see results instantly, and make data-driven decisions. From startups to large companies, everyone needs digital marketing. Traditional advertising costs ₹1-10 lakh for limited reach, while digital marketing can reach millions for ₹10,000-1 lakh.
+**The core channels most businesses evaluate first:**
+• Search engine optimization for demand that already exists
+• Social media for discovery, distribution, and repeat visibility
+• Email for direct communication and retention
+• Paid advertising for faster testing and lead generation
+• Content marketing for trust, education, and long-term organic reach
 
-**Digital Marketing Market in 2026:**
-- Global market: $500+ billion
-- Growth rate: 25% annually
-- Job opportunities: 2 million+ positions
-- Average salary: ₹6-20 LPA
-- India market: ₹50,000 crore
-- Expected growth: 30% annually
-
-**Traditional vs Digital Marketing:**
-Traditional: TV ads, Radio, Print, Billboards - High cost, Limited targeting, No real-time data
-Digital: Social media, Email, SEO, PPC - Low cost, Precise targeting, Real-time analytics`,
+Digital marketing matters because it is measurable in a way many offline channels are not. You can see what people clicked, which page held attention, where a form was abandoned, and what campaign actually led to revenue. That visibility is why even small teams can make disciplined decisions instead of guessing.`,
         image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
       },
       {
@@ -252,7 +238,16 @@ export const onlineEarningContent = {
     sections: [
       {
         heading: 'Top Ways to Earn Money Online from Home',
-        content: `There are many ways to earn money from home. Here are the most popular and realistic options that actually work in 2026.
+        content: `Most "make money online" advice fails because it mixes low-skill clickbait with real skill-based work. The most dependable online income models still come from one of three sources: selling a service, building an audience, or creating a useful digital asset.
+
+**A practical way to think about online income:**
+• Start with a service if you need cash flow sooner
+• Build an audience if you want long-term leverage
+• Create a digital product once you understand a niche problem clearly
+
+The sections below still cover common models, but keep this filter in mind: the more a method depends on genuine skill, trust, and consistency, the more realistic it usually is.
+
+There are many ways to earn money from home. Here are the most popular and realistic options that actually work in 2026.
 
 **1. Freelancing - Sell Your Skills:**
 

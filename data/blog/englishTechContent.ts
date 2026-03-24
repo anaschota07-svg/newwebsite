@@ -5,151 +5,55 @@ export const cloudComputingContent = {
     sections: [
       {
         heading: 'What is Cloud Computing',
-        content: `Cloud computing means using computing resources (storage, processing power, applications) from the internet instead of your own computer. Instead of storing everything locally, everything is on the cloud (internet).
+        content: `Cloud computing is best understood as renting computing capability when you need it instead of buying and maintaining everything yourself. In practice, that can mean hosting a website, storing application files, running a database, backing up data, or using software that is delivered through a browser.
 
-**Traditional vs Cloud:**
+The reason teams choose cloud services is not only convenience. It changes the economics of building and operating software. A small team can launch quickly without purchasing servers, and a larger team can scale up or down without rebuilding its infrastructure each time traffic changes.
 
-Traditional Computing:
-- Data on your computer
-- Software installed locally
-- Processing on your computer
-- You maintain everything
-- High upfront cost
+**How cloud use usually shows up in real work:**
+• A startup deploys its first app without owning hardware
+• A company stores backups in a separate environment for recovery
+• A developer provisions a database for testing instead of installing everything locally
+• A business uses browser-based tools such as email, collaboration software, or analytics platforms
 
-Cloud Computing:
-- Data on cloud servers
-- Software accessed from cloud
-- Processing in cloud
-- Provider maintains it
-- Pay-as-you-use cost
+The main service models are still useful:
+• **IaaS** when you want flexible building blocks like compute, storage, and networking
+• **PaaS** when you want to focus on shipping an application with less infrastructure work
+• **SaaS** when you simply need a finished product such as email, CRM, or office software
 
-**Cloud Benefits:**
-✓ Cost savings (no hardware investment)
-✓ Scalability (grow as needed)
-✓ Accessibility (access from anywhere)
-✓ Reliability (99.9% uptime)
-✓ Security (professional management)
-✓ Automatic updates (always latest)
-✓ Disaster recovery (data backup)
-✓ Flexibility (use what you need)
-
-**Cloud Service Types:**
-
-1. IaaS (Infrastructure as a Service):
-   - Virtual servers, storage, networking
-   - Example: AWS EC2, Azure VMs
-   - For: Developers, startups
-
-2. PaaS (Platform as a Service):
-   - Development tools, databases, middleware
-   - Example: Heroku, Google App Engine
-   - For: Application developers
-
-3. SaaS (Software as a Service):
-   - Ready-to-use applications
-   - Example: Gmail, Salesforce, Microsoft 365
-   - For: End users, businesses`,
+Cloud is not automatically cheaper in every situation, but it is often faster to adopt and easier to scale than traditional on-premises setups.`,
         image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
       },
       {
         heading: 'AWS vs Azure vs Google Cloud: Detailed Comparison',
-        content: `**AWS (Amazon Web Services):**
+        content: `Most teams do not choose a cloud provider because one is "best" in every category. They choose the provider that fits their existing skills, budget controls, vendor relationships, and technical priorities.
 
-Market Share: 32% (largest)
-Founded: 2006
-Services: 200+
-Pricing: Pay-as-you-go
-Free tier: 12 months
+**AWS usually makes sense when:**
+• you want the broadest service catalog
+• your team expects to work across many infrastructure patterns
+• you benefit from the largest ecosystem of tutorials, community examples, and hiring demand
 
-Strengths:
-✓ Largest market share
-✓ Most services available
-✓ Mature platform
-✓ Best documentation
-✓ Largest community
-✓ Most job opportunities
+AWS often feels like the default enterprise option because it has a mature service range and strong support for complex workloads. The tradeoff is that newcomers can find the pricing model and product surface area harder to navigate.
 
-Best for: Large enterprises, complex applications
+**Azure usually makes sense when:**
+• your company already relies heavily on Microsoft products
+• you need hybrid infrastructure between cloud and on-premises systems
+• identity, enterprise purchasing, and existing Microsoft agreements matter
 
-**Microsoft Azure:**
+Azure is often a comfortable choice for organizations that already live in the Microsoft ecosystem. In those cases, the integration benefits can matter more than a raw feature-by-feature checklist.
 
-Market Share: 23% (second largest)
-Founded: 2010
-Services: 200+
-Pricing: Pay-as-you-go
-Free tier: 12 months
+**Google Cloud usually makes sense when:**
+• your workload is data-heavy
+• analytics and machine learning are central to the project
+• you want a simpler experience for certain modern developer workflows
 
-Strengths:
-✓ Great for Microsoft ecosystem
-✓ Excellent hybrid cloud
-✓ Strong enterprise support
-✓ Good AI/ML services
-✓ Competitive pricing
-✓ Strong security
+GCP is frequently attractive to smaller engineering teams, data projects, and machine-learning-focused products, though its ecosystem and hiring pool can be narrower depending on your region and company size.
 
-Best for: Microsoft-heavy organizations, enterprises
+**A practical selection rule:**
+• choose AWS for breadth
+• choose Azure for enterprise Microsoft alignment
+• choose GCP for analytics- and ML-heavy work
 
-**Google Cloud Platform (GCP):**
-
-Market Share: 11% (third)
-Founded: 2008
-Services: 100+
-Pricing: Pay-as-you-go
-Free tier: Always free tier
-
-Strengths:
-✓ Best data analytics (BigQuery)
-✓ Best AI/ML capabilities
-✓ Competitive pricing
-✓ Good documentation
-✓ Strong in data science
-✓ Innovative services
-
-Best for: Data science, AI/ML projects, startups
-
-**Comparison Table:**
-
-| Feature | AWS | Azure | GCP |
-|---------|-----|-------|-----|
-| Market Share | 32% | 23% | 11% |
-| Services | 200+ | 200+ | 100+ |
-| Pricing | Complex | Moderate | Simple |
-| Learning Curve | Steep | Moderate | Moderate |
-| Community | Largest | Large | Growing |
-| Enterprise Support | Excellent | Excellent | Good |
-| AI/ML | Good | Good | Best |
-| Data Analytics | Good | Good | Best |
-| Cost | High if not optimized | Moderate | Competitive |
-
-**Pricing Example:**
-
-Running 1 Virtual Machine (1 vCPU, 4GB RAM) for 1 month:
-
-AWS EC2: ₹2,500-3,500
-Azure VM: ₹2,000-3,000
-GCP Compute: ₹1,800-2,800
-
-GCP is cheapest, but features may differ.
-
-**Which to Choose:**
-
-Choose AWS if:
-✓ Need maximum services
-✓ Building enterprise application
-✓ Need largest community
-✓ Budget not constraint
-
-Choose Azure if:
-✓ Using Microsoft products
-✓ Need hybrid cloud
-✓ Enterprise organization
-✓ Strong security needed
-
-Choose GCP if:
-✓ Data science/AI focus
-✓ Startup/small business
-✓ Cost-conscious
-✓ Need best analytics`,
+In real evaluations, the winning provider is often the one your team can operate well without surprise costs or a steep operational burden.`,
         image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
       },
     ],

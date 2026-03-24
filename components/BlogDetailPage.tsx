@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Clock, Calendar, User, Code2 } from 'lucide-react'
-import { BlogPost } from '@/data/blog/blogData'
+import { BlogPost, normalizeBlogAuthor } from '@/data/blog/blogData'
 import { MarkdownContent } from './MarkdownContent'
 
 interface BlogSection {
@@ -20,6 +20,8 @@ interface BlogDetailPageProps {
 }
 
 export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPageProps) {
+  const displayAuthor = normalizeBlogAuthor(post.author)
+
   // Scroll to top on load
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -82,7 +84,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
           <div className="flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
             <div className="flex items-center gap-2">
               <User className="h-4 w-4" />
-              <span className="font-semibold">{post.author}</span>
+              <span className="font-semibold">{displayAuthor}</span>
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
@@ -150,39 +152,35 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
             {/* Info */}
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-3 mb-2">
-                <h3 className="text-2xl font-black text-slate-900 dark:text-white">SimpleWebToolsBox Team</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">Mohd Washid</h3>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
-                  Expert Contributors
+                  Founder & Editor
                 </span>
               </div>
               <p className="text-sm font-semibold text-cyan-600 dark:text-cyan-400 mb-3 flex items-center gap-2">
                 <Code2 className="w-4 h-4" />
-                Professional Content Creators
+                Flutter Developer & Web Publisher
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                SimpleWebToolsBox Team is dedicated to creating high-quality, comprehensive guides and resources on technology, finance, education, and professional development. Our expert contributors bring years of experience to help you master complex topics with practical, actionable insights.
+                Mohd Washid writes and reviews the guides published on SimpleWebToolsBox, focusing on practical tools, web workflows, digital literacy, and straightforward tutorials that help readers solve real problems quickly.
               </p>
               <div className="flex items-center gap-4">
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/about"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 dark:hover:bg-slate-600 transition-all"
-                  aria-label="SimpleWebToolsBox on GitHub"
+                  aria-label="Learn more about Mohd Washid"
                 >
                   <span className="text-lg">🔗</span>
-                  GitHub
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  About
+                </Link>
+                <Link
+                  href="/contact"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all"
-                  aria-label="SimpleWebToolsBox on LinkedIn"
+                  aria-label="Contact SimpleWebToolsBox"
                 >
                   <span className="text-lg">💼</span>
-                  LinkedIn
-                </a>
+                  Contact
+                </Link>
               </div>
             </div>
           </div>
@@ -233,4 +231,3 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
     </div>
   )
 }
-

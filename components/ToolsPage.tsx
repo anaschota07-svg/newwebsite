@@ -95,6 +95,11 @@ export function ToolsPageContent() {
           <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto mb-8">
             {toolsData.length} powerful tools, zero setup required
           </p>
+          <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto leading-relaxed">
+            These tools are built to be immediately useful, privacy-friendly, and easy to understand. Wherever
+            possible, data stays in your browser and each tool page includes plain-language guidance instead of
+            sending users to generic filler articles.
+          </p>
           
           {/* Search Bar - Hide with session */}
           {!sessionToken && (
@@ -184,6 +189,30 @@ export function ToolsPageContent() {
           )}
         </div>
         </LazyLoad>
+
+        <section className="glass rounded-3xl p-8 border border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Built for real tasks',
+                body: 'The tool library focuses on calculators, formatters, generators, and utilities people can actually use in a browser without creating an account.',
+              },
+              {
+                title: 'Privacy-first by default',
+                body: 'Most tools work locally in the browser. We keep the explanations honest about what a tool can and cannot do so users are not misled by exaggerated claims.',
+              },
+              {
+                title: 'Supported by clear help text',
+                body: 'Each tool page includes usage guidance, feature details, and limitations so the page itself has standalone value beyond the interactive widget.',
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5">
+                <h2 className="text-lg font-black text-slate-900 dark:text-white mb-2">{item.title}</h2>
+                <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   )

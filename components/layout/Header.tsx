@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Sparkles } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -17,13 +17,6 @@ const navigation = [
 export default function Header() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
 
   return (
     <header className="sticky top-0 z-50 w-full glass border-b border-white/10"
