@@ -340,6 +340,40 @@ export default function ContactPage() {
               </div>
             </div>
           </motion.div>
+
+          <motion.aside
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="glass rounded-3xl p-8 border border-white/10 h-fit"
+          >
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">Publisher Details</h2>
+            <ul className="space-y-3 mb-8">
+              {publisherDetails.map((item) => (
+                <li key={item} className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5 mb-6">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">What this page is for</h3>
+              <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
+                This contact page exists for real support, corrections, feedback, and publishing inquiries. It is part
+                of the site’s trust and accountability setup, not a placeholder page.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">Common Questions</h3>
+              {faqs.map((faq) => (
+                <div key={faq.question} className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5">
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white mb-2">{faq.question}</p>
+                  <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </motion.aside>
         </div>
       </div>
     </div>

@@ -199,7 +199,7 @@ export function ToolsPageContent() {
         </LazyLoad>
 
         <section className="glass rounded-3xl p-8 border border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {[
               {
                 title: 'Built for real tasks',
@@ -219,6 +219,15 @@ export function ToolsPageContent() {
                 <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">{item.body}</p>
               </div>
             ))}
+          </div>
+
+          <div className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5">
+            <h2 className="text-lg font-black text-slate-900 dark:text-white mb-2">Publisher and review note</h2>
+            <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
+              This reviewed set is maintained by Mohd Washid for SimpleWebToolsBox. We are intentionally keeping this
+              collection smaller while weaker tool pages are revised, so search users and reviewers see only the pages
+              we consider strongest and most useful.
+            </p>
           </div>
         </section>
       </div>

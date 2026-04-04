@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { blogPosts, normalizeBlogAuthor } from '@/data/blog/blogData'
 import { indexedBlogSlugs } from '@/data/siteIndexing'
-import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
 import { BookOpen, Clock, Calendar, User, Sparkles, ArrowRight } from 'lucide-react'
 // [MIDDLEWARE] import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
@@ -245,7 +244,21 @@ export default function BlogPage() {
           </section>
         )}
 
-        {!sessionToken && <AdSense format="horizontal" />}
+        {!sessionToken && (
+          <section className="glass rounded-3xl p-8 border border-white/10">
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">Publisher Transparency</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
+              <div>
+                <p className="font-semibold text-slate-900 dark:text-white mb-2">Publisher</p>
+                <p>Mohd Washid publishes and reviews the content on SimpleWebToolsBox.</p>
+              </div>
+              <div>
+                <p className="font-semibold text-slate-900 dark:text-white mb-2">Contact and policies</p>
+                <p>Readers can use the contact page for corrections, feedback, and support, and can review the privacy, disclaimer, editorial, and DMCA pages linked in the footer.</p>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   )
