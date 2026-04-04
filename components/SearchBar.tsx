@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useMemo, useState } from 'react'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { toolsData } from '@/data/tools/toolsData'
 import { indexedToolSlugs } from '@/data/siteIndexing'
@@ -55,15 +54,13 @@ export default function SearchBar() {
         {/* Right icons */}
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
           {query && (
-            <motion.button
+            <button
               onClick={() => setQuery('')}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
               className="p-1.5 rounded-full hover:bg-red-500/10 text-slate-500 hover:text-red-500 transition"
               aria-label="Clear search"
             >
               <X size={18} />
-            </motion.button>
+            </button>
           )}
 
           <Search className="text-slate-400" size={20} />
@@ -71,51 +68,46 @@ export default function SearchBar() {
       </div>
 
       {/* Dropdown */}
-      <AnimatePresence>
-        {isOpen && query && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            className="
-              absolute z-50 mt-3 w-full
-              rounded-2xl glass
-              border border-white/10
-              overflow-hidden
-            "
-          >
-            {filteredTools.length > 0 ? (
-              filteredTools.map(tool => (
-                <Link
-                  key={tool.slug}
-                  href={`/tools/${tool.slug}`}
-                  className="
-                    flex items-center gap-4 px-5 py-4
-                    hover:bg-white/5 transition
-                  "
-                >
-                  <div className="text-xl">{tool.icon}</div>
+      {isOpen && query && (
+        <div
+          className="
+            absolute z-50 mt-3 w-full
+            rounded-2xl glass
+            border border-white/10
+            overflow-hidden
+          "
+        >
+          {filteredTools.length > 0 ? (
+            filteredTools.map(tool => (
+              <Link
+                key={tool.slug}
+                href={`/tools/${tool.slug}`}
+                className="
+                  flex items-center gap-4 px-5 py-4
+                  hover:bg-white/5 transition
+                "
+              >
+                <div className="text-xl">{tool.icon}</div>
 
-                  <div className="flex-1">
-                    <p className="font-semibold text-slate-900 dark:text-white">
-                      {tool.name}
-                    </p>
-                    <p className="text-sm text-slate-500 line-clamp-1">
-                      {tool.description}
-                    </p>
-                  </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-slate-900 dark:text-white">
+                    {tool.name}
+                  </p>
+                  <p className="text-sm text-slate-500 line-clamp-1">
+                    {tool.description}
+                  </p>
+                </div>
 
-                  <ArrowRight className="text-slate-400" size={18} />
-                </Link>
-              ))
-            ) : (
-              <div className="px-5 py-4 text-sm text-slate-500">
-                No tools found for <span className="font-medium">“{query}”</span>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <ArrowRight className="text-slate-400" size={18} />
+              </Link>
+            ))
+          ) : (
+            <div className="px-5 py-4 text-sm text-slate-500">
+              No tools found for <span className="font-medium">“{query}”</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

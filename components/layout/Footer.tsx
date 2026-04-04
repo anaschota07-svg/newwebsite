@@ -1,8 +1,5 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import { Sparkles, Zap, Heart } from 'lucide-react'
 
 const footerLinks = {
@@ -21,7 +18,7 @@ const footerLinks = {
   resources: [
     { name: 'All Tools', href: '/tools' },
     { name: 'Blogs & Guides', href: '/blog' },
-    { name: 'Sitemap', href: '/sitemap-page' },
+    { name: 'HTML Sitemap', href: '/sitemap-page' },
   ],
 }
 
@@ -38,13 +35,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
-          <motion.div 
-            className="col-span-1 md:col-span-1"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="col-span-1 md:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2 mb-4 group" aria-label="SimpleWebToolsBox Home">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl blur opacity-40 group-hover:opacity-60 transition-opacity" />
@@ -67,28 +58,19 @@ export default function Footer() {
             </p>
             
             {/* Stats Badge */}
-            <motion.div 
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyan-500/30"
-              whileHover={{ scale: 1.05 }}
-            >
+            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyan-500/30">
               <Zap className="w-4 h-4 text-cyan-500" />
               <span className="text-xs font-bold gradient-text">Powered by Innovation</span>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Links Sections */}
           {[
-            { title: 'Company', links: footerLinks.company, delay: 0.1 },
-            { title: 'Legal', links: footerLinks.legal, delay: 0.2 },
-            { title: 'Resources', links: footerLinks.resources, delay: 0.3 },
+            { title: 'Company', links: footerLinks.company },
+            { title: 'Legal', links: footerLinks.legal },
+            { title: 'Resources', links: footerLinks.resources },
           ].map((section) => (
-            <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: section.delay }}
-            >
+            <div key={section.title}>
               <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                 <Sparkles className="w-3 h-3 text-cyan-500" />
                 {section.title}
@@ -106,18 +88,12 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Bottom Bar */}
-        <motion.div 
-          className="pt-8 border-t border-slate-200/50 dark:border-slate-800/50"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
+        <div className="pt-8 border-t border-slate-200/50 dark:border-slate-800/50">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
               © {new Date().getFullYear()} 
@@ -127,17 +103,14 @@ export default function Footer() {
               for developers
             </p>
             
-            <motion.div 
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-purple-500/30"
-              whileHover={{ scale: 1.05 }}
-            >
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-purple-500/30">
               <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-pulse-gentle" />
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 All systems operational
               </span>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   )
