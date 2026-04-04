@@ -1,13 +1,9 @@
 import { MetadataRoute } from 'next'
-import { toolsData } from '@/data/tools/toolsData'
-import { blogPosts } from '@/data/blog/blogData'
-import { isIndexedBlogSlug, isIndexedToolSlug } from '@/data/siteIndexing'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://simplewebtoolsbox.com'
 
-  // Static pages
-  const staticPages = [
+  return [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -38,59 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms-conditions`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/disclaimer`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/editorial-policy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/dmca`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/sitemap-page`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.4,
-    },
   ]
-
-  // Tool pages
-  const toolPages = toolsData.filter((tool) => isIndexedToolSlug(tool.slug)).map((tool) => ({
-    url: `${baseUrl}/tools/${tool.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }))
-
-  // Blog pages
-  const blogPages = blogPosts.filter((post) => isIndexedBlogSlug(post.slug)).map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
-
-  return [...staticPages, ...toolPages, ...blogPages]
 }
