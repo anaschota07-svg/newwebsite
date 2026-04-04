@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { blogPosts, normalizeBlogAuthor } from '@/data/blog/blogData'
+import { indexedBlogSlugs } from '@/data/siteIndexing'
 import AdSense from '@/components/AdSense'
 import BlogImage from '@/components/BlogImage'
 import { BookOpen, Clock, Calendar, User, Sparkles, ArrowRight } from 'lucide-react'
@@ -26,7 +27,9 @@ export default function BlogPage() {
 
   // Use blog posts in order (no shuffling to avoid hydration mismatch)
   const shuffledPosts = useMemo(() => {
-    return blogPosts
+    return indexedBlogSlugs
+      .map((slug) => blogPosts.find((post) => post.slug === slug))
+      .filter((post): post is (typeof blogPosts)[number] => Boolean(post))
   }, [])
 
   // [MIDDLEWARE] Debug effect — commented out for AdSense review
@@ -106,11 +109,14 @@ export default function BlogPage() {
               Blogs <span className="gradient-text">Guides</span>
             </h1>
             <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
-              {blogPosts.length} expert tutorials to level up your skills
+              {shuffledPosts.length} reviewed guides currently promoted for search and AdSense quality review
             </p>
             <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-4 leading-relaxed">
               Every article is published under the SimpleWebToolsBox editorial process, reviewed for clarity,
               and updated when the underlying tools, formulas, or recommendations change.
+            </p>
+            <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-3 leading-relaxed">
+              Additional articles remain available on the site, but only this smaller reviewed set is being actively surfaced while we improve the rest.
             </p>
           </motion.div>
         )}

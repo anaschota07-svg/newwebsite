@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { getBlogPostBySlug, blogPosts, normalizeBlogAuthor } from '@/data/blog/blogData'
+import { isIndexedBlogSlug } from '@/data/siteIndexing'
 import { BlogDetailPage } from '@/components/BlogDetailPage'
 
 // Import content from separate files
@@ -34,6 +35,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | SimpleWebToolsBox`,
     description: `${post.description} Read our comprehensive guide with step-by-step instructions. Expert tutorials and Blogs & guides.`,
+    robots: {
+      index: isIndexedBlogSlug(post.slug),
+      follow: true,
+    },
     keywords: [
       post.title.toLowerCase(),
       post.category.toLowerCase(),
@@ -58,6 +63,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           alt: post.title,
         },
       ],
+    },
+    alternates: {
+      canonical: `https://simplewebtoolsbox.com/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -110,7 +118,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   const content = blogContent[slug as keyof typeof blogContent]
-  const related = blogPosts.filter((p) => p.id !== post.id).slice(0, 2)
+  const related = blogPosts.filter((p) => p.id !== post.id && isIndexedBlogSlug(p.slug)).slice(0, 2)
 
   return <BlogDetailPage post={post} content={content} relatedPosts={related} />
 }

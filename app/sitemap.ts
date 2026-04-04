@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
+import { isIndexedBlogSlug, isIndexedToolSlug } from '@/data/siteIndexing'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://simplewebtoolsbox.com'
@@ -76,7 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   // Tool pages
-  const toolPages = toolsData.map((tool) => ({
+  const toolPages = toolsData.filter((tool) => isIndexedToolSlug(tool.slug)).map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
@@ -84,7 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // Blog pages
-  const blogPages = blogPosts.map((post) => ({
+  const blogPages = blogPosts.filter((post) => isIndexedBlogSlug(post.slug)).map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
+import { isIndexedBlogSlug, isIndexedToolSlug } from '@/data/siteIndexing'
 
 export const metadata: Metadata = {
   title: 'Sitemap',
@@ -12,26 +13,29 @@ export const metadata: Metadata = {
 }
 
 export default function SitemapPage() {
+  const indexedTools = toolsData.filter((tool) => isIndexedToolSlug(tool.slug))
+  const indexedPosts = blogPosts.filter((post) => isIndexedBlogSlug(post.slug))
+
   // Group tools by category
-  const toolsByCategory = toolsData.reduce((acc, tool) => {
+  const toolsByCategory = indexedTools.reduce((acc, tool) => {
     if (!acc[tool.category]) acc[tool.category] = []
     acc[tool.category].push(tool)
     return acc
-  }, {} as Record<string, typeof toolsData>)
+  }, {} as Record<string, typeof indexedTools>)
 
   // Group blog posts by category
-  const postsByCategory = blogPosts.reduce((acc, post) => {
+  const postsByCategory = indexedPosts.reduce((acc, post) => {
     if (!acc[post.category]) acc[post.category] = []
     acc[post.category].push(post)
     return acc
-  }, {} as Record<string, typeof blogPosts>)
+  }, {} as Record<string, typeof indexedPosts>)
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Sitemap</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-10">
-          All pages on SimpleWebToolsBox — {toolsData.length} tools, {blogPosts.length} guides, and more.
+          Current search-facing pages on SimpleWebToolsBox — {indexedTools.length} reviewed tools, {indexedPosts.length} reviewed guides, and essential site pages.
         </p>
 
         <div className="space-y-10">
@@ -70,7 +74,7 @@ export default function SitemapPage() {
           {/* Tools by Category */}
           <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-slate-700">
-              🛠 Tools ({toolsData.length} total)
+              🛠 Reviewed Tools ({indexedTools.length})
             </h2>
             <div className="space-y-8">
               {Object.entries(toolsByCategory).map(([category, tools]) => (
@@ -100,7 +104,7 @@ export default function SitemapPage() {
           {/* Blog Posts by Category */}
           <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-slate-700">
-              📚 Blogs & Guides ({blogPosts.length} total)
+              📚 Reviewed Guides ({indexedPosts.length})
             </h2>
             <div className="space-y-8">
               {Object.entries(postsByCategory).map(([category, posts]) => (

@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { toolsData } from '@/data/tools/toolsData'
+import { indexedToolSlugs } from '@/data/siteIndexing'
 import Link from 'next/link'
 
 export default function SearchBar() {
@@ -13,8 +14,11 @@ export default function SearchBar() {
   const filteredTools = useMemo(() => {
     if (!query.trim()) return []
     const q = query.toLowerCase()
+    const reviewedTools = indexedToolSlugs
+      .map((slug) => toolsData.find((tool) => tool.slug === slug))
+      .filter((tool): tool is (typeof toolsData)[number] => Boolean(tool))
 
-    return toolsData
+    return reviewedTools
       .filter(
         tool =>
           tool.name.toLowerCase().includes(q) ||
@@ -84,7 +88,7 @@ export default function SearchBar() {
               filteredTools.map(tool => (
                 <Link
                   key={tool.slug}
-                  href={`/${tool.slug}`}
+                  href={`/tools/${tool.slug}`}
                   className="
                     flex items-center gap-4 px-5 py-4
                     hover:bg-white/5 transition

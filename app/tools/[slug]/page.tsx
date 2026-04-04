@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { getToolBySlug, toolsData } from '@/data/tools/toolsData'
+import { isIndexedToolSlug } from '@/data/siteIndexing'
 import AgeCalculator from '@/components/tools/AgeCalculator'
 import BMICalculator from '@/components/tools/BMICalculator'
 import TextCaseConverter from '@/components/tools/TextCaseConverter'
@@ -70,6 +71,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${tool.name} - Free Online Tool | SimpleWebToolsBox`,
     description: `${tool.description} Use our free ${tool.name.toLowerCase()} tool instantly. No registration required. Fast, secure, and 100% free.`,
+    robots: {
+      index: isIndexedToolSlug(tool.slug),
+      follow: true,
+    },
     keywords: [
       tool.name.toLowerCase(),
       `free ${tool.name.toLowerCase()}`,
@@ -84,6 +89,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: `${tool.description} Use our free ${tool.name.toLowerCase()} tool instantly.`,
       type: 'website',
       url: `https://simplewebtoolsbox.com/tools/${tool.slug}`,
+    },
+    alternates: {
+      canonical: `https://simplewebtoolsbox.com/tools/${tool.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -850,7 +858,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   
   // Get related tools (same category, exclude current tool)
   const relatedTools = toolsData
-    .filter((t) => t.id !== tool.id && t.category === tool.category)
+    .filter((t) => t.id !== tool.id && t.category === tool.category && isIndexedToolSlug(t.slug))
     .slice(0, 4)
 
   return (

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toolsData, categories } from '@/data/tools/toolsData'
+import { indexedToolSlugs } from '@/data/siteIndexing'
 import SearchBar from '@/components/SearchBar'
 import { ArrowRight, Sparkles, Filter } from 'lucide-react'
 // [MIDDLEWARE] import { useMiddlewareFlow } from '@/app/contexts/MiddlewareFlowContext'
@@ -22,10 +23,14 @@ export function ToolsPageContent() {
   const setCurrentStep = (_step: string) => {}
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
+  const reviewedTools = indexedToolSlugs
+    .map((slug) => toolsData.find((tool) => tool.slug === slug))
+    .filter((tool): tool is (typeof toolsData)[number] => Boolean(tool))
+  const reviewedCategories = Array.from(new Set(reviewedTools.map((tool) => tool.category)))
 
   const filteredTools = selectedCategory === 'All Tools'
-    ? toolsData
-    : toolsData.filter(tool => tool.category === selectedCategory)
+    ? reviewedTools
+    : reviewedTools.filter(tool => tool.category === selectedCategory)
 
   // [MIDDLEWARE] Debug + step-restore effects — commented out for AdSense review
   // useEffect(() => {
@@ -93,12 +98,15 @@ export function ToolsPageContent() {
             All <span className="gradient-text text-black dark:gradient-text">Tools</span>
           </h1>
           <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto mb-8">
-            {toolsData.length} powerful tools, zero setup required
+            {reviewedTools.length} reviewed tools currently promoted for search visibility
           </p>
           <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto leading-relaxed">
             These tools are built to be immediately useful, privacy-friendly, and easy to understand. Wherever
             possible, data stays in your browser and each tool page includes plain-language guidance instead of
             sending users to generic filler articles.
+          </p>
+          <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-3 leading-relaxed">
+            We are intentionally surfacing a smaller reviewed set here while the remaining tools are being improved.
           </p>
           
           {/* Search Bar - Hide with session */}
@@ -126,7 +134,7 @@ export function ToolsPageContent() {
             >
               All Tools
             </button>
-            {categories.map((category) => (
+            {reviewedCategories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}

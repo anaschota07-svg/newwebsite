@@ -4,21 +4,23 @@ import Link from 'next/link'
 import { ArrowRight, Zap, Shield, Sparkles, Calculator, FileText, Rocket, Star, Code2, Layers, TrendingUp, Award, Globe, BookOpen, Lock, Smartphone } from 'lucide-react'
 import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
+import { indexedBlogSlugs, indexedToolSlugs } from '@/data/siteIndexing'
 import BlogImage from '@/components/BlogImage'
 import LazyLoad from '@/components/LazyLoad'
 
 export function HomePageContent() {
-    const featuredTools = toolsData.slice(0, 6)
-    const allBlogs = blogPosts
-    const techBlogs = allBlogs.filter(b => b.category === 'Technology').slice(0, 3)
-    const financeBlogs = allBlogs.filter(b => b.category === 'Finance').slice(0, 3)
-    const studyBlogs = allBlogs.filter(b => b.category === 'Study').slice(0, 3)
-    const hindiBlogs = allBlogs.filter(b => b.readTime.includes('मिनट')).slice(0, 3)
+    const reviewedTools = indexedToolSlugs
+        .map(slug => toolsData.find(tool => tool.slug === slug))
+        .filter((tool): tool is (typeof toolsData)[number] => Boolean(tool))
+    const reviewedBlogs = indexedBlogSlugs
+        .map(slug => blogPosts.find(post => post.slug === slug))
+        .filter((post): post is (typeof blogPosts)[number] => Boolean(post))
+    const featuredGuides = reviewedBlogs.slice(0, 4)
 
     const realStats = {
-        tools: toolsData.length,
-        guides: blogPosts.length,
-        categories: new Set(toolsData.map(t => t.category)).size,
+        tools: reviewedTools.length,
+        guides: reviewedBlogs.length,
+        categories: new Set(reviewedTools.map(t => t.category)).size,
     }
 
     return (
@@ -56,7 +58,10 @@ export function HomePageContent() {
                         </h1>
 
                         <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
-                            Access <span className="font-black text-cyan-600 dark:text-cyan-400">{realStats.tools}</span> powerful tools and <span className="font-black text-purple-600 dark:text-purple-400">{realStats.guides}</span> comprehensive guides on technology, finance, education, and more.
+                            Explore our reviewed set of <span className="font-black text-cyan-600 dark:text-cyan-400">{realStats.tools}</span> high-value tools and <span className="font-black text-purple-600 dark:text-purple-400">{realStats.guides}</span> focused guides while we improve the rest of the library.
+                        </p>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
+                            We are intentionally highlighting only the strongest pages for search and AdSense review. Additional tools and articles remain available, but they are being revised before they are promoted again.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -107,252 +112,60 @@ export function HomePageContent() {
                 </div>
             </section>
 
-            {/* Featured Blog Section - Hindi First */}
             <LazyLoad>
-                <section className="py-20 relative" aria-labelledby="hindi-blogs-heading">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="text-center mb-16">
-                            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-orange-500/30 shadow-lg mb-6">
-                                <span className="text-sm font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">हिंदी लेख</span>
-                            </div>
-                            <h2 id="hindi-blogs-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
-                                हिंदी में <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">विशेषज्ञ लेख</span>
-                            </h2>
-                            <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-                                भारतीय पाठकों के लिए तकनीक, वित्त, और शिक्षा पर विस्तृत हिंदी लेख
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {hindiBlogs.map((post) => (
-                                <Link
-                                    key={post.id}
-                                    href={`/blog/${post.slug}`}
-                                    className="group block relative h-full hover:scale-105 transition-transform"
-                                    aria-label={`Read: ${post.title}`}
-                                >
-                                    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all h-full flex flex-col shadow-xl hover:shadow-2xl">
-                                        <div className="relative h-48 overflow-hidden">
-                                            <BlogImage
-                                                src={post.image}
-                                                alt={post.title}
-                                                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, 33vw"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                                            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                                                <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-500 shadow-lg">
-                                                    {post.category}
-                                                </span>
-                                                <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm">
-                                                    {post.readTime}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="p-6 flex-1 flex flex-col">
-                                            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-500 group-hover:to-red-500 transition-all line-clamp-2">
-                                                {post.title}
-                                            </h3>
-                                            <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1 font-medium">
-                                                {post.description}
-                                            </p>
-                                            <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                                <div className="text-xs text-slate-600 dark:text-slate-500 font-bold">
-                                                    {new Date(post.date).toLocaleDateString('hi-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                                </div>
-                                                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            </LazyLoad>
-
-            {/* Tech Articles Section */}
-            <LazyLoad>
-                <section className="py-20 relative" aria-labelledby="tech-blogs-heading">
+                <section className="py-20 relative" aria-labelledby="reviewed-guides-heading">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
                             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-blue-500/30 shadow-lg mb-6">
-                                <Code2 className="w-4 h-4 text-blue-500" />
-                                <span className="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Technology</span>
+                                <FileText className="w-4 h-4 text-blue-500" />
+                                <span className="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Reviewed Guides</span>
                             </div>
-                            <h2 id="tech-blogs-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
-                                Latest <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Tech Articles</span>
+                            <h2 id="reviewed-guides-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                                Focused <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Core Content</span>
                             </h2>
                             <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-                                AI, Cloud Computing, Cybersecurity, and Web Development
+                                These are the guides we currently consider strongest for search visibility and AdSense review.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {techBlogs.map((post) => (
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                            {featuredGuides.map((post) => (
                                 <Link
-                                    key={post.id}
-                                    href={`/blog/${post.slug}`}
+                                    key={post!.id}
+                                    href={`/blog/${post!.slug}`}
                                     className="group block relative h-full hover:scale-105 transition-transform"
+                                    aria-label={`Read: ${post!.title}`}
                                 >
                                     <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-blue-500 transition-all h-full flex flex-col shadow-xl hover:shadow-2xl">
                                         <div className="relative h-48 overflow-hidden">
                                             <BlogImage
-                                                src={post.image}
-                                                alt={post.title}
+                                                src={post!.image}
+                                                alt={post!.title}
                                                 className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, 33vw"
+                                                sizes="(max-width: 768px) 100vw, 25vw"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                                             <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                                                 <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg">
-                                                    {post.category}
+                                                    {post!.category}
                                                 </span>
                                                 <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm">
-                                                    {post.readTime}
+                                                    {post!.readTime}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="p-6 flex-1 flex flex-col">
                                             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-cyan-500 transition-all line-clamp-2">
-                                                {post.title}
+                                                {post!.title}
                                             </h3>
                                             <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1 font-medium">
-                                                {post.description}
+                                                {post!.description}
                                             </p>
                                             <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
                                                 <div className="text-xs text-slate-600 dark:text-slate-500 font-bold">
-                                                    {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                                    {new Date(post!.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                 </div>
                                                 <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            </LazyLoad>
-
-            {/* Finance Articles Section */}
-            <LazyLoad>
-                <section className="py-20 relative" aria-labelledby="finance-blogs-heading">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="text-center mb-16">
-                            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-green-500/30 shadow-lg mb-6">
-                                <TrendingUp className="w-4 h-4 text-green-500" />
-                                <span className="text-sm font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Finance</span>
-                            </div>
-                            <h2 id="finance-blogs-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
-                                Financial <span className="bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent">Guides</span>
-                            </h2>
-                            <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-                                Credit Score, Loans, Investments, and Wealth Building
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {financeBlogs.map((post) => (
-                                <Link
-                                    key={post.id}
-                                    href={`/blog/${post.slug}`}
-                                    className="group block relative h-full hover:scale-105 transition-transform"
-                                >
-                                    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-green-500 transition-all h-full flex flex-col shadow-xl hover:shadow-2xl">
-                                        <div className="relative h-48 overflow-hidden">
-                                            <BlogImage
-                                                src={post.image}
-                                                alt={post.title}
-                                                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, 33vw"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                                            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                                                <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg">
-                                                    {post.category}
-                                                </span>
-                                                <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm">
-                                                    {post.readTime}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="p-6 flex-1 flex flex-col">
-                                            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-500 group-hover:to-emerald-500 transition-all line-clamp-2">
-                                                {post.title}
-                                            </h3>
-                                            <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1 font-medium">
-                                                {post.description}
-                                            </p>
-                                            <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                                <div className="text-xs text-slate-600 dark:text-slate-500 font-bold">
-                                                    {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                                                </div>
-                                                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            </LazyLoad>
-
-            {/* Study Articles Section */}
-            <LazyLoad>
-                <section className="py-20 relative" aria-labelledby="study-blogs-heading">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="text-center mb-16">
-                            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-purple-500/30 shadow-lg mb-6">
-                                <BookOpen className="w-4 h-4 text-purple-500" />
-                                <span className="text-sm font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Education</span>
-                            </div>
-                            <h2 id="study-blogs-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
-                                Study <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Resources</span>
-                            </h2>
-                            <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-                                Learning Techniques, Career Guides, and Skill Development
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {studyBlogs.map((post) => (
-                                <Link
-                                    key={post.id}
-                                    href={`/blog/${post.slug}`}
-                                    className="group block relative h-full hover:scale-105 transition-transform"
-                                >
-                                    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-purple-500 transition-all h-full flex flex-col shadow-xl hover:shadow-2xl">
-                                        <div className="relative h-48 overflow-hidden">
-                                            <BlogImage
-                                                src={post.image}
-                                                alt={post.title}
-                                                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, 33vw"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                                            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                                                <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg">
-                                                    {post.category}
-                                                </span>
-                                                <span className="text-xs font-bold text-white px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm">
-                                                    {post.readTime}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="p-6 flex-1 flex flex-col">
-                                            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 transition-all line-clamp-2">
-                                                {post.title}
-                                            </h3>
-                                            <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed line-clamp-3 mb-4 flex-1 font-medium">
-                                                {post.description}
-                                            </p>
-                                            <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                                <div className="text-xs text-slate-600 dark:text-slate-500 font-bold">
-                                                    {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                                                </div>
-                                                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-purple-500 group-hover:translate-x-1 transition-all" />
                                             </div>
                                         </div>
                                     </div>
