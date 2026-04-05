@@ -24,12 +24,8 @@ export default function BlogPage() {
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
 
-  // Use blog posts in order (no shuffling to avoid hydration mismatch)
-  const shuffledPosts = useMemo(() => {
-    return indexedBlogSlugs
-      .map((slug) => blogPosts.find((post) => post.slug === slug))
-      .filter((post): post is (typeof blogPosts)[number] => Boolean(post))
-  }, [])
+  const reviewedCount = indexedBlogSlugs.length
+  const allPosts = useMemo(() => blogPosts, [])
 
   // [MIDDLEWARE] Debug effect — commented out for AdSense review
   // useEffect(() => {
@@ -108,14 +104,14 @@ export default function BlogPage() {
               Blogs <span className="gradient-text">Guides</span>
             </h1>
             <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto">
-              {shuffledPosts.length} reviewed guides currently promoted for search and AdSense quality review
+              Browse {allPosts.length} articles and guides across finance, study, technology, and practical web topics
             </p>
             <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-4 leading-relaxed">
               Every article is published under the SimpleWebToolsBox editorial process, reviewed for clarity,
               and updated when the underlying tools, formulas, or recommendations change.
             </p>
             <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-3 leading-relaxed">
-              Additional articles remain available on the site, but only this smaller reviewed set is being actively surfaced while we improve the rest.
+              We show the full article library here for readers, while only {reviewedCount} reviewed guides are currently prioritized for search indexing and review.
             </p>
           </motion.div>
         )}
@@ -159,7 +155,7 @@ export default function BlogPage() {
             }
           }}
         >
-          {shuffledPosts.map((post) => (
+          {allPosts.map((post) => (
             <motion.article
               key={post.id}
               variants={{
@@ -254,7 +250,7 @@ export default function BlogPage() {
               </div>
               <div>
                 <p className="font-semibold text-slate-900 dark:text-white mb-2">Contact and policies</p>
-                <p>Readers can use the contact page for corrections, feedback, and support, and can review the privacy, disclaimer, editorial, and DMCA pages linked in the footer.</p>
+                <p>Readers can use the contact page for corrections, feedback, and support, and can review the privacy, disclaimer, editorial, and DMCA pages linked in the footer. Only a smaller reviewed subset of guides is currently included in search-facing indexing.</p>
               </div>
             </div>
           </section>

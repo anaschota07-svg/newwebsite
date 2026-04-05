@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { toolsData, categories } from '@/data/tools/toolsData'
+import { toolsData } from '@/data/tools/toolsData'
 import { indexedToolSlugs } from '@/data/siteIndexing'
 import SearchBar from '@/components/SearchBar'
 import { ArrowRight, Sparkles, Filter } from 'lucide-react'
@@ -26,11 +26,11 @@ export function ToolsPageContent() {
   const reviewedTools = indexedToolSlugs
     .map((slug) => toolsData.find((tool) => tool.slug === slug))
     .filter((tool): tool is (typeof toolsData)[number] => Boolean(tool))
-  const reviewedCategories = Array.from(new Set(reviewedTools.map((tool) => tool.category)))
+  const allCategories = Array.from(new Set(toolsData.map((tool) => tool.category)))
 
   const filteredTools = selectedCategory === 'All Tools'
-    ? reviewedTools
-    : reviewedTools.filter(tool => tool.category === selectedCategory)
+    ? toolsData
+    : toolsData.filter(tool => tool.category === selectedCategory)
 
   // [MIDDLEWARE] Debug + step-restore effects — commented out for AdSense review
   // useEffect(() => {
@@ -98,7 +98,7 @@ export function ToolsPageContent() {
             All <span className="gradient-text text-black dark:gradient-text">Tools</span>
           </h1>
           <p className="text-lg text-slate-900 dark:text-slate-400 max-w-2xl mx-auto mb-8">
-            {reviewedTools.length} reviewed tools currently promoted for search visibility
+            Browse {toolsData.length} tools across calculators, generators, text helpers, and developer utilities
           </p>
           <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto leading-relaxed">
             These tools are built to be immediately useful, privacy-friendly, and easy to understand. Wherever
@@ -106,7 +106,7 @@ export function ToolsPageContent() {
             sending users to generic filler articles.
           </p>
           <p className="text-sm text-slate-600 dark:text-slate-500 max-w-3xl mx-auto mt-3 leading-relaxed">
-            We are intentionally surfacing a smaller reviewed set here while the remaining tools are being improved.
+            We show the full tool library here for visitors, while search indexing and sitemap inclusion remain limited to the strongest reviewed pages.
           </p>
           
           {/* Search Bar - Hide with session */}
@@ -134,7 +134,7 @@ export function ToolsPageContent() {
             >
               All Tools
             </button>
-            {reviewedCategories.map((category) => (
+            {allCategories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
@@ -224,9 +224,9 @@ export function ToolsPageContent() {
           <div className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5">
             <h2 className="text-lg font-black text-slate-900 dark:text-white mb-2">Publisher and review note</h2>
             <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
-              This reviewed set is maintained by Mohd Washid for SimpleWebToolsBox. We are intentionally keeping this
-              collection smaller while weaker tool pages are revised, so search users and reviewers see only the pages
-              we consider strongest and most useful.
+              The full tool library is maintained by Mohd Washid for SimpleWebToolsBox. For search and sitemap purposes,
+              only a smaller reviewed set is promoted while weaker pages are being improved, but visitors can still browse
+              and use the complete collection here.
             </p>
           </div>
         </section>

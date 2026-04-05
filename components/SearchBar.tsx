@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { toolsData } from '@/data/tools/toolsData'
-import { indexedToolSlugs } from '@/data/siteIndexing'
 import Link from 'next/link'
 
 export default function SearchBar() {
@@ -13,11 +12,7 @@ export default function SearchBar() {
   const filteredTools = useMemo(() => {
     if (!query.trim()) return []
     const q = query.toLowerCase()
-    const reviewedTools = indexedToolSlugs
-      .map((slug) => toolsData.find((tool) => tool.slug === slug))
-      .filter((tool): tool is (typeof toolsData)[number] => Boolean(tool))
-
-    return reviewedTools
+    return toolsData
       .filter(
         tool =>
           tool.name.toLowerCase().includes(q) ||
