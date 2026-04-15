@@ -1,23 +1,16 @@
 import Link from 'next/link'
-import { ArrowRight, Shield, Sparkles, Calculator, FileText, Rocket, Layers, Award, Globe } from 'lucide-react'
-import { toolsData } from '@/data/tools/toolsData'
+import { ArrowRight, Shield, Sparkles, FileText, Layers, Award, Globe } from 'lucide-react'
 import { blogPosts } from '@/data/blog/blogData'
-import { indexedBlogSlugs, indexedToolSlugs } from '@/data/siteIndexing'
 import BlogImage from '@/components/BlogImage'
 
 export function HomePageContent() {
-    const reviewedTools = indexedToolSlugs
-        .map(slug => toolsData.find(tool => tool.slug === slug))
-        .filter((tool): tool is (typeof toolsData)[number] => Boolean(tool))
-    const reviewedBlogs = indexedBlogSlugs
-        .map(slug => blogPosts.find(post => post.slug === slug))
-        .filter((post): post is (typeof blogPosts)[number] => Boolean(post))
-    const featuredGuides = reviewedBlogs.slice(0, 4)
+    const publishedBlogs = [...blogPosts]
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    const featuredGuides = publishedBlogs.slice(0, 4)
 
     const realStats = {
-        tools: reviewedTools.length,
-        guides: reviewedBlogs.length,
-        categories: new Set(reviewedTools.map(t => t.category)).size,
+        guides: publishedBlogs.length,
+        categories: new Set(publishedBlogs.map(t => t.category)).size,
     }
 
     return (
@@ -41,50 +34,38 @@ export function HomePageContent() {
                     <div className="text-center max-w-4xl mx-auto">
                         <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-white px-5 py-2.5 shadow-sm dark:bg-slate-900 mb-8">
                             <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
-                            <span className="text-sm font-black bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">Professional Tools & Resources</span>
+                            <span className="text-sm font-black bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">Practical Guides & Resources</span>
                             <Sparkles className="w-4 h-4 text-purple-500" />
                         </div>
 
                         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1]">
-                            <span className="text-slate-900 dark:text-white drop-shadow-sm">Free Tools &</span>
+                            <span className="text-slate-900 dark:text-white drop-shadow-sm">Focused Guides</span>
                             <br />
                             <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                                Expert Guides
+                                Real Resources
                             </span>
                         </h1>
 
                         <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
-                            Explore our reviewed set of <span className="font-black text-cyan-600 dark:text-cyan-400">{realStats.tools}</span> high-value tools and <span className="font-black text-purple-600 dark:text-purple-400">{realStats.guides}</span> focused guides while we improve the rest of the library.
+                            Explore <span className="font-black text-purple-600 dark:text-purple-400">{realStats.guides}</span> practical guides across finance, study, and technology, written to be useful, readable, and easy to trust.
                         </p>
                         <p className="text-sm text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
-                            We are intentionally highlighting only the strongest pages for search and AdSense review. Additional tools and articles remain available, but they are being revised before they are promoted again.
+                            The site focuses on original guides, clear ownership, and practical explanations instead of cluttered directory-style content.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                            <Link
-                                href="/tools"
-                                className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-8 py-4 text-base font-bold text-white shadow-lg transition-colors"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
-                                <span className="relative z-10 flex items-center gap-2">
-                                    <Rocket className="w-5 h-5" />
-                                    Explore Tools
-                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </span>
-                            </Link>
-
+                        <div className="flex justify-center mb-16">
                             <Link
                                 href="/blog"
                                 className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-8 py-4 text-base font-bold text-slate-900 shadow-sm transition-colors hover:border-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:border-purple-500"
                             >
                                 <FileText className="w-5 h-5" />
-                                Read Articles
+                                Read Guides
+                                <ArrowRight className="w-4 h-4 transition-transform" />
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
+                        <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
                             {[
-                                { icon: Calculator, value: realStats.tools, label: 'Tools', gradient: 'from-cyan-500 to-blue-500', bg: 'from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20' },
                                 { icon: FileText, value: realStats.guides, label: 'Articles', gradient: 'from-blue-500 to-purple-500', bg: 'from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20' },
                                 { icon: Layers, value: realStats.categories, label: 'Categories', gradient: 'from-purple-500 to-pink-500', bg: 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20' },
                             ].map((stat, index) => (
@@ -118,7 +99,7 @@ export function HomePageContent() {
                             Focused <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Core Content</span>
                         </h2>
                         <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-                            These are the guides we currently consider strongest for search visibility and AdSense review.
+                            Start with the latest published guides across the main topics covered on the site.
                         </p>
                     </div>
 
@@ -180,7 +161,7 @@ export function HomePageContent() {
                             Built Like a <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">Real Resource</span>
                         </h2>
                         <p className="text-lg text-slate-700 dark:text-slate-400 max-w-3xl mx-auto font-medium">
-                            SimpleWebToolsBox combines browser-based tools with original support content so users can understand what a tool does, when to use it, and where its limits are.
+                            SimpleWebToolsBox is being positioned as a smaller publisher resource with clearly written guides, named ownership, and transparent support pages.
                         </p>
                     </div>
 
@@ -194,12 +175,12 @@ export function HomePageContent() {
                             {
                                 icon: Award,
                                 title: 'Original guidance',
-                                body: 'Articles and tool pages are written to explain the practical use of each resource instead of acting as thin filler around a widget.',
+                                body: 'The public site is centered on practical guides that explain a topic clearly instead of acting like a generic content directory.',
                             },
                             {
                                 icon: Globe,
                                 title: 'Clear user intent',
-                                body: 'Visitors can discover tools, browse by category, read guides, and contact the publisher without needing an account or navigating misleading flows.',
+                                body: 'Visitors can discover curated guides, understand who runs the site, and contact the publisher without needing an account or navigating misleading flows.',
                             },
                         ].map((item) => (
                             <div key={item.title} className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-lg dark:border-slate-700 dark:bg-slate-900">
@@ -216,10 +197,10 @@ export function HomePageContent() {
                         <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4">How We Maintain Quality</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 dark:text-slate-400 leading-relaxed font-medium">
                             <p>
-                                Tool pages are structured to stand on their own, with an explanation, usage steps, features, and related recommendations. That helps users even if they land directly on one page from search.
+                                The site is centered on practical articles that answer real user questions clearly instead of padding out pages with generic summaries.
                             </p>
                             <p>
-                                Blog content is reviewed and tied back to real tools or real user workflows. The goal is to publish fewer, more useful pages rather than inflate the site with shallow content.
+                                Content is reviewed, tied to real user questions, and updated when guidance becomes stale so the public library stays useful over time.
                             </p>
                         </div>
                     </div>
@@ -241,7 +222,7 @@ export function HomePageContent() {
                         <span className="text-cyan-200">Start Today</span>
                     </h2>
                     <p className="text-xl text-white/95 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-                        Explore our comprehensive collection of tools and articles covering technology, finance, education, and more.
+                        Explore our current set of publisher-quality guides covering technology, finance, education, and more.
                     </p>
 
                     <Link

@@ -134,7 +134,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
           <div className="relative z-10">
             <h2 className="text-3xl font-black text-white mb-4">Wrapping Up</h2>
             <p className="text-white/90 leading-relaxed text-lg">
-              Hope this guide helped you! Explore more tutorials and try our free tools to level up your skills.
+              Hope this guide helped you! Explore the other published articles for more practical, clearly explained resources.
             </p>
           </div>
         </div>
@@ -162,7 +162,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                 Flutter Developer & Web Publisher
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                Mohd Washid writes and reviews the guides published on SimpleWebToolsBox, focusing on practical tools, web workflows, digital literacy, and straightforward tutorials that help readers solve real problems quickly.
+                Mohd Washid writes and reviews the guides published on SimpleWebToolsBox, focusing on practical explanations, digital literacy, and straightforward articles that help readers solve real problems quickly.
               </p>
               <div className="flex items-center gap-4">
                 <Link

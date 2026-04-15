@@ -1,27 +1,19 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { toolsData } from '@/data/tools/toolsData'
 import { blogPosts } from '@/data/blog/blogData'
-import { isIndexedBlogSlug, isIndexedToolSlug } from '@/data/siteIndexing'
 
 export const metadata: Metadata = {
   title: 'Sitemap',
-  description: 'Complete sitemap of SimpleWebToolsBox — all tools, guides, and pages in one place.',
+  description: 'Sitemap of the current reviewed SimpleWebToolsBox pages, including published guides and essential site pages.',
   alternates: {
     canonical: 'https://simplewebtoolsbox.com/sitemap-page',
   },
 }
 
 export default function SitemapPage() {
-  const indexedTools = toolsData.filter((tool) => isIndexedToolSlug(tool.slug))
-  const indexedPosts = blogPosts.filter((post) => isIndexedBlogSlug(post.slug))
-
-  // Group tools by category
-  const toolsByCategory = indexedTools.reduce((acc, tool) => {
-    if (!acc[tool.category]) acc[tool.category] = []
-    acc[tool.category].push(tool)
-    return acc
-  }, {} as Record<string, typeof indexedTools>)
+  const indexedPosts = [...blogPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
 
   // Group blog posts by category
   const postsByCategory = indexedPosts.reduce((acc, post) => {
@@ -35,7 +27,7 @@ export default function SitemapPage() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Sitemap</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-10">
-          Current search-facing pages on SimpleWebToolsBox — {indexedTools.length} reviewed tools, {indexedPosts.length} reviewed guides, and essential site pages.
+          Current pages on SimpleWebToolsBox — {indexedPosts.length} published guides and essential site pages.
         </p>
 
         <div className="space-y-10">
@@ -48,7 +40,6 @@ export default function SitemapPage() {
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {[
                 { name: 'Home', href: '/' },
-                { name: 'All Tools', href: '/tools' },
                 { name: 'Blogs & Guides', href: '/blog' },
                 { name: 'About Us', href: '/about' },
                 { name: 'Contact Us', href: '/contact' },
@@ -71,40 +62,10 @@ export default function SitemapPage() {
             </ul>
           </section>
 
-          {/* Tools by Category */}
-          <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-slate-700">
-              🛠 Reviewed Tools ({indexedTools.length})
-            </h2>
-            <div className="space-y-8">
-              {Object.entries(toolsByCategory).map(([category, tools]) => (
-                <div key={category}>
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
-                    <span className="w-2 h-5 bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full inline-block" />
-                    {category} ({tools.length})
-                  </h3>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 ml-4">
-                    {tools.map((tool) => (
-                      <li key={tool.slug}>
-                        <Link
-                          href={`/tools/${tool.slug}`}
-                          className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 hover:underline text-sm"
-                        >
-                          <span className="text-gray-400 text-xs">→</span>
-                          {tool.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* Blog Posts by Category */}
           <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-slate-700">
-              📚 Reviewed Guides ({indexedPosts.length})
+              📚 Published Guides ({indexedPosts.length})
             </h2>
             <div className="space-y-8">
               {Object.entries(postsByCategory).map(([category, posts]) => (

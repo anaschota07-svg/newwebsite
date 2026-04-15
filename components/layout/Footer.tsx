@@ -16,7 +16,6 @@ const footerLinks = {
     { name: 'DMCA Policy', href: '/dmca' },
   ],
   resources: [
-    { name: 'All Tools', href: '/tools' },
     { name: 'Blogs & Guides', href: '/blog' },
     { name: 'HTML Sitemap', href: '/sitemap-page' },
   ],
@@ -54,7 +53,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Futuristic tools for modern developers. Fast, private, and always free.
+              Practical guides and focused resources designed to be useful, transparent, and easy to navigate.
             </p>
             
             {/* Stats Badge */}

@@ -54,7 +54,54 @@ GCP is frequently attractive to smaller engineering teams, data projects, and ma
 • choose GCP for analytics- and ML-heavy work
 
 In real evaluations, the winning provider is often the one your team can operate well without surprise costs or a steep operational burden.`,
-        image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+        image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg',
+      },
+      {
+        heading: 'Pricing, Operations, and the Mistakes Teams Make',
+        content: `One of the biggest mistakes in cloud selection is assuming the cheapest-looking service page will produce the cheapest real-world setup. Cloud costs are shaped by much more than raw compute pricing.
+
+Teams often underestimate:
+
+• storage growth over time  
+• data transfer and egress costs  
+• logging, monitoring, and backup overhead  
+• idle resources left running  
+• the staffing cost of operational complexity
+
+This is why the “best” provider on paper can become the wrong provider in practice. A slightly more expensive platform that your team understands well may still be cheaper overall if it reduces misconfiguration, deployment friction, or troubleshooting time.
+
+Operational simplicity matters. If engineers can ship safely, monitor services clearly, and understand billing without constant confusion, the platform is delivering value beyond raw features.
+
+A realistic cloud comparison should always include:
+
+• projected monthly usage  
+• expected traffic patterns  
+• regional availability  
+• security and compliance needs  
+• team familiarity with the platform  
+• likely support burden after launch`,
+        image: 'https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg',
+      },
+      {
+        heading: 'A Practical Decision Framework for Choosing a Provider',
+        content: `If a team is stuck between AWS, Azure, and Google Cloud, a simple framework is often better than a long feature checklist.
+
+Ask:
+
+1. What are we actually building right now?  
+2. What kind of people will operate it after launch?  
+3. Which platform reduces surprise and supports our likely growth path?
+
+For example:
+
+• a startup launching a conventional web app may value speed of deployment and simple operational patterns  
+• a Microsoft-heavy enterprise may gain real efficiency from Azure identity and hybrid integration  
+• a data-centric product team may benefit from Google Cloud’s analytics reputation and developer simplicity in selected areas
+
+The strongest decision is usually the one that balances capability with team competence. Cloud infrastructure is not only about services. It is about whether the people maintaining the system can use those services well.
+
+That is why cloud selection should be treated as an operating decision, not only a technical shopping exercise.`,
+        image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg',
       },
     ],
   },
