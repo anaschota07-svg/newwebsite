@@ -3,9 +3,11 @@ import { HomePageContent } from '@/components/HomePage'
 
 export const metadata: Metadata = {
   title: 'SimpleWebToolsBox - Practical Guides & Resources',
-  description: 'A curated set of practical guides and publisher-quality resources from SimpleWebToolsBox, focused on finance, study, and technology topics.',
+  description:
+    'Practical guides plus free browser tools (calculators, text utilities, developer helpers) with clear how-to text on every page. Published by SimpleWebToolsBox with transparent policies and contact information.',
   keywords: [
     'Blogs & guides',
+    'free online tools',
     'tutorials',
     'study guides',
     'finance guides',

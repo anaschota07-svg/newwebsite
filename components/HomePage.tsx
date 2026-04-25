@@ -1,7 +1,17 @@
 import Link from 'next/link'
-import { ArrowRight, Shield, Sparkles, FileText, Layers, Award, Globe } from 'lucide-react'
+import { ArrowRight, Shield, Sparkles, FileText, Layers, Award, Globe, Wrench } from 'lucide-react'
 import { blogPosts } from '@/data/blog/blogData'
+import { toolsData } from '@/data/tools/toolsData'
 import BlogImage from '@/components/BlogImage'
+
+const featuredToolSlugs = [
+  'word-counter',
+  'json-formatter',
+  'loan-calculator',
+  'password-generator',
+  'qr-code-generator',
+  'age-calculator',
+] as const
 
 export function HomePageContent() {
     const publishedBlogs = [...blogPosts]
@@ -46,28 +56,37 @@ export function HomePageContent() {
                             </span>
                         </h1>
 
-                        <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
-                            Explore <span className="font-black text-purple-600 dark:text-purple-400">{realStats.guides}</span> practical guides across finance, study, and technology, written to be useful, readable, and easy to trust.
+                        <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 mb-6 max-w-2xl mx-auto leading-relaxed font-medium">
+                            Explore <span className="font-black text-cyan-600 dark:text-cyan-400">{toolsData.length}</span> free online tools and <span className="font-black text-purple-600 dark:text-purple-400">{realStats.guides}</span> in-depth guides across finance, study, and technology—written to be useful, transparent, and easy to trust.
                         </p>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
-                            The site focuses on original guides, clear ownership, and practical explanations instead of cluttered directory-style content.
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 max-w-3xl mx-auto leading-relaxed font-medium">
+                            The site pairs long-form articles with a library of free browser tools. Every tool page includes original how-to text—not just a blank widget—so visitors know what the output means and when to seek professional advice.
                         </p>
 
-                        <div className="flex justify-center mb-16">
+                        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 mb-16">
+                            <Link
+                                href="/tools"
+                                className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-cyan-200 bg-gradient-to-r from-cyan-50 to-blue-50 px-8 py-4 text-base font-bold text-slate-900 shadow-sm transition-colors hover:border-cyan-500 dark:border-cyan-800 dark:from-cyan-950/50 dark:to-blue-950/50 dark:text-white dark:hover:border-cyan-400"
+                            >
+                                <Wrench className="w-5 h-5" />
+                                Browse free tools
+                                <ArrowRight className="w-4 h-4 transition-transform" />
+                            </Link>
                             <Link
                                 href="/blog"
                                 className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-8 py-4 text-base font-bold text-slate-900 shadow-sm transition-colors hover:border-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:border-purple-500"
                             >
                                 <FileText className="w-5 h-5" />
-                                Read Guides
+                                Read guides
                                 <ArrowRight className="w-4 h-4 transition-transform" />
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
                             {[
-                                { icon: FileText, value: realStats.guides, label: 'Articles', gradient: 'from-blue-500 to-purple-500', bg: 'from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20' },
-                                { icon: Layers, value: realStats.categories, label: 'Categories', gradient: 'from-purple-500 to-pink-500', bg: 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20' },
+                                { icon: Wrench, value: toolsData.length, label: 'Tool pages', gradient: 'from-cyan-500 to-blue-500', bg: 'from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20' },
+                                { icon: FileText, value: realStats.guides, label: 'Guides', gradient: 'from-blue-500 to-purple-500', bg: 'from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20' },
+                                { icon: Layers, value: realStats.categories, label: 'Guide topics', gradient: 'from-purple-500 to-pink-500', bg: 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20' },
                             ].map((stat, index) => (
                                 <div key={index} className="relative">
                                     <div className={`bg-gradient-to-br ${stat.bg} rounded-2xl p-6 border-2 border-white/60 dark:border-slate-700/60 shadow-lg`}>
@@ -88,15 +107,61 @@ export function HomePageContent() {
                 </div>
             </section>
 
+            <section className="py-20 relative" aria-labelledby="free-tools-heading">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-white px-5 py-2.5 shadow-sm dark:bg-slate-900 mb-6">
+                            <Wrench className="w-4 h-4 text-cyan-500" />
+                            <span className="text-sm font-black bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Free tools library</span>
+                        </div>
+                        <h2 id="free-tools-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                            Utilities with <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">real context</span>
+                        </h2>
+                        <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium mb-8">
+                            Each tool has its own page with an explanation, privacy scope, and limitations—so the site is not a bare directory of apps.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto mb-4">
+                        {featuredToolSlugs.map((slug) => {
+                            const t = toolsData.find((x) => x.slug === slug)
+                            if (!t) return null
+                            return (
+                                <Link
+                                    key={t.id}
+                                    href={`/tools/${t.slug}`}
+                                    className="group flex h-full items-start justify-between gap-2 rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-cyan-500 dark:border-slate-700 dark:bg-slate-900"
+                                >
+                                    <div>
+                                        <span className="text-2xl mr-2" aria-hidden>{t.icon}</span>
+                                        <span className="font-black text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">{t.name}</span>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 line-clamp-2">{t.description}</p>
+                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-cyan-500 flex-shrink-0 mt-1" />
+                                </Link>
+                            )
+                        })}
+                    </div>
+                    <div className="text-center">
+                        <Link
+                            href="/tools"
+                            className="inline-flex items-center gap-2 text-sm font-bold text-cyan-600 dark:text-cyan-400 hover:underline"
+                        >
+                            See all {toolsData.length} tools
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
             <section className="py-20 relative" aria-labelledby="reviewed-guides-heading">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-white px-5 py-2.5 shadow-sm dark:bg-slate-900 mb-6">
                             <FileText className="w-4 h-4 text-blue-500" />
-                            <span className="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Reviewed Guides</span>
+                            <span className="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Reviewed guides</span>
                         </div>
                         <h2 id="reviewed-guides-heading" className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
-                            Focused <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Core Content</span>
+                            Focused <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">long-form content</span>
                         </h2>
                         <p className="text-lg text-slate-700 dark:text-slate-400 max-w-2xl mx-auto font-medium">
                             Start with the latest published guides across the main topics covered on the site.

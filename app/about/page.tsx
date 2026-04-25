@@ -252,11 +252,11 @@ export default function AboutPage() {
             >
               <Users className="h-8 w-8 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-black text-white mb-4">Join Thousands of Users</h2>
+            <h2 className="text-3xl font-black text-white mb-4">Built for real tasks</h2>
             <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
-              Developers, designers, students, and professionals worldwide trust SimpleWebToolsBox for their daily 
-              tasks. Our tools are used by thousands of users every day to calculate, convert, generate, and optimize 
-              their work. Whether you're building a website, managing finances, or creating content, we're here to help.
+              Developers, students, and professionals use SimpleWebToolsBox to calculate, convert, format, and learn
+              without installing heavy software. We focus on clear pages, browser-based privacy for most tools, and
+              content you can read before you use the app.
             </p>
             <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
               Have a tool idea or feedback? We'd love to hear from you! Your suggestions help us improve and expand 

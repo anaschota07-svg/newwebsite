@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | SimpleWebToolsBox",
   },
   description:
-    "SimpleWebToolsBox publishes practical guides and focused resources across finance, study, and technology topics, with clear ownership, transparent policies, and regularly reviewed content.",
+    "Free browser tools and in-depth guides on technology, study, and finance, with a named publisher, tool pages that explain use and limits, and transparent policy and contact pages.",
   keywords: [
     "practical guides",
     "technology guides",
@@ -113,12 +113,8 @@ export default function RootLayout({
             "@type": "WebSite",
             name: "SimpleWebToolsBox",
             url: "https://simplewebtoolsbox.com",
-            potentialAction: {
-              "@type": "SearchAction",
-              target:
-                "https://simplewebtoolsbox.com/search?q={search_term_string}",
-              "query-input": "required name=search_term_string",
-            },
+            description:
+              "Practical articles and free browser-based tools for everyday tasks, with clear ownership and policy pages.",
           }}
         />
 

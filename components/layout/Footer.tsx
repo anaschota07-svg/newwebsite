@@ -6,6 +6,7 @@ const footerLinks = {
   company: [
     { name: 'About Us', href: '/about' },
     { name: 'Contact Us', href: '/contact' },
+    { name: 'Free tools', href: '/tools' },
     { name: 'Blog', href: '/blog' },
   ],
   legal: [
@@ -17,6 +18,7 @@ const footerLinks = {
   ],
   resources: [
     { name: 'Blogs & Guides', href: '/blog' },
+    { name: 'Tools directory', href: '/tools' },
     { name: 'HTML Sitemap', href: '/sitemap-page' },
   ],
 }

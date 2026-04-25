@@ -1,10 +1,12 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { blogPosts } from '@/data/blog/blogData'
+import { toolsData, categories } from '@/data/tools/toolsData'
 
 export const metadata: Metadata = {
   title: 'Sitemap',
-  description: 'Sitemap of the current reviewed SimpleWebToolsBox pages, including published guides and essential site pages.',
+  description:
+    'Sitemap of SimpleWebToolsBox: free tool pages, published guides, and essential policy and contact pages.',
   alternates: {
     canonical: 'https://simplewebtoolsbox.com/sitemap-page',
   },
@@ -27,7 +29,7 @@ export default function SitemapPage() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Sitemap</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-10">
-          Current pages on SimpleWebToolsBox — {indexedPosts.length} published guides and essential site pages.
+          Current public routes — {toolsData.length} tool pages, {indexedPosts.length} published guides, and policy and contact pages.
         </p>
 
         <div className="space-y-10">
@@ -40,6 +42,7 @@ export default function SitemapPage() {
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {[
                 { name: 'Home', href: '/' },
+                { name: 'Free tools directory', href: '/tools' },
                 { name: 'Blogs & Guides', href: '/blog' },
                 { name: 'About Us', href: '/about' },
                 { name: 'Contact Us', href: '/contact' },
@@ -60,6 +63,44 @@ export default function SitemapPage() {
                 </li>
               ))}
             </ul>
+          </section>
+
+          <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-slate-700">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-slate-700">
+              🛠 Free tools ({toolsData.length})
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">
+              Each tool has a dedicated page with how-to text and a browser-based utility. Grouped by category.
+            </p>
+            <div className="space-y-6">
+              {categories
+                .sort((a, b) => a.localeCompare(b))
+                .map((cat) => {
+                  const group = toolsData.filter((t) => t.category === cat)
+                  return (
+                    <div key={cat}>
+                      <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+                        {cat} ({group.length})
+                      </h3>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-1 ml-1">
+                        {group
+                          .sort((a, b) => a.name.localeCompare(b.name))
+                          .map((tool) => (
+                            <li key={tool.slug}>
+                              <Link
+                                href={`/tools/${tool.slug}`}
+                                className="flex items-start gap-2 text-cyan-600 dark:text-cyan-400 hover:underline text-sm"
+                              >
+                                <span className="text-gray-400 text-xs mt-0.5">→</span>
+                                {tool.name}
+                              </Link>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  )
+                })}
+            </div>
           </section>
 
           {/* Blog Posts by Category */}

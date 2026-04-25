@@ -9,6 +9,7 @@ import { loanCalculatorContent, creditScoreContent } from '@/data/blog/remaining
 import { studyTechniquesContent } from '@/data/blog/studyContent'
 import { cloudComputingContent, cybersecurityContent } from '@/data/blog/englishTechContent'
 import { digitalMarketingContent, onlineEarningContent } from '@/data/blog/englishFinanceStudyContent'
+import { newGuides2026Content } from '@/data/blog/newGuides2026Content'
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))
@@ -78,6 +79,7 @@ const blogContent = {
   ...cybersecurityContent,
   ...digitalMarketingContent,
   ...onlineEarningContent,
+  ...newGuides2026Content,
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
