@@ -25,6 +25,14 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
+      // Redirect all www traffic to the canonical non-www domain
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.simplewebtoolsbox.com' }],
+        destination: 'https://simplewebtoolsbox.com/:path*',
+        permanent: true,
+      },
+      // Old blog post slugs → relevant tools
       {
         source: '/blog/text-case-conversion-guide',
         destination: '/tools/text-case-converter',
@@ -48,6 +56,17 @@ const nextConfig: NextConfig = {
       {
         source: '/blog/understanding-bmi',
         destination: '/tools/bmi-calculator',
+        permanent: true,
+      },
+      // Removed blog posts → blog listing
+      {
+        source: '/blog/css-optimization-guide',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/online-learning-platforms-guide',
+        destination: '/blog',
         permanent: true,
       },
     ]

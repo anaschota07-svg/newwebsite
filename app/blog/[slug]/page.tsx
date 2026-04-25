@@ -7,7 +7,7 @@ import { BlogDetailPage } from '@/components/BlogDetailPage'
 import { blogContent as aiContent } from '@/data/blog/blogContent'
 import { loanCalculatorContent, creditScoreContent } from '@/data/blog/remainingContent'
 import { studyTechniquesContent } from '@/data/blog/studyContent'
-import { cloudComputingContent, cybersecurityContent } from '@/data/blog/englishTechContent'
+import { cloudComputingContent, cybersecurityContent, webFrameworksContent } from '@/data/blog/englishTechContent'
 import { digitalMarketingContent, onlineEarningContent } from '@/data/blog/englishFinanceStudyContent'
 import { newGuides2026Content } from '@/data/blog/newGuides2026Content'
 
@@ -77,6 +77,7 @@ const blogContent = {
   ...studyTechniquesContent,
   ...cloudComputingContent,
   ...cybersecurityContent,
+  ...webFrameworksContent,
   ...digitalMarketingContent,
   ...onlineEarningContent,
   ...newGuides2026Content,

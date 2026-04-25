@@ -2,67 +2,72 @@ import { MetadataRoute } from 'next'
 import { blogPosts } from '@/data/blog/blogData'
 import { toolsData } from '@/data/tools/toolsData'
 
+// Keep a stable last-modified for static assets so the sitemap doesn't change on every build
+const SITE_LAUNCH = new Date('2026-01-25')
+const POLICY_UPDATED = new Date('2026-02-01')
+const TOOLS_UPDATED = new Date('2026-04-01')
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://simplewebtoolsbox.com'
 
   const staticPages = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: new Date('2026-04-24'),
       changeFrequency: 'daily' as const,
       priority: 1,
     },
     {
       url: `${baseUrl}/tools`,
-      lastModified: new Date(),
+      lastModified: TOOLS_UPDATED,
       changeFrequency: 'weekly' as const,
       priority: 0.95,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      lastModified: new Date('2026-04-24'),
       changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
+      lastModified: SITE_LAUNCH,
       changeFrequency: 'monthly' as const,
-      priority: 0.5,
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
+      lastModified: SITE_LAUNCH,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
     {
       url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
+      lastModified: POLICY_UPDATED,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms-conditions`,
-      lastModified: new Date(),
+      lastModified: POLICY_UPDATED,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
       url: `${baseUrl}/disclaimer`,
-      lastModified: new Date(),
+      lastModified: POLICY_UPDATED,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
       url: `${baseUrl}/editorial-policy`,
-      lastModified: new Date(),
+      lastModified: POLICY_UPDATED,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
       url: `${baseUrl}/dmca`,
-      lastModified: new Date(),
+      lastModified: POLICY_UPDATED,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
@@ -72,15 +77,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    priority: 0.8,
   }))
 
   const toolPages = toolsData.map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
-    lastModified: new Date(),
+    lastModified: TOOLS_UPDATED,
     changeFrequency: 'monthly' as const,
-    priority: 0.75,
+    priority: 0.8,
   }))
 
+  // Most important pages first
   return [...staticPages, ...toolPages, ...blogPages]
 }

@@ -129,6 +129,18 @@ export const blogPosts: BlogPost[] = [
     readTime: '12 min read',
     image: 'https://images.pexels.com/photos/128867/coins-currency-investment-insurance-128867.jpeg',
   },
+  {
+    id: '11',
+    title: 'Web Frameworks Comparison 2026: React, Vue, Angular, Svelte and More',
+    description:
+      'A practical comparison of the most-used web frameworks in 2026, covering architecture, learning curve, ecosystem maturity, and when each one is the more sensible choice for your project.',
+    slug: 'web-frameworks-comparison-2026',
+    category: 'Technology',
+    author: BLOG_AUTHOR,
+    date: '2026-04-10',
+    readTime: '14 min read',
+    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+  },
 ]
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {

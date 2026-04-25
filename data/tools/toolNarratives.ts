@@ -556,20 +556,24 @@ export const toolNarratives: Record<string, ToolNarrative> = {
   'random-password-generator': {
     sections: [
       {
-        heading: 'When you need more than one password at once',
-        body: `Bulk generation helps when you are setting up test accounts, temporary credentials for a demo environment, or rotating a family of service accounts in a safe workflow. The same rules apply: longer secrets, a password manager, and multi-factor where available.`,
+        heading: 'When bulk password generation is useful',
+        body: `Bulk generation is useful when you are setting up multiple test accounts, provisioning temporary credentials for a demo or staging environment, or rotating a family of service account secrets in a controlled workflow. Generating a fresh random set for each slot reduces the risk of credential reuse across systems.`,
       },
       {
-        heading: 'Practical use',
-        body: `Generate a set, copy the ones you need, and avoid leaving them in chat logs. If a website forbids some characters, turn off the problematic classes and regenerate. If you need a pattern like “one word in each list,” this tool is not a passphrase generator, but a random character generator is still a building block in some systems.`,
+        heading: 'How to choose good generation settings',
+        body: `Longer passwords are significantly stronger. A 20-character random string is far harder to brute-force than a 10-character one even if both use the same character set. Include uppercase, lowercase, numbers, and symbols unless the target system forbids specific characters. If a service disallows certain symbols, uncheck that character class and regenerate rather than manually replacing characters, which introduces patterns.`,
       },
       {
-        heading: 'Not an enterprise IAM product',
-        body: `This is a local helper, not a secret vault, access review system, or compliance workflow.`,
+        heading: 'Safe handling after generation',
+        body: `Copy what you need and paste directly into a password manager. Avoid leaving generated passwords in chat windows, emails, or clipboard history tools that sync across devices. If you are working in a shared screen session, clear the output before sharing your screen. Generated passwords should be treated as secrets from the moment they appear.`,
+      },
+      {
+        heading: 'What this tool is not',
+        body: `This is a browser-based random character generator, not a passphrase generator, a secret vault, an access review system, or a compliance workflow. For teams that need centralized credential management, rotation automation, or audit trails, a dedicated secrets manager is the right tool.`,
       },
     ],
   },
-  'text-diff-checker': {
+    'text-diff-checker': {
     sections: [
       {
         heading: 'What diffs are for beyond Git',
@@ -588,20 +592,24 @@ export const toolNarratives: Record<string, ToolNarrative> = {
   'email-validator': {
     sections: [
       {
-        heading: 'What “valid” usually means in email input',
-        body: `Most validators check a syntactic pattern: there is a local part, an @ sign, and a domain. That catches obvious typos and incomplete addresses. It does not prove a mailbox exists, is monitored, or belongs to the person you expect—only the receiving system can do that, often with a confirmation step.`,
+        heading: 'What email validation actually checks',
+        body: `Most validators check a syntactic pattern: there is a local part, an @ sign, and a recognizable domain. That catches obvious typos such as missing the @ symbol, double dots, or incomplete addresses. It does not prove a mailbox exists, is currently active, or belongs to the person you expect — only a delivery attempt or confirmation email can verify that.`,
       },
       {
-        heading: 'How to use validation with UX, not just regex',
-        body: `In products, pair syntax checks with “did you mean .com” hints for common TLD errors. Offer clear error text instead of a generic “invalid email” message. If you are doing cold outreach, respect consent and local anti-spam rules; correct syntax is not the same as permission to email.`,
+        heading: 'Common email format mistakes this tool catches',
+        body: `Typical errors include missing or misplaced @ signs, spaces in the address, invalid characters in the local part, missing top-level domains (example: user@domain with no .com), and double dots before or after the @ sign. Catching these before submission improves form UX and reduces bounce rates in email campaigns.`,
       },
       {
-        heading: 'This tool is not a deliverability service',
-        body: `It does not check MX records, reputation, or bounces. It is a quick developer and form-design helper.`,
+        heading: 'How to use validation alongside good UX',
+        body: `In web forms, pair syntax validation with helpful inline hints — for example, suggesting ".com" when a user types ".ocm" or ".con". Provide a specific error message like "Email address is missing the @ symbol" rather than a generic "invalid email" label. If you are building a sign-up flow, also offer a confirmation email step, since correct syntax does not equal a real inbox.`,
+      },
+      {
+        heading: 'What this tool is not',
+        body: `This tool does not check MX records, SMTP deliverability, inbox reputation, or whether an address belongs to a real person. It is a quick syntax helper for developers and form designers. For bulk email list cleaning or deliverability scoring, a dedicated email verification service is the appropriate choice.`,
       },
     ],
   },
-  'stopwatch': {
+    'stopwatch': {
     sections: [
       {
         heading: 'When a stopwatch is still the right UI',
@@ -637,15 +645,23 @@ export const toolNarratives: Record<string, ToolNarrative> = {
     sections: [
       {
         heading: 'What a browser speed test can tell you',
-        body: `A speed test is a quick snapshot of how fast your current network path can move data in ideal-ish conditions, usually by downloading and uploading to nearby servers. It helps confirm whether a connection feels slow because the ISP is underperforming, the Wi-Fi is weak, or a VPN is throttling. It is not a lab-grade benchmark.`,
+        body: `A speed test is a quick snapshot of how fast your current network path can move data under near-ideal conditions, usually by transferring data to and from nearby test servers. It helps confirm whether a slow connection is caused by ISP underperformance, weak Wi-Fi signal, a throttling VPN, or too many devices sharing bandwidth. It is useful as a first diagnostic step before contacting your internet provider or adjusting your network setup.`,
       },
       {
-        heading: 'How to get less noisy results',
-        body: `Close heavy downloads, use a wired connection if you can, and test at different times of day. Run multiple tests because routing changes. If you are comparing two locations, use the same server selection rules when possible. If you are testing for gaming or video calls, also look at latency and jitter, not just Mbps.`,
+        heading: 'Understanding download speed, upload speed, and latency',
+        body: `Download speed (Mbps) measures how fast data reaches your device — important for streaming, browsing, and large file transfers. Upload speed matters for video calls, cloud backups, and publishing content. Latency (ping in ms) measures the round-trip time for a small packet; low latency is critical for gaming, video conferencing, and real-time applications even when your Mbps looks fine. Jitter measures variability in latency and causes choppy audio or video even on fast connections.`,
       },
       {
-        heading: 'It does not diagnose everything',
-        body: `DNS issues, browser extensions, and specific app servers can be slow even when a generic speed test looks fine. The output is a clue, not a full network health report.`,
+        heading: 'How to get less noisy, more reliable results',
+        body: `Close background apps and pause any active downloads before testing. Use a wired Ethernet connection instead of Wi-Fi when you want to isolate ISP performance from Wi-Fi hardware limits. Run the test at different times of day because network congestion changes in evenings and weekends. Run at least three tests and compare them — routing changes and server load can cause single-test outliers. If you are comparing two locations, use the same test server and conditions for a fair comparison.`,
+      },
+      {
+        heading: 'What a speed test result does not diagnose',
+        body: `A clean speed test result does not mean every service on your device will be fast. DNS resolution delays, browser extensions, VPN overhead, content delivery network (CDN) routing, and the performance of a specific app's servers can all cause slowness even when your raw speed looks healthy. If a single website is slow but general browsing is fine, the issue is more likely on the service side than your connection. This tool gives you a useful clue, not a complete network health report.`,
+      },
+      {
+        heading: 'Privacy and data handling',
+        body: `This speed test runs in your browser on SimpleWebToolsBox. The test transfers sample data to measure your connection throughput. No personally identifiable information is collected or stored as part of the measurement process.`,
       },
     ],
   },
