@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'HTML Sitemap | SimpleWebToolsBox',
+  title: 'HTML Sitemap',
   description: 'Human-readable sitemap for browsing the reviewed pages on SimpleWebToolsBox.',
   robots: {
     index: false,

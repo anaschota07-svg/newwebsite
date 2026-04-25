@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact | SimpleWebToolsBox',
+  title: 'Contact',
   description:
     'Contact the publisher of SimpleWebToolsBox for feedback, corrections, suggestions, and general support.',
   robots: {
