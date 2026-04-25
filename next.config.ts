@@ -25,13 +25,8 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
-      // Redirect all www traffic to the canonical non-www domain
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.simplewebtoolsbox.com' }],
-        destination: 'https://simplewebtoolsbox.com/:path*',
-        permanent: true,
-      },
+      // NOTE: www → non-www redirect is handled at the Vercel domain level (not here)
+      // Adding it here while Vercel also redirects non-www → www causes a redirect loop
       // Old blog post slugs → relevant tools
       {
         source: '/blog/text-case-conversion-guide',
