@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import StructuredData from "@/components/StructuredData";
+import { siteAndOrganizationJsonLd } from "@/data/siteStructuredData";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://simplewebtoolsbox.com"),
@@ -92,44 +91,27 @@ export default function RootLayout({
         <link rel="icon" sizes="32x32" href="/logo.png" />
         <link rel="icon" sizes="16x16" href="/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+
+        {/* Site-wide JSON-LD once in <head> (single @graph) — not in <body>, to avoid duplicate blocks from streaming */}
+        <script
+          id="json-ld-site-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteAndOrganizationJsonLd),
+          }}
+        />
+
+        {/* Plain async script: next/script adds data-nscript which AdSense warns about */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
+          crossOrigin="anonymous"
+        />
       </head>
 
       <body
         className="antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50"
       >
-        {/* Google AdSense */}
-        <Script
-          id="google-adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
-
-        {/* Structured Data */}
-        <StructuredData
-          data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "SimpleWebToolsBox",
-            url: "https://simplewebtoolsbox.com",
-            description:
-              "Practical articles and free browser-based tools for everyday tasks, with clear ownership and policy pages.",
-          }}
-        />
-
-        <StructuredData
-          data={{
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "SimpleWebToolsBox",
-            url: "https://simplewebtoolsbox.com",
-            logo: "https://simplewebtoolsbox.com/logo.png",
-          }}
-        />
-
-        {/* FAQPage schema is on the home page only — not here — to avoid duplicate structured data on every route */}
-
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>
