@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
@@ -101,17 +102,17 @@ export default function RootLayout({
           }}
         />
 
-        {/* Plain async script: next/script adds data-nscript which AdSense warns about */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
-          crossOrigin="anonymous"
-        />
       </head>
 
       <body
         className="antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50"
       >
+        <Script
+          id="adsense-loader"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
+          crossOrigin="anonymous"
+        />
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>

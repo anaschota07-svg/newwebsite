@@ -235,7 +235,7 @@ export function HomePageContent() {
                             {
                                 icon: Shield,
                                 title: 'Named ownership',
-                                body: 'The site is published and maintained by Mohd Washid. About, contact, editorial, privacy, disclaimer, and DMCA pages are all available to help users understand who runs the site.',
+                                body: 'The site is published and maintained by SimpleWebToolsBox Team. About, contact, editorial, privacy, disclaimer, and DMCA pages are all available to help users understand who runs the site.',
                             },
                             {
                                 icon: Award,

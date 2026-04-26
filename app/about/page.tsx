@@ -205,13 +205,13 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-1">Mohd Washid</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-1">SimpleWebToolsBox Team</h3>
               <p className="text-cyan-600 dark:text-cyan-400 font-bold mb-4 flex items-center gap-2">
                 <Code2 className="w-4 h-4" />
                 Flutter Developer &amp; Founder
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4 text-lg">
-                SimpleWebToolsBox was built by Mohd Washid, a software developer with expertise in Flutter, 
+                SimpleWebToolsBox was built by SimpleWebToolsBox Team, a software developer with expertise in Flutter, 
                 web development, and productivity applications. Frustrated with bloated, paid-only tools, 
                 he set out to create a single platform offering all essential web utilities — completely free, 
                 fast, and private.

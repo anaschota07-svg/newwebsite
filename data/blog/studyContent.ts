@@ -111,6 +111,42 @@ Students usually improve fastest when they combine three things:
 Add sleep, reasonable breaks, and honest review of weak areas, and the results are usually much better than simply extending study hours without changing the method.`,
         image: 'https://images.pexels.com/photos/1226398/pexels-photo-1226398.jpeg',
       },
+      {
+        heading: 'Exam-Week Playbook: What to Do, What to Avoid, and How to Stay Consistent',
+        content: `Exam week is where good systems beat panic. You do not need a perfect plan. You need a repeatable structure that protects focus, sleep, and retrieval.
+
+**A practical daily structure during exam week:**
+• Block 1 (60-90 min): active recall of the highest-weight topics
+• Short break (10-15 min)
+• Block 2 (60-90 min): mixed problem practice under light time pressure
+• Break + meal
+• Block 3 (45-60 min): review mistakes and fix weak concepts
+• Final 20 min: write tomorrow's first three tasks
+
+**What high-performing students usually avoid:**
+✗ Re-reading full chapters the night before instead of retrieval practice
+✗ Studying only favorite subjects and delaying weak topics
+✗ Sacrificing sleep to \"gain\" extra study hours
+✗ Switching methods daily because of stress
+✗ Comparing progress constantly with friends
+
+**Rapid confidence check before each exam:**
+| Check | Yes = Ready Signal | No = Immediate Action |
+|---|---|---|
+| Can you explain core concepts without notes? | Memory is usable | Do one focused recall round |
+| Can you solve mixed questions without prompts? | Application is improving | Practice interleaved sets |
+| Do you have a clear error log of mistakes? | Weak areas are visible | Review and categorize mistakes |
+| Did you sleep at least 7 hours? | Better recall and focus | Prioritize recovery tonight |
+
+**48-hour rule before exam day:**
+✓ Focus on consolidation, not new major topics
+✓ Revise your mistake log and summary sheets
+✓ Use short recall cycles instead of marathon sessions
+✓ Keep hydration and sleep non-negotiable
+
+Key takeaway: exam performance improves most when revision is calm, structured, and retrieval-focused — not when effort is chaotic.`,
+        image: 'https://images.pexels.com/photos/1184572/pexels-photo-1184572.jpeg',
+      },
     ],
   },
 }

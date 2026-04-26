@@ -20,11 +20,13 @@ const FEATURED_TOOL_SLUGS = [
 
 const FEATURED_BLOG_SLUGS = [
   'cybersecurity-best-practices-2026',
-  'digital-marketing-2026-guide',
-  'effective-study-techniques',
   'password-managers-and-2fa-guide',
   'emergency-fund-basics-2026',
   'web-frameworks-comparison-2026',
+  'how-to-convert-image-to-webp-for-free',
+  'why-is-my-website-slow-2025',
+  'how-to-check-website-security',
+  'how-hackers-crack-weak-passwords-and-how-to-prevent-it',
 ] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {

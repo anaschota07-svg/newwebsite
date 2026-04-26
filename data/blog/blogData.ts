@@ -10,35 +10,13 @@ export interface BlogPost {
   image: string
 }
 
-export const BLOG_AUTHOR = 'Mohd Washid'
+export const BLOG_AUTHOR = 'SimpleWebToolsBox Team'
 
 export function normalizeBlogAuthor(author: string): string {
   return author === 'SimpleWebToolsBox Team' ? BLOG_AUTHOR : author
 }
 
 export const blogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Artificial Intelligence in 2026: Transforming Industries and Shaping the Future',
-    description: 'A practical guide to how AI is being used in software, business, education, and everyday workflows, with a clearer view of where it genuinely helps and where caution still matters.',
-    slug: 'artificial-intelligence-2026-guide',
-    category: 'Technology',
-    author: BLOG_AUTHOR,
-    date: '2026-03-15',
-    readTime: '15 min read',
-    image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg',
-  },
-  {
-    id: '2',
-    title: 'Cloud Computing Explained: AWS vs Azure vs Google Cloud - Complete Comparison',
-    description: 'A practical comparison of AWS, Azure, and Google Cloud covering service models, tradeoffs, operational concerns, and how teams can choose the right platform more realistically.',
-    slug: 'cloud-computing-comparison-2026',
-    category: 'Technology',
-    author: BLOG_AUTHOR,
-    date: '2026-03-12',
-    readTime: '14 min read',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-  },
   {
     id: '3',
     title: 'Cybersecurity Best Practices: Protecting Your Digital Life from Threats',
@@ -49,61 +27,6 @@ export const blogPosts: BlogPost[] = [
     date: '2026-03-10',
     readTime: '13 min read',
     image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg',
-  },
-  {
-    id: '4',
-    title: 'Digital Marketing 2026: Complete Guide to Online Business',
-    description: 'A broad but practical introduction to SEO, social media, email, paid campaigns, and measurement for people trying to grow a website, product, or online business.',
-    slug: 'digital-marketing-2026-guide',
-    category: 'Technology',
-    author: BLOG_AUTHOR,
-    date: '2026-03-13',
-    readTime: '16 min read',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-  },
-  {
-    id: '5',
-    title: 'Online Earning Guide: Make Money from Home',
-    description: 'A grounded guide to freelancing, content businesses, affiliate marketing, courses, and other online income models, with realistic expectations instead of clickbait promises.',
-    slug: 'online-earning-guide',
-    category: 'Finance',
-    author: BLOG_AUTHOR,
-    date: '2026-03-11',
-    readTime: '15 min read',
-    image: 'https://images.pexels.com/photos/259209/pexels-photo-259209.jpeg',
-  },
-  {
-    id: '6',
-    title: 'Credit Score Explained: How to Build and Maintain Excellent Credit',
-    description: 'A practical guide to what credit scores signal, which habits affect them most, and how better credit improves borrowing flexibility and long-term cost.',
-    slug: 'credit-score-guide-2026',
-    category: 'Finance',
-    author: BLOG_AUTHOR,
-    date: '2026-03-14',
-    readTime: '15 min read',
-    image: 'https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg',
-  },
-  {
-    id: '7',
-    title: 'Loan Calculator and Understanding Loan Calculations: EMI, Interest, and Repayment',
-    description: 'A borrowing guide that explains EMI, total repayment, tenure tradeoffs, and how to compare loan offers more carefully before applying.',
-    slug: 'loan-calculator-guide',
-    category: 'Finance',
-    author: BLOG_AUTHOR,
-    date: '2026-03-08',
-    readTime: '14 min read',
-    image: 'https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg',
-  },
-  {
-    id: '8',
-    title: 'Effective Study Techniques: Learn Faster and Retain Information Better',
-    description: 'A focused guide to active recall, spaced repetition, the Feynman technique, interleaving, and sustainable routines that improve real retention.',
-    slug: 'effective-study-techniques',
-    category: 'Study',
-    author: BLOG_AUTHOR,
-    date: '2026-03-13',
-    readTime: '14 min read',
-    image: 'https://images.pexels.com/photos/1226398/pexels-photo-1226398.jpeg',
   },
   {
     id: '9',
@@ -140,6 +63,54 @@ export const blogPosts: BlogPost[] = [
     date: '2026-04-10',
     readTime: '14 min read',
     image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+  },
+  {
+    id: '12',
+    title: 'How to Convert Images to WebP for Free (Beginner-Friendly Guide)',
+    description:
+      'A practical step-by-step guide to converting images to WebP for free using online tools and built-in options, with real compatibility tips for WordPress and custom websites.',
+    slug: 'how-to-convert-image-to-webp-for-free',
+    category: 'Technology',
+    author: BLOG_AUTHOR,
+    date: '2026-04-26',
+    readTime: '13 min read',
+    image: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg',
+  },
+  {
+    id: '13',
+    title: 'Why Is My Website Slow? A Practical 2025 Speed Fix Guide',
+    description:
+      'A practical guide to diagnosing and fixing slow websites in 2025, including Core Web Vitals, testing tools, and a step-by-step optimisation checklist.',
+    slug: 'why-is-my-website-slow-2025',
+    category: 'Technology',
+    author: BLOG_AUTHOR,
+    date: '2026-04-26',
+    readTime: '14 min read',
+    image: 'https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg',
+  },
+  {
+    id: '14',
+    title: 'How to Check Website Security: Free Tools and Practical Fixes',
+    description:
+      'A complete website security guide covering free security audits, critical checks, common vulnerabilities, and a practical hardening checklist for site owners.',
+    slug: 'how-to-check-website-security',
+    category: 'Technology',
+    author: BLOG_AUTHOR,
+    date: '2026-04-26',
+    readTime: '15 min read',
+    image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg',
+  },
+  {
+    id: '15',
+    title: 'How Hackers Crack Weak Passwords And How to Prevent It',
+    description:
+      'A practical deep-dive on brute force, credential stuffing, phishing, keyloggers, and modern prevention steps for users and website owners.',
+    slug: 'how-hackers-crack-weak-passwords-and-how-to-prevent-it',
+    category: 'Technology',
+    author: BLOG_AUTHOR,
+    date: '2026-04-26',
+    readTime: '18 min read',
+    image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg',
   },
 ]
 

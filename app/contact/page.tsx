@@ -111,7 +111,7 @@ export default function ContactPage() {
   ]
 
   const publisherDetails = [
-    'Publisher: Mohd Washid',
+    'Publisher: SimpleWebToolsBox Team',
     'Website: SimpleWebToolsBox',
     'Primary contact: contact@simplewebtoolsbox.com',
     'Editorial and policy pages are linked in the site footer for transparency',

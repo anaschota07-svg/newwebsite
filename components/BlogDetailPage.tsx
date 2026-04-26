@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ArrowLeft, Clock, Calendar, User, Code2 } from 'lucide-react'
 import { BlogPost, normalizeBlogAuthor } from '@/data/blog/blogData'
 import { MarkdownContent } from './MarkdownContent'
+import { BlogInsightBlocks } from './BlogInsightBlocks'
 
 interface BlogSection {
   heading: string
@@ -120,6 +121,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                       />
                     </div>
                   )}
+                  <BlogInsightBlocks content={section.content} />
                   <MarkdownContent content={section.content} />
                 </section>
               ))}
@@ -152,7 +154,7 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
             {/* Info */}
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-3 mb-2">
-                <h3 className="text-2xl font-black text-slate-900 dark:text-white">Mohd Washid</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">SimpleWebToolsBox Team</h3>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
                   Founder & Editor
                 </span>
@@ -162,13 +164,13 @@ export function BlogDetailPage({ post, content, relatedPosts }: BlogDetailPagePr
                 Flutter Developer & Web Publisher
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                Mohd Washid writes and reviews the guides published on SimpleWebToolsBox, focusing on practical explanations, digital literacy, and straightforward articles that help readers solve real problems quickly.
+                SimpleWebToolsBox Team writes and reviews the guides published on SimpleWebToolsBox, focusing on practical explanations, digital literacy, and straightforward articles that help readers solve real problems quickly.
               </p>
               <div className="flex items-center gap-4">
                 <Link
                   href="/about"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 dark:hover:bg-slate-600 transition-all"
-                  aria-label="Learn more about Mohd Washid"
+                  aria-label="Learn more about SimpleWebToolsBox Team"
                 >
                   <span className="text-lg">🔗</span>
                   About

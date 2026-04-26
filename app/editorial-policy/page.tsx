@@ -29,7 +29,7 @@ export default function EditorialPolicyPage() {
           <section>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Who Creates Our Content</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
-              Our content is created and reviewed by <strong>Mohd Washid</strong>, a Flutter developer and web tools 
+              Our content is created and reviewed by <strong>SimpleWebToolsBox Team</strong>, a Flutter developer and web tools 
               creator with expertise in software development, productivity tools, and digital technology. All articles 
               are written based on hands-on experience, technical knowledge, and thorough research.
             </p>

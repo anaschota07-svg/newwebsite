@@ -70,7 +70,7 @@ export default function BlogPage() {
                 },
                 {
                   title: 'Reviewed by a named publisher',
-                  body: 'Articles attributed to the SimpleWebToolsBox team are reviewed and published by Mohd Washid, the founder of the site and the person responsible for its editorial direction.',
+                  body: 'Articles attributed to the SimpleWebToolsBox team are reviewed and published by SimpleWebToolsBox Team, the founder of the site and the person responsible for its editorial direction.',
                 },
                 {
                   title: 'Updated when content changes',
@@ -181,7 +181,7 @@ export default function BlogPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
               <div>
                 <p className="font-semibold text-slate-900 dark:text-white mb-2">Publisher</p>
-                <p>Mohd Washid publishes and reviews the content on SimpleWebToolsBox.</p>
+                <p>SimpleWebToolsBox Team publishes and reviews the content on SimpleWebToolsBox.</p>
               </div>
               <div>
                 <p className="font-semibold text-slate-900 dark:text-white mb-2">Contact and policies</p>

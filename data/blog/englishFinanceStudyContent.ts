@@ -36,7 +36,7 @@ Digital marketing matters because it is measurable in a way many offline channel
 
 2. On-Page SEO:
    • Use relevant keywords in title, description, content
-   • Write high-quality content (1500+ words minimum)
+   • Write high-quality content that satisfies search intent and answers user questions clearly
    • Write attractive meta descriptions (155-160 characters)
    • Link related pages internally
    • Use H1, H2, H3 headings properly
@@ -121,7 +121,7 @@ Track: Reach, Engagement rate, Click-through rate, Conversion rate, Follower gro
       },
       {
         heading: 'Email Marketing: Direct Communication That Converts',
-        content: `Email marketing has the highest ROI of any digital marketing channel. For every ₹1 spent, you get ₹42 back. Email is personal, direct, and highly effective.
+        content: `Email marketing is one of the most reliable retention channels because you own the audience relationship and can communicate directly without algorithm dependence. Results vary by niche, offer quality, and list health, so focus on measuring your own performance instead of relying on generic ROI claims.
 
 **Building Your Email List:**
 
@@ -166,11 +166,11 @@ Regular Campaigns:
 ✓ Send at optimal times (Tuesday-Thursday, 9-11 AM)
 ✓ Keep emails concise (under 150 words)
 
-**Email Metrics:**
-- Open rate: 20-30% is good
-- Click-through rate: 2-5% is good
-- Conversion rate: 1-3% is good
-- Unsubscribe rate: <0.5% is good
+**Email Metrics to benchmark over time (not universal targets):**
+- Open rate trend by segment
+- Click-through rate by campaign type
+- Conversion rate by landing page
+- Unsubscribe and spam complaint rates
 
 **Email Tools:**
 Mailchimp (free up to 500 contacts), ConvertKit, ActiveCampaign, GetResponse, Brevo`,
@@ -228,6 +228,45 @@ Allocation by channel:
 - Tools and software: 10-15%
 - Team/freelancers: 20-30%`,
         image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+      },
+      {
+        heading: 'A 90-Day Execution Blueprint + Mistakes That Drain Budget',
+        content: `Most teams fail in digital marketing not because they lack tools, but because they run disconnected activities without a clear operating rhythm. A 90-day plan is long enough to generate meaningful data and short enough to correct quickly.
+
+**Days 1-30 (foundation and instrumentation):**
+• Define one primary business goal (lead generation, trial signups, or direct sales)
+• Set up analytics events, conversion tracking, and attribution rules
+• Publish core landing pages with clear offers and proof points
+• Build initial channel mix: SEO basics + one social channel + email capture
+
+**Days 31-60 (testing and optimization):**
+• Run A/B tests on headlines, CTAs, and offer positioning
+• Improve top 5 pages by bounce and conversion drop-off
+• Segment email list and send behavior-based campaigns
+• Pause low-intent campaigns and reallocate budget to high-intent traffic
+
+**Days 61-90 (scale and systemize):**
+• Double down on winning channel/campaign combinations
+• Build repeatable content and ad production workflow
+• Add retargeting for users who visited but did not convert
+• Document playbooks so results survive team changes
+
+**Common budget-killing mistakes:**
+✗ Running ads before conversion tracking is trustworthy
+✗ Measuring vanity metrics (likes/follows) instead of revenue actions
+✗ Sending all traffic to one generic homepage
+✗ Changing strategy every week before enough data accumulates
+✗ Using one message for all audience segments
+
+**Decision checkpoint at day 90:**
+| Question | If Yes | If No |
+|---|---|---|
+| Are cost per acquisition and conversion trends improving? | Scale winning channels gradually | Revisit positioning and landing page clarity |
+| Is one channel clearly outperforming others? | Increase budget in controlled steps | Keep testing creatives and audience fit |
+| Is retention improving through email/content? | Build lifecycle automation | Fix onboarding and post-click experience first |
+
+Key takeaway: treat digital marketing as an operating system with weekly feedback loops, not isolated campaigns.`,
+        image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg',
       },
     ],
   },
