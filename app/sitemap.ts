@@ -6,6 +6,26 @@ import { toolsData } from '@/data/tools/toolsData'
 const SITE_LAUNCH = new Date('2026-01-25')
 const POLICY_UPDATED = new Date('2026-02-01')
 const TOOLS_UPDATED = new Date('2026-04-01')
+const CONTENT_UPDATED = new Date('2026-04-24')
+
+// Keep sitemap intentionally small for quality-first indexing.
+const FEATURED_TOOL_SLUGS = [
+  'age-calculator',
+  'password-generator',
+  'json-formatter',
+  'css-minifier',
+  'loan-calculator',
+  'email-validator',
+] as const
+
+const FEATURED_BLOG_SLUGS = [
+  'cybersecurity-best-practices-2026',
+  'digital-marketing-2026-guide',
+  'effective-study-techniques',
+  'password-managers-and-2fa-guide',
+  'emergency-fund-basics-2026',
+  'web-frameworks-comparison-2026',
+] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://simplewebtoolsbox.com'
@@ -13,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     {
       url: baseUrl,
-      lastModified: new Date('2026-04-24'),
+      lastModified: CONTENT_UPDATED,
       changeFrequency: 'daily' as const,
       priority: 1,
     },
@@ -25,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date('2026-04-24'),
+      lastModified: CONTENT_UPDATED,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
@@ -73,20 +93,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  const blogPages = blogPosts.map((post) => ({
+  const blogPages = blogPosts
+    .filter((post) => FEATURED_BLOG_SLUGS.includes(post.slug as (typeof FEATURED_BLOG_SLUGS)[number]))
+    .map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
-    priority: 0.8,
+    priority: 0.85,
   }))
 
-  const toolPages = toolsData.map((tool) => ({
+  const toolPages = toolsData
+    .filter((tool) => FEATURED_TOOL_SLUGS.includes(tool.slug as (typeof FEATURED_TOOL_SLUGS)[number]))
+    .map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
     lastModified: TOOLS_UPDATED,
     changeFrequency: 'monthly' as const,
-    priority: 0.8,
+    priority: 0.85,
   }))
 
-  // Most important pages first
+  // Most important pages only.
   return [...staticPages, ...toolPages, ...blogPages]
 }

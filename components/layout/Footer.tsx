@@ -19,7 +19,6 @@ const footerLinks = {
   resources: [
     { name: 'Blogs & Guides', href: '/blog' },
     { name: 'Tools directory', href: '/tools' },
-    { name: 'HTML Sitemap', href: '/sitemap-page' },
   ],
 }
 
