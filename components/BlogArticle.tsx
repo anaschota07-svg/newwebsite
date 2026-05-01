@@ -21,7 +21,7 @@ export function BlogArticle({
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <Link
         href="/blog"
-        className="text-sm font-medium text-sky-600 hover:text-sky-500 dark:text-sky-400"
+        className="text-sm font-medium text-sky-700 underline decoration-sky-700/35 underline-offset-2 hover:text-sky-900 hover:decoration-sky-700 dark:text-sky-300 dark:hover:text-sky-200 dark:hover:decoration-sky-300"
       >
         ← Back to blog
       </Link>

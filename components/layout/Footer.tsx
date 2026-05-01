@@ -42,7 +42,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-700 hover:text-sky-600 dark:text-slate-300 dark:hover:text-sky-400"
+                      className="text-sm font-medium text-slate-700 underline decoration-slate-400/60 underline-offset-2 hover:text-sky-700 hover:decoration-sky-600 dark:text-slate-200 dark:decoration-slate-500/70 dark:hover:text-sky-300 dark:hover:decoration-sky-400"
                     >
                       {link.name}
                     </Link>
@@ -57,7 +57,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-700 hover:text-sky-600 dark:text-slate-300 dark:hover:text-sky-400"
+                      className="text-sm font-medium text-slate-700 underline decoration-slate-400/60 underline-offset-2 hover:text-sky-700 hover:decoration-sky-600 dark:text-slate-200 dark:decoration-slate-500/70 dark:hover:text-sky-300 dark:hover:decoration-sky-400"
                     >
                       {link.name}
                     </Link>

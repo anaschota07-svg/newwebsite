@@ -71,7 +71,7 @@ export default async function BlogPage({ searchParams }: Props) {
                   <BlogImage
                     src={post.image}
                     alt={post.title}
-                    className="object-cover transition duration-300 group-hover:scale-[1.02]"
+                    className="object-cover transition-colors"
                     sizes="(max-width: 640px) 100vw, 33vw"
                     priority={page === 1 && idx < 2}
                   />
@@ -106,15 +106,24 @@ export default async function BlogPage({ searchParams }: Props) {
       <section className="mt-12 rounded-xl border border-slate-200 bg-slate-50 px-5 py-5 dark:border-slate-800 dark:bg-slate-900/50 sm:px-6">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Policies</h2>
         <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-          <Link href="/editorial-policy" className="text-sky-600 underline-offset-2 hover:underline dark:text-sky-400">
+          <Link
+            href="/editorial-policy"
+            className="font-medium text-sky-700 underline decoration-sky-700/35 underline-offset-2 hover:text-sky-900 dark:text-sky-300 dark:hover:text-sky-200"
+          >
             Editorial
           </Link>
           ,{' '}
-          <Link href="/privacy-policy" className="text-sky-600 underline-offset-2 hover:underline dark:text-sky-400">
+          <Link
+            href="/privacy-policy"
+            className="font-medium text-sky-700 underline decoration-sky-700/35 underline-offset-2 hover:text-sky-900 dark:text-sky-300 dark:hover:text-sky-200"
+          >
             Privacy
           </Link>
           ,{' '}
-          <Link href="/contact" className="text-sky-600 underline-offset-2 hover:underline dark:text-sky-400">
+          <Link
+            href="/contact"
+            className="font-medium text-sky-700 underline decoration-sky-700/35 underline-offset-2 hover:text-sky-900 dark:text-sky-300 dark:hover:text-sky-200"
+          >
             Contact
           </Link>
           .

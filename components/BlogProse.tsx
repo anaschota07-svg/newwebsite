@@ -18,7 +18,10 @@ export function BlogProse({ children }: { children: string }) {
           ),
           p: ({ children: c }) => <p className="mt-4 leading-relaxed">{c}</p>,
           a: ({ href, children: c }) => (
-            <a className="text-sky-600 underline underline-offset-2 hover:text-sky-500 dark:text-sky-400" href={href}>
+            <a
+              className="font-medium text-sky-700 underline decoration-sky-700/35 underline-offset-2 hover:text-sky-900 hover:decoration-sky-700 dark:text-sky-300 dark:decoration-sky-400/40 dark:hover:text-sky-200 dark:hover:decoration-sky-300"
+              href={href}
+            >
               {c}
             </a>
           ),
