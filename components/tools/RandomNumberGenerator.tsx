@@ -34,7 +34,7 @@ export default function RandomNumberGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-5">
           <div className="grid grid-cols-3 gap-4">
             <div>
@@ -45,7 +45,7 @@ export default function RandomNumberGenerator() {
                 type="number"
                 value={min}
                 onChange={(e) => setMin(e.target.value)}
-                className="w-full px-4 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
+                className="w-full px-4 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
               />
             </div>
             <div>
@@ -56,7 +56,7 @@ export default function RandomNumberGenerator() {
                 type="number"
                 value={max}
                 onChange={(e) => setMax(e.target.value)}
-                className="w-full px-4 py-4 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
+                className="w-full px-4 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
               />
             </div>
             <div>
@@ -69,7 +69,7 @@ export default function RandomNumberGenerator() {
                 max="100"
                 value={count}
                 onChange={(e) => setCount(e.target.value)}
-                className="w-full px-4 py-4 glass border border-white/10 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
+                className="w-full px-4 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-slate-900 dark:text-white transition-all font-bold text-lg text-center"
               />
             </div>
           </div>
@@ -77,13 +77,13 @@ export default function RandomNumberGenerator() {
           <div className="flex gap-3">
             <button
               onClick={generate}
-              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all"
+              className="flex-1 px-6 py-4 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all"
             >
               🎲 Generate Random Numbers
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
+              className="px-6 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -92,9 +92,9 @@ export default function RandomNumberGenerator() {
       </div>
 
       {results.length > 0 && (
-        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+        <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-black text-slate-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
               ✨ Generated Numbers ({results.length})
             </h3>
             <button
@@ -109,7 +109,7 @@ export default function RandomNumberGenerator() {
             {results.map((num, index) => (
               <div
                 key={index}
-                className="px-5 py-3 glass border border-cyan-500/30 rounded-xl font-mono font-black text-xl bg-gradient-to-br from-cyan-500/10 to-purple-500/10 text-slate-900 dark:text-white hover:scale-110 transition-all cursor-default"
+                className="glass cursor-default rounded-xl border border-slate-200 px-5 py-3 font-mono text-xl font-semibold text-slate-900 transition-colors dark:border-slate-600 dark:text-white"
               >
                 {num}
               </div>

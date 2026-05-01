@@ -26,8 +26,8 @@ export default function CreditCardValidator() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           💳 Enter Card Number
         </h3>
         <div className="space-y-4">
@@ -39,12 +39,12 @@ export default function CreditCardValidator() {
               onChange={(e) => setCardNumber(e.target.value)}
               placeholder="1234 5678 9012 3456"
               maxLength={19}
-              className="w-full pl-12 pr-4 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono text-lg"
+              className="w-full pl-12 pr-4 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-mono text-lg"
             />
           </div>
           <button
             onClick={validateCard}
-            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all"
+            className="w-full px-6 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all"
           >
             Validate Card
           </button>
@@ -58,7 +58,7 @@ export default function CreditCardValidator() {
               <>
                 <CheckCircle className="h-8 w-8 text-emerald-500" />
                 <div>
-                  <h3 className="text-lg font-black text-emerald-600 dark:text-emerald-400">
+                  <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400">
                     Valid Card Number
                   </h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -70,7 +70,7 @@ export default function CreditCardValidator() {
               <>
                 <XCircle className="h-8 w-8 text-red-500" />
                 <div>
-                  <h3 className="text-lg font-black text-red-600 dark:text-red-400">
+                  <h3 className="text-lg font-semibold text-red-600 dark:text-red-400">
                     Invalid Card Number
                   </h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -83,8 +83,8 @@ export default function CreditCardValidator() {
         </div>
       )}
 
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 About Validation
         </h3>
         <p className="text-sm text-slate-700 dark:text-slate-300">

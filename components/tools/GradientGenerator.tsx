@@ -53,8 +53,8 @@ export default function GradientGenerator() {
   return (
     <div className="space-y-4">
       {/* Preview */}
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           🎨 Preview
         </h3>
         <div
@@ -66,7 +66,7 @@ export default function GradientGenerator() {
       </div>
 
       {/* Controls */}
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -78,13 +78,13 @@ export default function GradientGenerator() {
                   type="color"
                   value={gradient.color1}
                   onChange={(e) => setGradient({ ...gradient, color1: e.target.value })}
-                  className="h-12 w-16 rounded-xl cursor-pointer border-2 border-white/10"
+                  className="h-12 w-16 rounded-xl cursor-pointer border-2 border-slate-200 dark:border-slate-700"
                 />
                 <input
                   type="text"
                   value={gradient.color1}
                   onChange={(e) => setGradient({ ...gradient, color1: e.target.value })}
-                  className="flex-1 px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono"
+                  className="flex-1 px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-mono"
                 />
               </div>
             </div>
@@ -98,13 +98,13 @@ export default function GradientGenerator() {
                   type="color"
                   value={gradient.color2}
                   onChange={(e) => setGradient({ ...gradient, color2: e.target.value })}
-                  className="h-12 w-16 rounded-xl cursor-pointer border-2 border-white/10"
+                  className="h-12 w-16 rounded-xl cursor-pointer border-2 border-slate-200 dark:border-slate-700"
                 />
                 <input
                   type="text"
                   value={gradient.color2}
                   onChange={(e) => setGradient({ ...gradient, color2: e.target.value })}
-                  className="flex-1 px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono"
+                  className="flex-1 px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-mono"
                 />
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function GradientGenerator() {
             <select
               value={gradient.direction}
               onChange={(e) => setGradient({ ...gradient, direction: e.target.value })}
-              className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-bold"
+              className="w-full px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-bold"
             >
               {directions.map((dir) => (
                 <option key={dir.value} value={dir.value}>
@@ -129,7 +129,7 @@ export default function GradientGenerator() {
 
           <button
             onClick={generateRandomGradient}
-            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+            className="w-full px-6 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
           >
             <RefreshCw className="h-5 w-5" />
             Random Gradient
@@ -138,8 +138,8 @@ export default function GradientGenerator() {
       </div>
 
       {/* Presets */}
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           ✨ Presets
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -147,7 +147,7 @@ export default function GradientGenerator() {
             <button
               key={preset.name}
               onClick={() => setGradient({ ...gradient, color1: preset.color1, color2: preset.color2 })}
-              className="group relative p-4 rounded-xl overflow-hidden border-2 border-white/10 hover:border-cyan-500/50 transition-all"
+              className="group relative p-4 rounded-xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-sky-500/50 transition-all"
               style={{
                 background: `linear-gradient(${gradient.direction}, ${preset.color1}, ${preset.color2})`
               }}
@@ -162,9 +162,9 @@ export default function GradientGenerator() {
       </div>
 
       {/* CSS Code */}
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-black text-slate-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
             📋 CSS Code
           </h3>
           <button
@@ -175,7 +175,7 @@ export default function GradientGenerator() {
             {copied ? '✓ Copied!' : 'Copy'}
           </button>
         </div>
-        <div className="p-4 glass rounded-xl border border-white/10">
+        <div className="p-4 glass rounded-xl border border-slate-200 dark:border-slate-700">
           <code className="text-sm font-mono text-slate-900 dark:text-white">
             {cssCode}
           </code>
@@ -183,8 +183,8 @@ export default function GradientGenerator() {
       </div>
 
       {/* Tips */}
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 Tips
         </h3>
         <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">

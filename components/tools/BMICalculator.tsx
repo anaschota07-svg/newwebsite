@@ -59,14 +59,14 @@ export default function BMICalculator() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-2xl p-6 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="flex gap-3 mb-5">
           <button
             onClick={() => setUnit('metric')}
             className={`flex-1 py-2.5 px-5 rounded-xl font-bold transition-all ${
               unit === 'metric'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
-                : 'glass border border-white/10 text-slate-900 dark:text-slate-300 hover:border-cyan-500/50'
+                ? 'bg-slate-900 text-white shadow-sm dark:bg-sky-600'
+                : 'glass border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-300 hover:border-sky-500/50'
             }`}
           >
             📏 Metric (kg, cm)
@@ -76,7 +76,7 @@ export default function BMICalculator() {
             className={`flex-1 py-2.5 px-5 rounded-xl font-bold transition-all ${
               unit === 'imperial'
                 ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
-                : 'glass border border-white/10 text-slate-900 dark:text-slate-300 hover:border-purple-500/50'
+                : 'glass border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-300 hover:border-purple-500/50'
             }`}
           >
             📐 Imperial (lbs, in)
@@ -94,7 +94,7 @@ export default function BMICalculator() {
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 placeholder={unit === 'metric' ? 'e.g., 70' : 'e.g., 154'}
-                className="w-full px-5 py-3 pl-12 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-semibold"
+                className="w-full px-5 py-3 pl-12 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white transition-all font-semibold"
               />
               <Weight className="absolute left-4 top-3 h-5 w-5 text-cyan-500" />
             </div>
@@ -110,7 +110,7 @@ export default function BMICalculator() {
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
                 placeholder={unit === 'metric' ? 'e.g., 175' : 'e.g., 69'}
-                className="w-full px-5 py-3 pl-12 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-semibold"
+                className="w-full px-5 py-3 pl-12 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-semibold"
               />
               <Ruler className="absolute left-4 top-3 h-5 w-5 text-purple-500" />
             </div>
@@ -119,7 +119,7 @@ export default function BMICalculator() {
           <button
             onClick={calculateBMI}
             disabled={!weight || !height}
-            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-600 hover:via-blue-700 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
+            className="w-full rounded-xl bg-slate-900 px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40 dark:bg-sky-600 dark:hover:bg-sky-500 dark:disabled:opacity-40"
           >
             🎯 Calculate BMI
           </button>
@@ -127,19 +127,19 @@ export default function BMICalculator() {
       </div>
 
       {bmi && (
-        <div className="glass rounded-2xl p-6 border border-white/10 shadow-lg animate-slide-up bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 text-center">
+        <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up bg-slate-50 dark:bg-slate-800/50">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4 text-center">
             📊 Your BMI Result
           </h3>
           <div className="text-center mb-5">
-            <div className="text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600 mb-2">
+            <div className="mb-2 text-6xl font-semibold tabular-nums text-slate-900 dark:text-white">
               {bmi.value}
             </div>
             <div className={`text-2xl font-bold ${bmi.color}`}>{bmi.category}</div>
           </div>
 
           <div className="space-y-3">
-            <div className="glass rounded-xl p-4 border border-white/10">
+            <div className="glass rounded-xl p-4 border border-slate-200 dark:border-slate-700">
               <p className="text-sm text-slate-900 dark:text-slate-300 leading-relaxed font-semibold">
                 💡 {bmi.advice}
               </p>

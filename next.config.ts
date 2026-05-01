@@ -64,6 +64,16 @@ const nextConfig: NextConfig = {
         destination: '/blog',
         permanent: true,
       },
+      {
+        source: '/blog/how-to-convert-image-to-webp-for-free',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/how-to-check-website-security',
+        destination: '/blog',
+        permanent: true,
+      },
     ]
   },
 };

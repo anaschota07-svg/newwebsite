@@ -61,7 +61,7 @@ export default function JSONFormatter() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-5">
           <div>
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
@@ -76,7 +76,7 @@ export default function JSONFormatter() {
               }}
               placeholder='{"name": "John", "age": 30}'
               rows={10}
-              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono text-sm resize-none transition-all"
+              className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-mono text-sm resize-none transition-all"
             />
           </div>
 
@@ -84,7 +84,7 @@ export default function JSONFormatter() {
             <button
               onClick={formatJSON}
               disabled={!input}
-              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
+              className="px-6 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
               ✨ Format
             </button>
@@ -105,7 +105,7 @@ export default function JSONFormatter() {
             <button
               onClick={clearAll}
               disabled={!input && !output}
-              className="px-6 py-3 glass border border-white/10 hover:border-red-500/50 disabled:opacity-50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all disabled:cursor-not-allowed"
+              className="px-6 py-3 glass border border-slate-200 dark:border-slate-700 hover:border-red-500/50 disabled:opacity-50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all disabled:cursor-not-allowed"
             >
               🗑️ Clear
             </button>
@@ -114,7 +114,7 @@ export default function JSONFormatter() {
           {isValid !== null && (
             <div className={`flex items-center gap-3 p-4 rounded-xl glass border ${isValid ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-red-500/50 bg-red-500/10'} transition-all`}>
               {isValid ? <Check className="h-6 w-6 text-emerald-500" /> : <X className="h-6 w-6 text-red-500" />}
-              <span className={`font-black text-lg ${isValid ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
+              <span className={`font-semibold text-lg ${isValid ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
                 {isValid ? '✓ Valid JSON' : '✗ Invalid JSON'}
               </span>
             </div>
@@ -129,20 +129,20 @@ export default function JSONFormatter() {
       </div>
 
       {output && (
-        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
+        <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up">
           <div className="flex items-center justify-between mb-4">
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">
               ✨ Output
             </label>
             <button
               onClick={copyToClipboard}
-              className="p-3 glass border border-white/10 hover:border-cyan-500 rounded-xl transition-all"
+              className="p-3 glass border border-slate-200 dark:border-slate-700 hover:border-cyan-500 rounded-xl transition-all"
               title="Copy to clipboard"
             >
               <Copy className="h-5 w-5 text-cyan-500" />
             </button>
           </div>
-          <pre className="w-full px-5 py-4 glass border border-white/10 rounded-xl text-slate-900 dark:text-white font-mono text-sm overflow-x-auto">
+          <pre className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-mono text-sm overflow-x-auto">
             {output}
           </pre>
         </div>

@@ -85,7 +85,7 @@ export default function ColorPicker() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-8">
           <div className="flex flex-col items-center">
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-5">
@@ -106,21 +106,21 @@ export default function ColorPicker() {
           </div>
 
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-4 glass border border-white/10 rounded-xl group hover:border-cyan-500/50 transition-all">
+            <div className="flex items-center justify-between p-4 glass border border-slate-200 dark:border-slate-700 rounded-xl group hover:border-sky-500/50 transition-all">
               <div>
                 <span className="text-xs font-bold text-slate-500 dark:text-slate-400">HEX</span>
                 <div className="font-mono text-xl font-bold text-slate-900 dark:text-white">{color.toUpperCase()}</div>
               </div>
               <button
                 onClick={() => copyToClipboard(color)}
-                className="p-3 glass border border-white/10 hover:border-cyan-500 rounded-xl transition-all group-hover:scale-110"
+                className="p-3 glass border border-slate-200 dark:border-slate-700 hover:border-cyan-500 rounded-xl transition-all group-hover:scale-110"
               >
                 <Copy className="h-5 w-5 text-cyan-500" />
               </button>
             </div>
 
             {rgb && (
-              <div className="flex items-center justify-between p-4 glass border border-white/10 rounded-xl group hover:border-blue-500/50 transition-all">
+              <div className="flex items-center justify-between p-4 glass border border-slate-200 dark:border-slate-700 rounded-xl group hover:border-blue-500/50 transition-all">
                 <div>
                   <span className="text-xs font-bold text-slate-500 dark:text-slate-400">RGB</span>
                   <div className="font-mono text-xl font-bold text-slate-900 dark:text-white">
@@ -129,7 +129,7 @@ export default function ColorPicker() {
                 </div>
                 <button
                   onClick={() => copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`)}
-                  className="p-3 glass border border-white/10 hover:border-blue-500 rounded-xl transition-all group-hover:scale-110"
+                  className="p-3 glass border border-slate-200 dark:border-slate-700 hover:border-blue-500 rounded-xl transition-all group-hover:scale-110"
                 >
                   <Copy className="h-5 w-5 text-blue-500" />
                 </button>
@@ -137,7 +137,7 @@ export default function ColorPicker() {
             )}
 
             {hsl && (
-              <div className="flex items-center justify-between p-4 glass border border-white/10 rounded-xl group hover:border-purple-500/50 transition-all">
+              <div className="flex items-center justify-between p-4 glass border border-slate-200 dark:border-slate-700 rounded-xl group hover:border-purple-500/50 transition-all">
                 <div>
                   <span className="text-xs font-bold text-slate-500 dark:text-slate-400">HSL</span>
                   <div className="font-mono text-xl font-bold text-slate-900 dark:text-white">
@@ -146,7 +146,7 @@ export default function ColorPicker() {
                 </div>
                 <button
                   onClick={() => copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`)}
-                  className="p-3 glass border border-white/10 hover:border-purple-500 rounded-xl transition-all group-hover:scale-110"
+                  className="p-3 glass border border-slate-200 dark:border-slate-700 hover:border-purple-500 rounded-xl transition-all group-hover:scale-110"
                 >
                   <Copy className="h-5 w-5 text-purple-500" />
                 </button>
@@ -156,8 +156,8 @@ export default function ColorPicker() {
         </div>
       </div>
 
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-6">
           🌈 Color Palette
         </h3>
         <div className="grid grid-cols-5 gap-3">

@@ -44,14 +44,14 @@ export default function TimestampConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="flex gap-3 mb-6">
           <button
             onClick={() => setMode('toDate')}
             className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
               mode === 'toDate'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
-                : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50'
+                ? 'bg-slate-900 text-white shadow-sm dark:bg-sky-600'
+                : 'glass border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-sky-500/50'
             }`}
           >
             ⏰ Timestamp → Date
@@ -61,7 +61,7 @@ export default function TimestampConverter() {
             className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
               mode === 'toTimestamp'
                 ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
-                : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
+                : 'glass border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
             }`}
           >
             📅 Date → Timestamp
@@ -80,11 +80,11 @@ export default function TimestampConverter() {
                   value={timestamp}
                   onChange={(e) => setTimestamp(e.target.value)}
                   placeholder="Enter Unix timestamp..."
-                  className="flex-1 px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-mono font-semibold text-lg"
+                  className="flex-1 px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white transition-all font-mono font-semibold text-lg"
                 />
                 <button
                   onClick={handleCurrentTimestamp}
-                  className="px-6 py-4 glass border border-white/10 hover:border-cyan-500 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
+                  className="px-6 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-cyan-500 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
                 >
                   🕐 Now
                 </button>
@@ -99,7 +99,7 @@ export default function TimestampConverter() {
                 type="datetime-local"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-semibold"
+                className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-semibold"
               />
             </div>
           )}
@@ -107,7 +107,7 @@ export default function TimestampConverter() {
           <div className="flex gap-3">
             <button
               onClick={handleClear}
-              className="flex-1 px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
+              className="flex-1 px-6 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5 inline mr-2" />
               Clear
@@ -117,7 +117,7 @@ export default function TimestampConverter() {
       </div>
 
       {result && (
-        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
+        <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up bg-slate-50 dark:bg-slate-800/50">
           <div className="flex items-center justify-between mb-4">
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">
               {mode === 'toDate' ? '✨ Converted Date' : '⏱️ Unix Timestamp'}
@@ -130,14 +130,14 @@ export default function TimestampConverter() {
               {copied ? '✓ Copied!' : 'Copy'}
             </button>
           </div>
-          <div className="px-6 py-5 glass border border-white/10 rounded-xl text-slate-900 dark:text-white font-mono text-xl font-bold text-center">
+          <div className="px-6 py-5 glass border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-mono text-xl font-bold text-center">
             {result}
           </div>
         </div>
       )}
 
-      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-600 shadow-lg bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           💡 About Unix Timestamps
         </h3>
         <p className="text-sm text-slate-700 dark:text-slate-300 mb-5 leading-relaxed font-semibold">

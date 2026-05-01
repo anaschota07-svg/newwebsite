@@ -13,8 +13,8 @@ export default function FontPreview() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           🔤 Settings
         </h3>
         <div className="space-y-4">
@@ -26,7 +26,7 @@ export default function FontPreview() {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white"
+              className="w-full px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white"
             />
           </div>
 
@@ -48,7 +48,7 @@ export default function FontPreview() {
 
       <div className="space-y-3">
         {fonts.map((font) => (
-          <div key={font} className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
+          <div key={font} className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
             <p className="text-sm font-bold text-slate-600 dark:text-slate-400 mb-3">
               {font}
             </p>

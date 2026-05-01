@@ -13,8 +13,8 @@ export default function InvoiceGenerator() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           🧾 Invoice Details
         </h3>
         <div className="space-y-3">
@@ -27,7 +27,7 @@ export default function InvoiceGenerator() {
               value={invoice.invoiceNumber}
               onChange={(e) => setInvoice({ ...invoice, invoiceNumber: e.target.value })}
               placeholder="INV-001"
-              className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white"
+              className="w-full px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white"
             />
           </div>
 
@@ -40,7 +40,7 @@ export default function InvoiceGenerator() {
               value={invoice.clientName}
               onChange={(e) => setInvoice({ ...invoice, clientName: e.target.value })}
               placeholder="John Doe"
-              className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white"
+              className="w-full px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white"
             />
           </div>
 
@@ -53,7 +53,7 @@ export default function InvoiceGenerator() {
                 type="date"
                 value={invoice.date}
                 onChange={(e) => setInvoice({ ...invoice, date: e.target.value })}
-                className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white"
+                className="w-full px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white"
               />
             </div>
 
@@ -66,20 +66,20 @@ export default function InvoiceGenerator() {
                 value={invoice.amount}
                 onChange={(e) => setInvoice({ ...invoice, amount: e.target.value })}
                 placeholder="1000"
-                className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white"
+                className="w-full px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white"
               />
             </div>
           </div>
 
-          <button className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+          <button className="w-full px-6 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
             <Download className="h-5 w-5" />
             Generate Invoice PDF
           </button>
         </div>
       </div>
 
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 Features
         </h3>
         <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">

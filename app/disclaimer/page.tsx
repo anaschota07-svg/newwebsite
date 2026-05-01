@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import { AlertTriangle } from 'lucide-react'
+import { PageKicker } from '@/components/PageKicker'
 
 export const metadata: Metadata = {
   title: 'Disclaimer',
@@ -9,6 +11,7 @@ export default function DisclaimerPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <PageKicker icon={AlertTriangle} label="Disclaimer" className="mb-2" />
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Disclaimer</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-300">Last updated: February 1, 2026</p>
 

@@ -36,24 +36,24 @@ export default function Stopwatch() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-12 border border-white/10 shadow-lg text-center">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-8">
+      <div className="glass rounded-3xl p-12 border border-slate-200 dark:border-slate-700 shadow-lg text-center">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-8">
           ⏱️ Stopwatch
         </h3>
-        <div className="text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500 mb-8 font-mono">
+        <div className="text-7xl font-semibold mb-8 font-mono">
           {formatTime(time)}
         </div>
         <div className="flex gap-4 justify-center">
           <button
             onClick={() => setIsRunning(!isRunning)}
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center gap-2"
+            className="px-8 py-4 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all flex items-center gap-2"
           >
             {isRunning ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
             {isRunning ? 'Pause' : 'Start'}
           </button>
           <button
             onClick={reset}
-            className="px-8 py-4 glass border border-white/10 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all flex items-center gap-2"
+            className="px-8 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all flex items-center gap-2"
           >
             <RotateCcw className="h-5 w-5" />
             Reset

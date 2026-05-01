@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import { Copyright } from 'lucide-react'
+import { PageKicker } from '@/components/PageKicker'
 
 export const metadata: Metadata = {
   title: 'DMCA Policy',
@@ -12,6 +14,7 @@ export default function DMCAPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300 py-12">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <PageKicker icon={Copyright} label="DMCA" className="mb-2" />
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">DMCA Policy</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-8">Last updated: February 2026</p>
 

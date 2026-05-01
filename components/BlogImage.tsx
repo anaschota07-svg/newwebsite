@@ -23,12 +23,12 @@ export default function BlogImage({
 
   if (hasError || !src || !src.startsWith('http')) {
     return (
-      <div 
-        className={`w-full h-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center ${className}`}
+      <div
+        className={`flex h-full w-full items-center justify-center bg-slate-200 dark:bg-slate-800 ${className}`}
         role="img"
-        aria-label={alt || 'Image placeholder'}
+        aria-label={alt || 'Article image placeholder'}
       >
-        <BookOpen className="h-16 w-16 text-white/50" aria-hidden="true" />
+        <BookOpen className="h-10 w-10 text-slate-400 dark:text-slate-500" aria-hidden />
       </div>
     )
   }

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { siteAndOrganizationJsonLd } from "@/data/siteStructuredData";
+import { stringifyJsonLd } from "@/lib/seo/stringifyJsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://simplewebtoolsbox.com"),
@@ -79,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* AdSense site verification meta tag */}
         <meta
@@ -98,7 +98,7 @@ export default function RootLayout({
           id="json-ld-site-org"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(siteAndOrganizationJsonLd),
+            __html: stringifyJsonLd(siteAndOrganizationJsonLd),
           }}
         />
 
@@ -107,12 +107,6 @@ export default function RootLayout({
       <body
         className="antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50"
       >
-        <Script
-          id="adsense-loader"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2268511139409784"
-          crossOrigin="anonymous"
-        />
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>

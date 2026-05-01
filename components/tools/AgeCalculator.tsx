@@ -52,11 +52,11 @@ export default function AgeCalculator() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-6 border border-white/10">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700">
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-bold text-slate-900 dark:text-slate-300 mb-2 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-cyan-500" />
+              <Calendar className="h-4 w-4 text-sky-600 dark:text-sky-400" />
               Enter Your Birth Date
             </label>
             <input
@@ -64,23 +64,20 @@ export default function AgeCalculator() {
               value={birthDate}
               onChange={(e) => setBirthDate(e.target.value)}
               max={new Date().toISOString().split('T')[0]}
-              className="w-full px-5 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-semibold transition-all"
+              className="w-full px-5 py-3 glass border border-slate-200 dark:border-slate-700 rounded-2xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-semibold transition-all"
             />
           </div>
 
           <motion.button
+            type="button"
             onClick={calculateAge}
             disabled={!birthDate}
-            whileHover={birthDate ? { scale: 1.02, y: -2 } : {}}
-            whileTap={birthDate ? { scale: 0.98 } : {}}
-            className="group relative w-full px-8 py-3 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+            whileHover={birthDate ? { scale: 1.01 } : {}}
+            whileTap={birthDate ? { scale: 0.99 } : {}}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 px-8 py-3 font-semibold text-white transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-sky-600 dark:hover:bg-sky-500"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 animate-gradient-shift" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              <Sparkles className="w-5 h-5" />
-              Calculate Age
-            </span>
+            <Sparkles className="h-5 w-5" aria-hidden />
+            Calculate Age
           </motion.button>
         </div>
       </div>
@@ -90,29 +87,28 @@ export default function AgeCalculator() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="glass rounded-3xl p-6 border border-white/10"
+          className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700"
         >
-          <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-5 flex items-center gap-3">
-            <Sparkles className="w-6 h-6 text-cyan-500" />
+          <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-5 flex items-center gap-3">
+            <Sparkles className="h-6 w-6 text-sky-600 dark:text-sky-400" aria-hidden />
             Your Age
           </h3>
           
           {/* Main Age Display */}
-          <div className="grid grid-cols-3 gap-3 mb-5">
+          <div className="mb-5 grid grid-cols-3 gap-3">
             {[
-              { value: age.years, label: 'Years', gradient: 'from-cyan-500 to-blue-500' },
-              { value: age.months, label: 'Months', gradient: 'from-blue-500 to-purple-500' },
-              { value: age.days, label: 'Days', gradient: 'from-purple-500 to-pink-500' },
+              { value: age.years, label: 'Years' },
+              { value: age.months, label: 'Months' },
+              { value: age.days, label: 'Days' },
             ].map((item, i) => (
               <motion.div
-                key={i}
-                className="text-center p-4 rounded-2xl glass border border-white/10"
-                initial={{ opacity: 0, y: 20 }}
+                key={item.label}
+                className="glass rounded-2xl border border-slate-200 p-4 text-center dark:border-slate-700"
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ delay: i * 0.05 }}
               >
-                <div className={`text-4xl font-black gradient-text mb-1`}>{item.value}</div>
+                <div className="mb-1 text-4xl font-semibold tabular-nums text-slate-900 dark:text-white">{item.value}</div>
                 <div className="text-sm font-semibold text-slate-900 dark:text-slate-400 uppercase tracking-wide">{item.label}</div>
               </motion.div>
             ))}
@@ -134,7 +130,7 @@ export default function AgeCalculator() {
                 whileHover={{ x: 4 }}
               >
                 <span className="text-sm font-semibold text-slate-900 dark:text-slate-400">{stat.label}:</span>
-                <span className="text-lg font-black gradient-text">{stat.value.toLocaleString()}</span>
+                <span className="text-lg font-semibold gradient-text">{stat.value.toLocaleString()}</span>
               </motion.div>
             ))}
           </div>

@@ -82,7 +82,7 @@ export default function HashGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-5">
           <div>
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
@@ -93,7 +93,7 @@ export default function HashGenerator() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter text to generate hash values..."
               rows={6}
-              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none font-mono text-sm transition-all"
+              className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white resize-none font-mono text-sm transition-all"
             />
           </div>
 
@@ -101,13 +101,13 @@ export default function HashGenerator() {
             <button
               onClick={handleGenerate}
               disabled={!input}
-              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
+              className="flex-1 px-6 py-4 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 disabled:from-slate-300 disabled:to-slate-400 dark:disabled:from-slate-700 dark:disabled:to-slate-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed disabled:shadow-none"
             >
               ⚡ Generate Hashes
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
+              className="px-6 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -116,29 +116,25 @@ export default function HashGenerator() {
       </div>
 
       {Object.keys(hashes).length > 0 && (
-        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up">
-          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+        <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
             ✨ Generated Hashes
           </h3>
           <div className="space-y-4">
-            {Object.entries(hashes).map(([type, hash], i) => {
-              const gradients = [
-                'from-cyan-500/10 to-blue-500/10 border-cyan-500/20',
-                'from-blue-500/10 to-purple-500/10 border-blue-500/20',
-                'from-purple-500/10 to-pink-500/10 border-purple-500/20',
-                'from-pink-500/10 to-red-500/10 border-pink-500/20',
-              ]
-              const gradient = gradients[i % gradients.length]
-              
+            {Object.entries(hashes).map(([type, hash]) => {
               return (
-                <div key={type} className={`glass border rounded-xl p-5 bg-gradient-to-br ${gradient} transition-all hover:scale-102`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-black text-slate-700 dark:text-slate-300 px-3 py-1 glass rounded-lg border border-white/10">
+                <div
+                  key={type}
+                  className="glass rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-600 dark:bg-slate-800/40"
+                >
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="glass rounded-lg border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">
                       {type}
                     </span>
                     <button
+                      type="button"
                       onClick={() => handleCopy(hash, type)}
-                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
+                      className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500"
                     >
                       <Copy className="h-3 w-3" />
                       {copied === type ? '✓ Copied!' : 'Copy'}
@@ -152,8 +148,8 @@ export default function HashGenerator() {
         </div>
       )}
 
-      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-600 shadow-lg bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           🛡️ About Hash Functions
         </h3>
         <p className="text-sm text-slate-700 dark:text-slate-300 mb-5 leading-relaxed font-semibold">
@@ -172,7 +168,7 @@ export default function HashGenerator() {
             <span className="text-green-500 font-bold text-lg">🟢</span>
             <div><strong className="text-green-600 dark:text-green-400">SHA-256:</strong> 256-bit hash (recommended for most uses)</div>
           </li>
-          <li className="flex items-start gap-3 p-4 glass rounded-xl border border-cyan-500/20">
+          <li className="flex items-start gap-3 p-4 glass rounded-xl border border-slate-200 dark:border-slate-600">
             <span className="text-cyan-500 font-bold text-lg">🔵</span>
             <div><strong className="text-cyan-600 dark:text-cyan-400">SHA-512:</strong> 512-bit hash (highest security)</div>
           </li>

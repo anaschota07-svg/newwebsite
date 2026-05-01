@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blogs & Guides',
+  title: 'Blog',
   description:
-    'Read the reviewed set of blogs and guides on SimpleWebToolsBox, focused on practical explanations that support our tools and calculators.',
+    'Guides on security, performance, frameworks, and money—published as Markdown in the repo for easy updates.',
   robots: {
     index: true,
     follow: true,
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     canonical: 'https://simplewebtoolsbox.com/blog',
   },
   openGraph: {
-    title: 'Blogs & Guides | SimpleWebToolsBox',
+    title: 'Blog | SimpleWebToolsBox',
     description:
-      'Read the reviewed set of blogs and guides on SimpleWebToolsBox, focused on practical explanations that support our tools and calculators.',
+      'Guides on security, performance, frameworks, and money—published as Markdown in the repo for easy updates.',
     url: 'https://simplewebtoolsbox.com/blog',
     type: 'website',
   },

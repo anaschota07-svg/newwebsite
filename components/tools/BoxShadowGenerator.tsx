@@ -23,25 +23,13 @@ export default function BoxShadowGenerator() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-blue-950 dark:to-purple-950 p-8">
-      <div className="max-w-4xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-            Box Shadow Generator
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400">
-            Create beautiful shadows with live preview
-          </p>
-        </div>
+    <div className="mx-auto max-w-4xl space-y-6">
+      <p className="sr-only">Adjust shadow values and copy the generated CSS.</p>
 
-        {/* Preview Section */}
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-xl">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">
-              Preview
-            </h3>
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-8">
+          <div className="mb-6 flex items-center gap-2">
+            <div className="h-8 w-2 rounded-full bg-sky-500" />
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Preview</h3>
           </div>
           
           {/* Grid background for better shadow visibility */}
@@ -52,8 +40,7 @@ export default function BoxShadowGenerator() {
               backgroundSize: '20px 20px',
             }}
           >
-            {/* Gradient overlay for depth */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30" />
+            <div className="pointer-events-none absolute inset-0 bg-slate-50/60 dark:bg-slate-950/30" />
             
             {/* Preview Box */}
             <div
@@ -68,13 +55,10 @@ export default function BoxShadowGenerator() {
           </div>
         </div>
 
-        {/* Controls Section */}
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-xl">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-2 h-8 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">
-              Controls
-            </h3>
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-8">
+          <div className="mb-6 flex items-center gap-2">
+            <div className="h-8 w-2 rounded-full bg-slate-400 dark:bg-slate-500" />
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Controls</h3>
           </div>
           
           <div className="space-y-6">
@@ -87,11 +71,12 @@ export default function BoxShadowGenerator() {
             ].map((control) => (
               <div key={control.key} className="group">
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                     {control.label}
                   </label>
-                  <span className={`text-lg font-black bg-gradient-to-r ${control.color} bg-clip-text text-transparent`}>
-                    {shadow[control.key as keyof typeof shadow]}{control.key === 'opacity' ? '%' : 'px'}
+                  <span className="text-lg font-semibold tabular-nums text-sky-700 dark:text-sky-300">
+                    {shadow[control.key as keyof typeof shadow]}
+                    {control.key === 'opacity' ? '%' : 'px'}
                   </span>
                 </div>
                 
@@ -146,18 +131,16 @@ export default function BoxShadowGenerator() {
           </div>
         </div>
 
-        {/* CSS Output Section */}
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-xl">
-          <div className="flex items-center justify-between mb-6">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-8">
+          <div className="mb-6 flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-8 bg-gradient-to-b from-pink-500 to-rose-500 rounded-full" />
-              <h3 className="text-xl font-black text-slate-900 dark:text-white">
-                CSS Code
-              </h3>
+              <div className="h-8 w-2 rounded-full bg-sky-500" />
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">CSS</h3>
             </div>
             <button
+              type="button"
               onClick={handleCopy}
-              className="group relative px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold rounded-xl flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500"
             >
               {copied ? (
                 <>
@@ -186,7 +169,6 @@ export default function BoxShadowGenerator() {
             </code>
           </div>
         </div>
-      </div>
     </div>
   )
 }

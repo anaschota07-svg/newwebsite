@@ -14,18 +14,37 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!tool) {
     return { title: 'Tool not found' }
   }
+  const canonical = `https://simplewebtoolsbox.com/tools/${tool.slug}`
+  const title = `${tool.name}: free ${tool.category} tool`
+  const description = `${tool.description} Step-by-step use, limits, and data handling—all in your browser on SimpleWebToolsBox.`
+
   return {
-    title: `${tool.name} — free online tool`,
-    description: `${tool.description} Learn how to use it, what the limits are, and how we handle your data on SimpleWebToolsBox.`,
+    title,
+    description,
     robots: { index: true, follow: true },
     openGraph: {
       title: `${tool.name} | SimpleWebToolsBox`,
       description: tool.description,
-      url: `https://simplewebtoolsbox.com/tools/${tool.slug}`,
+      url: canonical,
       type: 'website',
+      siteName: 'SimpleWebToolsBox',
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: tool.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${tool.name} | SimpleWebToolsBox`,
+      description: tool.description,
+      images: ['/og-image.png'],
     },
     alternates: {
-      canonical: `https://simplewebtoolsbox.com/tools/${tool.slug}`,
+      canonical,
     },
   }
 }

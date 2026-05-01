@@ -22,15 +22,15 @@ export default function SpeedTest() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-12 border border-white/10 shadow-lg text-center">
-        <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-8">
+      <div className="glass rounded-3xl p-12 border border-slate-200 dark:border-slate-700 shadow-lg text-center">
+        <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-8">
           🚀 Internet Speed Test
         </h3>
 
         {!results && !testing && (
           <button
             onClick={runTest}
-            className="px-12 py-6 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3 mx-auto text-xl"
+            className="px-12 py-6 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3 mx-auto text-xl"
           >
             <Zap className="h-6 w-6" />
             Start Test
@@ -46,25 +46,25 @@ export default function SpeedTest() {
         {results && !testing && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="glass rounded-2xl p-6 border border-white/10">
+              <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
                 <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">Download</p>
-                <p className="text-4xl font-black text-cyan-600">{results.download}</p>
+                <p className="text-4xl font-semibold text-cyan-600">{results.download}</p>
                 <p className="text-sm text-slate-500 mt-1">Mbps</p>
               </div>
-              <div className="glass rounded-2xl p-6 border border-white/10">
+              <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
                 <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">Upload</p>
-                <p className="text-4xl font-black text-purple-600">{results.upload}</p>
+                <p className="text-4xl font-semibold text-purple-600">{results.upload}</p>
                 <p className="text-sm text-slate-500 mt-1">Mbps</p>
               </div>
-              <div className="glass rounded-2xl p-6 border border-white/10">
+              <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
                 <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">Ping</p>
-                <p className="text-4xl font-black text-pink-600">{results.ping}</p>
+                <p className="text-4xl font-semibold text-pink-600">{results.ping}</p>
                 <p className="text-sm text-slate-500 mt-1">ms</p>
               </div>
             </div>
             <button
               onClick={runTest}
-              className="px-8 py-4 glass border border-white/10 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all"
+              className="px-8 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all"
             >
               Test Again
             </button>
@@ -72,8 +72,8 @@ export default function SpeedTest() {
         )}
       </div>
 
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 About Speed Tests
         </h3>
         <p className="text-sm text-slate-700 dark:text-slate-300">

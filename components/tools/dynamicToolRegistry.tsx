@@ -8,7 +8,7 @@ const load = (loader: () => Promise<{ default: ComponentType }>) =>
   dynamic(loader, {
     ssr: false,
     loading: () => (
-      <div className="flex min-h-[12rem] items-center justify-center rounded-2xl border border-white/10 glass">
+      <div className="flex min-h-[12rem] items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-700 glass">
         <LoadingSpinner size="lg" />
       </div>
     ),

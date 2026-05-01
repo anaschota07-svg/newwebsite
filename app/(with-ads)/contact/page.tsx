@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, MessageSquare, Clock, HelpCircle, Send, Sparkles } from 'lucide-react'
+import Link from 'next/link'
+import { Mail, MessageSquare, Clock, HelpCircle, Send } from 'lucide-react'
+import { PageKicker } from '@/components/PageKicker'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 
-// Use external API if configured, otherwise fall back to Next.js internal route
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ||
-  (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '')
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '')
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -25,33 +25,31 @@ export default function ContactPage() {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/api/contact`, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        timeout: 10000, // 10 second timeout
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 10000,
       })
 
       if (response.data.success) {
-        toast.success(response.data.message || "Thank you for your message! We'll get back to you within 24-48 hours.")
+        toast.success(response.data.message || "Thanks — we'll reply within 24–48 hours when possible.")
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
-        toast.error('Failed to send message. Please try again.')
+        toast.error('Could not send. Please try again.')
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Contact form error:', error)
+      let errorMessage = 'Could not send. Please try again later.'
 
-      let errorMessage = 'Failed to send message. Please try again later.'
-
-      if (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED') {
-        if (process.env.NODE_ENV === 'development') {
-          errorMessage = 'Backend server is not running. Please start the server on port 3001 or configure NEXT_PUBLIC_API_BASE_URL in .env file.'
-        } else {
-          errorMessage = 'Unable to connect to server. Please email us directly at contact@simplewebtoolsbox.com or try again later.'
+      if (axios.isAxiosError(error)) {
+        if (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED') {
+          errorMessage =
+            process.env.NODE_ENV === 'development'
+              ? 'Backend not reachable. Use the same origin in production or set NEXT_PUBLIC_API_BASE_URL.'
+              : 'Connection issue. Email contact@simplewebtoolsbox.com directly.'
+        } else if (error.response?.data && typeof error.response.data === 'object' && 'error' in error.response.data) {
+          errorMessage = String((error.response.data as { error?: string }).error || errorMessage)
+        } else if (error.message) {
+          errorMessage = error.message
         }
-      } else if (error.response) {
-        errorMessage = error.response.data?.error || error.response.data?.message || errorMessage
-      } else if (error.message) {
-        errorMessage = error.message
       }
 
       toast.error(errorMessage, { duration: 5000 })
@@ -61,320 +59,184 @@ export default function ContactPage() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const faqs = [
-    {
-      question: 'Are all tools really free?',
-      answer: 'Yes! Every single tool is 100% free. No hidden costs, no subscriptions, no premium tiers.',
-    },
-    {
-      question: 'Do I need to create an account?',
-      answer: 'Nope! All tools work instantly. No sign-up, no login, no hassle.',
-    },
-    {
-      question: 'Is my data safe?',
-      answer: 'Absolutely! Everything processes locally in your browser. Your data never leaves your device.',
-    },
-    {
-      question: 'Can I suggest new tools?',
-      answer: "We love feedback! Use the contact form to suggest tools you'd like us to add.",
-    },
+    { q: 'Are the tools free?', a: 'Yes. The public tool library has no login or paywall for standard use.' },
+    { q: 'Do I need an account?', a: 'No. Tools and articles work without signing up.' },
+    { q: 'Where does my data go?', a: 'Most utilities run in your browser; check each tool page for its privacy note.' },
+    { q: 'Can I suggest a tool?', a: 'Use this form—we read serious suggestions and corrections.' },
   ]
 
-  const contactMethods = [
-    {
-      icon: Mail,
-      title: 'Email Us',
-      description: "Send us an email and we'll respond within 24-48 hours",
-      contact: 'contact@simplewebtoolsbox.com',
-      gradient: 'from-cyan-500 to-blue-500',
-    },
-    {
-      icon: MessageSquare,
-      title: 'Contact Form',
-      description: 'Fill out the form below for the fastest response',
-      contact: 'Use form below',
-      gradient: 'from-blue-500 to-purple-500',
-    },
-    {
-      icon: Clock,
-      title: 'Response Time',
-      description: 'We typically respond within 24-48 hours',
-      contact: 'Monday - Friday',
-      gradient: 'from-purple-500 to-pink-500',
-    },
-  ]
-
-  const publisherDetails = [
-    'Publisher: SimpleWebToolsBox Team',
-    'Website: SimpleWebToolsBox',
-    'Primary contact: contact@simplewebtoolsbox.com',
-    'Editorial and policy pages are linked in the site footer for transparency',
-  ]
+  const fieldClass =
+    'w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500'
 
   return (
-    <div className="min-h-screen py-12 px-4 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 pattern-dots opacity-20" />
-      <motion.div
-        className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
-        animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <header className="max-w-2xl border-b border-slate-200 pb-8 dark:border-slate-800">
+        <PageKicker icon={Mail} label="Contact" />
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          Get in touch
+        </h1>
+        <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+          Questions, corrections, tool ideas, or publishing inquiries. We aim to respond within a few business days.
+        </p>
+      </header>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyan-500/30 mb-6">
-            <Sparkles className="w-4 h-4 text-cyan-500" />
-            <span className="text-sm font-bold gradient-text">Get in Touch</span>
+      <div className="mt-10 grid gap-6 lg:grid-cols-3 lg:gap-10">
+        <div className="grid gap-4 sm:grid-cols-3 lg:col-span-3 lg:grid-cols-3">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            <Mail className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+            <p className="mt-2 text-sm font-medium text-slate-900 dark:text-white">Email</p>
+            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">contact@simplewebtoolsbox.com</p>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6">
-            Let's <span className="gradient-text">Connect</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-            Have questions, suggestions, or feedback? We'd love to hear from you.
-            Your input helps us build better tools for everyone.
-          </p>
-        </motion.div>
-
-        {/* Contact Methods */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {contactMethods.map((method, index) => (
-            <motion.div
-              key={method.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="relative group"
-            >
-              <div className="glass rounded-3xl p-6 border border-white/10 hover:border-white/30 transition-all text-center">
-                <div className={`w-16 h-16 bg-gradient-to-br ${method.gradient} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                  <method.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{method.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-3">{method.description}</p>
-                <p className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm">{method.contact}</p>
-              </div>
-              <div className={`absolute inset-0 bg-gradient-to-br ${method.gradient} opacity-0 group-hover:opacity-10 blur-xl rounded-3xl transition-opacity -z-10`} />
-            </motion.div>
-          ))}
+          <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            <MessageSquare className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+            <p className="mt-2 text-sm font-medium text-slate-900 dark:text-white">Form</p>
+            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">Fastest for structured requests</p>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            <Clock className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+            <p className="mt-2 text-sm font-medium text-slate-900 dark:text-white">Timing</p>
+            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">Typically 24–48h on business days</p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="glass rounded-3xl p-8 border border-white/10"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
-                <Send className="w-6 h-6 text-white" />
-              </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Send Us a Message</h2>
+        <div className="lg:col-span-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+            <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+              <Send className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+              <h2 className="text-lg font-semibold">Message</h2>
             </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  Your Name <span className="text-red-500">*</span>
+                <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Name <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="name"
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all"
+                  className={`${fieldClass} mt-1.5`}
                   required
-                  placeholder="John Doe"
+                  autoComplete="name"
+                  placeholder="Your name"
                 />
               </div>
-
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  Email Address <span className="text-red-500">*</span>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all"
+                  className={`${fieldClass} mt-1.5`}
                   required
-                  placeholder="john@example.com"
+                  autoComplete="email"
+                  placeholder="you@example.com"
                 />
               </div>
-
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Subject <span className="text-red-500">*</span>
                 </label>
                 <select
+                  id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all"
+                  className={`${fieldClass} mt-1.5`}
                   required
                 >
-                  <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="tool-suggestion">Tool Suggestion</option>
+                  <option value="">Choose…</option>
+                  <option value="general">General</option>
+                  <option value="tool-suggestion">Tool suggestion</option>
                   <option value="feedback">Feedback</option>
-                  <option value="partnership">Partnership Opportunity</option>
-                  <option value="bug-report">Bug Report</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="bug-report">Bug report</option>
                   <option value="other">Other</option>
                 </select>
               </div>
-
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
+                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-2xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none transition-all"
+                  className={`${fieldClass} mt-1.5 resize-y`}
                   required
-                  placeholder="Tell us how we can help..."
+                  placeholder="How can we help?"
                 />
               </div>
-
-              <motion.button
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
-                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                className="group relative w-full px-8 py-4 rounded-2xl font-bold text-white overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex w-full min-h-11 items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 sm:w-auto"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-                <span className="relative z-10 flex items-center justify-center gap-2 text-lg">
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </>
-                  )}
-                </span>
-              </motion.button>
+                {isSubmitting ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent dark:border-slate-900 dark:border-t-transparent" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" aria-hidden />
+                    Send
+                  </>
+                )}
+              </button>
             </form>
-          </motion.div>
+          </div>
+        </div>
 
-          {/* FAQ + Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="space-y-6"
-          >
-            {/* FAQ */}
-            <div className="glass rounded-3xl p-8 border border-white/10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
-                  <HelpCircle className="w-6 h-6 text-white" />
-                </div>
-                <h2 className="text-2xl font-black text-slate-900 dark:text-white">Frequently Asked Questions</h2>
-              </div>
-              <div className="space-y-6">
-                {faqs.map((faq, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
-                    className="border-b border-slate-200 dark:border-slate-700 pb-4 last:border-0 last:pb-0"
-                  >
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{faq.question}</h3>
-                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{faq.answer}</p>
-                  </motion.div>
-                ))}
-              </div>
+        <aside className="space-y-6 lg:col-span-1">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+              <HelpCircle className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+              <h2 className="text-lg font-semibold">FAQ</h2>
             </div>
-
-            {/* Additional Info */}
-            <div className="glass rounded-3xl p-8 border border-white/10 bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-slate-800/50 dark:to-slate-700/50">
-              <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">We're Here to Help</h3>
-              <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
-                Whether you have questions about our tools, suggestions for new features, or just want to share
-                your feedback — we're here to listen. Your input is invaluable in helping us build better
-                resources for everyone.
-              </p>
-              <div className="space-y-2 text-slate-600 dark:text-slate-400">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-cyan-500" />
-                  <span className="font-semibold">contact@simplewebtoolsbox.com</span>
-                </div>
-                <p className="text-sm text-slate-500 dark:text-slate-500 mt-4">
-                  We typically respond within 24-48 hours during business days.
-                </p>
-              </div>
-            </div>
-
-            <div className="glass rounded-3xl p-8 border border-white/10">
-              <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Publisher Information</h3>
-              <div className="space-y-3">
-                {publisherDetails.map((detail) => (
-                  <p key={detail} className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {detail}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.aside
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="glass rounded-3xl p-8 border border-white/10 h-fit"
-          >
-            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">Publisher Details</h2>
-            <ul className="space-y-3 mb-8">
-              {publisherDetails.map((item) => (
-                <li key={item} className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
-                  {item}
+            <ul className="mt-4 space-y-4">
+              {faqs.map((item) => (
+                <li key={item.q} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700">
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{item.q}</p>
+                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{item.a}</p>
                 </li>
               ))}
             </ul>
+          </div>
 
-            <div className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5 mb-6">
-              <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">What this page is for</h3>
-              <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">
-                This contact page exists for real support, corrections, feedback, and publishing inquiries. It is part
-                of the site’s trust and accountability setup, not a placeholder page.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-black text-slate-900 dark:text-white">Common Questions</h3>
-              {faqs.map((faq) => (
-                <div key={faq.question} className="rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5">
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white mb-2">{faq.question}</p>
-                  <p className="text-sm text-slate-700 dark:text-slate-400 leading-relaxed">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </motion.aside>
-        </div>
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Publisher</h2>
+            <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li>SimpleWebToolsBox Team</li>
+              <li>
+                <a href="mailto:contact@simplewebtoolsbox.com" className="text-sky-600 hover:underline dark:text-sky-400">
+                  contact@simplewebtoolsbox.com
+                </a>
+              </li>
+              <li>
+                Policies:{' '}
+                <Link href="/privacy-policy" className="text-sky-600 hover:underline dark:text-sky-400">
+                  Privacy
+                </Link>
+                ,{' '}
+                <Link href="/editorial-policy" className="text-sky-600 hover:underline dark:text-sky-400">
+                  Editorial
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </div>
   )

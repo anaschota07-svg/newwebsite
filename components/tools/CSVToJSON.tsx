@@ -33,20 +33,20 @@ export default function CSVToJSON() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           📝 CSV Input
         </h3>
-        <textarea value={csv} onChange={(e) => setCSV(e.target.value)} placeholder="name,age,city\nJohn,30,NYC\nJane,25,LA" className="w-full h-64 px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono resize-none" />
-        <button onClick={convert} className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all">
+        <textarea value={csv} onChange={(e) => setCSV(e.target.value)} placeholder="name,age,city\nJohn,30,NYC\nJane,25,LA" className="w-full h-64 px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-mono resize-none" />
+        <button onClick={convert} className="mt-4 w-full px-6 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all">
           🔄 Convert to JSON
         </button>
       </div>
 
       {json && (
-        <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg animate-slide-up">
+        <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-black text-slate-900 dark:text-white">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
               ✨ JSON Output
             </h3>
             <button onClick={handleCopy} className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-bold rounded-xl flex items-center gap-2">
@@ -54,7 +54,7 @@ export default function CSVToJSON() {
               {copied ? '✓ Copied!' : 'Copy'}
             </button>
           </div>
-          <pre className="w-full h-64 px-4 py-3 glass border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm overflow-auto">
+          <pre className="w-full h-64 px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-sm overflow-auto">
             {json}
           </pre>
         </div>

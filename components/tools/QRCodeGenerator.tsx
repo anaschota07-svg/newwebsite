@@ -40,7 +40,7 @@ export default function QRCodeGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-5">
           <div>
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
@@ -51,7 +51,7 @@ export default function QRCodeGenerator() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Enter text, URL, or contact information..."
               rows={4}
-              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white resize-none transition-all font-semibold"
+              className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white resize-none transition-all font-semibold"
             />
           </div>
 
@@ -77,11 +77,11 @@ export default function QRCodeGenerator() {
       </div>
 
       {text && (
-        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg text-center animate-slide-up">
-          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+        <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg text-center animate-slide-up">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
             ✨ Your QR Code
           </h3>
-          <div className="flex justify-center mb-6 p-6 glass rounded-2xl border border-white/10 bg-white dark:bg-slate-900">
+          <div className="flex justify-center mb-6 p-6 glass rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
             <QRCodeSVG
               id="qrcode-svg"
               value={text}
@@ -100,8 +100,8 @@ export default function QRCodeGenerator() {
         </div>
       )}
 
-      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-600 shadow-lg bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           🎯 QR Code Uses
         </h3>
         <ul className="space-y-3 text-sm text-slate-700 dark:text-slate-300">

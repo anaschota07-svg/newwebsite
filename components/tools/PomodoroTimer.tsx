@@ -39,24 +39,24 @@ export default function PomodoroTimer() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-12 border border-white/10 shadow-lg text-center">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-8">
+      <div className="glass rounded-3xl p-12 border border-slate-200 dark:border-slate-700 shadow-lg text-center">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-8">
           🍅 Pomodoro Timer
         </h3>
-        <div className="text-8xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500 mb-8">
+        <div className="text-8xl font-semibold mb-8">
           {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
         </div>
         <div className="flex gap-4 justify-center">
           <button
             onClick={() => setIsActive(!isActive)}
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center gap-2"
+            className="px-8 py-4 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition-all flex items-center gap-2"
           >
             {isActive ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
             {isActive ? 'Pause' : 'Start'}
           </button>
           <button
             onClick={reset}
-            className="px-8 py-4 glass border border-white/10 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all flex items-center gap-2"
+            className="px-8 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all flex items-center gap-2"
           >
             <RotateCcw className="h-5 w-5" />
             Reset
@@ -64,8 +64,8 @@ export default function PomodoroTimer() {
         </div>
       </div>
 
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 Pomodoro Technique
         </h3>
         <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">

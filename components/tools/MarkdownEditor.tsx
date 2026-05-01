@@ -16,9 +16,9 @@ export default function MarkdownEditor() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
+        <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-black text-slate-900 dark:text-white">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
               📝 Markdown
             </h3>
             <button
@@ -32,13 +32,13 @@ export default function MarkdownEditor() {
           <textarea
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
-            className="w-full h-96 px-4 py-3 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white font-mono resize-none"
+            className="w-full h-96 px-4 py-3 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white font-mono resize-none"
             placeholder="Enter markdown..."
           />
         </div>
 
-        <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-          <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+        <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
             👁️ Preview
           </h3>
           <div className="prose dark:prose-invert max-w-none h-96 overflow-y-auto">
@@ -47,8 +47,8 @@ export default function MarkdownEditor() {
         </div>
       </div>
 
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 Markdown Syntax
         </h3>
         <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300 font-mono">

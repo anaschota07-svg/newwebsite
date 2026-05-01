@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { Wrench, ArrowRight, Sparkles, Shield } from 'lucide-react'
+import { ArrowRight, Wrench, Shield } from 'lucide-react'
 import { categories, toolsData } from '@/data/tools/toolsData'
+import { PageKicker } from '@/components/PageKicker'
 
 export const metadata: Metadata = {
   title: 'Free online tools for everyday work',
@@ -27,86 +28,86 @@ export default function ToolsIndexPage() {
     }))
 
   return (
-    <div className="min-h-screen py-12 relative overflow-hidden">
-      <div className="absolute inset-0 pattern-grid opacity-20" />
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <header className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-white/80 dark:bg-slate-900/80 px-4 py-2 mb-6">
-            <Sparkles className="h-4 w-4 text-cyan-500" />
-            <span className="text-sm font-bold text-slate-800 dark:text-slate-200">No install · Runs in your browser</span>
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <header className="max-w-2xl border-b border-slate-200 pb-8 dark:border-slate-800">
+        <PageKicker icon={Wrench} label="Tools" />
+        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          Browser tools
+        </h1>
+        <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+          Every tool has its own page with guidance and limits. Prefer reading first? Start with our{' '}
+          <Link href="/blog" className="font-medium text-sky-600 underline-offset-2 hover:underline dark:text-sky-400">
+            blog
+          </Link>
+          .
+        </p>
+        <p className="mt-4 text-sm text-slate-500 dark:text-slate-500">
+          {toolsData.length} tools · {categories.length} categories
+        </p>
+      </header>
+
+      <section
+        className="mt-10 rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:p-6"
+        aria-labelledby="publish-heading"
+      >
+        <div className="flex gap-4">
+          <Shield className="h-6 w-6 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden />
+          <div>
+            <h2 id="publish-heading" className="font-semibold text-slate-900 dark:text-white">
+              How we publish
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Owned descriptions, transparent{' '}
+              <Link href="/about" className="font-medium text-sky-600 hover:underline dark:text-sky-400">
+                about
+              </Link>{' '}
+              &amp;{' '}
+              <Link href="/editorial-policy" className="font-medium text-sky-600 hover:underline dark:text-sky-400">
+                editorial
+              </Link>{' '}
+              links, and footer policies. If it is not listed here, it is not part of the public library.
+            </p>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4">
-            Free online tools, explained
-          </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            Each tool has its own page with original guidance: what it is for, how to get reliable results, and what it
-            does <em>not</em> try to do. The interactive piece runs in your browser so you can try ideas quickly, while
-            the long-form <Link href="/blog" className="text-cyan-600 dark:text-cyan-400 font-semibold underline-offset-2 hover:underline">articles</Link>{' '}
-            cover related topics in more depth.
-          </p>
-        </header>
-
-        <div className="mb-12 rounded-3xl border border-slate-200 bg-white/90 dark:border-slate-700 dark:bg-slate-900/80 p-6 sm:p-8 shadow-sm">
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 rounded-xl bg-cyan-500/15 p-2">
-              <Shield className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
-            </div>
-            <div>
-              <h2 className="text-lg font-black text-slate-900 dark:text-white mb-2">How we publish tools</h2>
-              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
-                We avoid empty “app-only” pages. You get written context on every tool route, a consistent privacy stance
-                (data stays in your session for most utilities), and visible ownership through our{' '}
-                <Link href="/about" className="text-cyan-600 dark:text-cyan-400 font-semibold hover:underline">
-                  About
-                </Link>
-                ,{' '}
-                <Link href="/editorial-policy" className="text-cyan-600 dark:text-cyan-400 font-semibold hover:underline">
-                  Editorial policy
-                </Link>
-                , and policy pages in the footer. If a tool is not listed here, it is not part of the public library.
-              </p>
-            </div>
-          </div>
         </div>
+      </section>
 
-        <div className="mb-4 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
-          <Wrench className="h-4 w-4" />
-          <span>{toolsData.length} tools in {categories.length} categories</span>
-        </div>
-
-        <div className="space-y-12">
-          {byCategory.map((group) => (
-            <section key={group.name} aria-labelledby={`cat-${group.name}`}>
-              <h2
-                id={`cat-${group.name}`}
-                className="text-2xl font-black text-slate-900 dark:text-white mb-4 border-b border-slate-200 dark:border-slate-700 pb-2"
-              >
-                {group.name}
-              </h2>
-              <ul className="grid sm:grid-cols-2 gap-4">
-                {group.tools.map((t) => (
-                  <li key={t.id}>
-                    <Link
-                      href={`/tools/${t.slug}`}
-                      className="group flex h-full items-start justify-between gap-3 rounded-2xl border border-slate-200 bg-white/90 p-4 dark:border-slate-700 dark:bg-slate-900/70 shadow-sm transition-colors hover:border-cyan-500/50"
-                    >
-                      <div>
-                        <span className="text-xl mr-2" aria-hidden>
-                          {t.icon}
-                        </span>
-                        <span className="font-black text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
-                          {t.name}
-                        </span>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">{t.description}</p>
-                      </div>
-                      <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-cyan-500 flex-shrink-0 transition-colors" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
+      <div className="mt-12 space-y-10">
+        {byCategory.map((group) => (
+          <section key={group.name} aria-labelledby={`cat-${group.name}`}>
+            <h2
+              id={`cat-${group.name}`}
+              className="border-b border-slate-200 pb-2 text-lg font-semibold text-slate-900 dark:border-slate-800 dark:text-white"
+            >
+              {group.name}
+            </h2>
+            <ul className="mt-4 grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {group.tools.map((t) => (
+                <li key={t.id} className="flex min-h-0">
+                  <Link
+                    href={`/tools/${t.slug}`}
+                    className="group flex h-full min-h-[7rem] w-full flex-col rounded-xl border border-slate-200 bg-white p-4 transition-colors hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-800/50"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="text-xl leading-none" aria-hidden>
+                        {t.icon}
+                      </span>
+                      <ArrowRight
+                        className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:text-sky-500 dark:text-slate-500"
+                        aria-hidden
+                      />
+                    </div>
+                    <span className="mt-3 font-medium text-slate-900 group-hover:text-sky-600 dark:text-white dark:group-hover:text-sky-400">
+                      {t.name}
+                    </span>
+                    <p className="mt-2 line-clamp-3 flex-1 text-sm leading-snug text-slate-600 dark:text-slate-400">
+                      {t.description}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
       </div>
     </div>
   )

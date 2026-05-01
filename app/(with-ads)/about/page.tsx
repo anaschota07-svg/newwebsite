@@ -1,280 +1,132 @@
-'use client'
+import Link from 'next/link'
+import { ArrowRight, BookOpen, Mail, Shield, Info, Target, Wrench } from 'lucide-react'
+import { PageKicker } from '@/components/PageKicker'
 
-import { motion } from 'framer-motion'
-import { Users, Target, Heart, Zap, Shield, Rocket, Sparkles, Lock, Smartphone, Code2, Github, Globe } from 'lucide-react'
-import NextLink from 'next/link'
+const offerings = [
+  { title: 'Calculators', desc: 'Age, BMI, loan, date, and unit tools with how-to text on each page.' },
+  { title: 'Text & data', desc: 'Case conversion, word count, JSON, Base64, CSV, and similar utilities.' },
+  { title: 'Security & dev', desc: 'Password and hash helpers, encoders, minifiers, and small dev aids.' },
+  { title: 'Design & productivity', desc: 'Color, shadows, timers, QR codes, and other quick tasks in the browser.' },
+]
+
+const values = [
+  { title: 'Free to use', desc: 'No paywall for the public tool library; policies explain scope and limits.' },
+  { title: 'Privacy-minded', desc: 'Most tools run locally in your session; see each page for specifics.' },
+  { title: 'Readable pages', desc: 'Tool routes include context, not only a blank widget.' },
+]
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen py-12 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pattern-grid opacity-20" />
-      <motion.div
-        className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-        }}
-      />
+    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <header className="border-b border-slate-200 pb-10 dark:border-slate-800">
+        <PageKicker icon={Info} label="About" />
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          SimpleWebToolsBox
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          A small publisher site: free browser tools plus long-form guides. Clear ownership, contact, and policy pages
+          are always linked in the header and footer.
+        </p>
+      </header>
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/30 mb-6">
-            <Sparkles className="w-4 h-4 text-blue-500" />
-            <span className="text-sm font-bold gradient-text">About Us</span>
-          </div>
-          
-          <h1 className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6">
-            About <span className="gradient-text">SimpleWebToolsBox</span>
-          </h1>
-          <p className="text-xl text-slate-900 dark:text-slate-400 leading-relaxed">
-            Your trusted source for free, powerful online tools and expert guides
-          </p>
-        </motion.div>
+      <section className="mt-10 space-y-4 text-slate-700 dark:text-slate-300" aria-labelledby="mission-heading">
+        <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+          <Target className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+          <h2 id="mission-heading" className="text-lg font-semibold">
+            Mission
+          </h2>
+        </div>
+        <p className="leading-relaxed">
+          We publish practical articles and tools that help people complete everyday tasks without installing heavy
+          software. Each tool page explains what the output means and when to seek professional advice.
+        </p>
+      </section>
 
-        {/* Mission */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass rounded-3xl p-8 border border-white/10 mb-8"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
-              <Target className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Our Mission</h2>
-          </div>
-          <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg mb-4">
-            SimpleWebToolsBox is a comprehensive platform offering over 45 free online tools and 15+ expert guides 
-            to help you work smarter, faster, and more efficiently. Whether you're a developer, designer, student, 
-            or professional, our tools are designed to simplify your daily tasks.
-          </p>
-          <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
-            Every tool is built with simplicity, speed, and privacy in mind. All processing happens locally in your 
-            browser, ensuring your data never leaves your device. No registration required, no hidden costs, 
-            no compromises—just powerful tools that work instantly.
-          </p>
-        </motion.section>
-
-        {/* What We Do */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="glass rounded-3xl p-8 border border-white/10 mb-8"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-              <Zap className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white">What We Offer</h2>
-          </div>
-          <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg mb-6">
-            SimpleWebToolsBox provides a wide range of free online tools organized into multiple categories:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-            {[
-              { icon: '🧮', title: 'Calculators', desc: 'Age, BMI, Loan, Date, Percentage, and Unit conversion calculators for personal and professional use' },
-              { icon: '✍️', title: 'Text Tools', desc: 'Text case converter, word counter, text diff checker, and Lorem Ipsum generator for content creators' },
-              { icon: '🔐', title: 'Security Tools', desc: 'Password generators, hash generators, and encryption tools to keep your data secure' },
-              { icon: '💻', title: 'Developer Tools', desc: 'JSON formatter, Base64 encoder, URL encoder, HTML encoder, regex tester, and code minifiers' },
-              { icon: '🎨', title: 'Design Tools', desc: 'Color picker, gradient generator, box shadow generator, and font preview tools for designers' },
-              { icon: '📱', title: 'Generators', desc: 'QR code generator, UUID generator, barcode generator, and random number generator' },
-              { icon: '⏱️', title: 'Productivity Tools', desc: 'Pomodoro timer, stopwatch, time zone converter, and invoice generator' },
-              { icon: '📚', title: 'Blogs & Guides', desc: '15+ comprehensive tutorials covering everything from password security to loan calculations' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="text-3xl mb-2">{item.icon}</div>
-                <h3 className="font-black text-slate-900 dark:text-white mb-1">{item.title}</h3>
-                <p className="text-sm text-slate-900 dark:text-slate-400">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Values */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="glass rounded-3xl p-8 border border-white/10 mb-8"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-              <Heart className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Core Values</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { icon: Heart, title: 'Always Free', desc: 'No hidden costs, subscriptions, or premium tiers. Forever.' },
-              { icon: Lock, title: 'Privacy First', desc: 'Your data never leaves your browser. Complete privacy guaranteed.' },
-              { icon: Zap, title: 'Lightning Fast', desc: 'Instant results with zero uploads or processing delays.' },
-              { icon: Smartphone, title: 'Mobile Ready', desc: 'Fully responsive design that works perfectly on any device.' },
-            ].map((value, i) => (
-              <motion.div
-                key={i}
-                className="flex gap-4"
-                whileHover={{ x: 4 }}
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
-                  <value.icon className="w-5 h-5 text-cyan-500" />
-                </div>
-                <div>
-                  <h3 className="font-black text-slate-900 dark:text-white mb-1">{value.title}</h3>
-                  <p className="text-sm text-slate-900 dark:text-slate-400 leading-relaxed">{value.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.22 }}
-          className="glass rounded-3xl p-8 border border-white/10 mb-8"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-              <Shield className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Editorial Standards</h2>
-          </div>
-          <div className="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
-            <p>
-              SimpleWebToolsBox is designed to be both a utility site and a publisher-quality resource. We aim to
-              publish content that helps people use a tool correctly, understand its limits, and make better
-              decisions from the output.
-            </p>
-            <p>
-              Articles are reviewed before publication, updated when they become stale, and written to support
-              genuine user tasks. We avoid scraped content, spun summaries, and misleading claims about expertise
-              or outcomes.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            {[
-              'Named publisher and contact details',
-              'Original tool descriptions and usage guidance',
-              'Policy, privacy, disclaimer, and DMCA pages available sitewide',
-            ].map((item) => (
-              <div key={item} className="rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 text-sm font-semibold text-slate-700 dark:text-slate-300">
-                {item}
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Founder Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25 }}
-          className="glass rounded-3xl p-8 border border-white/10 mb-8"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
-              <Users className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white">Meet the Creator</h2>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-6 items-start">
-            <div className="flex-shrink-0">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-xl">
-                <span className="text-3xl font-black text-white">MW</span>
-              </div>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-1">SimpleWebToolsBox Team</h3>
-              <p className="text-cyan-600 dark:text-cyan-400 font-bold mb-4 flex items-center gap-2">
-                <Code2 className="w-4 h-4" />
-                Flutter Developer &amp; Founder
-              </p>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4 text-lg">
-                SimpleWebToolsBox was built by SimpleWebToolsBox Team, a software developer with expertise in Flutter, 
-                web development, and productivity applications. Frustrated with bloated, paid-only tools, 
-                he set out to create a single platform offering all essential web utilities — completely free, 
-                fast, and private.
-              </p>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-                Every tool on this platform is personally built, tested, and used by Mohd. Have a suggestion 
-                or want to collaborate? Reach out directly — your feedback shapes what gets built next.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <NextLink href="/blog" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-sm font-semibold hover:bg-slate-700 transition-all">
-                  <Github className="w-4 h-4" />
-                  Read Articles
-                </NextLink>
-                <NextLink href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
-                  <Globe className="w-4 h-4" />
-                  Contact
-                </NextLink>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Community CTA */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="relative rounded-3xl p-10 overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 animate-gradient-shift" />
-          <div className="absolute inset-0 pattern-dots opacity-10" />
-          
-          <div className="relative z-10 text-center">
-            <motion.div
-              className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-white/20 backdrop-blur-sm"
-              whileHover={{ scale: 1.1, rotate: 5 }}
+      <section className="mt-12" aria-labelledby="offer-heading">
+        <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+          <Wrench className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+          <h2 id="offer-heading" className="text-lg font-semibold">
+            What we offer
+          </h2>
+        </div>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          {offerings.map((item) => (
+            <li
+              key={item.title}
+              className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900"
             >
-              <Users className="h-8 w-8 text-white" />
-            </motion.div>
-            <h2 className="text-3xl font-black text-white mb-4">Built for real tasks</h2>
-            <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
-              Developers, students, and professionals use SimpleWebToolsBox to calculate, convert, format, and learn
-              without installing heavy software. We focus on clear pages, browser-based privacy for most tools, and
-              content you can read before you use the app.
-            </p>
-            <p className="text-white/90 leading-relaxed mb-6 max-w-2xl mx-auto">
-              Have a tool idea or feedback? We'd love to hear from you! Your suggestions help us improve and expand 
-              our collection of free tools.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              type="button"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-xl"
-              onClick={() => window.location.href = "/contact"}
+              <p className="font-medium text-slate-900 dark:text-white">{item.title}</p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{item.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-12" aria-labelledby="values-heading">
+        <h2 id="values-heading" className="text-lg font-semibold text-slate-900 dark:text-white">
+          Values
+        </h2>
+        <ul className="mt-4 space-y-3">
+          {values.map((v) => (
+            <li
+              key={v.title}
+              className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-900/60"
             >
-              <Rocket className="w-5 h-5" />
-              Get in Touch
-            </motion.button>
-          </div>
-        </motion.section>
-      </div>
+              <p className="font-medium text-slate-900 dark:text-white">{v.title}</p>
+              <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{v.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section
+        className="mt-12 rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900"
+        aria-labelledby="editorial-heading"
+      >
+        <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+          <Shield className="h-5 w-5 text-sky-600 dark:text-sky-400" aria-hidden />
+          <h2 id="editorial-heading" className="text-lg font-semibold">
+            Editorial standards
+          </h2>
+        </div>
+        <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          Content is written for real tasks, reviewed before publication, and updated when guidance goes stale. We avoid
+          scraped filler and unclear authorship. See the{' '}
+          <Link href="/editorial-policy" className="font-medium text-sky-600 hover:underline dark:text-sky-400">
+            editorial policy
+          </Link>{' '}
+          for detail.
+        </p>
+      </section>
+
+      <section className="mt-12 rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/60">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Publisher</h2>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          <strong className="text-slate-900 dark:text-white">SimpleWebToolsBox Team</strong> — builds and maintains the
+          site. For suggestions, corrections, or partnerships, use{' '}
+          <Link href="/contact" className="font-medium text-sky-600 hover:underline dark:text-sky-400">
+            contact
+          </Link>
+          .
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+          >
+            <BookOpen className="h-4 w-4" aria-hidden />
+            Blog
+            <ArrowRight className="h-4 w-4 opacity-70" aria-hidden />
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
+          >
+            <Mail className="h-4 w-4" aria-hidden />
+            Email us
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }

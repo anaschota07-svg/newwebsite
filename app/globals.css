@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
-/* ===== FUTURISTIC 2050 THEME SYSTEM ===== */
+/*
+ * Tailwind v4 defaults dark: to prefers-color-scheme. next-themes sets class="dark"|"light"
+ * on <html>; this wires dark: utilities to that class so the toggle affects the whole site.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== THEME TOKENS ===== */
 :root {
-  /* Light Theme - Vibrant & Clean */
+  color-scheme: light;
+
+  /* Light Theme — shared CSS variables for legacy utilities (.glass, etc.) */
   --bg-primary: #fafbfc;
   --bg-secondary: #f0f4f8;
   --bg-card: #ffffff;
@@ -41,8 +49,8 @@
   --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.4);
 }
 
-.dark {
-  /* Dark Theme - Deep & Sophisticated */
+html.dark {
+  /* Dark Theme - Deep & Sophisticated (matches next-themes `class="dark"` on html) */
   --bg-primary: #0a0f1e;
   --bg-secondary: #111827;
   --bg-card: #1a1f35;
@@ -84,22 +92,22 @@
 }
 
 /* ===== BODY & BASE STYLES ===== */
+/* Background and text color come from Tailwind on <body> in layout so light/dark mode matches the theme toggle. */
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-feature-settings: 'rlig' 1, 'calt' 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===== GLASS MORPHISM UTILITY ===== */
+/* ===== CARD UTILITY (`glass` legacy name — solid surface, no blur for speed & minimal UI) ===== */
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
 }
 
 /* ===== CUSTOM SCROLLBAR ===== */
@@ -113,19 +121,27 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+  background: var(--border-medium);
   border-radius: 10px;
   border: 2px solid var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-blue));
+  background: var(--text-tertiary);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }
 
 /* Firefox Scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-blue) var(--bg-secondary);
+  scrollbar-color: var(--border-medium) var(--bg-secondary);
 }
 
 /* ===== SMOOTH ANIMATIONS ===== */
@@ -303,7 +319,7 @@ body {
   background-size: 1000px 100%;
 }
 
-.dark .skeleton {
+html.dark .skeleton {
   background: linear-gradient(
     90deg,
     #1e293b 0%,
@@ -525,21 +541,24 @@ img, video {
   background-size: 40px 40px;
 }
 
-/* ===== MODERN INPUT STYLES ===== */
-input, textarea, select {
+/* Bare form controls without Tailwind classes — avoids fighting theme-aware utilities */
+input:not([class]),
+textarea:not([class]),
+select:not([class]) {
   background: var(--bg-card);
-  border: 2px solid var(--border-subtle);
-  color: var(--text-primary);
-  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  color: inherit;
+  border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
-  transition: all 0.3s ease;
   font-size: 1rem;
 }
 
-input:focus, textarea:focus, select:focus {
+input:not([class]):focus,
+textarea:not([class]):focus,
+select:not([class]):focus {
   outline: none;
   border-color: var(--accent-blue);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 /* ===== CODE BLOCKS ===== */
@@ -559,7 +578,7 @@ pre code {
 
 /* ===== LINK HOVER EFFECTS ===== */
 a {
-  transition: all 0.2s ease;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 /* ===== NOISE TEXTURE (Subtle) ===== */
@@ -585,14 +604,7 @@ a {
   animation: spin 1s linear infinite;
 }
 
-/* ===== SMOOTH TRANSITIONS (No Jank) ===== */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
-
-/* Override for elements that need custom transitions */
+/* Prefer explicit Tailwind `transition-*` on components; avoid blanket * transitions (layout & paint cost). */
 .no-transition {
   transition: none !important;
 }

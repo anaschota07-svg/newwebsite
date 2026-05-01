@@ -82,7 +82,7 @@ export default function UnitConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
         <div className="space-y-5">
           <div>
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
@@ -93,8 +93,8 @@ export default function UnitConverter() {
                 onClick={() => setUnitType('length')}
                 className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${
                   unitType === 'length'
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
-                    : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50'
+                    ? 'bg-slate-900 text-white shadow-sm dark:bg-sky-600'
+                    : 'glass border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-sky-500/50'
                 }`}
               >
                 Length
@@ -104,7 +104,7 @@ export default function UnitConverter() {
                 className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${
                   unitType === 'weight'
                     ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg shadow-purple-500/50'
-                    : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
+                    : 'glass border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-purple-500/50'
                 }`}
               >
                 Weight
@@ -114,7 +114,7 @@ export default function UnitConverter() {
                 className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${
                   unitType === 'temperature'
                     ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg shadow-orange-500/50'
-                    : 'glass border border-white/10 text-slate-700 dark:text-slate-300 hover:border-orange-500/50'
+                    : 'glass border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500/50'
                 }`}
               >
                 Temperature
@@ -130,7 +130,7 @@ export default function UnitConverter() {
               <select
                 value={fromUnit}
                 onChange={(e) => setFromUnit(e.target.value)}
-                className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-bold"
+                className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white transition-all font-bold"
               >
                 {getUnits().map((unit) => (
                   <option key={unit} value={unit}>
@@ -146,7 +146,7 @@ export default function UnitConverter() {
               <select
                 value={toUnit}
                 onChange={(e) => setToUnit(e.target.value)}
-                className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-bold"
+                className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-slate-900 dark:text-white transition-all font-bold"
               >
                 {getUnits().map((unit) => (
                   <option key={unit} value={unit}>
@@ -167,20 +167,20 @@ export default function UnitConverter() {
               onChange={(e) => setValue(e.target.value)}
               onKeyUp={handleConvert}
               placeholder="Enter value to convert..."
-              className="w-full px-5 py-4 glass border border-white/10 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white transition-all font-semibold text-lg"
+              className="w-full px-5 py-4 glass border border-slate-200 dark:border-slate-700 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-slate-900 dark:text-white transition-all font-semibold text-lg"
             />
           </div>
 
           <div className="flex gap-3">
             <button
               onClick={handleConvert}
-              className="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all"
+              className="flex-1 px-6 py-4 bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all"
             >
               ⚡ Convert
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-4 glass border border-white/10 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
+              className="px-6 py-4 glass border border-slate-200 dark:border-slate-700 hover:border-red-500/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-all"
             >
               <RefreshCw className="h-5 w-5" />
             </button>
@@ -189,11 +189,11 @@ export default function UnitConverter() {
       </div>
 
       {result && (
-        <div className="glass rounded-2xl p-8 border border-white/10 shadow-lg animate-slide-up text-center bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+        <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up text-center bg-slate-50 dark:bg-slate-800/50">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
             ✨ Result
           </h3>
-          <div className="text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 mb-2">
+          <div className="text-6xl font-semibold mb-2">
             {result}
           </div>
           <div className="text-xl font-bold text-slate-700 dark:text-slate-300">
@@ -202,8 +202,8 @@ export default function UnitConverter() {
         </div>
       )}
 
-      <div className="glass rounded-2xl p-8 border border-cyan-500/20 shadow-lg bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
+      <div className="glass rounded-2xl p-8 border border-slate-200 dark:border-slate-600 shadow-lg bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           💡 Unit Conversion
         </h3>
         <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-semibold">

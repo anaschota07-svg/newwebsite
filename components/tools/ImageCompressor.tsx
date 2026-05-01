@@ -9,11 +9,11 @@ export default function ImageCompressor() {
 
   return (
     <div className="space-y-4">
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-4">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           🖼️ Upload Image
         </h3>
-        <div className="border-2 border-dashed border-white/20 rounded-2xl p-12 text-center hover:border-cyan-500/50 transition-all cursor-pointer">
+        <div className="border-2 border-dashed border-white/20 rounded-2xl p-12 text-center hover:border-sky-500/50 transition-all cursor-pointer">
           <Upload className="h-12 w-12 mx-auto mb-4 text-slate-400" />
           <p className="text-slate-600 dark:text-slate-400 font-semibold">
             Click to upload or drag and drop
@@ -24,7 +24,7 @@ export default function ImageCompressor() {
         </div>
       </div>
 
-      <div className="glass rounded-3xl p-6 border border-white/10 shadow-lg">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
         <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
           Compression Quality: {quality}%
         </label>
@@ -38,8 +38,8 @@ export default function ImageCompressor() {
         />
       </div>
 
-      <div className="glass rounded-3xl p-6 border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-purple-500/5">
-        <h3 className="text-lg font-black text-slate-900 dark:text-white mb-3">
+      <div className="glass rounded-3xl p-6 border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
           💡 About Compression
         </h3>
         <p className="text-sm text-slate-700 dark:text-slate-300">
