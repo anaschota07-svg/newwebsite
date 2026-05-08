@@ -120,13 +120,15 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPostFile | null {
-  for (const ext of ['.md', '.mdx'] as const) {
-    const filePath = path.join(CONTENT_DIR, `${slug}${ext}`)
-    if (!fs.existsSync(filePath)) continue
-    const raw = fs.readFileSync(filePath, 'utf8')
+  const files = listMarkdownFiles()
+  for (const file of files) {
+    const raw = fs.readFileSync(path.join(CONTENT_DIR, file), 'utf8')
     const { data, content } = matter(raw)
-    const meta = requireMeta(data as Record<string, unknown>, slug)
-    return { ...meta, body: content.trim() }
+    const slugFromFile = file.replace(/\.mdx?$/, '')
+    const meta = requireMeta(data as Record<string, unknown>, slugFromFile)
+    if (meta.slug === slug) {
+      return { ...meta, body: content.trim() }
+    }
   }
   return null
 }

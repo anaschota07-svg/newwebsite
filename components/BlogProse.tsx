@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { slugify } from '@/lib/utils/slugify'
 
 export function BlogProse({ children }: { children: string }) {
   return (
@@ -11,10 +12,20 @@ export function BlogProse({ children }: { children: string }) {
             <h1 className="mt-10 text-2xl font-semibold tracking-tight text-slate-900 dark:text-white first:mt-0">{c}</h1>
           ),
           h2: ({ children: c }) => (
-            <h2 className="mt-10 text-xl font-semibold tracking-tight text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">{c}</h2>
+            <h2 
+              id={slugify(c?.toString() || '')} 
+              className="mt-10 text-xl font-semibold tracking-tight text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2 scroll-mt-24"
+            >
+              {c}
+            </h2>
           ),
           h3: ({ children: c }) => (
-            <h3 className="mt-8 text-lg font-semibold text-slate-900 dark:text-white">{c}</h3>
+            <h3 
+              id={slugify(c?.toString() || '')} 
+              className="mt-8 text-lg font-semibold text-slate-900 dark:text-white scroll-mt-24"
+            >
+              {c}
+            </h3>
           ),
           p: ({ children: c }) => <p className="mt-4 leading-relaxed">{c}</p>,
           a: ({ href, children: c }) => (
@@ -59,6 +70,23 @@ export function BlogProse({ children }: { children: string }) {
             <td className="border-b border-slate-100 px-3 py-2 align-top dark:border-slate-800">{c}</td>
           ),
           hr: () => <hr className="my-10 border-slate-200 dark:border-slate-800" />,
+          img: ({ src, alt, title }) => (
+            <figure className="my-10 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50">
+              <div className="relative aspect-video w-full overflow-hidden">
+                <img
+                  src={src}
+                  alt={alt}
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              {title && (
+                <figcaption className="border-t border-slate-200 px-5 py-3 text-center text-sm font-medium text-slate-500 dark:border-slate-800 dark:text-slate-400">
+                  {title}
+                </figcaption>
+              )}
+            </figure>
+          ),
         }}
       >
         {children}

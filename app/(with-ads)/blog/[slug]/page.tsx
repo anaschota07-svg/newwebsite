@@ -50,9 +50,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
-  const related = getAllPosts()
-    .filter((p) => p.slug !== file.slug && p.category === file.category)
-    .slice(0, 2)
+  const sameCategory = getAllPosts().filter((p) => p.slug !== file.slug && p.category === file.category)
+  const fallback = getAllPosts().filter((p) => p.slug !== file.slug && p.category !== file.category)
+  const related = [...sameCategory, ...fallback].slice(0, 6)
 
   const jsonLd = articleJsonLd(file)
 
