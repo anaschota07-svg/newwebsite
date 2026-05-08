@@ -4,7 +4,7 @@ description: "Using the wrong image format costs you page speed, quality, and fi
 slug: "png-vs-jpeg-vs-webp-vs-svg-image-formats"
 category: "Design"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-15"
 readTime: "12 min read"
 image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
 ---

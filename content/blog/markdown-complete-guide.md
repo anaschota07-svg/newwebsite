@@ -4,7 +4,7 @@ description: "Markdown is the universal writing format for developers, bloggers,
 slug: "markdown-complete-guide-syntax-examples"
 category: "Developer"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-13"
 readTime: "12 min read"
 image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
 ---

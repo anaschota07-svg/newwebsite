@@ -4,7 +4,7 @@ description: "Most passwords are cracked in seconds. Learn exactly how hackers b
 slug: "how-to-create-strong-passwords-complete-guide"
 category: "Security"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-11"
 readTime: "14 min read"
 image: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg"
 ---

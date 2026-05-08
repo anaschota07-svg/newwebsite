@@ -4,7 +4,7 @@ description: "Meta tags control how your pages appear in Google search and socia
 slug: "seo-meta-tags-complete-guide"
 category: "Developer"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-21"
 readTime: "13 min read"
 image: "https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg"
 ---

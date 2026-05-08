@@ -4,7 +4,7 @@ description: "Base64 converts binary data into safe text characters. Learn how t
 slug: "what-is-base64-encoding-explained"
 category: "Security"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-05-04"
 readTime: "8 min read"
 image: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg"
 ---

@@ -4,7 +4,7 @@ description: "Regular expressions feel like gibberish at first. This guide demys
 slug: "regular-expressions-beginners-guide"
 category: "Developer"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-17"
 readTime: "11 min read"
 image: "https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg"
 ---

@@ -4,7 +4,7 @@ description: "Every website stores data on your browser — but cookies, session
 slug: "cookies-sessions-local-storage-explained"
 category: "Developer"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-05-01"
 readTime: "13 min read"
 image: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg"
 ---

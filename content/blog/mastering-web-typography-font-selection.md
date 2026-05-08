@@ -4,7 +4,7 @@ description: "Typography shapes how users read, feel, and trust your website. Le
 slug: "mastering-web-typography-font-selection"
 category: "Design"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-14"
 readTime: "10 min read"
 image: "https://images.pexels.com/photos/261763/pexels-photo-261763.jpeg"
 ---

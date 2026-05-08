@@ -4,7 +4,7 @@ description: "QR codes are everywhere — menus, boarding passes, payments. Lear
 slug: "qr-codes-ultimate-guide"
 category: "Everyday Tech"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-05-02"
 readTime: "9 min read"
 image: "https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg"
 ---

@@ -4,7 +4,7 @@ description: "Learn how CSS box-shadow works, how to layer shadows for realism, 
 slug: "css-box-shadow-beginners-guide"
 category: "Design"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-19"
 readTime: "9 min read"
 image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg"
 ---

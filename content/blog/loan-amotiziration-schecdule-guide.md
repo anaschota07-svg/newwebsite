@@ -4,7 +4,7 @@ description: "An amortization schedule shows exactly how each payment splits bet
 slug: "loan-amortization-schedule-explained"
 category: "Finance"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-09"
 readTime: "10 min read"
 image: "https://images.pexels.com/photos/210990/pexels-photo-210990.jpeg"
 ---

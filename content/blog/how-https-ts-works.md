@@ -4,7 +4,7 @@ description: "Every website needs HTTPS — but what does it actually do? Learn 
 slug: "how-https-ssl-tls-works-explained"
 category: "Security"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-25"
 readTime: "13 min read"
 image: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg"
 ---

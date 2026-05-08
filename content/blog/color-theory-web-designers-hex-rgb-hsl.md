@@ -4,7 +4,7 @@ description: "Bad color choices kill good designs. Learn how HEX, RGB, and HSL c
 slug: "color-theory-web-designers-hex-rgb-hsl"
 category: "Design"
 author: "SimpleWebToolsBox Team"
-date: "2026-05-05"
+date: "2026-04-30"
 readTime: "13 min read"
 image: "https://images.pexels.com/photos/1212407/pexels-photo-1212407.jpeg"
 ---
