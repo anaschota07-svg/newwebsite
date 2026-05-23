@@ -28,54 +28,56 @@ const nextConfig: NextConfig = {
   // Compression
   compress: true,
   async redirects() {
+    const site = 'https://simplewebtoolsbox.com'
     return [
       // NOTE: www → non-www redirect is handled at the Vercel domain level (not here)
       // Adding it here while Vercel also redirects non-www → www causes a redirect loop
+      // Use absolute destinations so www → apex → path redirect chains resolve reliably for crawlers
       // Old blog post slugs → relevant tools
       {
         source: '/blog/text-case-conversion-guide',
-        destination: '/tools/text-case-converter',
+        destination: `${site}/tools/text-case-converter`,
         permanent: true,
       },
       {
         source: '/blog/base64-encoding-tutorial',
-        destination: '/tools/base64-encoder-decoder',
+        destination: `${site}/tools/base64-encoder-decoder`,
         permanent: true,
       },
       {
         source: '/blog/hash-functions-guide',
-        destination: '/tools/hash-generator',
+        destination: `${site}/tools/hash-generator`,
         permanent: true,
       },
       {
         source: '/blog/base64-encoding-applications',
-        destination: '/tools/base64-encoder-decoder',
+        destination: `${site}/tools/base64-encoder-decoder`,
         permanent: true,
       },
       {
         source: '/blog/understanding-bmi',
-        destination: '/tools/bmi-calculator',
+        destination: `${site}/tools/bmi-calculator`,
         permanent: true,
       },
       // Removed blog posts → blog listing
       {
         source: '/blog/css-optimization-guide',
-        destination: '/blog',
+        destination: `${site}/blog`,
         permanent: true,
       },
       {
         source: '/blog/online-learning-platforms-guide',
-        destination: '/blog',
+        destination: `${site}/blog`,
         permanent: true,
       },
       {
         source: '/blog/how-to-convert-image-to-webp-for-free',
-        destination: '/blog',
+        destination: `${site}/blog`,
         permanent: true,
       },
       {
         source: '/blog/how-to-check-website-security',
-        destination: '/blog',
+        destination: `${site}/blog`,
         permanent: true,
       },
     ]

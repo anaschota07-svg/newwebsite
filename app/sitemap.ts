@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/lib/blog/posts'
+import { getAllPosts, paginatePosts } from '@/lib/blog/posts'
 import { toolsData } from '@/data/tools/toolsData'
 
 // Keep a stable last-modified for static assets so the sitemap doesn't change on every build
@@ -74,12 +74,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  const blogPages = getAllPosts().map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.85,
-  }))
+  const posts = getAllPosts()
+  const { totalPages } = paginatePosts(posts, 1)
+
+  // One URL per slug (duplicate frontmatter in content/blog would otherwise repeat entries)
+  const blogPagesBySlug = new Map<string, MetadataRoute.Sitemap[number]>()
+  for (const post of posts) {
+    const lastModified = new Date(post.date)
+    const entry: MetadataRoute.Sitemap[number] = {
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    }
+    const existing = blogPagesBySlug.get(post.slug)
+    if (!existing || lastModified > new Date(existing.lastModified!)) {
+      blogPagesBySlug.set(post.slug, entry)
+    }
+  }
+
+  const blogPaginationPages: MetadataRoute.Sitemap =
+    totalPages > 1
+      ? Array.from({ length: totalPages - 1 }, (_, i) => ({
+          url: `${baseUrl}/blog?page=${i + 2}`,
+          lastModified: CONTENT_UPDATED,
+          changeFrequency: 'weekly' as const,
+          priority: 0.75,
+        }))
+      : []
 
   const toolPages = toolsData.map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
@@ -88,5 +110,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.82,
   }))
 
-  return [...staticPages, ...toolPages, ...blogPages]
+  const allEntries = [
+    ...staticPages,
+    ...toolPages,
+    ...blogPaginationPages,
+    ...blogPagesBySlug.values(),
+  ]
+
+  // Final guard: unique URLs only
+  const seen = new Set<string>()
+  return allEntries.filter((entry) => {
+    if (seen.has(entry.url)) return false
+    seen.add(entry.url)
+    return true
+  })
 }
